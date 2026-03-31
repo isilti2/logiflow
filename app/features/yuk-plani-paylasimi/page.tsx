@@ -320,9 +320,14 @@ export default function YukPlaniPaylasimi() {
                     <span className="text-xs text-gray-400">
                       LogiFlow tarafından paylaşıldı
                     </span>
-                    <span className="text-xs text-blue-600 font-medium">
+                    <a
+                      href={shareUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-blue-600 font-medium hover:underline"
+                    >
                       3D Görünümü Aç →
-                    </span>
+                    </a>
                   </div>
                 </div>
               ) : (
@@ -372,7 +377,7 @@ export default function YukPlaniPaylasimi() {
             Hesap açmaya gerek yok. Tek link, tam erişim.
           </p>
           <Link
-            href="#"
+            href="/features/kargo-optimizasyon"
             className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl transition-colors shadow-sm shadow-blue-100 text-lg"
           >
             Uygulamaya Git
