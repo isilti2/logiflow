@@ -156,7 +156,7 @@ export default function AdminPage() {
     });
   }, [router]);
 
-  async function handleLogout() { await logout(); router.push('/'); }
+  async function handleLogout() { await logout(); window.location.href = '/'; }
   function toggleSetting(key: keyof typeof settings) { setSettings((p) => ({ ...p, [key]: !p[key] })); }
   async function handleDeleteUser(id: string) {
     await fetch(`/api/admin/users/${id}`, { method: 'DELETE' });

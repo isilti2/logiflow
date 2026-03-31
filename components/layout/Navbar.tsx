@@ -35,8 +35,7 @@ export default function Navbar() {
 
   async function handleLogout() {
     await logout();
-    setAuthed(false);
-    router.push('/');
+    window.location.href = '/';
   }
 
   return (

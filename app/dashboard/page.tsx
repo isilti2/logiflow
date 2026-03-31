@@ -138,7 +138,7 @@ export default function DashboardPage() {
 
   async function handleLogout() {
     await logout();
-    router.push('/');
+    window.location.href = '/';
   }
 
   const userInitial = userName ? userName[0].toUpperCase() : '?';
