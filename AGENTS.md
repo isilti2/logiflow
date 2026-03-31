@@ -63,7 +63,57 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 - Tekrarlayan bir görev otomasyon gerektirdiğinde
 - Yeni bir ürün modülü (ör. `/fatura`, `/entegrasyon`, `/api-docs`) hayata geçirilmesi planlandığında
 
-### Güncel Açık Maddeler (2026-03-29)
+---
+
+## Agent 5: `security-auditor`
+**Yetki Seviyesi:** `ceo`'dan bağımsız, güvenlik alanında tam yetkili.
+
+**Sorumluluk:** LogiFlow'un tüm katmanlarında güvenlik açıklarını tespit eder, önceliklendirir ve kapatır. Veri sızıntısı, kimlik doğrulama açıkları ve yetkisiz erişim sıfır toleranslıdır.
+
+### Tarama Kapsamı
+
+#### API Güvenliği
+- Her route'ta `getSession()` kontrolü var mı?
+- Admin endpoint'leri `role === 'admin'` kontrolü yapıyor mu?
+- Başka kullanıcının verisine erişim mümkün mü? (IDOR — Insecure Direct Object Reference)
+- `req.json()` girdileri validate ediliyor mu? (tip, uzunluk, format)
+- SQL injection riski var mı? (Prisma parametre binding doğru kullanılıyor mu?)
+
+#### Kimlik Doğrulama
+- JWT secret yeterince güçlü mü? (min 32 karakter, ortam değişkeni)
+- Cookie `httpOnly: true`, `secure: true` (prod), `sameSite: 'lax'` ayarlı mı?
+- Session süresi makul mü? (7 günden uzun = risk)
+- Brute-force koruması var mı? (rate limiting login endpoint'inde)
+
+#### Veri Sızıntısı
+- API response'larda `password` hash'i dönüyor mu?
+- `console.log` ile hassas veri loglama var mı?
+- Error mesajlarında stack trace veya DB detayı sızıyor mu?
+- `.env` dosyası `.gitignore`'da mı?
+
+#### Frontend Güvenliği
+- XSS: `dangerouslySetInnerHTML` kullanımı var mı?
+- Kullanıcıdan gelen veri direkt render ediliyor mu?
+- `localStorage`'da hassas veri (token, şifre) saklanıyor mu?
+
+### Müdahale Protokolü
+1. **KRITIK** (veri sızıntısı, auth bypass): Anında düzelt, kullanıcıya bildir.
+2. **YÜKSEK** (IDOR, brute-force): Kullanıcı onayıyla düzelt.
+3. **ORTA/DÜŞÜK**: Bir sonraki review döngüsünde birleştir.
+
+### Güncel Güvenlik Durumu (2026-04-01)
+| Öncelik | Bulgu | Durum |
+|---------|-------|-------|
+| KRITIK | Password hash API response'larında sızıyor mu? | ✅ Kontrol edildi — `select` ile filtreleniyor |
+| YÜKSEK | Admin API'leri `role === 'admin'` kontrolü | ✅ `requireAdmin()` helper tüm admin route'larda |
+| YÜKSEK | JWT cookie güvenliği | ✅ `httpOnly`, `secure` (prod), `sameSite: lax` |
+| ORTA | Login brute-force koruması | ✅ Kapatıldı — IP+email bazlı rate limiter (15dk/10 deneme) |
+| ORTA | IDOR: Kullanıcı başkasının cargoItem'ını silebilir mi? | ✅ Kapatıldı — `owns()` helper tüm [id] route'larda |
+| DÜŞÜK | `.env` gitignore'da | ✅ `.env*` pattern ile kapsanıyor |
+
+---
+
+### Güncel Açık Maddeler (2026-04-01)
 | Öncelik | Konu | Durum |
 |---------|------|-------|
 | YÜKSEK | `localStorage` auth — production için güvensiz | Kabul Edilmiş Risk |

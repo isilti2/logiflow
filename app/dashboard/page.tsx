@@ -249,6 +249,36 @@ export default function DashboardPage() {
           ))}
         </div>
 
+        {/* Getting started — only when no data yet */}
+        {recentOpts.length === 0 && areaInfos.length === 0 && (
+          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 text-white shadow-lg shadow-blue-200">
+            <div className="flex items-start justify-between gap-4 mb-5">
+              <div>
+                <p className="text-blue-200 text-xs font-semibold uppercase tracking-wider mb-1">Başlangıç Rehberi</p>
+                <h2 className="text-xl font-black">3 adımda hazır olun</h2>
+              </div>
+              <Zap className="w-8 h-8 text-blue-300 shrink-0" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { step: '1', title: 'Depo Alanı Ekle', desc: 'Stoğunuzu tutacak depo alanı tanımlayın.', href: '/depolama', cta: 'Depoya Git' },
+                { step: '2', title: 'Kargo Girin',     desc: 'Boyut ve ağırlık bilgileriyle kargo ekleyin.', href: '/depolama', cta: 'Kargo Ekle' },
+                { step: '3', title: 'Optimize Et',     desc: '3D algoritma ile yükleme planınızı oluşturun.', href: '/features/kargo-optimizasyon', cta: 'Optimizasyon' },
+              ].map(({ step, title, desc, href, cta }) => (
+                <Link key={step} href={href}
+                  className="bg-white/10 hover:bg-white/20 rounded-xl p-4 transition-colors group">
+                  <div className="w-7 h-7 bg-white/20 rounded-lg flex items-center justify-center text-xs font-black mb-3">{step}</div>
+                  <p className="font-bold text-sm mb-1">{title}</p>
+                  <p className="text-blue-200 text-xs leading-relaxed mb-3">{desc}</p>
+                  <span className="text-xs font-semibold text-white/70 group-hover:text-white transition-colors flex items-center gap-1">
+                    {cta} <ChevronRight className="w-3 h-3" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Feature cards */}
         <div>
           <h2 className="text-base font-bold text-gray-900 mb-4">Uygulamalar</h2>
@@ -439,6 +469,39 @@ export default function DashboardPage() {
             )}
           </div>
         </div>
+
+        {/* Usage analytics — only when there's data */}
+        {recentOpts.length > 0 && (() => {
+          const avgFill = Math.round(recentOpts.reduce((s, r) => s + r.fillPct, 0) / recentOpts.length);
+          const totalPlaced = recentOpts.reduce((s, r) => s + r.placedCount, 0);
+          const totalItems = recentOpts.reduce((s, r) => s + r.itemCount, 0);
+          const efficiency = totalItems > 0 ? Math.round((totalPlaced / totalItems) * 100) : 0;
+          const savedSpace = Math.max(0, avgFill - 70); // compared to 70% baseline
+          return (
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-bold text-gray-900">Performans Özeti</h2>
+                <Link href="/opt-gecmisi" className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                  Tüm geçmiş <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {[
+                  { label: 'Ort. Doluluk',      value: `%${avgFill}`,        color: avgFill >= 80 ? 'text-emerald-600' : avgFill >= 60 ? 'text-blue-600' : 'text-amber-500', desc: 'son çalışmalar' },
+                  { label: 'Yerleştirme Oranı', value: `%${efficiency}`,     color: 'text-blue-600',    desc: 'kargo başarısı' },
+                  { label: 'Toplam Kargo',      value: String(totalItems),   color: 'text-gray-900',    desc: 'işlenen kalem' },
+                  { label: 'Alan Tasarrufu',    value: `+%${savedSpace}`,    color: 'text-emerald-600', desc: 'bazeline göre' },
+                ].map(({ label, value, color, desc }) => (
+                  <div key={label} className="bg-gray-50 rounded-xl p-4">
+                    <p className={`text-2xl font-black ${color}`}>{value}</p>
+                    <p className="text-xs font-semibold text-gray-700 mt-1">{label}</p>
+                    <p className="text-xs text-gray-400">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Quick access truck banner */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

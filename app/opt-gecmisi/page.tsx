@@ -6,7 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import AuthGuard from '@/components/AuthGuard';
 import {
   BarChart3, Zap, TrendingUp, Package, Trash2,
-  ChevronRight, AlertCircle, Clock, Box,
+  ChevronRight, AlertCircle, Clock, Box, FileDown,
 } from 'lucide-react';
 
 interface OptRecord {
@@ -81,6 +81,16 @@ export default function OptGecmisiPage() {
                 Geçmiş kargo paketleme sonuçlarınız ve istatistikler.
               </p>
             </div>
+            <div className="flex items-center gap-2">
+            <a
+              href="/api/optimizations/export"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white border border-gray-200 hover:border-blue-300 hover:text-blue-600 text-gray-600 text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors"
+            >
+              <FileDown className="w-4 h-4" />
+              PDF Rapor
+            </a>
             <Link
               href="/features/kargo-optimizasyon"
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-sm"
@@ -88,6 +98,7 @@ export default function OptGecmisiPage() {
               <Zap className="w-4 h-4" />
               Yeni Optimizasyon
             </Link>
+            </div>
           </div>
         </div>
 
