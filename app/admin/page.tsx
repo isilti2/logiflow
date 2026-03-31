@@ -15,15 +15,9 @@ import {
   Filter, Inbox, Info, type LucideIcon,
 } from 'lucide-react';
 
-/* ─── Mock data ──────────────────────────────────────────── */
-const USERS_INIT = [
-  { id: 1, name: 'Ahmet Yılmaz',  email: 'ahmet@logiflow.io',  role: 'admin',  status: 'aktif',  lastLogin: '27 Mar 2026, 09:14', dept: 'Yönetim' },
-  { id: 2, name: 'Elif Kaya',     email: 'elif@logiflow.io',   role: 'user',   status: 'aktif',  lastLogin: '27 Mar 2026, 08:52', dept: 'Lojistik' },
-  { id: 3, name: 'Murat Demir',   email: 'murat@logiflow.io',  role: 'user',   status: 'aktif',  lastLogin: '26 Mar 2026, 17:30', dept: 'Lojistik' },
-  { id: 4, name: 'Selin Arslan',  email: 'selin@logiflow.io',  role: 'editor', status: 'aktif',  lastLogin: '26 Mar 2026, 14:05', dept: 'Raporlama' },
-  { id: 5, name: 'Kerem Öztürk', email: 'kerem@logiflow.io',  role: 'user',   status: 'pasif',  lastLogin: '20 Mar 2026, 11:22', dept: 'Depo' },
-  { id: 6, name: 'Ayşe Çelik',   email: 'ayse@logiflow.io',   role: 'user',   status: 'pasif',  lastLogin: '15 Mar 2026, 09:00', dept: 'Depo' },
-];
+/* ─── Types ──────────────────────────────────────────────── */
+type ApiUser = { id: string; name: string | null; email: string; role: string; createdAt: string };
+type ApiStats = { totalUsers: number; totalOpts: number; totalCargo: number; totalAreas: number };
 
 const LOGS = [
   { id: 1,  user: 'Ahmet Yılmaz', action: 'Kargo optimizasyonu yapıldı',    module: 'Optimizasyon', time: '27 Mar 2026, 09:18', ip: '192.168.1.10', type: 'success' },
@@ -64,15 +58,7 @@ const DEPOT_STATS = [
   { name: 'İzmir Depo',    capacity: 3200, used: 2100, unit: 'kg' },
 ];
 
-const STATS = [
-  { label: 'Toplam Kullanıcı', value: '6',     delta: '+1 bu ay',      icon: Users,      color: 'blue',   trend: 'up' },
-  { label: 'Aktif Oturum',     value: '3',     delta: 'şu an online',  icon: Activity,   color: 'green',  trend: 'up' },
-  { label: 'Günlük İşlem',     value: '47',    delta: 'bugün',         icon: Package,    color: 'purple', trend: 'up' },
-  { label: 'Uptime',           value: '99.9%', delta: 'son 30 gün',    icon: TrendingUp, color: 'indigo', trend: 'up' },
-];
-
 type Tab = 'overview' | 'users' | 'logs' | 'reports' | 'notifications' | 'settings';
-type UserRow = typeof USERS_INIT[number];
 type NotifRow = typeof NOTIFICATIONS_INIT[number];
 
 /* ─── Sub-components ─────────────────────────────────────── */
@@ -137,7 +123,8 @@ export default function AdminPage() {
   const router = useRouter();
   const [authed, setAuthed]             = useState<boolean | null>(null);
   const [activeTab, setActiveTab]       = useState<Tab>('overview');
-  const [users, setUsers]               = useState<UserRow[]>(USERS_INIT);
+  const [users, setUsers]               = useState<ApiUser[]>([]);
+  const [dbStats, setDbStats]           = useState<ApiStats | null>(null);
   const [notifications, setNotifications] = useState<NotifRow[]>(NOTIFICATIONS_INIT);
   const [userSearch, setUserSearch]     = useState('');
   const [logSearch, setLogSearch]       = useState('');
@@ -148,8 +135,8 @@ export default function AdminPage() {
     twoFactor: false, activityLog: true, shareLinks: true,
   });
   const [showAddUser, setShowAddUser]       = useState(false);
-  const [newUser, setNewUser]               = useState({ name: '', email: '', role: 'user', dept: '' });
-  const [confirmDeleteUserId, setConfirmDeleteUserId] = useState<number | null>(null);
+  const [newUser, setNewUser]               = useState({ name: '', email: '', password: '', role: 'user' });
+  const [confirmDeleteUserId, setConfirmDeleteUserId] = useState<string | null>(null);
   const [reportPeriod, setReportPeriod] = useState<'6m' | '3m' | '1m'>('6m');
   const [lastRefresh, setLastRefresh]   = useState(() => new Date().toLocaleString('tr-TR'));
   const [apiKey, setApiKey]             = useState('lf_live_sk_a7b3c9d2e1f4g8h5i6j0k3l');
@@ -160,20 +147,32 @@ export default function AdminPage() {
       const me = await res.json();
       if (me.role !== 'admin') { router.replace('/dashboard'); return; }
       setAuthed(true);
+      const [usersRes, statsRes] = await Promise.all([
+        fetch('/api/admin/users'),
+        fetch('/api/admin/stats'),
+      ]);
+      if (usersRes.ok) setUsers(await usersRes.json());
+      if (statsRes.ok) setDbStats(await statsRes.json());
     });
   }, [router]);
 
   async function handleLogout() { await logout(); router.push('/'); }
   function toggleSetting(key: keyof typeof settings) { setSettings((p) => ({ ...p, [key]: !p[key] })); }
-  function handleDeleteUser(id: number) { setUsers((p) => p.filter((u) => u.id !== id)); setConfirmDeleteUserId(null); }
-  function handleToggleStatus(id: number) {
-    setUsers((p) => p.map((u) => u.id === id ? { ...u, status: u.status === 'aktif' ? 'pasif' : 'aktif' } : u));
+  async function handleDeleteUser(id: string) {
+    await fetch(`/api/admin/users/${id}`, { method: 'DELETE' });
+    setUsers((p) => p.filter((u) => u.id !== id));
+    setConfirmDeleteUserId(null);
   }
-  function handleAddUser(e: React.FormEvent) {
+  async function handleRoleChange(id: string, role: string) {
+    const res = await fetch(`/api/admin/users/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role }) });
+    if (res.ok) { const updated = await res.json(); setUsers((p) => p.map((u) => u.id === id ? updated : u)); }
+  }
+  async function handleAddUser(e: React.FormEvent) {
     e.preventDefault();
-    if (!newUser.name || !newUser.email) return;
-    setUsers((p) => [...p, { id: Date.now(), ...newUser, status: 'aktif', lastLogin: '—' }]);
-    setNewUser({ name: '', email: '', role: 'user', dept: '' });
+    if (!newUser.email || !newUser.password) return;
+    const res = await fetch('/api/admin/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newUser) });
+    if (res.ok) { const created = await res.json(); setUsers((p) => [...p, created]); }
+    setNewUser({ name: '', email: '', password: '', role: 'user' });
     setShowAddUser(false);
   }
   function markAllRead() { setNotifications((p) => p.map((n) => ({ ...n, read: true }))); }
@@ -199,7 +198,7 @@ export default function AdminPage() {
   }
 
   const filteredUsers = users.filter((u) =>
-    u.name.toLowerCase().includes(userSearch.toLowerCase()) ||
+    (u.name ?? '').toLowerCase().includes(userSearch.toLowerCase()) ||
     u.email.toLowerCase().includes(userSearch.toLowerCase())
   );
   const filteredLogs = LOGS.filter((l) => {
@@ -341,7 +340,12 @@ export default function AdminPage() {
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {STATS.map(({ label, value, delta, icon: Icon, color, trend }) => (
+                {[
+                  { label: 'Toplam Kullanıcı', value: dbStats?.totalUsers ?? '—', delta: 'kayıtlı',        icon: Users,      color: 'blue' },
+                  { label: 'Optimizasyon',      value: dbStats?.totalOpts ?? '—',  delta: 'toplam çalışma', icon: TrendingUp, color: 'green' },
+                  { label: 'Kargo Kalemi',      value: dbStats?.totalCargo ?? '—', delta: 'depoda',         icon: Package,    color: 'purple' },
+                  { label: 'Depo Alanı',        value: dbStats?.totalAreas ?? '—', delta: 'tanımlı',        icon: Activity,   color: 'indigo' },
+                ].map(({ label, value, delta, icon: Icon, color }) => (
                   <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-xs text-gray-400 font-medium">{label}</span>
@@ -351,10 +355,7 @@ export default function AdminPage() {
                     </div>
                     <p className="text-2xl font-black text-gray-900">{value}</p>
                     <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                      {trend === 'up'
-                        ? <ArrowUpRight className="w-3 h-3 text-green-500" />
-                        : <ArrowDownRight className="w-3 h-3 text-red-400" />}
-                      {delta}
+                      <ArrowUpRight className="w-3 h-3 text-green-500" />{delta}
                     </p>
                   </div>
                 ))}
@@ -413,10 +414,9 @@ export default function AdminPage() {
                 </div>
                 <div className="px-5 py-4 flex flex-wrap gap-8">
                   {[
-                    { label: 'Toplam', value: users.length, color: 'text-gray-900' },
-                    { label: 'Aktif', value: users.filter(u => u.status === 'aktif').length, color: 'text-green-600' },
-                    { label: 'Pasif', value: users.filter(u => u.status === 'pasif').length, color: 'text-gray-400' },
-                    { label: 'Admin', value: users.filter(u => u.role === 'admin').length, color: 'text-red-600' },
+                    { label: 'Toplam',  value: users.length,                              color: 'text-gray-900' },
+                    { label: 'Admin',   value: users.filter(u => u.role === 'admin').length, color: 'text-red-600' },
+                    { label: 'Üye',     value: users.filter(u => u.role === 'user').length,  color: 'text-blue-600' },
                   ].map(({ label, value, color }) => (
                     <div key={label} className="text-center">
                       <p className={`text-2xl font-black ${color}`}>{value}</p>
@@ -450,16 +450,15 @@ export default function AdminPage() {
                 <div className="bg-white rounded-2xl border border-blue-100 shadow-sm p-5">
                   <h3 className="font-bold text-gray-900 mb-4 text-sm">Yeni Kullanıcı</h3>
                   <form onSubmit={handleAddUser} className="grid grid-cols-2 gap-3">
-                    <input required value={newUser.name} onChange={(e) => setNewUser(p => ({ ...p, name: e.target.value }))}
+                    <input value={newUser.name} onChange={(e) => setNewUser(p => ({ ...p, name: e.target.value }))}
                       placeholder="Ad Soyad" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
                     <input required type="email" value={newUser.email} onChange={(e) => setNewUser(p => ({ ...p, email: e.target.value }))}
                       placeholder="E-posta" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
-                    <input value={newUser.dept} onChange={(e) => setNewUser(p => ({ ...p, dept: e.target.value }))}
-                      placeholder="Departman" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                    <input required type="password" value={newUser.password} onChange={(e) => setNewUser(p => ({ ...p, password: e.target.value }))}
+                      placeholder="Şifre" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
                     <select value={newUser.role} onChange={(e) => setNewUser(p => ({ ...p, role: e.target.value }))}
                       className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white">
                       <option value="user">user</option>
-                      <option value="editor">editor</option>
                       <option value="admin">admin</option>
                     </select>
                     <div className="col-span-2 flex gap-2 justify-end">
@@ -475,7 +474,7 @@ export default function AdminPage() {
                   <table className="w-full text-sm min-w-[600px]">
                     <thead>
                       <tr className="border-b border-gray-100 bg-gray-50">
-                        {['Kullanıcı', 'Departman', 'Rol', 'Durum', 'Son Giriş', ''].map((h) => (
+                        {['Kullanıcı', 'Rol', 'Kayıt Tarihi', 'Rol Değiştir', ''].map((h) => (
                           <th key={h} className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
                         ))}
                       </tr>
@@ -486,38 +485,35 @@ export default function AdminPage() {
                           <td className="px-5 py-3.5">
                             <div className="flex items-center gap-3">
                               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
-                                <span className="text-white text-xs font-bold">{user.name.charAt(0)}</span>
+                                <span className="text-white text-xs font-bold">{(user.name ?? user.email).charAt(0).toUpperCase()}</span>
                               </div>
                               <div>
-                                <p className="font-semibold text-gray-900 leading-tight">{user.name}</p>
+                                <p className="font-semibold text-gray-900 leading-tight">{user.name ?? '—'}</p>
                                 <p className="text-xs text-gray-400">{user.email}</p>
                               </div>
                             </div>
                           </td>
-                          <td className="px-5 py-3.5 text-gray-500 text-xs">{user.dept}</td>
                           <td className="px-5 py-3.5"><RoleBadge role={user.role} /></td>
-                          <td className="px-5 py-3.5"><StatusBadge status={user.status} /></td>
-                          <td className="px-5 py-3.5 text-xs text-gray-400 whitespace-nowrap">{user.lastLogin}</td>
+                          <td className="px-5 py-3.5 text-xs text-gray-400 whitespace-nowrap">{new Date(user.createdAt).toLocaleDateString('tr-TR')}</td>
+                          <td className="px-5 py-3.5">
+                            <select value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                              className="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-600">
+                              <option value="user">user</option>
+                              <option value="admin">admin</option>
+                            </select>
+                          </td>
                           <td className="px-5 py-3.5">
                             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button onClick={() => handleToggleStatus(user.id)}
-                                className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-blue-600 transition-colors"
-                                aria-label={user.status === 'aktif' ? 'Pasife al' : 'Aktive et'}>
-                                {user.status === 'aktif' ? <XCircle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
-                              </button>
                               {confirmDeleteUserId === user.id ? (
                                 <div className="flex items-center gap-1">
                                   <button onClick={() => handleDeleteUser(user.id)}
-                                    className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-lg transition-colors"
-                                    aria-label="Silmeyi onayla">Sil</button>
+                                    className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-lg transition-colors">Sil</button>
                                   <button onClick={() => setConfirmDeleteUserId(null)}
-                                    className="text-xs text-gray-500 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
-                                    aria-label="İptal">İptal</button>
+                                    className="text-xs text-gray-500 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors">İptal</button>
                                 </div>
                               ) : (
                                 <button onClick={() => setConfirmDeleteUserId(user.id)}
-                                  className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors"
-                                  aria-label={`${user.name} kullanıcısını sil`}>
+                                  className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
                                   <Trash2 className="w-4 h-4" />
                                 </button>
                               )}

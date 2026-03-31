@@ -77,12 +77,17 @@ export default function ProfilPage() {
     setEditing(false);
   }
 
-  function handlePwSave() {
+  async function handlePwSave() {
     setPwError('');
     if (!pwForm.current.trim()) { setPwError('Mevcut şifre zorunludur.'); return; }
     if (pwForm.next.length < 6) { setPwError('Yeni şifre en az 6 karakter olmalıdır.'); return; }
     if (pwForm.next !== pwForm.confirm) { setPwError('Yeni şifreler eşleşmiyor.'); return; }
-    // Password change would require a dedicated API endpoint
+    const res = await fetch('/api/auth/change-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword: pwForm.current, newPassword: pwForm.next }),
+    });
+    if (!res.ok) { const d = await res.json(); setPwError(d.error ?? 'Bir hata oluştu'); return; }
     setPwSaved(true);
     setPwForm({ current: '', next: '', confirm: '' });
     setPwOpen(false);

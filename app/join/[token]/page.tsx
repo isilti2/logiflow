@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Users, CheckCircle2, AlertTriangle, Clock, ArrowRight } from 'lucide-react';
 
@@ -22,6 +22,7 @@ type State = 'loading' | 'valid' | 'expired' | 'invalid' | 'accepted';
 
 export default function JoinPage() {
   const params = useParams();
+  const router = useRouter();
   const [state, setState] = useState<State>('loading');
   const [payload, setPayload] = useState<InvitePayload | null>(null);
 
@@ -40,8 +41,17 @@ export default function JoinPage() {
     }
   }, [params.token]);
 
-  function handleAccept() {
-    setState('accepted');
+  async function handleAccept() {
+    if (!payload) return;
+    // Check if user already has an account
+    const meRes = await fetch('/api/auth/me');
+    if (meRes.ok) {
+      // Already logged in — just mark accepted and redirect to dashboard
+      setState('accepted');
+      return;
+    }
+    // Not logged in — redirect to register with email pre-filled
+    router.push(`/register?email=${encodeURIComponent(payload.email)}`);
   }
 
   if (state === 'loading') return (

@@ -1,13 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { CheckCircle2 } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [form, setForm]     = useState({ name: '', email: '', password: '', confirm: '' });
+
+  useEffect(() => {
+    const email = searchParams.get('email');
+    if (email) setForm((p) => ({ ...p, email }));
+  }, [searchParams]);
   const [errors, setErrors] = useState<Partial<typeof form & { server: string }>>({});
   const [loading, setLoading] = useState(false);
 
