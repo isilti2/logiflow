@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String   @default("")
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  areas         DepotArea[]
+  cargo         CargoItem[]
+  optimizations OptimizationRun[]
+  teamMembers   TeamMember[]
+  apiKeys       ApiKey[]
+  notifications AppNotification[]
+  templates     OptTemplate[]
+}
+
+model DepotArea {
+  id       String @id @default(cuid())
+  userId   String
+  name     String
+  location String @default("")
+  capacity Int    @default(50)
+
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cargo CargoItem[]
+
+  @@index([userId])
+}
+
+model CargoItem {
+  id         String   @id @default(cuid())
+  userId     String
+  areaId     String
+  name       String
+  type       String
+  weight     Float
+  dimensions String
+  date       String
+  status     String   @default("depolarda")
+  shelf      String?
+  row        Int?
+  col        Int?
+  createdAt  DateTime @default(now())
+
+  user User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  area DepotArea @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([areaId])
+}
+
+model OptimizationRun {
+  id             String   @id @default(cuid())
+  userId         String
+  date           String
+  containerLabel String
+  fillPct        Int
+  itemCount      Int
+  placedCount    Int
+  createdAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model TeamMember {
+  id        String @id @default(cuid())
+  userId    String
+  email     String
+  name      String @default("")
+  role      String @default("viewer")
+  status    String @default("pending")
+  invitedAt String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model ApiKey {
+  id        String    @id @default(cuid())
+  userId    String
+  name      String
+  prefix    String
+  keyHash   String
+  scopes    String    @default("[]")
+  active    Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  lastUsed  DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model AppNotification {
+  id      String   @id @default(cuid())
+  userId  String
+  type    String
+  title   String
+  message String
+  read    Boolean  @default(false)
+  time    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model OptTemplate {
+  id      String   @id @default(cuid())
+  userId  String
+  name    String
+  items   String
+  savedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

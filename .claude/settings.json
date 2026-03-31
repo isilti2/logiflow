@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(findstr \":3000\")",
+      "Bash(node_modules/.bin/prisma --version)",
+      "Bash(node_modules/.bin/prisma generate:*)",
+      "Bash(grep -rn localStorage c:/Users/Okan/Contacts/yuks/app/ c:/Users/Okan/Contacts/yuks/components/ c:/Users/Okan/Contacts/yuks/lib/ --include=*.tsx --include=*.ts)",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/register -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"admin@logiflow.io\"\",\"\"password\"\":\"\"admin123\"\",\"\"name\"\":\"\"Admin User\"\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -c /tmp/cookies.txt -d '{\"\"email\"\":\"\"admin@logiflow.io\"\",\"\"password\"\":\"\"admin123\"\"}')",
+      "Bash(curl -s http://localhost:3000/api/auth/me -b /tmp/cookies.txt)",
+      "Bash(curl -s http://localhost:3000/api/cargo -b /tmp/cookies.txt)",
+      "Bash(curl -s http://localhost:3000/api/team -b /tmp/cookies.txt)",
+      "Bash(curl -s http://localhost:3000/api/opt-templates -b /tmp/cookies.txt)",
+      "Bash(powershell -Command \"Get-Process -Name node -ErrorAction SilentlyContinue | Stop-Process -Force\")",
+      "Bash(Remove-Item -Recurse -Force \"c:/Users/Okan/Contacts/yuks/.next\" -ErrorAction SilentlyContinue)",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"test@test.com\"\",\"\"password\"\":\"\"test123\"\"}' -w \"\\\\nHTTP: %{http_code}\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/register -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"admin@logiflow.com\"\",\"\"password\"\":\"\"admin123\"\",\"\"name\"\":\"\"Admin User\"\"}' -w \"\\\\nHTTP: %{http_code}\")",
+      "Bash(curl -s http://localhost:3000/api/auth/me -b /tmp/cookies.txt -w \"\\\\nHTTP: %{http_code}\")",
+      "Bash(curl -s http://localhost:3000/api/cargo -b /tmp/cookies.txt -w \"\\\\nHTTP: %{http_code}\")",
+      "Bash(curl -s http://localhost:3000/api/notifications -b /tmp/cookies.txt -w \"\\\\nHTTP: %{http_code}\")",
+      "Bash(node -e \"console.log\\(require\\(''crypto''\\).randomBytes\\(32\\).toString\\(''hex''\\)\\)\")"
+    ]
+  }
+}
