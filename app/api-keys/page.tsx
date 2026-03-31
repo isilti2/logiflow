@@ -79,7 +79,7 @@ export default function ApiKeysPage() {
       body: JSON.stringify({ active: !key.active }),
     });
     setKeys((prev) => prev.map((k) => k.id === id ? { ...k, active: !k.active } : k));
-    toast('Anahtar durumu güncellendi', 'info');
+    toast('Anahtar durumu güncellendi', 'success');
   }
 
   async function handleDelete(id: string) {
@@ -87,7 +87,7 @@ export default function ApiKeysPage() {
     setKeys((prev) => prev.filter((k) => k.id !== id));
     setDeleteId(null);
     if (justCreated?.id === id) setJustCreated(null);
-    toast('API anahtarı silindi', 'info');
+    toast('API anahtarı silindi', 'success');
   }
 
   const activeCount = keys.filter((k) => k.active).length;

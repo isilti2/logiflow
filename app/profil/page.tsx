@@ -9,13 +9,6 @@ import {
   Bell, ChevronRight, Edit2, Check, X,
 } from 'lucide-react';
 
-const STATIC_ACTIVITY = [
-  { label: 'Kargo optimizasyonu yapıldı',  time: '27 Mar 2026, 09:18', module: 'Optimizasyon' },
-  { label: 'Excel içe aktarma',            time: '26 Mar 2026, 14:05', module: 'Depolama' },
-  { label: 'Rapor PDF indirildi',          time: '25 Mar 2026, 11:30', module: 'Raporlama' },
-  { label: 'Yük planı paylaşıldı',         time: '24 Mar 2026, 16:20', module: 'Paylaşım' },
-  { label: 'Depo alanı oluşturuldu',       time: '23 Mar 2026, 10:00', module: 'Depolama' },
-];
 
 export default function ProfilPage() {
   const router = useRouter();
@@ -30,7 +23,7 @@ export default function ProfilPage() {
   const [pwForm, setPwForm]     = useState({ current: '', next: '', confirm: '' });
   const [pwError, setPwError]   = useState('');
   const [pwSaved, setPwSaved]   = useState(false);
-  const [activity, setActivity] = useState(STATIC_ACTIVITY);
+  const [activity, setActivity] = useState<{ label: string; time: string; module: string }[]>([]);
 
   useEffect(() => {
     async function load() {
@@ -47,13 +40,11 @@ export default function ProfilPage() {
 
       if (optsRes.ok) {
         const opts = await optsRes.json() as { date: string; containerLabel: string; placedCount: number }[];
-        if (opts.length > 0) {
-          setActivity(opts.slice(0, 5).map((r) => ({
-            label: `Kargo optimizasyonu — ${r.containerLabel} (${r.placedCount} birim)`,
-            time: r.date,
-            module: 'Optimizasyon',
-          })));
-        }
+        setActivity(opts.slice(0, 5).map((r) => ({
+          label: `Kargo optimizasyonu — ${r.containerLabel} (${r.placedCount} birim)`,
+          time: r.date,
+          module: 'Optimizasyon',
+        })));
       }
       setLoading(false);
     }
@@ -330,7 +321,14 @@ export default function ProfilPage() {
             <h2 className="text-sm font-bold text-gray-900">Son Aktivitelerim</h2>
           </div>
           <div className="divide-y divide-gray-50">
-            {activity.map((a, i) => (
+            {activity.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-8 text-gray-400">
+                <p className="text-sm">Henüz aktivite yok</p>
+                <Link href="/features/kargo-optimizasyon" className="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-700">
+                  İlk optimizasyonu başlat →
+                </Link>
+              </div>
+            ) : activity.map((a, i) => (
               <div key={i} className="flex items-center gap-4 px-5 py-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
                 <div className="flex-1 min-w-0">

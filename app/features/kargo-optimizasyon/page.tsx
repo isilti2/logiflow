@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
 import { addNotification } from '@/lib/notifications';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
 
 /* ─── Template types ─────────────────────────────────────── */
 interface OptTemplate {
@@ -287,7 +288,14 @@ interface OptRecord {
 
 /* ─── Page ───────────────────────────────────────────────── */
 export default function KargoOptimizasyonPage() {
-  const [container, setContainer]     = useState<ContainerDims>(DEFAULT_CONTAINER);
+  const [container, setContainer]     = useState<ContainerDims>(() => {
+    if (typeof window === 'undefined') return DEFAULT_CONTAINER;
+    try {
+      const saved = localStorage.getItem('lf_last_container');
+      if (saved) return { ...DEFAULT_CONTAINER, ...JSON.parse(saved) };
+    } catch { /* ignore */ }
+    return DEFAULT_CONTAINER;
+  });
   const [cargoItems, setCargoItems]   = useState<CargoItem[]>(DEFAULT_CARGO);
   const [showResult, setShowResult]   = useState(false);
   const [isOptimizing, setIsOptimizing] = useState(false);
@@ -322,6 +330,7 @@ export default function KargoOptimizasyonPage() {
   function applyPreset(e: React.ChangeEvent<HTMLSelectElement>) {
     const p = PRESETS[parseInt(e.target.value)];
     setContainer(p);
+    localStorage.setItem('lf_last_container', JSON.stringify(p));
     setShowResult(false);
     setResult(null);
   }
@@ -329,7 +338,11 @@ export default function KargoOptimizasyonPage() {
   function handleContainerChange(field: keyof ContainerDims, val: string) {
     const n = parseInt(val, 10);
     if (!isNaN(n) && n > 0) {
-      setContainer((prev) => ({ ...prev, [field]: n }));
+      setContainer((prev) => {
+        const next = { ...prev, [field]: n };
+        localStorage.setItem('lf_last_container', JSON.stringify(next));
+        return next;
+      });
       setShowResult(false);
       setResult(null);
     }
@@ -443,7 +456,7 @@ export default function KargoOptimizasyonPage() {
     setCargoItems(t.items);
     setShowResult(false); setResult(null); setResult2(null);
     setShowTemplates(false);
-    toast(`"${t.name}" şablonu yüklendi — ${t.items.length} kalem`, 'info');
+    toast(`"${t.name}" şablonu yüklendi — ${t.items.length} kalem`, 'success');
   }
 
   async function handleDeleteTemplate(id: string) {
@@ -456,7 +469,7 @@ export default function KargoOptimizasyonPage() {
       const res = await fetch('/api/cargo');
       if (!res.ok) { toast('Depo verisi alınamadı', 'error'); return; }
       const depoCargo = await res.json() as { id: string; name: string; weight: number; dimensions: string }[];
-      if (!depoCargo.length) { toast('Depoda kayıtlı kargo bulunamadı.', 'info'); return; }
+      if (!depoCargo.length) { toast('Depoda kayıtlı kargo bulunamadı.', 'error'); return; }
       const imported: CargoItem[] = depoCargo.map((c) => {
         const parts = c.dimensions.replace(/[×x]/g, ' ').split(/\s+/).map(Number);
         const [w = 40, h = 30, d = 20] = parts;
@@ -471,7 +484,7 @@ export default function KargoOptimizasyonPage() {
       });
       setShowResult(false);
       setResult(null);
-      toast(`${imported.length} kalem depodan aktarıldı`, 'info');
+      toast(`${imported.length} kalem depodan aktarıldı`, 'success');
     } catch { toast('Depo verisi okunamadı', 'error'); }
   }
 
@@ -1053,11 +1066,13 @@ export default function KargoOptimizasyonPage() {
                       {activeTab === '3d' ? (
                         <>
                           <div className="rounded-2xl overflow-hidden" style={{ height: '420px' }}>
-                            <CargoViewer3D
-                              placed={activeContainer === 1 ? result.placed : (result2?.placed ?? [])}
-                              container={container}
-                              cog={activeContainer === 1 ? cog : null}
-                            />
+                            <ErrorBoundary>
+                              <CargoViewer3D
+                                placed={activeContainer === 1 ? result.placed : (result2?.placed ?? [])}
+                                container={container}
+                                cog={activeContainer === 1 ? cog : null}
+                              />
+                            </ErrorBoundary>
                           </div>
                           <p className="text-center text-xs text-gray-400 mt-2">
                             Sol tık: döndür · Sağ tık / iki parmak: kaydır · Scroll: zoom

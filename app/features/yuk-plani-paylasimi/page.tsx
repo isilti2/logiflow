@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import AuthGuard from '@/components/AuthGuard';
@@ -42,6 +42,25 @@ export default function YukPlaniPaylasimi() {
   const [cargoRows, setCargoRows] = useState<CargoRow[]>(FALLBACK_CARGO);
   const [fillPct, setFillPct] = useState(84);
   const [containerLabel, setContainerLabel] = useState('40ft Standart Konteyner');
+  const [lastDate, setLastDate] = useState('');
+  const [totalItems, setTotalItems] = useState(FALLBACK_CARGO.reduce((s, r) => s + r.qty, 0));
+  const [hasRealData, setHasRealData] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/optimizations')
+      .then((r) => r.ok ? r.json() : [])
+      .then((opts: { date: string; containerLabel: string; fillPct: number; itemCount: number }[]) => {
+        if (opts.length > 0) {
+          const last = opts[0];
+          setContainerLabel(last.containerLabel);
+          setFillPct(last.fillPct);
+          setTotalItems(last.itemCount);
+          setLastDate(last.date);
+          setHasRealData(true);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   async function handleGenerateLink() {
     try {
@@ -126,20 +145,20 @@ export default function YukPlaniPaylasimi() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 text-base">
-                        İstanbul → Ankara #2847
+                        {hasRealData ? 'Son Optimizasyon' : 'İstanbul → Ankara #2847'}
                       </h3>
-                      <p className="text-xs text-gray-400">40ft Standart Konteyner</p>
+                      <p className="text-xs text-gray-400">{containerLabel}</p>
                     </div>
                   </div>
                   <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded-lg">
-                    27 Mart 2026
+                    {lastDate || '27 Mart 2026'}
                   </span>
                 </div>
 
                 {/* Meta row */}
                 <div className="flex items-center gap-6 mb-5 text-sm text-gray-600">
                   <span>
-                    <span className="font-semibold text-gray-900">{cargoRows.reduce((s, r) => s + r.qty, 0)}</span> kalem kargo
+                    <span className="font-semibold text-gray-900">{totalItems}</span> kalem kargo
                   </span>
                   <span className="flex items-center gap-1">
                     Doluluk:{' '}

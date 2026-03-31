@@ -106,7 +106,7 @@ export default function TakimPage() {
     await fetch(`/api/team/${id}`, { method: 'DELETE' });
     setMembers((prev) => prev.filter((m) => m.id !== id));
     setDeleteId(null);
-    toast('Üye kaldırıldı', 'info');
+    toast('Üye kaldırıldı', 'success');
   }
 
   async function handleRoleChange(id: string, role: Role) {
