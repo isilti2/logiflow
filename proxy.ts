@@ -8,7 +8,8 @@ const secret = () => new TextEncoder().encode(
 // Routes that require authentication
 const PROTECTED = [
   '/dashboard', '/depolama', '/profil', '/takim', '/api-keys',
-  '/opt-gecmisi', '/admin', '/features/kargo-optimizasyon',
+  '/opt-gecmisi', '/admin', '/fatura',
+  '/features/kargo-optimizasyon',
   '/features/detayli-raporlama', '/features/yonetme-depolama',
   '/features/yuk-plani-paylasimi',
 ];

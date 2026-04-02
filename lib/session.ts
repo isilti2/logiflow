@@ -43,5 +43,11 @@ export async function getSession(): Promise<SessionPayload | null> {
 
 export async function destroySession() {
   const store = await cookies();
-  store.delete(COOKIE);
+  store.set(COOKIE, '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 0,
+    path: '/',
+  });
 }
