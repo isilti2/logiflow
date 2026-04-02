@@ -23,6 +23,13 @@ export async function POST(req: Request) {
   return NextResponse.json(notif, { status: 201 });
 }
 
+export async function PATCH() {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  await db.appNotification.updateMany({ where: { userId: session.userId }, data: { read: true } });
+  return NextResponse.json({ ok: true });
+}
+
 export async function DELETE() {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

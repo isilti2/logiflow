@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { logout } from '@/lib/auth';
 import {
   LogOut, User, Mail, Building2, Shield, Key,
-  Bell, ChevronRight, Edit2, Check, X,
+  Bell, ChevronRight, Edit2, Check, X, CreditCard, Trash2,
 } from 'lucide-react';
 
 
@@ -24,6 +24,8 @@ export default function ProfilPage() {
   const [pwError, setPwError]   = useState('');
   const [pwSaved, setPwSaved]   = useState(false);
   const [activity, setActivity] = useState<{ label: string; time: string; module: string }[]>([]);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -66,6 +68,13 @@ export default function ProfilPage() {
   function handleCancel() {
     setDraft(profile);
     setEditing(false);
+  }
+
+  async function handleDeleteAccount() {
+    setDeleting(true);
+    const res = await fetch('/api/auth/me', { method: 'DELETE' });
+    if (res.ok) { window.location.href = '/'; }
+    else { setDeleting(false); setDeleteConfirm(false); }
   }
 
   async function handlePwSave() {
@@ -302,6 +311,7 @@ export default function ProfilPage() {
                   { label: 'Kargo Optimizasyon', href: '/features/kargo-optimizasyon' },
                   { label: 'Depolama',           href: '/depolama' },
                   { label: 'Raporlama',          href: '/features/detayli-raporlama' },
+                  { label: 'Fatura & Abonelik',  href: '/fatura' },
                   ...(admin ? [{ label: 'Admin Panel', href: '/admin' }] : []),
                 ].map(({ label, href }) => (
                   <Link key={href} href={href}
@@ -312,6 +322,37 @@ export default function ProfilPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Danger zone */}
+        <div className="bg-white rounded-2xl border border-red-100 shadow-sm p-5">
+          <div className="flex items-center gap-2 mb-4">
+            <Trash2 className="w-4 h-4 text-red-500" />
+            <h2 className="text-sm font-bold text-gray-900">Tehlikeli Bölge</h2>
+          </div>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-semibold text-gray-800">Hesabı Sil</p>
+              <p className="text-xs text-gray-400 mt-0.5">Tüm verileriniz kalıcı olarak silinir. Bu işlem geri alınamaz.</p>
+            </div>
+            {!deleteConfirm ? (
+              <button onClick={() => setDeleteConfirm(true)}
+                className="text-xs font-semibold text-red-500 hover:text-red-600 border border-red-200 hover:bg-red-50 px-3 py-1.5 rounded-xl transition-colors shrink-0">
+                Hesabı Sil
+              </button>
+            ) : (
+              <div className="flex gap-2 shrink-0">
+                <button onClick={() => setDeleteConfirm(false)}
+                  className="text-xs font-medium text-gray-600 border border-gray-200 px-3 py-1.5 rounded-xl hover:bg-gray-50">
+                  Vazgeç
+                </button>
+                <button onClick={handleDeleteAccount} disabled={deleting}
+                  className="text-xs font-semibold bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl transition-colors disabled:opacity-70">
+                  {deleting ? 'Siliniyor…' : 'Evet, Sil'}
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

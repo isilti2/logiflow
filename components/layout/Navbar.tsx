@@ -110,6 +110,12 @@ export default function Navbar() {
             {authed ? (
               <>
                 <Link
+                  href="/fatura"
+                  className="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 px-3 py-2 rounded-xl transition-colors"
+                >
+                  Fatura
+                </Link>
+                <Link
                   href="/profil"
                   className="hidden sm:flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-1.5"
                 >

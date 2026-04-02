@@ -20,13 +20,6 @@ type ApiUser = { id: string; name: string | null; email: string; role: string; c
 type ApiStats = { totalUsers: number; totalOpts: number; totalCargo: number; totalAreas: number };
 
 
-const NOTIFICATIONS_INIT = [
-  { id: 1, title: 'Disk kullanımı yüksek', body: 'Disk kullanımı %80 eşiğini geçti. Temizlik yapılması önerilir.', type: 'warning', time: '2 saat önce', read: false },
-  { id: 2, title: 'Başarısız giriş denemesi', body: 'Kerem Öztürk için 3 başarısız giriş denemesi — IP: 85.99.210.14', type: 'error', time: '5 saat önce', read: false },
-  { id: 3, title: 'Yedekleme tamamlandı', body: 'Günlük otomatik yedekleme başarıyla tamamlandı (26 Mar 03:00).', type: 'success', time: '1 gün önce', read: true },
-  { id: 4, title: 'Yeni kullanıcı kaydı', body: 'Ahmet Yılmaz tarafından yeni kullanıcı eklendi: ayse@logiflow.io', type: 'info', time: '2 gün önce', read: true },
-  { id: 5, title: 'SSL sertifikası yenilendi', body: 'logiflow.io için SSL sertifikası otomatik olarak yenilendi.', type: 'success', time: '5 gün önce', read: true },
-];
 
 /* ─── Reports mock ───────────────────────────────────────── */
 const REPORT_MONTHLY = [
@@ -45,7 +38,7 @@ const DEPOT_STATS = [
 ];
 
 type Tab = 'overview' | 'users' | 'logs' | 'reports' | 'notifications' | 'settings';
-type NotifRow = typeof NOTIFICATIONS_INIT[number];
+type NotifRow = { id: string; title: string; message: string; type: string; time: string; read: boolean };
 
 /* ─── Sub-components ─────────────────────────────────────── */
 function RoleBadge({ role }: { role: string }) {
@@ -112,7 +105,7 @@ export default function AdminPage() {
   const [users, setUsers]               = useState<ApiUser[]>([]);
   const [dbStats, setDbStats]           = useState<ApiStats | null>(null);
   const [auditLogs, setAuditLogs]       = useState<{ id: string; userId: string | null; userEmail: string | null; action: string; module: string; ip: string | null; type: string; createdAt: string }[]>([]);
-  const [notifications, setNotifications] = useState<NotifRow[]>(NOTIFICATIONS_INIT);
+  const [notifications, setNotifications] = useState<NotifRow[]>([]);
   const [userSearch, setUserSearch]     = useState('');
   const [logSearch, setLogSearch]       = useState('');
   const [logFilter, setLogFilter]       = useState('tümü');
@@ -134,14 +127,19 @@ export default function AdminPage() {
       const me = await res.json();
       if (me.role !== 'admin') { router.replace('/dashboard'); return; }
       setAuthed(true);
-      const [usersRes, statsRes, logsRes] = await Promise.all([
+      const [usersRes, statsRes, logsRes, notifsRes] = await Promise.all([
         fetch('/api/admin/users'),
         fetch('/api/admin/stats'),
         fetch('/api/admin/logs'),
+        fetch('/api/notifications'),
       ]);
       if (usersRes.ok) setUsers(await usersRes.json());
       if (statsRes.ok) setDbStats(await statsRes.json());
       if (logsRes.ok) setAuditLogs(await logsRes.json());
+      if (notifsRes.ok) {
+        const raw = await notifsRes.json() as { id: string; title: string; message: string; type: string; time: string; read: boolean }[];
+        setNotifications(raw.map((n) => ({ ...n, time: new Date(n.time).toLocaleString('tr-TR') })));
+      }
     });
   }, [router]);
 
@@ -164,8 +162,14 @@ export default function AdminPage() {
     setNewUser({ name: '', email: '', password: '', role: 'user' });
     setShowAddUser(false);
   }
-  function markAllRead() { setNotifications((p) => p.map((n) => ({ ...n, read: true }))); }
-  function deleteNotif(id: number) { setNotifications((p) => p.filter((n) => n.id !== id)); }
+  async function markAllRead() {
+    setNotifications((p) => p.map((n) => ({ ...n, read: true })));
+    await fetch('/api/notifications', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ readAll: true }) }).catch(() => {});
+  }
+  async function deleteNotif(id: string) {
+    setNotifications((p) => p.filter((n) => n.id !== id));
+    await fetch(`/api/notifications/${id}`, { method: 'DELETE' }).catch(() => {});
+  }
 
   function handleRefresh() { setLastRefresh(new Date().toLocaleString('tr-TR')); }
 
