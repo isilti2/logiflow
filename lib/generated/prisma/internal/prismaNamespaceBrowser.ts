@@ -58,7 +58,9 @@ export const ModelName = {
   TeamMember: 'TeamMember',
   ApiKey: 'ApiKey',
   AppNotification: 'AppNotification',
-  OptTemplate: 'OptTemplate'
+  OptTemplate: 'OptTemplate',
+  PasswordResetToken: 'PasswordResetToken',
+  AuditLog: 'AuditLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -184,6 +186,31 @@ export const OptTemplateScalarFieldEnum = {
 } as const
 
 export type OptTemplateScalarFieldEnum = (typeof OptTemplateScalarFieldEnum)[keyof typeof OptTemplateScalarFieldEnum]
+
+
+export const PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  userEmail: 'userEmail',
+  action: 'action',
+  module: 'module',
+  ip: 'ip',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
 export const SortOrder = {

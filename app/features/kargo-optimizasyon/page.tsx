@@ -488,6 +488,48 @@ export default function KargoOptimizasyonPage() {
     } catch { toast('Depo verisi okunamadı', 'error'); }
   }
 
+  function handleImportCSV(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const text = ev.target?.result as string;
+        const lines = text.split(/\r?\n/).filter((l) => l.trim());
+        if (lines.length < 2) { toast('CSV dosyası boş veya geçersiz.', 'error'); return; }
+        // Detect header row: name,width,height,depth,qty,weight
+        const header = lines[0].toLowerCase().replace(/\s/g, '');
+        const hasHeader = header.includes('name') || header.includes('ad') || header.includes('isim');
+        const dataLines = hasHeader ? lines.slice(1) : lines;
+        const imported: CargoItem[] = [];
+        for (const line of dataLines) {
+          const cols = line.split(',').map((c) => c.trim().replace(/^"|"$/g, ''));
+          const name   = cols[0];
+          const width  = parseFloat(cols[1]);
+          const height = parseFloat(cols[2]);
+          const depth  = parseFloat(cols[3]);
+          const qty    = parseInt(cols[4]) || 1;
+          const weight = parseFloat(cols[5]) || 1;
+          if (!name || isNaN(width) || isNaN(height) || isNaN(depth)) continue;
+          imported.push({ id: nextId++, name, width, height, depth, qty, weight, canRotate: true, stackable: true, fragile: false, priority: 'any' });
+        }
+        if (imported.length === 0) { toast('Geçerli satır bulunamadı. Format: isim,en,boy,yükseklik,adet,ağırlık', 'error'); return; }
+        setCargoItems((prev) => {
+          const merged = [...prev];
+          for (const imp of imported) {
+            if (!merged.some((m) => m.name === imp.name)) merged.push(imp);
+          }
+          return merged;
+        });
+        setShowResult(false);
+        setResult(null);
+        toast(`${imported.length} kalem CSV'den aktarıldı`, 'success');
+      } catch { toast('CSV okunamadı.', 'error'); }
+    };
+    reader.readAsText(file);
+  }
+
   function handleExportCSV() {
     if (!result) return;
     const header = ['#', 'Ürün', 'X (cm)', 'Y (cm)', 'Z (cm)', 'G (cm)', 'Y (cm)', 'D (cm)'];
@@ -942,6 +984,10 @@ export default function KargoOptimizasyonPage() {
                   >
                     <Plus className="w-4 h-4" /> Kalem Ekle
                   </button>
+                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 border border-gray-200 hover:border-blue-400 hover:text-blue-600 px-4 py-2 rounded-xl transition-colors cursor-pointer">
+                    <input type="file" accept=".csv" className="hidden" onChange={handleImportCSV} />
+                    CSV İçe Aktar
+                  </label>
                 </div>
               </div>
 

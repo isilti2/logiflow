@@ -1,30 +1,38 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { CheckCircle2, ArrowLeft } from 'lucide-react';
+import { CheckCircle2, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail]   = useState('');
-  const [error, setError]   = useState('');
+export default function ResetPasswordPage() {
+  const params = useParams();
+  const router = useRouter();
+  const token = params.token as string;
+
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [showPw, setShowPw] = useState(false);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [sent, setSent]     = useState(false);
+  const [done, setDone] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) { setError('E-posta adresi zorunludur.'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Geçerli bir e-posta girin.'); return; }
+    if (password.length < 8) { setError('Şifre en az 8 karakter olmalıdır.'); return; }
+    if (password !== confirm) { setError('Şifreler eşleşmiyor.'); return; }
     setError('');
     setLoading(true);
     try {
-      await fetch('/api/auth/forgot-password', {
+      const res = await fetch('/api/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ token, password }),
       });
-      setSent(true);
-    } catch {
-      setError('Bir hata oluştu. Lütfen tekrar deneyin.');
+      const data = await res.json();
+      if (!res.ok) { setError(data.error ?? 'Bir hata oluştu.'); return; }
+      setDone(true);
+      setTimeout(() => router.push('/login'), 3000);
     } finally {
       setLoading(false);
     }
@@ -52,38 +60,48 @@ export default function ForgotPasswordPage() {
                 Logi<span className="text-blue-600">Flow</span>
               </span>
             </Link>
-            <h1 className="text-2xl font-black text-gray-900">Şifremi Unuttum</h1>
+            <h1 className="text-2xl font-black text-gray-900">Yeni Şifre Belirle</h1>
             <p className="text-gray-500 text-sm mt-1.5 text-center">
-              E-posta adresinizi girin, sıfırlama bağlantısı gönderelim.
+              En az 8 karakter içeren yeni şifrenizi girin.
             </p>
           </div>
 
-          {sent ? (
+          {done ? (
             <div className="text-center py-6">
               <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 className="w-7 h-7 text-green-500" />
               </div>
-              <h3 className="text-lg font-black text-gray-900 mb-2">E-posta Gönderildi</h3>
+              <h3 className="text-lg font-black text-gray-900 mb-2">Şifre Güncellendi</h3>
               <p className="text-sm text-gray-500 leading-relaxed">
-                <strong>{email}</strong> adresine şifre sıfırlama bağlantısı gönderildi. Gelen kutunuzu kontrol edin.
+                Şifreniz başarıyla değiştirildi. Giriş sayfasına yönlendiriliyorsunuz…
               </p>
-              <p className="text-xs text-gray-400 mt-3">E-posta görünmüyorsa spam klasörünü kontrol edin.</p>
-              <Link
-                href="/login"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 font-semibold"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" /> Giriş sayfasına dön
-              </Link>
             </div>
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-                  E-posta Adresi
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Yeni Şifre</label>
+                <div className="relative">
+                  <input
+                    type={showPw ? 'text' : 'password'}
+                    placeholder="En az 8 karakter"
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value); setError(''); }}
+                    className="w-full px-4 py-2.5 pr-10 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
+                  />
+                  <button type="button" onClick={() => setShowPw((p) => !p)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                    {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Şifreyi Onayla</label>
                 <input
-                  id="email" type="email" placeholder="ornek@logiflow.io"
-                  value={email} onChange={(e) => { setEmail(e.target.value); setError(''); }}
+                  type="password"
+                  placeholder="Şifreyi tekrar girin"
+                  value={confirm}
+                  onChange={(e) => { setConfirm(e.target.value); setError(''); }}
                   className={`w-full px-4 py-2.5 border rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition ${error ? 'border-red-300 bg-red-50' : 'border-gray-200'}`}
                 />
                 {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
@@ -94,8 +112,8 @@ export default function ForgotPasswordPage() {
                 className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-70 text-white font-semibold py-3 rounded-xl transition-colors text-sm"
               >
                 {loading ? (
-                  <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Gönderiliyor…</>
-                ) : 'Sıfırlama Bağlantısı Gönder'}
+                  <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Kaydediliyor…</>
+                ) : 'Şifreyi Kaydet'}
               </button>
 
               <div className="text-center">

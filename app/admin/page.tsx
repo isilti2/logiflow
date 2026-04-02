@@ -19,20 +19,6 @@ import {
 type ApiUser = { id: string; name: string | null; email: string; role: string; createdAt: string };
 type ApiStats = { totalUsers: number; totalOpts: number; totalCargo: number; totalAreas: number };
 
-const LOGS = [
-  { id: 1,  user: 'Ahmet Yılmaz', action: 'Kargo optimizasyonu yapıldı',    module: 'Optimizasyon', time: '27 Mar 2026, 09:18', ip: '192.168.1.10', type: 'success' },
-  { id: 2,  user: 'Elif Kaya',    action: 'Excel içe aktarma',              module: 'Depolama',     time: '27 Mar 2026, 09:02', ip: '192.168.1.22', type: 'success' },
-  { id: 3,  user: 'Murat Demir',  action: 'Yük planı paylaşıldı',           module: 'Paylaşım',     time: '27 Mar 2026, 08:45', ip: '192.168.1.31', type: 'success' },
-  { id: 4,  user: 'Selin Arslan', action: 'Rapor PDF indirildi',            module: 'Raporlama',    time: '26 Mar 2026, 17:35', ip: '192.168.1.41', type: 'success' },
-  { id: 5,  user: 'Kerem Öztürk',action: 'Başarısız giriş denemesi',       module: 'Auth',         time: '26 Mar 2026, 16:10', ip: '85.99.210.14', type: 'error' },
-  { id: 6,  user: 'Sistem',       action: 'Otomatik yedekleme tamamlandı', module: 'Sistem',       time: '26 Mar 2026, 03:00', ip: '—',            type: 'info' },
-  { id: 7,  user: 'Ahmet Yılmaz', action: 'Yeni kullanıcı eklendi',         module: 'Admin',        time: '25 Mar 2026, 11:20', ip: '192.168.1.10', type: 'info' },
-  { id: 8,  user: 'Sistem',       action: 'Disk kullanımı %80 uyarısı',     module: 'Sistem',       time: '24 Mar 2026, 14:00', ip: '—',            type: 'warning' },
-  { id: 9,  user: 'Elif Kaya',    action: 'Yeni depo alanı oluşturuldu',    module: 'Depolama',     time: '24 Mar 2026, 10:15', ip: '192.168.1.22', type: 'success' },
-  { id: 10, user: 'Murat Demir',  action: 'Konteyner optimizasyonu #59',    module: 'Optimizasyon', time: '23 Mar 2026, 15:40', ip: '192.168.1.31', type: 'success' },
-  { id: 11, user: 'Sistem',       action: 'SSL sertifikası yenilendi',      module: 'Sistem',       time: '22 Mar 2026, 02:00', ip: '—',            type: 'info' },
-  { id: 12, user: 'Kerem Öztürk',action: 'Yetkisiz erişim girişimi',       module: 'Auth',         time: '21 Mar 2026, 19:55', ip: '185.220.101.5', type: 'error' },
-];
 
 const NOTIFICATIONS_INIT = [
   { id: 1, title: 'Disk kullanımı yüksek', body: 'Disk kullanımı %80 eşiğini geçti. Temizlik yapılması önerilir.', type: 'warning', time: '2 saat önce', read: false },
@@ -125,6 +111,7 @@ export default function AdminPage() {
   const [activeTab, setActiveTab]       = useState<Tab>('overview');
   const [users, setUsers]               = useState<ApiUser[]>([]);
   const [dbStats, setDbStats]           = useState<ApiStats | null>(null);
+  const [auditLogs, setAuditLogs]       = useState<{ id: string; userId: string | null; userEmail: string | null; action: string; module: string; ip: string | null; type: string; createdAt: string }[]>([]);
   const [notifications, setNotifications] = useState<NotifRow[]>(NOTIFICATIONS_INIT);
   const [userSearch, setUserSearch]     = useState('');
   const [logSearch, setLogSearch]       = useState('');
@@ -147,12 +134,14 @@ export default function AdminPage() {
       const me = await res.json();
       if (me.role !== 'admin') { router.replace('/dashboard'); return; }
       setAuthed(true);
-      const [usersRes, statsRes] = await Promise.all([
+      const [usersRes, statsRes, logsRes] = await Promise.all([
         fetch('/api/admin/users'),
         fetch('/api/admin/stats'),
+        fetch('/api/admin/logs'),
       ]);
       if (usersRes.ok) setUsers(await usersRes.json());
       if (statsRes.ok) setDbStats(await statsRes.json());
+      if (logsRes.ok) setAuditLogs(await logsRes.json());
     });
   }, [router]);
 
@@ -182,7 +171,7 @@ export default function AdminPage() {
 
   function handleDownloadCSV() {
     const header = ['Tür', 'İşlem', 'Kullanıcı', 'Modül', 'IP', 'Zaman'];
-    const rows = filteredLogs.map((l) => [l.type, l.action, l.user, l.module, l.ip, l.time]);
+    const rows = filteredLogs.map((l) => [l.type, l.action, l.userEmail ?? '—', l.module, l.ip ?? '—', new Date(l.createdAt).toLocaleString('tr-TR')]);
     const csv = [header, ...rows].map((r) => r.map((c) => `"${c}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -201,8 +190,8 @@ export default function AdminPage() {
     (u.name ?? '').toLowerCase().includes(userSearch.toLowerCase()) ||
     u.email.toLowerCase().includes(userSearch.toLowerCase())
   );
-  const filteredLogs = LOGS.filter((l) => {
-    const matchSearch = l.user.toLowerCase().includes(logSearch.toLowerCase()) ||
+  const filteredLogs = auditLogs.filter((l) => {
+    const matchSearch = (l.userEmail ?? '').toLowerCase().includes(logSearch.toLowerCase()) ||
       l.action.toLowerCase().includes(logSearch.toLowerCase());
     const matchType = logFilter === 'tümü' || l.type === logFilter;
     return matchSearch && matchType;
@@ -391,14 +380,14 @@ export default function AdminPage() {
                   </button>
                 </div>
                 <div className="divide-y divide-gray-50">
-                  {LOGS.slice(0, 5).map((log) => (
+                  {auditLogs.slice(0, 5).map((log) => (
                     <div key={log.id} className="flex items-center gap-3 px-5 py-3">
                       <LogIcon type={log.type} />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-gray-800 font-medium truncate">{log.action}</p>
-                        <p className="text-xs text-gray-400">{log.user} · {log.module}</p>
+                        <p className="text-xs text-gray-400">{log.userEmail ?? '—'} · {log.module}</p>
                       </div>
-                      <span className="text-xs text-gray-400 shrink-0">{log.time.split(',')[1]}</span>
+                      <span className="text-xs text-gray-400 shrink-0">{new Date(log.createdAt).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
                   ))}
                 </div>
@@ -670,12 +659,12 @@ export default function AdminPage() {
                         <tr key={log.id} className="hover:bg-gray-50 transition-colors">
                           <td className="px-4 py-3"><LogIcon type={log.type} /></td>
                           <td className="px-4 py-3 font-medium text-gray-800 max-w-xs">{log.action}</td>
-                          <td className="px-4 py-3 text-gray-600 whitespace-nowrap">{log.user}</td>
+                          <td className="px-4 py-3 text-gray-600 whitespace-nowrap">{log.userEmail ?? '—'}</td>
                           <td className="px-4 py-3">
                             <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">{log.module}</span>
                           </td>
-                          <td className="px-4 py-3 text-gray-400 text-xs font-mono">{log.ip}</td>
-                          <td className="px-4 py-3 text-gray-400 text-xs whitespace-nowrap">{log.time}</td>
+                          <td className="px-4 py-3 text-gray-400 text-xs font-mono">{log.ip ?? '—'}</td>
+                          <td className="px-4 py-3 text-gray-400 text-xs whitespace-nowrap">{new Date(log.createdAt).toLocaleString('tr-TR')}</td>
                         </tr>
                       ))}
                     </tbody>

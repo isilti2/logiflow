@@ -16,13 +16,14 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  areas         DepotArea[]
-  cargo         CargoItem[]
-  optimizations OptimizationRun[]
-  teamMembers   TeamMember[]
-  apiKeys       ApiKey[]
-  notifications AppNotification[]
-  templates     OptTemplate[]
+  areas               DepotArea[]
+  cargo               CargoItem[]
+  optimizations       OptimizationRun[]
+  teamMembers         TeamMember[]
+  apiKeys             ApiKey[]
+  notifications       AppNotification[]
+  templates           OptTemplate[]
+  passwordResetTokens PasswordResetToken[]
 }
 
 model DepotArea {
@@ -129,4 +130,30 @@ model OptTemplate {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  userEmail String?
+  action    String
+  module    String
+  ip        String?
+  type      String   @default("info")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }

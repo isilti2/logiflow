@@ -205,6 +205,7 @@ export type UserWhereInput = {
   apiKeys?: Prisma.ApiKeyListRelationFilter
   notifications?: Prisma.AppNotificationListRelationFilter
   templates?: Prisma.OptTemplateListRelationFilter
+  passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -222,6 +223,7 @@ export type UserOrderByWithRelationInput = {
   apiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
   notifications?: Prisma.AppNotificationOrderByRelationAggregateInput
   templates?: Prisma.OptTemplateOrderByRelationAggregateInput
+  passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -242,6 +244,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   apiKeys?: Prisma.ApiKeyListRelationFilter
   notifications?: Prisma.AppNotificationListRelationFilter
   templates?: Prisma.OptTemplateListRelationFilter
+  passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -285,6 +288,7 @@ export type UserCreateInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -302,6 +306,7 @@ export type UserUncheckedCreateInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -319,6 +324,7 @@ export type UserUpdateInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -336,6 +342,7 @@ export type UserUncheckedUpdateInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -509,6 +516,20 @@ export type UserUpdateOneRequiredWithoutTemplatesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTemplatesInput, Prisma.UserUpdateWithoutTemplatesInput>, Prisma.UserUncheckedUpdateWithoutTemplatesInput>
 }
 
+export type UserCreateNestedOneWithoutPasswordResetTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPasswordResetTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetTokensInput
+  upsert?: Prisma.UserUpsertWithoutPasswordResetTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetTokensInput, Prisma.UserUpdateWithoutPasswordResetTokensInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+}
+
 export type UserCreateWithoutAreasInput = {
   id?: string
   email: string
@@ -523,6 +544,7 @@ export type UserCreateWithoutAreasInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAreasInput = {
@@ -539,6 +561,7 @@ export type UserUncheckedCreateWithoutAreasInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAreasInput = {
@@ -571,6 +594,7 @@ export type UserUpdateWithoutAreasInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAreasInput = {
@@ -587,6 +611,7 @@ export type UserUncheckedUpdateWithoutAreasInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCargoInput = {
@@ -603,6 +628,7 @@ export type UserCreateWithoutCargoInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCargoInput = {
@@ -619,6 +645,7 @@ export type UserUncheckedCreateWithoutCargoInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCargoInput = {
@@ -651,6 +678,7 @@ export type UserUpdateWithoutCargoInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCargoInput = {
@@ -667,6 +695,7 @@ export type UserUncheckedUpdateWithoutCargoInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOptimizationsInput = {
@@ -683,6 +712,7 @@ export type UserCreateWithoutOptimizationsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOptimizationsInput = {
@@ -699,6 +729,7 @@ export type UserUncheckedCreateWithoutOptimizationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOptimizationsInput = {
@@ -731,6 +762,7 @@ export type UserUpdateWithoutOptimizationsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOptimizationsInput = {
@@ -747,6 +779,7 @@ export type UserUncheckedUpdateWithoutOptimizationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -763,6 +796,7 @@ export type UserCreateWithoutTeamMembersInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -779,6 +813,7 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -811,6 +846,7 @@ export type UserUpdateWithoutTeamMembersInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -827,6 +863,7 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApiKeysInput = {
@@ -843,6 +880,7 @@ export type UserCreateWithoutApiKeysInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -859,6 +897,7 @@ export type UserUncheckedCreateWithoutApiKeysInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -891,6 +930,7 @@ export type UserUpdateWithoutApiKeysInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -907,6 +947,7 @@ export type UserUncheckedUpdateWithoutApiKeysInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -923,6 +964,7 @@ export type UserCreateWithoutNotificationsInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -939,6 +981,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -971,6 +1014,7 @@ export type UserUpdateWithoutNotificationsInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -987,6 +1031,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTemplatesInput = {
@@ -1003,6 +1048,7 @@ export type UserCreateWithoutTemplatesInput = {
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTemplatesInput = {
@@ -1019,6 +1065,7 @@ export type UserUncheckedCreateWithoutTemplatesInput = {
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTemplatesInput = {
@@ -1051,6 +1098,7 @@ export type UserUpdateWithoutTemplatesInput = {
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTemplatesInput = {
@@ -1067,6 +1115,91 @@ export type UserUncheckedUpdateWithoutTemplatesInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPasswordResetTokensInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+}
+
+export type UserUpsertWithoutPasswordResetTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetTokensInput, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPasswordResetTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetTokensInput, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+}
+
+export type UserUpdateWithoutPasswordResetTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1082,6 +1215,7 @@ export type UserCountOutputType = {
   apiKeys: number
   notifications: number
   templates: number
+  passwordResetTokens: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1092,6 +1226,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   apiKeys?: boolean | UserCountOutputTypeCountApiKeysArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   templates?: boolean | UserCountOutputTypeCountTemplatesArgs
+  passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
 }
 
 /**
@@ -1153,6 +1288,13 @@ export type UserCountOutputTypeCountTemplatesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.OptTemplateWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PasswordResetTokenWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1169,6 +1311,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   apiKeys?: boolean | Prisma.User$apiKeysArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   templates?: boolean | Prisma.User$templatesArgs<ExtArgs>
+  passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1211,6 +1354,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   apiKeys?: boolean | Prisma.User$apiKeysArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   templates?: boolean | Prisma.User$templatesArgs<ExtArgs>
+  passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1226,6 +1370,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     notifications: Prisma.$AppNotificationPayload<ExtArgs>[]
     templates: Prisma.$OptTemplatePayload<ExtArgs>[]
+    passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1636,6 +1781,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   apiKeys<T extends Prisma.User$apiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   templates<T extends Prisma.User$templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OptTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2230,6 +2376,30 @@ export type User$templatesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.OptTemplateScalarFieldEnum | Prisma.OptTemplateScalarFieldEnum[]
+}
+
+/**
+ * User.passwordResetTokens
+ */
+export type User$passwordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PasswordResetToken
+   */
+  select?: Prisma.PasswordResetTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PasswordResetToken
+   */
+  omit?: Prisma.PasswordResetTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PasswordResetTokenInclude<ExtArgs> | null
+  where?: Prisma.PasswordResetTokenWhereInput
+  orderBy?: Prisma.PasswordResetTokenOrderByWithRelationInput | Prisma.PasswordResetTokenOrderByWithRelationInput[]
+  cursor?: Prisma.PasswordResetTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
 }
 
 /**

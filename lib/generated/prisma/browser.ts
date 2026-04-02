@@ -57,3 +57,13 @@ export type AppNotification = Prisma.AppNotificationModel
  * 
  */
 export type OptTemplate = Prisma.OptTemplateModel
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel

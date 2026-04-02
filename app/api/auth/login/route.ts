@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const error = await loginAction(email, password);
+  const error = await loginAction(email, password, ip);
   if (error) return NextResponse.json({ error }, { status: 401 });
 
   resetRateLimit(key); // başarılı girişte sıfırla

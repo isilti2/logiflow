@@ -3,16 +3,25 @@
 import { db } from '@/lib/db';
 import { hashPassword, verifyPassword } from '@/lib/password';
 import { createSession, destroySession } from '@/lib/session';
+import { writeAuditLog } from '@/lib/auditLog';
 import { redirect } from 'next/navigation';
 
-export async function loginAction(email: string, password: string): Promise<string | null> {
-  const user = await db.user.findUnique({ where: { email: email.toLowerCase().trim() } });
-  if (!user) return 'E-posta veya şifre hatalı.';
+export async function loginAction(email: string, password: string, ip?: string): Promise<string | null> {
+  const normalEmail = email.toLowerCase().trim();
+  const user = await db.user.findUnique({ where: { email: normalEmail } });
+  if (!user) {
+    await writeAuditLog({ userEmail: normalEmail, action: 'Başarısız giriş denemesi', module: 'Auth', ip, type: 'error' });
+    return 'E-posta veya şifre hatalı.';
+  }
 
   const valid = await verifyPassword(password, user.password);
-  if (!valid) return 'E-posta veya şifre hatalı.';
+  if (!valid) {
+    await writeAuditLog({ userId: user.id, userEmail: user.email, action: 'Başarısız giriş denemesi', module: 'Auth', ip, type: 'error' });
+    return 'E-posta veya şifre hatalı.';
+  }
 
   await createSession({ userId: user.id, email: user.email, role: user.role });
+  await writeAuditLog({ userId: user.id, userEmail: user.email, action: 'Kullanıcı giriş yaptı', module: 'Auth', ip, type: 'success' });
   return null;
 }
 
@@ -41,6 +50,7 @@ export async function registerAction(
   });
 
   await createSession({ userId: user.id, email: user.email, role: user.role });
+  await writeAuditLog({ userId: user.id, userEmail: user.email, action: 'Yeni kullanıcı kaydı', module: 'Auth', type: 'success' });
   return null;
 }
 
