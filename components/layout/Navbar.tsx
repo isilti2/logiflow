@@ -11,13 +11,13 @@ import GlobalSearch from '@/components/ui/GlobalSearch';
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState<boolean | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const { lang, setLang, t } = useLanguage();
 
   useEffect(() => {
-    fetch('/api/auth/me').then((r) => { if (r.ok) setAuthed(true); });
+    fetch('/api/auth/me').then((r) => { setAuthed(r.ok); }).catch(() => setAuthed(false));
     const onScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
@@ -107,7 +107,9 @@ export default function Navbar() {
               {lang === 'tr' ? '🇬🇧 EN' : '🇹🇷 TR'}
             </button>
 
-            {authed ? (
+            {authed === null ? (
+              <div className="w-20 h-8 bg-gray-100 rounded-xl animate-pulse hidden sm:block" />
+            ) : authed ? (
               <>
                 <Link
                   href="/fatura"
@@ -176,7 +178,7 @@ export default function Navbar() {
             {authed ? (
               <>
                 {[
-                  { label: 'Dashboard', href: '/dashboard' },
+                  { label: 'Dashboard',   href: '/dashboard' },
                   { label: 'Optimizasyon', href: '/features/kargo-optimizasyon' },
                   { label: 'Geçmiş', href: '/opt-gecmisi' },
                   { label: 'Raporlama', href: '/features/detayli-raporlama' },
