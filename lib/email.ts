@@ -4,7 +4,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendPasswordResetEmail(to: string, resetUrl: string): Promise<void> {
   await resend.emails.send({
-    from: 'LogiFlow <noreply@logiflow.io>',
+    from: 'LogiFlow <onboarding@resend.dev>',
     to,
     subject: 'Şifre Sıfırlama Talebi — LogiFlow',
     html: `
