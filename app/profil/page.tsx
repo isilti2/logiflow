@@ -119,7 +119,7 @@ export default function ProfilPage() {
               ← Dashboard
             </Link>
             <button
-              onClick={async () => { await logout(); router.push('/'); }}
+              onClick={async () => { await logout(); window.location.href = '/'; }}
               className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 border border-gray-200 hover:border-red-200 px-3 py-2 rounded-xl transition-colors"
             >
               <LogOut className="w-4 h-4" />
