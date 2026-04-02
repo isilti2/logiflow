@@ -172,8 +172,11 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white shadow-lg">
+      <div
+        className={`md:hidden border-t border-gray-100 bg-white shadow-lg overflow-hidden transition-all duration-200 ease-in-out ${
+          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
           <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
             {authed ? (
               <>
@@ -210,8 +213,7 @@ export default function Navbar() {
               </>
             )}
           </div>
-        </div>
-      )}
+      </div>
     </nav>
   );
 }
