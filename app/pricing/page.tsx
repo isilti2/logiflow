@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import { Check, X, Zap, Building2, Users, ArrowRight, HelpCircle } from 'lucide-react';
@@ -32,7 +32,7 @@ const PLANS: Plan[] = [
     monthlyPrice: 0,
     description: 'Bireysel kullanım ve küçük operasyonlar için ideal başlangıç noktası.',
     cta: 'Ücretsiz Başla',
-    ctaHref: '/login',
+    ctaHref: '/register',
     highlight: false,
     features: [
       { text: 'Aylık 10 optimizasyon', included: true },
@@ -57,7 +57,7 @@ const PLANS: Plan[] = [
     monthlyPrice: 29,
     description: 'Büyüyen ekipler ve yoğun operasyonlar için gelişmiş araçlar ve sınırsız kullanım.',
     cta: 'Pro\'yu Dene',
-    ctaHref: '/login',
+    ctaHref: '/register',
     highlight: true,
     features: [
       { text: 'Sınırsız optimizasyon', included: true },
@@ -129,6 +129,16 @@ const FAQ = [
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [authed, setAuthed] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/auth/me').then((r) => { if (r.ok) setAuthed(true); });
+  }, []);
+
+  function ctaHref(plan: Plan): string {
+    if (plan.id === 'enterprise') return plan.ctaHref;
+    return authed ? '/fatura' : plan.ctaHref;
+  }
 
   function displayPrice(plan: Plan): string {
     if (plan.monthlyPrice === null) return 'Özel';
@@ -239,7 +249,7 @@ export default function PricingPage() {
 
               {/* CTA */}
               <Link
-                href={plan.ctaHref}
+                href={ctaHref(plan)}
                 className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
                   plan.highlight
                     ? 'bg-white text-blue-700 hover:bg-blue-50'
