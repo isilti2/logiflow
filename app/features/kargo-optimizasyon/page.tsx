@@ -982,73 +982,124 @@ export default function KargoOptimizasyonPage() {
                 {/* Add item */}
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Yeni Kalem Ekle</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
-                    <input
-                      type="text" placeholder="Ad"
-                      value={newItem.name}
-                      onChange={(e) => setNewItem((p) => ({ ...p, name: e.target.value }))}
-                      className="col-span-2 sm:col-span-1 border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {(['width', 'height', 'depth'] as const).map((f) => (
-                      <input key={f} type="number" min={1}
-                        placeholder={f === 'width' ? 'G (cm)' : f === 'height' ? 'Y (cm)' : 'D (cm)'}
-                        value={newItem[f]}
-                        onChange={(e) => setNewItem((p) => ({ ...p, [f]: parseInt(e.target.value) || 1 }))}
+
+                  {/* Row 1: Ad + Boyutlar */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                    {/* Ad */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Ürün Adı</label>
+                      <input
+                        type="text"
+                        placeholder="ör. Koli A, Palet B…"
+                        value={newItem.name}
+                        onChange={(e) => setNewItem((p) => ({ ...p, name: e.target.value }))}
                         className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
-                    ))}
-                    <input type="number" min={1} placeholder="Adet"
-                      value={newItem.qty}
-                      onChange={(e) => setNewItem((p) => ({ ...p, qty: parseInt(e.target.value) || 1 }))}
-                      className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <input type="number" min={0} step="0.1" placeholder="Ağırlık (kg)"
-                      value={newItem.weight}
-                      onChange={(e) => setNewItem((p) => ({ ...p, weight: parseFloat(e.target.value) || 0 }))}
-                      className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
-                      <input type="checkbox" checked={newItem.canRotate}
-                        onChange={(e) => setNewItem((p) => ({ ...p, canRotate: e.target.checked }))}
-                        className="accent-blue-600 w-3.5 h-3.5"
-                      />
-                      Rotasyon
-                    </label>
-                    <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
-                      <input type="checkbox" checked={newItem.stackable}
-                        onChange={(e) => setNewItem((p) => ({ ...p, stackable: e.target.checked }))}
-                        className="accent-green-600 w-3.5 h-3.5"
-                      />
-                      İstifleme
-                    </label>
-                    <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
-                      <input type="checkbox" checked={newItem.fragile}
-                        onChange={(e) => setNewItem((p) => ({ ...p, fragile: e.target.checked }))}
-                        className="accent-amber-500 w-3.5 h-3.5"
-                      />
-                      Kırılgan
-                    </label>
+                    </div>
+
+                    {/* Boyutlar: Uzunluk × Genişlik × Yükseklik */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">
+                        Boyutlar <span className="font-normal normal-case text-gray-300">(Uzunluk × Genişlik × Yükseklik — cm)</span>
+                      </label>
+                      <div className="flex items-center gap-1.5">
+                        {([
+                          { field: 'width',  ph: 'Uzunluk' },
+                          { field: 'height', ph: 'Genişlik' },
+                          { field: 'depth',  ph: 'Yükseklik' },
+                        ] as { field: 'width' | 'height' | 'depth'; ph: string }[]).map(({ field, ph }, i) => (
+                          <>
+                            <div key={field} className="flex flex-col gap-0.5 flex-1">
+                              <span className="text-[10px] text-gray-400 text-center">{ph}</span>
+                              <input
+                                type="number" min={1}
+                                value={newItem[field]}
+                                onChange={(e) => setNewItem((p) => ({ ...p, [field]: parseInt(e.target.value) || 1 }))}
+                                className="w-full border border-gray-200 rounded-lg px-2 py-2 text-xs text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
+                            </div>
+                            {i < 2 && <span key={`sep-${i}`} className="text-gray-300 text-sm font-bold mt-4">×</span>}
+                          </>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Çıkış Sırası</label>
-                    <select value={newItem.priority}
+
+                  {/* Row 2: Adet + Ağırlık */}
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Adet</label>
+                      <input
+                        type="number" min={1}
+                        value={newItem.qty}
+                        onChange={(e) => setNewItem((p) => ({ ...p, qty: parseInt(e.target.value) || 1 }))}
+                        className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Ağırlık <span className="font-normal">(kg / adet)</span></label>
+                      <input
+                        type="number" min={0} step="0.1"
+                        value={newItem.weight}
+                        onChange={(e) => setNewItem((p) => ({ ...p, weight: parseFloat(e.target.value) || 0 }))}
+                        className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Row 3: Özellikler */}
+                  <div className="flex flex-col gap-1 mb-3">
+                    <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Özellikler</label>
+                    <div className="flex flex-wrap gap-3 bg-gray-50 border border-gray-100 rounded-lg px-3 py-2.5">
+                      <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer" title="Kutu farklı yönlerde yerleştirilebilir">
+                        <input type="checkbox" checked={newItem.canRotate}
+                          onChange={(e) => setNewItem((p) => ({ ...p, canRotate: e.target.checked }))}
+                          className="accent-blue-600 w-3.5 h-3.5" />
+                        <span>Rotasyon <span className="text-gray-400">(yön değiştirilebilir)</span></span>
+                      </label>
+                      <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer" title="Bu kutunun üstüne başka kutu konulabilir">
+                        <input type="checkbox" checked={newItem.stackable}
+                          onChange={(e) => setNewItem((p) => ({ ...p, stackable: e.target.checked }))}
+                          className="accent-green-600 w-3.5 h-3.5" />
+                        <span>İstifleme <span className="text-gray-400">(üste kutu konabilir)</span></span>
+                      </label>
+                      <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer" title="Kırılgan — en üste yerleştirilir">
+                        <input type="checkbox" checked={newItem.fragile}
+                          onChange={(e) => setNewItem((p) => ({ ...p, fragile: e.target.checked }))}
+                          className="accent-amber-500 w-3.5 h-3.5" />
+                        <span>Kırılgan <span className="text-gray-400">(en üste yerleştirilir)</span></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Row 4: Çıkış sırası */}
+                  <div className="flex flex-col gap-1 mb-4">
+                    <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Çıkış Sırası</label>
+                    <select
+                      value={newItem.priority}
                       onChange={(e) => setNewItem((p) => ({ ...p, priority: e.target.value as LoadPriority }))}
-                      className="border border-gray-200 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                      <option value="first-out">Önce Çıkar (LIFO — kapıya yakın)</option>
-                      <option value="any">Herhangi (hacim bazlı)</option>
-                      <option value="last-out">Sonra Çıkar (FIFO — arkaya)</option>
+                      className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700"
+                    >
+                      <option value="first-out">Önce Çıkar — LIFO (kapı tarafına yakın yerleşir)</option>
+                      <option value="any">Herhangi — hacim bazlı optimal yerleşim</option>
+                      <option value="last-out">Sonra Çıkar — FIFO (en arkaya yerleşir)</option>
                     </select>
                   </div>
-                  <button
-                    onClick={handleAddItem}
-                    className="flex items-center gap-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors"
-                  >
-                    <Plus className="w-4 h-4" /> Kalem Ekle
-                  </button>
-                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 border border-gray-200 hover:border-blue-400 hover:text-blue-600 px-4 py-2 rounded-xl transition-colors cursor-pointer">
-                    <input type="file" accept=".csv" className="hidden" onChange={handleImportCSV} />
-                    CSV İçe Aktar
-                  </label>
+
+                  {/* Buttons */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleAddItem}
+                      disabled={!newItem.name.trim()}
+                      className="flex items-center gap-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2.5 rounded-xl transition-colors"
+                    >
+                      <Plus className="w-4 h-4" /> Kalem Ekle
+                    </button>
+                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-500 border border-gray-200 hover:border-blue-400 hover:text-blue-600 px-4 py-2.5 rounded-xl transition-colors cursor-pointer">
+                      <input type="file" accept=".csv" className="hidden" onChange={handleImportCSV} />
+                      CSV İçe Aktar
+                    </label>
+                  </div>
                 </div>
               </div>
 
