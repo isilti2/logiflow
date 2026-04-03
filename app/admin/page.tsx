@@ -725,7 +725,7 @@ export default function AdminPage() {
                             </button>
                           </div>
                         </div>
-                        <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{n.body}</p>
+                        <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{n.message}</p>
                         <p className="text-xs text-gray-300 mt-1.5">{n.time}</p>
                       </div>
                     </div>

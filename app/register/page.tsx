@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, Users, TrendingUp, Lock } from 'lucide-react';
 
-export default function RegisterPage() {
+function RegisterForm() {
   const searchParams = useSearchParams();
   const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
   const [showPw, setShowPw]       = useState(false);
@@ -255,5 +255,13 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterForm />
+    </Suspense>
   );
 }
