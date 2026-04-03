@@ -73,6 +73,10 @@ interface PackResult {
   unplacedItems: CargoItem[];
   usedVolume: number;
   totalWeight: number;
+  frontWeight: number;   // ön yarı ağırlığı (z < depth/2)
+  rearWeight: number;    // arka yarı ağırlığı
+  leftWeight: number;    // sol yarı ağırlığı (x < width/2)
+  rightWeight: number;   // sağ yarı ağırlığı
 }
 
 /* ─── Constants ──────────────────────────────────────────── */
@@ -136,18 +140,42 @@ function packBoxes(items: CargoItem[], container: ContainerDims): PackResult {
     }
   });
 
-  // Sort: first-out → front (placed first, low z); last-out → back (placed last, high z)
-  // fragile/non-stackable → placed last within z-shelf (end up at higher y = top of load)
+  // Sort: önce öncelik grubu, sonra ağırlık dengesi
   units.sort((a, b) => {
     const pOrder = { 'first-out': 0, 'any': 1, 'last-out': 2 };
     const pa = pOrder[a.priority], pb = pOrder[b.priority];
     if (pa !== pb) return pa - pb;
-    // fragile and non-stackable items go to top (placed later = higher y)
     const aTop = (a.fragile || !a.stackable) ? 1 : 0;
     const bTop = (b.fragile || !b.stackable) ? 1 : 0;
     if (aTop !== bTop) return aTop - bTop;
     return (b.w * b.h * b.d) - (a.w * a.h * a.d);
   });
+
+  // ── Uluslararası TIR standardı: ağırlık bölge dağılımı ──────────────
+  // "any" öncelikli, normal (istifleme OK, kırılgan değil) kalemleri
+  // 3 bölgeye (ön/orta/arka) eşit dağıt — ağır kalemler bölgelere döngüsel atanır
+  // Böylece her bölgede benzer toplam ağırlık olur (AB Direktifi 96/53/EC).
+  {
+    const anyNormal = units.filter(u => u.priority === 'any' && u.stackable && !u.fragile);
+    const rest      = units.filter(u => !(u.priority === 'any' && u.stackable && !u.fragile));
+
+    if (anyNormal.length > 3) {
+      // Ağırlığa göre sırala (en ağır → en hafif)
+      anyNormal.sort((a, b) => b.weight - a.weight);
+
+      // 3 bölgeye döngüsel ata: 0=ön, 1=orta, 2=arka
+      const zones: typeof anyNormal[] = [[], [], []];
+      anyNormal.forEach((u, i) => zones[i % 3].push(u));
+
+      // Sıra: firstOut → ön bölge → orta bölge → arka bölge → özel(fragile/non-stack) → lastOut
+      const firstOut = rest.filter(u => u.priority === 'first-out');
+      const special  = rest.filter(u => u.priority === 'any');
+      const lastOut  = rest.filter(u => u.priority === 'last-out');
+
+      units.length = 0;
+      units.push(...firstOut, ...zones[0], ...zones[1], ...zones[2], ...special, ...lastOut);
+    }
+  }
 
   const placed: PlacedBox[] = [];
   const failedIds = new Set<number>();
@@ -274,7 +302,22 @@ function packBoxes(items: CargoItem[], container: ContainerDims): PackResult {
   }
 
   const unplacedItems = items.filter((item) => failedIds.has(item.id));
-  return { placed, unplacedItems, usedVolume, totalWeight };
+
+  // ── Ağırlık dağılımı hesapla ─────────────────────────────────────────
+  const halfZ = container.depth  / 2;
+  const halfX = container.width  / 2;
+  let frontWeight = 0, rearWeight = 0, leftWeight = 0, rightWeight = 0;
+
+  for (const p of placed) {
+    const unit = items.find(i => i.id === p.cargoId);
+    const w    = unit?.weight ?? 0;
+    const cz   = p.z + p.d / 2;
+    const cx   = p.x + p.w / 2;
+    if (cz < halfZ) frontWeight += w; else rearWeight += w;
+    if (cx < halfX) leftWeight  += w; else rightWeight += w;
+  }
+
+  return { placed, unplacedItems, usedVolume, totalWeight, frontWeight, rearWeight, leftWeight, rightWeight };
 }
 
 
@@ -1205,6 +1248,113 @@ export default function KargoOptimizasyonPage() {
                       </div>
                     )}
                   </div>
+
+                  {/* ── Ağırlık Dağılımı Paneli (AB/TIR standardı) ── */}
+                  {activeContainer === 1 && result.totalWeight > 0 && (() => {
+                    const { frontWeight: fw, rearWeight: rw, leftWeight: lw, rightWeight: rght } = result;
+                    const totalW   = fw + rw;
+                    const frontPct = Math.round((fw / Math.max(totalW, 1)) * 100);
+                    const rearPct  = 100 - frontPct;
+                    const leftPct  = Math.round((lw / Math.max(lw + rght, 1)) * 100);
+
+                    // CoG z konumu % olarak (dorsenin başından)
+                    const cogZPct  = cog ? Math.round((cog.z / container.depth) * 100) : null;
+
+                    // AB standart aralığı: CoG %35-55, yan fark <%15
+                    const cogOk    = cogZPct !== null && cogZPct >= 35 && cogZPct <= 55;
+                    const lateralOk = Math.abs(leftPct - 50) <= 10;
+                    const frontRearOk = frontPct >= 40 && frontPct <= 60;
+
+                    // Tahmini aks yükleri (basitleştirilmiş fizik modeli)
+                    // Dorse aksı ≈ toplam yük * cogZ / dorseBoyu
+                    const trailerAxleLoad = cog ? Math.round(result.totalWeight * (cog.z / container.depth)) : null;
+                    const kingpinLoad     = trailerAxleLoad !== null ? Math.round(result.totalWeight - trailerAxleLoad) : null;
+
+                    const EU_TRAILER_AXL = 24000; // tandem aks kg
+                    const EU_KINGPIN_MAX = 12000;  // beşinci teker kg
+
+                    return (
+                      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-sm font-bold text-gray-900">Ağırlık Dağılımı</h3>
+                          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">AB Direktifi 96/53/EC</span>
+                        </div>
+
+                        {/* Ön / Arka */}
+                        <div>
+                          <div className="flex items-center justify-between text-xs mb-1.5">
+                            <span className="font-semibold text-gray-500">Ön – Arka Dağılımı</span>
+                            <span className={`font-bold ${frontRearOk ? 'text-emerald-600' : 'text-amber-500'}`}>
+                              {frontRearOk ? '✓ Dengeli' : frontPct > 60 ? '⚠ Öne ağırlıklı' : '⚠ Arkaya ağırlıklı'}
+                            </span>
+                          </div>
+                          <div className="flex h-5 rounded-lg overflow-hidden text-[10px] font-bold">
+                            <div className="bg-blue-500 flex items-center justify-center text-white transition-all" style={{ width: `${frontPct}%` }}>
+                              {frontPct >= 15 && `Ön %${frontPct}`}
+                            </div>
+                            <div className="bg-indigo-400 flex items-center justify-center text-white transition-all" style={{ width: `${rearPct}%` }}>
+                              {rearPct >= 15 && `Arka %${rearPct}`}
+                            </div>
+                          </div>
+                          <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                            <span>{fw.toFixed(0)} kg</span>
+                            <span className="text-gray-300">|  İdeal: %40-60  |</span>
+                            <span>{rw.toFixed(0)} kg</span>
+                          </div>
+                        </div>
+
+                        {/* Sol / Sağ */}
+                        <div>
+                          <div className="flex items-center justify-between text-xs mb-1.5">
+                            <span className="font-semibold text-gray-500">Sol – Sağ Dengesi</span>
+                            <span className={`font-bold ${lateralOk ? 'text-emerald-600' : 'text-amber-500'}`}>
+                              {lateralOk ? '✓ Dengeli' : leftPct > 60 ? '⚠ Sola yatık' : '⚠ Sağa yatık'}
+                            </span>
+                          </div>
+                          <div className="flex h-4 rounded-lg overflow-hidden text-[10px] font-bold">
+                            <div className="bg-teal-500 flex items-center justify-center text-white transition-all" style={{ width: `${leftPct}%` }}>
+                              {leftPct >= 20 && `Sol %${leftPct}`}
+                            </div>
+                            <div className="bg-cyan-400 flex items-center justify-center text-white transition-all" style={{ width: `${100 - leftPct}%` }}>
+                              {(100 - leftPct) >= 20 && `Sağ %${100 - leftPct}`}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Aks yükleri */}
+                        {kingpinLoad !== null && trailerAxleLoad !== null && (
+                          <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100">
+                            <div className={`rounded-xl p-3 ${kingpinLoad > EU_KINGPIN_MAX ? 'bg-red-50 border border-red-100' : 'bg-gray-50'}`}>
+                              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-0.5">Beşinci Teker Yükü</p>
+                              <p className={`text-lg font-black ${kingpinLoad > EU_KINGPIN_MAX ? 'text-red-600' : 'text-gray-800'}`}>
+                                {(kingpinLoad / 1000).toFixed(1)} t
+                              </p>
+                              <p className="text-[10px] text-gray-400">limit: {EU_KINGPIN_MAX / 1000} t</p>
+                              {kingpinLoad > EU_KINGPIN_MAX && <p className="text-[10px] text-red-500 font-semibold mt-0.5">⚠ Limit aşıldı</p>}
+                            </div>
+                            <div className={`rounded-xl p-3 ${trailerAxleLoad > EU_TRAILER_AXL ? 'bg-red-50 border border-red-100' : 'bg-gray-50'}`}>
+                              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-0.5">Dorse Aks Yükü</p>
+                              <p className={`text-lg font-black ${trailerAxleLoad > EU_TRAILER_AXL ? 'text-red-600' : 'text-gray-800'}`}>
+                                {(trailerAxleLoad / 1000).toFixed(1)} t
+                              </p>
+                              <p className="text-[10px] text-gray-400">limit: {EU_TRAILER_AXL / 1000} t (tandem)</p>
+                              {trailerAxleLoad > EU_TRAILER_AXL && <p className="text-[10px] text-red-500 font-semibold mt-0.5">⚠ Limit aşıldı</p>}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* CoG konumu */}
+                        {cogZPct !== null && (
+                          <div className="flex items-center justify-between text-xs pt-1 border-t border-gray-100">
+                            <span className="font-semibold text-gray-500">Ağırlık Merkezi (Z ekseni)</span>
+                            <span className={`font-bold ${cogOk ? 'text-emerald-600' : 'text-amber-500'}`}>
+                              %{cogZPct} — {cogOk ? '✓ İdeal aralıkta' : '⚠ Aralık dışı'}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
 
                   {/* Unplaced warning + multi-container */}
                   {result.unplacedItems.length > 0 && (
