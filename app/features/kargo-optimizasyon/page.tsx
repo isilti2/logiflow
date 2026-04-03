@@ -8,7 +8,7 @@ import AuthGuard from '@/components/AuthGuard';
 import {
   Package, Box, BarChart3, CheckCircle2, ChevronRight,
   Plus, Trash2, Zap, AlertTriangle, Printer, RotateCcw,
-  Weight,
+  Pencil, Maximize2, Minimize2,
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
 import { addNotification } from '@/lib/notifications';
@@ -313,6 +313,7 @@ export default function KargoOptimizasyonPage() {
   const [showTemplates, setShowTemplates] = useState(false);
   const [templates, setTemplates]     = useState<OptTemplate[]>([]);
   const [templateName, setTemplateName] = useState('');
+  const [fullscreen3D, setFullscreen3D] = useState(false);
 
   useEffect(() => {
     fetch('/api/opt-templates')
@@ -574,6 +575,66 @@ export default function KargoOptimizasyonPage() {
 
   return (
     <AuthGuard><main className="min-h-screen bg-white">
+
+      {/* ── Fullscreen 3D overlay ── */}
+      {fullscreen3D && result && (() => {
+        const fsPlaced = activeContainer === 1 ? result.placed : (result2?.placed ?? []);
+        return (
+          <div className="fixed inset-0 z-50 bg-gray-950 flex flex-col">
+            {/* Header */}
+            <div className="flex items-center gap-3 px-5 py-3 bg-gray-900/80 border-b border-white/10 backdrop-blur-sm flex-wrap">
+              <span className="text-white font-bold text-sm">3D Konteyner Görünümü</span>
+              <span className="text-gray-500 text-xs">— {PRESETS.find((p) => p.width === container.width && p.depth === container.depth)?.label ?? 'Özel'}</span>
+              <div className="flex flex-wrap gap-3 ml-2">
+                {placedSummary.map((s) => {
+                  const c = COLORS[s.colorIdx % COLORS.length];
+                  return (
+                    <span key={s.name} className="flex items-center gap-1.5 text-xs text-gray-300 font-medium">
+                      <span className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: c.bg }} />
+                      {s.name} ×{s.count}
+                    </span>
+                  );
+                })}
+                {cog && activeContainer === 1 && (
+                  <span className="flex items-center gap-1.5 text-xs text-amber-400 font-medium">
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                    Ağırlık Merkezi
+                  </span>
+                )}
+              </div>
+              <div className="ml-auto flex items-center gap-3">
+                <span className="hidden sm:block text-xs text-gray-500">Sol tık: döndür · Scroll: zoom · Sağ tık: taşı</span>
+                <button
+                  onClick={() => setFullscreen3D(false)}
+                  className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg transition-all"
+                >
+                  <Minimize2 className="w-3.5 h-3.5" /> Küçült
+                </button>
+              </div>
+            </div>
+            {/* Viewer */}
+            <div className="flex-1">
+              <ErrorBoundary>
+                <CargoViewer3D
+                  placed={fsPlaced}
+                  container={container}
+                  cog={activeContainer === 1 ? cog : null}
+                />
+              </ErrorBoundary>
+            </div>
+            {/* Stats footer */}
+            <div className="flex items-center justify-center gap-8 px-5 py-2.5 bg-gray-900/60 border-t border-white/10 text-xs text-gray-400">
+              <span>Doluluk: <strong className="text-white">{fillPct}%</strong></span>
+              <span>Ağırlık: <strong className="text-white">{result.totalWeight.toFixed(1)} kg</strong> / {container.maxWeight} kg</span>
+              <span>Paketlenen: <strong className="text-white">{fsPlaced.length}</strong> kutu</span>
+              {result.unplacedItems.length > 0 && (
+                <span className="text-orange-400">Sığmayan: {result.unplacedItems.length} tip</span>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
       <Navbar />
 
       {/* Hero */}
@@ -903,7 +964,7 @@ export default function KargoOptimizasyonPage() {
                               ) : (
                                 <div className="flex gap-1">
                                   <button onClick={() => handleEditStart(item)} className="text-gray-300 hover:text-blue-400 transition-colors" title="Düzenle">
-                                    <Weight className="w-3.5 h-3.5" />
+                                    <Pencil className="w-3.5 h-3.5" />
                                   </button>
                                   <button onClick={() => handleRemoveItem(item.id)} className="text-gray-300 hover:text-red-400 transition-colors" title="Sil">
                                     <Trash2 className="w-3.5 h-3.5" />
@@ -990,6 +1051,37 @@ export default function KargoOptimizasyonPage() {
                   </label>
                 </div>
               </div>
+
+              {/* Pre-optimize summary */}
+              {cargoItems.length > 0 && (() => {
+                const totalUnits = cargoItems.reduce((s, c) => s + c.qty, 0);
+                const totalW     = cargoItems.reduce((s, c) => s + c.qty * c.weight, 0);
+                const wPct       = Math.min(110, Math.round((totalW / container.maxWeight) * 100));
+                const over       = totalW > container.maxWeight;
+                return (
+                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
+                    <div className="flex items-center justify-between text-xs mb-2">
+                      <span className="font-semibold text-gray-500">
+                        {cargoItems.length} tip · <span className="text-gray-700 font-bold">{totalUnits} adet</span>
+                      </span>
+                      <span className={`font-semibold ${over ? 'text-red-500' : 'text-gray-600'}`}>
+                        {totalW.toFixed(1)} / {container.maxWeight} kg
+                      </span>
+                    </div>
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${over ? 'bg-red-400' : wPct > 80 ? 'bg-amber-400' : 'bg-blue-500'}`}
+                        style={{ width: `${Math.min(100, wPct)}%` }}
+                      />
+                    </div>
+                    {over && (
+                      <p className="text-xs text-red-500 mt-1.5 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3" /> Toplam ağırlık konteyner limitini aşıyor
+                      </p>
+                    )}
+                  </div>
+                );
+              })()}
 
               {/* Optimize button */}
               <button
@@ -1108,10 +1200,11 @@ export default function KargoOptimizasyonPage() {
                       ))}
                     </div>
 
-                    <div className="p-5">
+                    <div className="p-4">
                       {activeTab === '3d' ? (
                         <>
-                          <div className="rounded-2xl overflow-hidden" style={{ height: '420px' }}>
+                          {/* Viewer + fullscreen btn */}
+                          <div className="relative rounded-xl overflow-hidden" style={{ height: '460px' }}>
                             <ErrorBoundary>
                               <CargoViewer3D
                                 placed={activeContainer === 1 ? result.placed : (result2?.placed ?? [])}
@@ -1119,10 +1212,20 @@ export default function KargoOptimizasyonPage() {
                                 cog={activeContainer === 1 ? cog : null}
                               />
                             </ErrorBoundary>
+                            <button
+                              onClick={() => setFullscreen3D(true)}
+                              title="Tam ekrana aç"
+                              className="absolute top-3 right-3 z-10 bg-gray-900/60 hover:bg-gray-900/90 text-white/70 hover:text-white p-2 rounded-lg transition-all backdrop-blur-sm"
+                            >
+                              <Maximize2 className="w-4 h-4" />
+                            </button>
                           </div>
+
+                          {/* Controls hint */}
                           <p className="text-center text-xs text-gray-400 mt-2">
-                            Sol tık: döndür · Sağ tık / iki parmak: kaydır · Scroll: zoom
+                            Sol tık: döndür · Kaydır: zoom · Sağ tık: taşı
                           </p>
+
                           {/* Legend */}
                           <div className="mt-3 flex flex-wrap gap-3">
                             {placedSummary.map((s) => {
