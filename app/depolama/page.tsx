@@ -1,14 +1,17 @@
 'use client';
 
-import { useState, useRef, useId, useEffect } from 'react';
+import { useState, useRef, useId, useEffect, lazy, Suspense } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import AuthGuard from '@/components/AuthGuard';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import {
   Package, Plus, Search, Trash2,
   MapPin, Box, X, Building2, FileSpreadsheet,
   AlertCircle, Pencil, Check, Download, ArrowRightLeft,
-  BarChart2, Weight,
+  BarChart2, Weight, Boxes,
 } from 'lucide-react';
+
+const DepotViewer3D = lazy(() => import('@/components/3d/DepotViewer3D'));
 
 /* ─── Types ─────────────────────────────────────────────── */
 interface Area {
@@ -113,6 +116,7 @@ export default function DepolamaPage() {
     load();
   }, []);
 
+  const [show3D, setShow3D] = useState(false);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<StatusKey | 'tümü'>('tümü');
 
@@ -536,6 +540,19 @@ export default function DepolamaPage() {
                   CSV İndir
                 </button>
 
+                {/* 3D toggle */}
+                <button
+                  onClick={() => setShow3D((v) => !v)}
+                  className={`flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-colors border ${
+                    show3D
+                      ? 'bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-indigo-300 hover:text-indigo-700'
+                  }`}
+                >
+                  <Boxes className="w-4 h-4" />
+                  3D Görünüm
+                </button>
+
                 {/* Add cargo */}
                 <button
                   onClick={() => setShowAddCargo(true)}
@@ -576,6 +593,32 @@ export default function DepolamaPage() {
                   >
                     Seçimi Temizle
                   </button>
+                </div>
+              )}
+
+              {/* 3D Depot View */}
+              {show3D && selectedArea && (
+                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                  <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-100">
+                    <Boxes className="w-4 h-4 text-indigo-600" />
+                    <h2 className="text-sm font-bold text-gray-900">3D Depo Doluluk Görünümü</h2>
+                    <span className="text-xs text-gray-400 ml-1">— {selectedArea.name}</span>
+                    <span className="ml-auto text-xs text-gray-400">
+                      {areaCargo.length}/{selectedArea.capacity} slot dolu · fareyle döndür, kaydır
+                    </span>
+                  </div>
+                  <ErrorBoundary>
+                    <Suspense fallback={
+                      <div className="flex items-center justify-center" style={{ height: 380, background: 'linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#0f172a 100%)' }}>
+                        <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                      </div>
+                    }>
+                      <DepotViewer3D
+                        capacity={selectedArea.capacity}
+                        cargo={areaCargo}
+                      />
+                    </Suspense>
+                  </ErrorBoundary>
                 </div>
               )}
 
