@@ -11,11 +11,52 @@ async function requireAdmin() {
 
 export async function GET() {
   if (!await requireAdmin()) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
   const users = await db.user.findMany({
-    select: { id: true, name: true, email: true, role: true, createdAt: true },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      createdAt: true,
+      _count: {
+        select: { optimizations: true, cargo: true },
+      },
+      optimizations: {
+        select: { createdAt: true, containerLabel: true, fillPct: true },
+        orderBy: { createdAt: 'desc' },
+        take: 1,
+      },
+    },
     orderBy: { createdAt: 'desc' },
   });
-  return NextResponse.json(users);
+
+  // Her kullanıcı için en son AuditLog kaydını çek
+  const userIds = users.map((u) => u.id).filter(Boolean);
+  const recentLogs = userIds.length
+    ? await db.auditLog.findMany({
+        where: { userId: { in: userIds } },
+        orderBy: { createdAt: 'desc' },
+        distinct: ['userId'],
+        select: { userId: true, action: true, module: true, type: true, createdAt: true },
+      })
+    : [];
+
+  const logMap = Object.fromEntries(recentLogs.map((l) => [l.userId, l]));
+
+  const result = users.map((u) => ({
+    id: u.id,
+    name: u.name,
+    email: u.email,
+    role: u.role,
+    createdAt: u.createdAt,
+    optCount: u._count.optimizations,
+    cargoCount: u._count.cargo,
+    lastOpt: u.optimizations[0] ?? null,
+    lastLog: logMap[u.id] ?? null,
+  }));
+
+  return NextResponse.json(result);
 }
 
 export async function POST(req: Request) {

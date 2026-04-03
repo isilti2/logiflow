@@ -16,7 +16,17 @@ import {
 } from 'lucide-react';
 
 /* ─── Types ──────────────────────────────────────────────── */
-type ApiUser = { id: string; name: string | null; email: string; role: string; createdAt: string };
+type ApiUser = {
+  id: string;
+  name: string | null;
+  email: string;
+  role: string;
+  createdAt: string;
+  optCount: number;
+  cargoCount: number;
+  lastOpt: { createdAt: string; containerLabel: string; fillPct: number } | null;
+  lastLog: { userId: string; action: string; module: string; type: string; createdAt: string } | null;
+};
 type ApiStats = { totalUsers: number; totalOpts: number; totalCargo: number; totalAreas: number };
 
 
@@ -463,61 +473,133 @@ export default function AdminPage() {
               )}
 
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="overflow-x-auto -mx-0">
-                  <table className="w-full text-sm min-w-[600px]">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm min-w-[820px]">
                     <thead>
                       <tr className="border-b border-gray-100 bg-gray-50">
-                        {['Kullanıcı', 'Rol', 'Kayıt Tarihi', 'Rol Değiştir', ''].map((h) => (
-                          <th key={h} className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
+                        {['Kullanıcı', 'Durum', 'Son İşlem', 'Opt.', 'Kargo', 'Rol', 'Rol Değiştir', ''].map((h) => (
+                          <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50">
-                      {filteredUsers.map((user) => (
-                        <tr key={user.id} className="hover:bg-gray-50 transition-colors group">
-                          <td className="px-5 py-3.5">
-                            <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
-                                <span className="text-white text-xs font-bold">{(user.name ?? user.email).charAt(0).toUpperCase()}</span>
+                      {filteredUsers.map((user) => {
+                        // Aktivite durumu
+                        const lastSeenMs = user.lastLog ? Date.now() - new Date(user.lastLog.createdAt).getTime() : null;
+                        const status = lastSeenMs === null ? 'pasif'
+                          : lastSeenMs < 30 * 60_000   ? 'aktif'
+                          : lastSeenMs < 24 * 3600_000 ? 'yakın'
+                          : 'pasif';
+
+                        // Son işlem metni
+                        const lastAction = user.lastLog
+                          ? `${user.lastLog.action} (${user.lastLog.module})`
+                          : null;
+                        const lastWhen = user.lastLog
+                          ? new Date(user.lastLog.createdAt).toLocaleString('tr-TR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
+                          : null;
+
+                        return (
+                          <tr key={user.id} className="hover:bg-gray-50 transition-colors group">
+                            {/* Kullanıcı */}
+                            <td className="px-4 py-3.5">
+                              <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
+                                  <span className="text-white text-xs font-bold">{(user.name ?? user.email).charAt(0).toUpperCase()}</span>
+                                </div>
+                                <div>
+                                  <p className="font-semibold text-gray-900 leading-tight">{user.name || '—'}</p>
+                                  <p className="text-xs text-gray-400">{user.email}</p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="font-semibold text-gray-900 leading-tight">{user.name ?? '—'}</p>
-                                <p className="text-xs text-gray-400">{user.email}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-5 py-3.5"><RoleBadge role={user.role} /></td>
-                          <td className="px-5 py-3.5 text-xs text-gray-400 whitespace-nowrap">{new Date(user.createdAt).toLocaleDateString('tr-TR')}</td>
-                          <td className="px-5 py-3.5">
-                            <select value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                              className="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-600">
-                              <option value="user">user</option>
-                              <option value="admin">admin</option>
-                            </select>
-                          </td>
-                          <td className="px-5 py-3.5">
-                            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                              {confirmDeleteUserId === user.id ? (
-                                <div className="flex items-center gap-1">
-                                  <button onClick={() => handleDeleteUser(user.id)}
-                                    className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-lg transition-colors">Sil</button>
-                                  <button onClick={() => setConfirmDeleteUserId(null)}
-                                    className="text-xs text-gray-500 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors">İptal</button>
+                            </td>
+
+                            {/* Durum */}
+                            <td className="px-4 py-3.5">
+                              {status === 'aktif' ? (
+                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-full">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Aktif
+                                </span>
+                              ) : status === 'yakın' ? (
+                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-100 px-2 py-1 rounded-full">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Yakında
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 bg-gray-50 border border-gray-100 px-2 py-1 rounded-full">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Pasif
+                                </span>
+                              )}
+                            </td>
+
+                            {/* Son İşlem */}
+                            <td className="px-4 py-3.5 max-w-[200px]">
+                              {lastAction ? (
+                                <div>
+                                  <p className="text-xs font-medium text-gray-700 truncate">{lastAction}</p>
+                                  <p className="text-[10px] text-gray-400 mt-0.5">{lastWhen}</p>
                                 </div>
                               ) : (
-                                <button onClick={() => setConfirmDeleteUserId(user.id)}
-                                  className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
-                                  <Trash2 className="w-4 h-4" />
-                                </button>
+                                <span className="text-xs text-gray-300">—</span>
                               )}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+
+                            {/* Opt sayısı */}
+                            <td className="px-4 py-3.5 text-center">
+                              <span className="inline-flex items-center justify-center w-8 h-6 bg-blue-50 text-blue-700 text-xs font-bold rounded-md">
+                                {user.optCount ?? 0}
+                              </span>
+                            </td>
+
+                            {/* Kargo sayısı */}
+                            <td className="px-4 py-3.5 text-center">
+                              <span className="inline-flex items-center justify-center w-8 h-6 bg-gray-50 text-gray-600 text-xs font-bold rounded-md">
+                                {user.cargoCount ?? 0}
+                              </span>
+                            </td>
+
+                            {/* Rol badge */}
+                            <td className="px-4 py-3.5"><RoleBadge role={user.role} /></td>
+
+                            {/* Rol değiştir */}
+                            <td className="px-4 py-3.5">
+                              <select value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                                className="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                <option value="user">user</option>
+                                <option value="admin">admin</option>
+                              </select>
+                            </td>
+
+                            {/* Sil */}
+                            <td className="px-4 py-3.5">
+                              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                {confirmDeleteUserId === user.id ? (
+                                  <div className="flex items-center gap-1">
+                                    <button onClick={() => handleDeleteUser(user.id)}
+                                      className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-lg transition-colors">Sil</button>
+                                    <button onClick={() => setConfirmDeleteUserId(null)}
+                                      className="text-xs text-gray-500 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors">İptal</button>
+                                  </div>
+                                ) : (
+                                  <button onClick={() => setConfirmDeleteUserId(user.id)}
+                                    className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                )}
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
-                <div className="px-5 py-3 border-t border-gray-100 text-xs text-gray-400">{filteredUsers.length} kullanıcı gösteriliyor</div>
+                <div className="px-5 py-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+                  <span>{filteredUsers.length} kullanıcı</span>
+                  <span className="flex items-center gap-3">
+                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Aktif: son 30 dk</span>
+                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Yakında: son 24 sa</span>
+                  </span>
+                </div>
               </div>
             </>
           )}
