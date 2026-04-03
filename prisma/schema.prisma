@@ -24,6 +24,11 @@ model User {
   notifications       AppNotification[]
   templates           OptTemplate[]
   passwordResetTokens PasswordResetToken[]
+  musteriler          Musteri[]
+  seferler            Sefer[]
+  maliIslemler        MaliIslem[]
+  personeller         Personel[]
+  puantajlar          Puantaj[]
 }
 
 model DepotArea {
@@ -156,4 +161,105 @@ model AuditLog {
   createdAt DateTime @default(now())
 
   @@index([createdAt])
+}
+
+// ─── Lojistik Muhasebe ───────────────────────────────────────
+
+model Musteri {
+  id        String   @id @default(cuid())
+  userId    String
+  ad        String
+  vergiNo   String   @default("")
+  telefon   String   @default("")
+  email     String   @default("")
+  adres     String   @default("")
+  createdAt DateTime @default(now())
+
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  seferler Sefer[]
+  islemler MaliIslem[]
+
+  @@index([userId])
+}
+
+model Sefer {
+  id            String   @id @default(cuid())
+  userId        String
+  musteriId     String?
+  aracPlaka     String
+  rotaDan       String
+  rotaAya       String
+  mesafeKm      Float    @default(0)
+  tarih         String
+  yukAgirligi   Float    @default(0)
+  seferUcreti   Float    @default(0)
+  yakitMaliyeti Float    @default(0)
+  notlar        String   @default("")
+  durum         String   @default("planlandi")
+  createdAt     DateTime @default(now())
+
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  musteri  Musteri?    @relation(fields: [musteriId], references: [id])
+  islemler MaliIslem[]
+
+  @@index([userId])
+}
+
+model MaliIslem {
+  id        String   @id @default(cuid())
+  userId    String
+  seferId   String?
+  musteriId String?
+  tur       String
+  kategori  String
+  tutar     Float
+  kdvOrani  Float    @default(0)
+  aciklama  String   @default("")
+  tarih     String
+  createdAt DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sefer   Sefer?   @relation(fields: [seferId], references: [id])
+  musteri Musteri? @relation(fields: [musteriId], references: [id])
+
+  @@index([userId])
+  @@index([seferId])
+}
+
+model Personel {
+  id              String   @id @default(cuid())
+  userId          String
+  ad              String
+  unvan           String   @default("")
+  telefon         String   @default("")
+  tcNo            String   @default("")
+  maas            Float    @default(0)
+  baslangicTarihi String
+  aktif           Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  puantajlar Puantaj[]
+
+  @@index([userId])
+}
+
+model Puantaj {
+  id         String   @id @default(cuid())
+  personelId String
+  userId     String
+  tarih      String
+  girisSaati String?
+  cikisSaati String?
+  fazlaMesai Float    @default(0)
+  izinTuru   String?
+  notlar     String   @default("")
+  createdAt  DateTime @default(now())
+
+  personel Personel @relation(fields: [personelId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([personelId, tarih])
+  @@index([personelId])
+  @@index([userId])
 }

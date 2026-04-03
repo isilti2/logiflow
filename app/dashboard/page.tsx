@@ -7,7 +7,7 @@ import { logout } from '@/lib/auth';
 import {
   Package, BarChart3, Building2, Share2,
   LogOut, TrendingUp, Truck, Clock, ChevronRight, Shield,
-  Zap, Box,
+  Zap, Box, Calculator,
 } from 'lucide-react';
 import OnboardingWizard from '@/components/ui/OnboardingWizard';
 import NotificationBell from '@/components/ui/NotificationBell';
@@ -49,6 +49,15 @@ const APP_FEATURES = [
     color: 'sky',
     badge: null,
   },
+  {
+    id: 'muhasebe',
+    title: 'Lojistik Muhasebe',
+    description: 'Sefer takibi, gelir-gider, cari hesap ve personel puantajı tek ekranda.',
+    icon: Calculator,
+    href: '/muhasebe',
+    color: 'green',
+    badge: 'Yeni',
+  },
 ];
 
 interface OptRecord {
@@ -72,7 +81,8 @@ const COLOR_MAP: Record<string, string> = {
   blue: 'bg-blue-50 text-blue-600 border-blue-100 hover:border-blue-300 hover:shadow-blue-50',
   purple: 'bg-purple-50 text-purple-600 border-purple-100 hover:border-purple-300 hover:shadow-purple-50',
   indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 hover:border-indigo-300 hover:shadow-indigo-50',
-  sky: 'bg-sky-50 text-sky-600 border-sky-100 hover:border-sky-300 hover:shadow-sky-50',
+  sky:   'bg-sky-50 text-sky-600 border-sky-100 hover:border-sky-300 hover:shadow-sky-50',
+  green: 'bg-green-50 text-green-600 border-green-100 hover:border-green-300 hover:shadow-green-50',
 };
 
 export default function DashboardPage() {
