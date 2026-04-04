@@ -205,7 +205,7 @@ model Sefer {
   createdAt     DateTime @default(now())
 
   user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  musteri       Musteri?     @relation(fields: [musteriId], references: [id])
+  musteri       Musteri?     @relation(fields: [musteriId], references: [id], onDelete: SetNull)
   islemler      MaliIslem[]
   faturalar     Fatura[]
   konumKayitlari KonumKaydi[]
@@ -227,8 +227,8 @@ model MaliIslem {
   createdAt DateTime @default(now())
 
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  sefer   Sefer?   @relation(fields: [seferId], references: [id])
-  musteri Musteri? @relation(fields: [musteriId], references: [id])
+  sefer   Sefer?   @relation(fields: [seferId], references: [id], onDelete: SetNull)
+  musteri Musteri? @relation(fields: [musteriId], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([seferId])
@@ -330,8 +330,8 @@ model Fatura {
   createdAt   DateTime @default(now())
 
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  musteri Musteri? @relation(fields: [musteriId], references: [id])
-  sefer   Sefer?   @relation(fields: [seferId], references: [id])
+  musteri Musteri? @relation(fields: [musteriId], references: [id], onDelete: SetNull)
+  sefer   Sefer?   @relation(fields: [seferId], references: [id], onDelete: SetNull)
 
   @@index([userId])
 }

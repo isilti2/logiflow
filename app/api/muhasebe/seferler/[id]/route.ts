@@ -13,6 +13,33 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   if (!await owns(id, s.userId)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
   const data = await req.json();
+
+  // Sefer tamamlandığında otomatik gelir kaydı oluştur (bir kez)
+  if (data.durum === 'tamamlandi') {
+    const mevcut = await db.sefer.findFirst({ where: { id, userId: s.userId } });
+    if (mevcut && mevcut.durum !== 'tamamlandi' && Number(data.seferUcreti ?? mevcut.seferUcreti) > 0) {
+      const ucret = Number(data.seferUcreti ?? mevcut.seferUcreti);
+      const mevcutGelir = await db.maliIslem.findFirst({
+        where: { userId: s.userId, seferId: id, tur: 'gelir', kategori: 'Sefer Ücreti' },
+      });
+      if (!mevcutGelir) {
+        await db.maliIslem.create({
+          data: {
+            userId: s.userId,
+            seferId: id,
+            musteriId: data.musteriId || mevcut.musteriId || null,
+            tur: 'gelir',
+            kategori: 'Sefer Ücreti',
+            tutar: ucret,
+            kdvOrani: 0,
+            aciklama: `Sefer Tamamlandı — ${data.rotaDan ?? mevcut.rotaDan} → ${data.rotaAya ?? mevcut.rotaAya} (${data.aracPlaka ?? mevcut.aracPlaka})`,
+            tarih: data.tarih ?? mevcut.tarih,
+          },
+        });
+      }
+    }
+  }
+
   const row = await db.sefer.update({
     where: { id },
     data: {

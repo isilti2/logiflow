@@ -343,7 +343,7 @@ export default function MuhasebePage() {
       const islemRes = await fetch('/api/muhasebe/islemler', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tur: 'gider', kategori: 'Yakıt', tutar: n.toplamTutar, kdvOrani: 0, aciklama, tarih: yakitForm.tarih }),
+        body: JSON.stringify({ tur: 'gider', kategori: 'Yakıt', tutar: n.toplamTutar, kdvOrani: 18, aciklama, tarih: yakitForm.tarih }),
       });
       if (islemRes.ok) { const ni = await islemRes.json(); setIslemler(p => [ni, ...p]); }
       setYakitForm(f => ({ ...f, tarih: '', litre: '', birimFiyat: '', kmSayaci: '', istasyon: '', notlar: '' }));
