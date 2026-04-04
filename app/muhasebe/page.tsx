@@ -189,6 +189,7 @@ export default function MuhasebePage() {
   const [selPersonel, setSelPersonel] = useState('');
   const [bordroAy,    setBordroAy]    = useState(thisMonth);
   const [selArac,     setSelArac]     = useState('');
+  const [plakaManuel, setPlakaManuel] = useState(false);
 
   // Forms
   const [musteriForm,  setMusteriForm]  = useState({ ad: '', vergiNo: '', telefon: '', email: '', adres: '' });
@@ -272,7 +273,7 @@ export default function MuhasebePage() {
   async function submitSefer(e: React.FormEvent) {
     e.preventDefault();
     const res = await fetch('/api/muhasebe/seferler', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(seferForm) });
-    if (res.ok) { const n = await res.json(); setSeferler(p => [n, ...p]); setSeferForm({ musteriId: '', aracPlaka: '', rotaDan: '', rotaAya: '', mesafeKm: '', tarih: '', yukAgirligi: '', seferUcreti: '', yakitMaliyeti: '', notlar: '', durum: 'planlandi' }); setShowForm(false); }
+    if (res.ok) { const n = await res.json(); setSeferler(p => [n, ...p]); setSeferForm({ musteriId: '', aracPlaka: '', rotaDan: '', rotaAya: '', mesafeKm: '', tarih: '', yukAgirligi: '', seferUcreti: '', yakitMaliyeti: '', notlar: '', durum: 'planlandi' }); setPlakaManuel(false); setShowForm(false); }
   }
   async function updateSeferDurum(id: string, durum: string) {
     const sefer = seferler.find(s => s.id === id);
@@ -333,7 +334,21 @@ export default function MuhasebePage() {
   async function submitYakit(e: React.FormEvent) {
     e.preventDefault();
     const res = await fetch('/api/muhasebe/yakit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(yakitForm) });
-    if (res.ok) { const n = await res.json(); setYakitlar(p => [n, ...p]); setYakitForm(f => ({ ...f, tarih: '', litre: '', birimFiyat: '', kmSayaci: '', istasyon: '', notlar: '' })); setShowForm(false); }
+    if (res.ok) {
+      const n = await res.json();
+      setYakitlar(p => [n, ...p]);
+      // Otomatik gider kaydı oluştur
+      const plaka = araclar.find(a => a.id === yakitForm.aracId)?.plaka ?? '';
+      const aciklama = ['Yakıt', plaka, yakitForm.istasyon].filter(Boolean).join(' — ');
+      const islemRes = await fetch('/api/muhasebe/islemler', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tur: 'gider', kategori: 'Yakıt', tutar: n.toplamTutar, kdvOrani: 0, aciklama, tarih: yakitForm.tarih }),
+      });
+      if (islemRes.ok) { const ni = await islemRes.json(); setIslemler(p => [ni, ...p]); }
+      setYakitForm(f => ({ ...f, tarih: '', litre: '', birimFiyat: '', kmSayaci: '', istasyon: '', notlar: '' }));
+      setShowForm(false);
+    }
   }
   async function deleteYakit(id: string) {
     await fetch(`/api/muhasebe/yakit/${id}`, { method: 'DELETE' });
@@ -538,7 +553,31 @@ export default function MuhasebePage() {
                     </select>
                   </div>
                 ))}
-                {([['Araç Plakası *', 'aracPlaka', 'text', '34 ABC 123'], ['Çıkış Noktası *', 'rotaDan', 'text', 'İstanbul'], ['Varış Noktası *', 'rotaAya', 'text', 'Ankara'], ['Tarih *', 'tarih', 'date', ''], ['Mesafe (km)', 'mesafeKm', 'number', '0'], ['Yük Ağırlığı (kg)', 'yukAgirligi', 'number', '0'], ['Sefer Ücreti (₺)', 'seferUcreti', 'number', '0'], ['Yakıt Maliyeti (₺)', 'yakitMaliyeti', 'number', '0']] as [string, keyof typeof seferForm, string, string][]).map(([lbl, key, type, ph]) => (
+                {/* Araç Plakası — kayıtlı araçlardan seç ya da el ile gir */}
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Araç Plakası *</label>
+                  {!plakaManuel && araclar.length > 0 ? (
+                    <div className="flex gap-2">
+                      <select required value={seferForm.aracPlaka} onChange={e => setSeferForm(p => ({ ...p, aracPlaka: e.target.value }))}
+                        className="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">— Kayıtlı araç seç —</option>
+                        {araclar.filter(a => a.aktif).map(a => <option key={a.id} value={a.plaka}>{a.plaka}{a.marka ? ` · ${a.marka} ${a.model ?? ''}`.trim() : ''}</option>)}
+                      </select>
+                      <button type="button" onClick={() => { setPlakaManuel(true); setSeferForm(p => ({ ...p, aracPlaka: '' })); }}
+                        className="px-3 py-2 text-xs text-gray-500 hover:text-blue-600 border border-gray-200 rounded-xl whitespace-nowrap">El ile gir</button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input required value={seferForm.aracPlaka} onChange={e => setSeferForm(p => ({ ...p, aracPlaka: e.target.value.toUpperCase() }))}
+                        placeholder="34 ABC 123" className="flex-1 px-3 py-2 border border-blue-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono" />
+                      {araclar.length > 0 && (
+                        <button type="button" onClick={() => { setPlakaManuel(false); setSeferForm(p => ({ ...p, aracPlaka: '' })); }}
+                          className="px-3 py-2 text-xs text-gray-500 hover:text-blue-600 border border-gray-200 rounded-xl whitespace-nowrap">← Listeden seç</button>
+                      )}
+                    </div>
+                  )}
+                </div>
+                {([['Çıkış Noktası *', 'rotaDan', 'text', 'İstanbul'], ['Varış Noktası *', 'rotaAya', 'text', 'Ankara'], ['Tarih *', 'tarih', 'date', ''], ['Mesafe (km)', 'mesafeKm', 'number', '0'], ['Yük Ağırlığı (kg)', 'yukAgirligi', 'number', '0'], ['Sefer Ücreti (₺)', 'seferUcreti', 'number', '0'], ['Yakıt Maliyeti (₺)', 'yakitMaliyeti', 'number', '0']] as [string, keyof typeof seferForm, string, string][]).map(([lbl, key, type, ph]) => (
                   <div key={key}>
                     <label className="block text-xs font-semibold text-gray-600 mb-1">{lbl}</label>
                     <input required={lbl.endsWith('*')} type={type} min={type==='number'?0:undefined} value={seferForm[key]} onChange={e => setSeferForm(p => ({ ...p, [key]: e.target.value }))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
