@@ -33,11 +33,14 @@ export async function GET(req: Request) {
   const userId  = searchParams.get('userId');
   const son     = searchParams.get('son'); // "1" = sadece son nokta
 
+  // userId parametresi dışarıdan geçilse bile sadece kendi kaydına izin ver (IDOR koruması)
+  const filterUserId = s.userId;
+
   if (son === '1') {
     const row = await db.konumKaydi.findFirst({
       where: {
+        userId: filterUserId,
         ...(seferId ? { seferId } : {}),
-        ...(userId  ? { userId }  : { userId: s.userId }),
       },
       orderBy: { createdAt: 'desc' },
       include: { sefer: { select: { rotaDan: true, rotaAya: true, aracPlaka: true } } },
@@ -47,8 +50,8 @@ export async function GET(req: Request) {
 
   const rows = await db.konumKaydi.findMany({
     where: {
+      userId: filterUserId,
       ...(seferId ? { seferId } : {}),
-      ...(userId  ? { userId }  : { userId: s.userId }),
     },
     orderBy: { createdAt: 'asc' },
     take: 500,

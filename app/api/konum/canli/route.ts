@@ -9,9 +9,10 @@ export async function GET() {
 
   const sinir = new Date(Date.now() - 2 * 60 * 60 * 1000); // son 2 saat
 
-  // Her userId için en son kayıt
+  // Bu kullanıcıya ait şoförlerin en son konumu
   const rows = await db.konumKaydi.findMany({
     where: {
+      userId: s.userId,
       createdAt: { gte: sinir },
     },
     orderBy: { createdAt: 'desc' },
