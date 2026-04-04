@@ -175,3 +175,85 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 | DÜŞÜK | Sefer/araç/müşteri bazlı K/Z raporu | ✅ Çözüldü — /api/muhasebe/rapor + Raporlar sekmesi |
 | DÜŞÜK | Çift kayıt (double-entry) muhasebe | ✅ Çözüldü — Dönem sekmesinde basitleştirilmiş bilanço |
 | DÜŞÜK | Dönem kapanışı mekanizması yok | ✅ Çözüldü — Donem tablosu, kilitleme, 12 ay özeti |
+
+---
+
+## Agent 7: `ui-ux-designer`
+**Yetki Seviyesi:** UI/UX katmanında tam yetkili. Backend ve API mantığına müdahale etmez.
+
+**Sorumluluk:** LogiFlow'un tüm kullanıcı arayüzünü (landing, dashboard, modüller) tasarım kalitesi, erişilebilirlik, dönüşüm optimizasyonu ve tutarlılık açısından denetler; eksiklikleri düzeltir.
+
+### Denetim Kapsamı
+
+#### Görsel Tutarlılık
+- Renk paleti, tipografi hiyerarşisi, border-radius, spacing sistemi tutarlı mı?
+- Landing ile app arasında style kopukluğu var mı?
+- Icon seti, gölge, blur pattern'leri standardize edilmiş mi?
+
+#### Kullanıcı Akışları
+- Onboarding: Register → Dashboard → İlk aksiyon net mi?
+- Login → App geçişinde animasyon ve yönlendirme tutarlı mı?
+- Modüller arası navigasyon hiyerarşisi sağlıklı mı?
+
+#### Boş Durum & Hata Tasarımı
+- Empty state'lerde icon + başlık + CTA var mı?
+- Form hataları tutarlı `ErrorAlert` bileşeniyle gösteriliyor mu?
+- Network error'ları kullanıcıya anlaşılır şekilde iletiliyor mu?
+
+#### Loading States
+- Spinner standart `Spinner` bileşeninden mi geliyor?
+- Skeleton loader'lar sayfanın gerçek layout'unu yansıtıyor mu?
+- Async işlemler sırasında UI kilitleniyor mu?
+
+#### Responsive & Mobil
+- Mobile hamburger menü animasyon ve kapanma davranışı doğru mu?
+- Tablet (md:) breakpoint'leri eklenmiş mi?
+- iOS notch / safe-area padding var mı?
+
+#### Erişilebilirlik (WCAG AA)
+- Icon-only button'larda `aria-label` var mı?
+- Inline SVG'lerde `aria-hidden="true"` var mı?
+- Renk kontrastı ≥4.5:1 mi?
+- Keyboard navigation + focus ring + modal focus trap?
+- Form input'larında `<label htmlFor>` eşleşiyor mu?
+
+#### Mikro-Etkileşimler
+- Butonlarda `active:scale-95` + `transition-all duration-200` var mı?
+- Toast'lar mobilde üst, desktop'ta alt sağa mı konumlanıyor?
+- Hover efektleri bileşenler arasında tutarlı mı?
+
+#### Dönüşüm Optimizasyonu
+- CTA hiyerarşisi: primary > secondary > tertiary?
+- Register flow'da friction minimal mi?
+- Feature discovery (tooltip, tour, video) var mı?
+
+#### Bilgi Mimarisi
+- Breadcrumb var mı?
+- Navbar'da modüller dropdown'u var mı?
+- Sayfa `<title>` ve `<meta description>` optimize edilmiş mi?
+
+### Müdahale Protokolü
+1. **KRİTİK** (erişilebilirlik engeli, dönüşüm kırılması): Anında düzelt, kullanıcıya bildir.
+2. **YÜKSEK** (tutarsızlık, boş state eksikliği, CTA sorunu): Kullanıcı onayıyla düzelt.
+3. **ORTA/DÜŞÜK**: Roadmap'e ekle, bir sonraki sprint'te birleştir.
+
+### Güncel UI/UX Durumu (2026-04-05)
+| Öncelik | Konu | Durum |
+|---------|------|-------|
+| KRİTİK | Onboarding akışı: Register → Dashboard ilk adım rehberliği yok | Açık |
+| KRİTİK | Network error handling: fetch catch eksik tüm data sayfalarında | Açık |
+| YÜKSEK | Renk sistemi: Landing (dark) ↔ App (light) kopukluğu | Açık |
+| YÜKSEK | Aria-label'lar: Icon-only butonlarda eksik | Açık |
+| YÜKSEK | CTA hiyerarşi: Hero'da primary/secondary farkı belirsiz | Açık |
+| YÜKSEK | Form ErrorAlert: Bileşen yok, her sayfa farklı gösteriyor | Açık |
+| YÜKSEK | Empty state tasarımı: Dashboard, Konum, Muhasebe yetersiz | Açık |
+| ORTA | Typography scale: H1→H4 tutarsız tüm sayfalarda | Açık |
+| ORTA | Spinner bileşeni: Her sayfada farklı boyut/renk | Açık |
+| ORTA | Breadcrumb: Muhasebe, Profil, Fatura sayfalarında yok | Açık |
+| ORTA | Keyboard navigation: Focus ring + modal focus trap eksik | Açık |
+| ORTA | Renk kontrastı: text-gray-400/500 WCAG AA altında | Açık |
+| ORTA | Button hover/active: active:scale-95 + transition standardı yok | Açık |
+| ORTA | Navbar modül dropdown: Muhasebe/Konum/Şoför linkleri gizli | Açık |
+| DÜŞÜK | Toast mobil pozisyon: bottom-5 butonları kapatıyor | Açık |
+| DÜŞÜK | Page title/metadata: Tüm sayfalar "LogiFlow" diye bitiyor | Açık |
+| DÜŞÜK | Tablet breakpoint (md:): Grid kolonlarda atlanmış | Açık |
