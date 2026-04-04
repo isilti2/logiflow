@@ -117,6 +117,10 @@ export default function SoforPage() {
 
   /* ── Başlat ── */
   const baslat = useCallback(async () => {
+    if (!seciliSefer) {
+      setHata('Lütfen önce bir sefer seçin.');
+      return;
+    }
     if (!navigator.geolocation) {
       setHata('Tarayıcınız konum özelliğini desteklemiyor.');
       return;
@@ -223,7 +227,7 @@ export default function SoforPage() {
               onChange={e => setSeciliSefer(e.target.value)}
               className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
             >
-              <option value="">— Sefer seç (opsiyonel) —</option>
+              <option value="">— Sefer seç —</option>
               {seferler.map(s => (
                 <option key={s.id} value={s.id}>{s.aracPlaka} · {s.rotaDan} → {s.rotaAya}</option>
               ))}
@@ -335,7 +339,7 @@ export default function SoforPage() {
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Nasıl Çalışır?</p>
             <div className="flex items-start gap-2 text-xs text-gray-500">
               <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 shrink-0 font-bold">1</span>
-              <span>Sefer seçin (opsiyonel) ve <strong className="text-gray-400">Yolculuğu Başlat</strong>&apos;a basın</span>
+              <span>Sefer seçin ve <strong className="text-gray-400">Yolculuğu Başlat</strong>&apos;a basın</span>
             </div>
             <div className="flex items-start gap-2 text-xs text-gray-500">
               <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 shrink-0 font-bold">2</span>
