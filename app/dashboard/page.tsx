@@ -10,6 +10,7 @@ import {
   Zap, Box, Calculator, Navigation,
 } from 'lucide-react';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
+import { EmptyState } from '@/components/ui/EmptyState';
 import OnboardingWizard from '@/components/ui/OnboardingWizard';
 import NotificationBell from '@/components/ui/NotificationBell';
 
@@ -440,13 +441,12 @@ export default function DashboardPage() {
                 )}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-6 text-gray-400">
-                <Box className="w-7 h-7 mb-2 opacity-30" />
-                <p className="text-xs">Henüz optimizasyon yok</p>
-                <Link href="/features/kargo-optimizasyon" className="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-700">
-                  Başlat →
-                </Link>
-              </div>
+              <EmptyState
+                icon={Box}
+                title="Henüz optimizasyon yok"
+                description="İlk yükleme planınızı oluşturun ve doluluk oranınızı burada takip edin."
+                action={{ label: 'İlk Optimizasyonu Yap', href: '/features/kargo-optimizasyon' }}
+              />
             )}
           </div>
 
@@ -459,10 +459,12 @@ export default function DashboardPage() {
               </Link>
             </div>
             {areaInfos.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-6 text-gray-400">
-                <Building2 className="w-7 h-7 mb-2 opacity-30" />
-                <p className="text-xs">Depo alanı tanımlanmamış</p>
-              </div>
+              <EmptyState
+                icon={Building2}
+                title="Depo alanı yok"
+                description="Kargo stoğunuzu takip etmek için bir depo alanı tanımlayın."
+                action={{ label: 'Depo Ekle', href: '/depolama' }}
+              />
             ) : (
               <div className="space-y-3">
                 {areaInfos.map((a) => {
@@ -497,10 +499,13 @@ export default function DashboardPage() {
           </div>
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             {recentOpts.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-10 text-gray-400">
-                <TrendingUp className="w-7 h-7 mb-2 opacity-30" />
-                <p className="text-sm font-medium">Henüz optimizasyon yapılmadı.</p>
-              </div>
+              <EmptyState
+                icon={TrendingUp}
+                title="Henüz optimizasyon yapılmadı"
+                description="3D bin-packing algoritmasıyla ilk yükleme planınızı oluşturduğunuzda burada görüntülenecek."
+                action={{ label: 'Optimizasyona Git', href: '/features/kargo-optimizasyon' }}
+                secondaryAction={{ label: 'Nasıl çalışır?', href: '/docs' }}
+              />
             ) : (
               <table className="w-full text-sm">
                 <thead>

@@ -207,6 +207,8 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
+        {/* Gradient fade to white — smooth dark→light transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-white pointer-events-none" aria-hidden="true" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════

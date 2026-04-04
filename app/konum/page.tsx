@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Spinner } from '@/components/ui/Spinner';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { logout } from '@/lib/auth';
 
 const RouteMap = dynamic(() => import('@/components/map/RouteMap'), {
@@ -195,11 +196,12 @@ export default function KonumPage() {
               </div>
               <div className="divide-y divide-gray-50 overflow-y-auto flex-1">
                 {canliSoforler.length === 0 && (
-                  <div className="p-6 text-center">
-                    <Radio className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                    <p className="text-sm text-gray-400">Son 2 saatte konum bildirimi yok</p>
-                    <p className="text-xs text-gray-300 mt-1">Şoförler /sofor adresinden bağlanabilir</p>
-                  </div>
+                  <EmptyState
+                    icon={Radio}
+                    title="Aktif şoför yok"
+                    description="Son 2 saatte konum bildirimi gelmedi. Şoförler Şoför Paneli üzerinden bağlanabilir."
+                    action={{ label: 'Şoför Paneli', href: '/sofor' }}
+                  />
                 )}
                 {canliSoforler.map(s => (
                   <div key={s.id} className="px-4 py-3">

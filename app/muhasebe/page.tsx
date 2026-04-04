@@ -582,7 +582,14 @@ export default function MuhasebePage() {
                       </div>
                     </div>
                   ))}
-                  {!seferler.length && <p className="px-5 py-8 text-center text-sm text-gray-400">Henüz sefer yok</p>}
+                  {!seferler.length && (
+                    <EmptyState
+                      icon={Truck}
+                      title="Henüz sefer yok"
+                      description="İlk seferinizi ekleyerek gelir takibine başlayın."
+                      action={{ label: 'Sefer Ekle', onClick: () => setShowForm(true) }}
+                    />
+                  )}
                 </div>
               </div>
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
@@ -604,7 +611,9 @@ export default function MuhasebePage() {
                       </div>
                     </div>
                   ))}
-                  {!faturalar.length && <p className="px-5 py-8 text-center text-sm text-gray-400">Henüz fatura yok</p>}
+                  {!faturalar.length && (
+                    <EmptyState icon={FileText} title="Henüz fatura yok" description="Müşterilere fatura keserek alacak takibine başlayın." action={{ label: 'Fatura Oluştur', onClick: () => setShowForm(true) }} />
+                  )}
                 </div>
               </div>
             </div>
@@ -781,7 +790,11 @@ export default function MuhasebePage() {
                       <td className="px-4 py-3"><button onClick={()=>deleteIslem(i.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!islemler.length && <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-400">Henüz mali işlem yok.</td></tr>}
+                  {!islemler.length && (
+                    <tr><td colSpan={9}>
+                      <EmptyState icon={Receipt} title="Henüz mali işlem yok" description="Sefer gelirleri ve giderler burada listelenir. İlk işlemi ekleyin." action={{ label: 'İşlem Ekle', onClick: () => setShowForm(true) }} />
+                    </td></tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -855,7 +868,16 @@ export default function MuhasebePage() {
                   </div>
                 );
               })}
-              {!musteriler.length&&<div className="col-span-full py-16 text-center text-gray-400 text-sm">Henüz müşteri yok.</div>}
+              {!musteriler.length&&(
+                <div className="col-span-full">
+                  <EmptyState
+                    icon={Building2}
+                    title="Henüz müşteri yok"
+                    description="Fatura kesmek ve cari hesap takibi yapmak için müşteri ekleyin."
+                    action={{ label: 'Müşteri Ekle', onClick: () => setShowForm(true) }}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Tahsilat formu */}
@@ -978,7 +1000,16 @@ export default function MuhasebePage() {
                   </div>
                 );
               })}
-              {!araclar.length&&<div className="col-span-full py-16 text-center text-gray-400 text-sm">Henüz araç yok.</div>}
+              {!araclar.length&&(
+                <div className="col-span-full">
+                  <EmptyState
+                    icon={Truck}
+                    title="Henüz araç yok"
+                    description="Araç ekleyerek yakıt takibi ve sözleşme maliyeti analizine başlayın."
+                    action={{ label: 'Araç Ekle', onClick: () => setShowForm(true) }}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Yakıt girişi formu */}
@@ -1159,7 +1190,11 @@ export default function MuhasebePage() {
                       </td>
                     </tr>
                   ))}
-                  {!faturalar.length&&<tr><td colSpan={10} className="px-4 py-12 text-center text-gray-400">Henüz fatura yok.</td></tr>}
+                  {!faturalar.length&&(
+                    <tr><td colSpan={10}>
+                      <EmptyState icon={FileText} title="Henüz fatura yok" description="Müşterilerinize fatura keserek alacak takibine başlayın." action={{ label: 'Fatura Oluştur', onClick: () => setShowForm(true) }} />
+                    </td></tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -1221,7 +1256,16 @@ export default function MuhasebePage() {
                   </div>
                 </div>
               ))}
-              {!personeller.length&&<div className="col-span-full py-12 text-center text-gray-400 text-sm">Henüz personel yok.</div>}
+              {!personeller.length&&(
+                <div className="col-span-full">
+                  <EmptyState
+                    icon={Users}
+                    title="Henüz personel yok"
+                    description="Çalışanlarınızı ekleyerek puantaj ve bordro hesaplamasına başlayın."
+                    action={{ label: 'Personel Ekle', onClick: () => setShowForm(true) }}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Puantaj girişi */}
@@ -1325,7 +1369,11 @@ export default function MuhasebePage() {
                       </tr>
                     );
                   })}
-                  {!personeller.length&&<tr><td colSpan={10} className="px-4 py-12 text-center text-gray-400">Henüz personel yok.</td></tr>}
+                  {!personeller.length&&(
+                    <tr><td colSpan={10}>
+                      <EmptyState icon={Users} title="Henüz personel yok" description="Çalışanlarınızı ekleyerek bordro ve puantaj hesaplamasına başlayın." action={{ label: 'Personel Ekle', onClick: () => setShowForm(true) }} />
+                    </td></tr>
+                  )}
                 </tbody>
               </table>
               {bordrolar.filter(b=>b.ay===bordroAy).length>0&&(
