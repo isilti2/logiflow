@@ -172,6 +172,6 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 | ORTA | Yakıt KDV'si %0 ile işleniyor | ✅ Çözüldü — yakıt gider kaydında kdvOrani: 18 |
 | ORTA | Cascade delete — orphan kayıtlar | ✅ Çözüldü — onDelete: SetNull tüm ilişkilerde |
 | ORTA | Müşteri cari bakiye takibi yok | ✅ Çözüldü — musteri.bakiye, Tahsilat tablosu, UI |
-| DÜŞÜK | Sefer bazlı kar/zarar raporu yok | ⚠️ Açık — planlanan özellik |
-| DÜŞÜK | Çift kayıt (double-entry) muhasebe | ⚠️ Açık — büyük mimari değişiklik, onay bekliyor |
-| DÜŞÜK | Dönem kapanışı mekanizması yok | ⚠️ Açık — planlanan özellik |
+| DÜŞÜK | Sefer/araç/müşteri bazlı K/Z raporu | ✅ Çözüldü — /api/muhasebe/rapor + Raporlar sekmesi |
+| DÜŞÜK | Çift kayıt (double-entry) muhasebe | ✅ Çözüldü — Dönem sekmesinde basitleştirilmiş bilanço |
+| DÜŞÜK | Dönem kapanışı mekanizması yok | ✅ Çözüldü — Donem tablosu, kilitleme, 12 ay özeti |

@@ -142,6 +142,11 @@ export type Bordro = Prisma.BordroModel
  */
 export type Tahsilat = Prisma.TahsilatModel
 /**
+ * Model Donem
+ * 
+ */
+export type Donem = Prisma.DonemModel
+/**
  * Model KonumKaydi
  * 
  */

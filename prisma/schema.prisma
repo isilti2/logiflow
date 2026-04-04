@@ -35,6 +35,7 @@ model User {
   bordrolar           Bordro[]
   konumKayitlari      KonumKaydi[]
   tahsilatlar         Tahsilat[]
+  donemler            Donem[]
 }
 
 model DepotArea {
@@ -380,6 +381,21 @@ model Tahsilat {
 
   @@index([userId])
   @@index([musteriId])
+}
+
+model Donem {
+  id          String    @id @default(cuid())
+  userId      String
+  ay          String    // "2026-04"
+  durum       String    @default("acik")  // "acik" | "kapali"
+  notlar      String    @default("")
+  kapatildiAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, ay])
+  @@index([userId])
 }
 
 model KonumKaydi {

@@ -71,6 +71,7 @@ export const ModelName = {
   Fatura: 'Fatura',
   Bordro: 'Bordro',
   Tahsilat: 'Tahsilat',
+  Donem: 'Donem',
   KonumKaydi: 'KonumKaydi'
 } as const
 
@@ -396,6 +397,19 @@ export const TahsilatScalarFieldEnum = {
 } as const
 
 export type TahsilatScalarFieldEnum = (typeof TahsilatScalarFieldEnum)[keyof typeof TahsilatScalarFieldEnum]
+
+
+export const DonemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ay: 'ay',
+  durum: 'durum',
+  notlar: 'notlar',
+  kapatildiAt: 'kapatildiAt',
+  createdAt: 'createdAt'
+} as const
+
+export type DonemScalarFieldEnum = (typeof DonemScalarFieldEnum)[keyof typeof DonemScalarFieldEnum]
 
 
 export const KonumKaydiScalarFieldEnum = {

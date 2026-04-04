@@ -217,6 +217,7 @@ export type UserWhereInput = {
   bordrolar?: Prisma.BordroListRelationFilter
   konumKayitlari?: Prisma.KonumKaydiListRelationFilter
   tahsilatlar?: Prisma.TahsilatListRelationFilter
+  donemler?: Prisma.DonemListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -246,6 +247,7 @@ export type UserOrderByWithRelationInput = {
   bordrolar?: Prisma.BordroOrderByRelationAggregateInput
   konumKayitlari?: Prisma.KonumKaydiOrderByRelationAggregateInput
   tahsilatlar?: Prisma.TahsilatOrderByRelationAggregateInput
+  donemler?: Prisma.DonemOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -278,6 +280,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   bordrolar?: Prisma.BordroListRelationFilter
   konumKayitlari?: Prisma.KonumKaydiListRelationFilter
   tahsilatlar?: Prisma.TahsilatListRelationFilter
+  donemler?: Prisma.DonemListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type UserCreateInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -362,6 +366,7 @@ export type UserUncheckedCreateInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -391,6 +396,7 @@ export type UserUpdateInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -420,6 +426,7 @@ export type UserUncheckedUpdateInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -747,6 +754,20 @@ export type UserUpdateOneRequiredWithoutTahsilatlarNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTahsilatlarInput, Prisma.UserUpdateWithoutTahsilatlarInput>, Prisma.UserUncheckedUpdateWithoutTahsilatlarInput>
 }
 
+export type UserCreateNestedOneWithoutDonemlerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDonemlerInput, Prisma.UserUncheckedCreateWithoutDonemlerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDonemlerInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDonemlerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDonemlerInput, Prisma.UserUncheckedCreateWithoutDonemlerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDonemlerInput
+  upsert?: Prisma.UserUpsertWithoutDonemlerInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDonemlerInput, Prisma.UserUpdateWithoutDonemlerInput>, Prisma.UserUncheckedUpdateWithoutDonemlerInput>
+}
+
 export type UserCreateNestedOneWithoutKonumKayitlariInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutKonumKayitlariInput, Prisma.UserUncheckedCreateWithoutKonumKayitlariInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutKonumKayitlariInput
@@ -787,6 +808,7 @@ export type UserCreateWithoutAreasInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAreasInput = {
@@ -815,6 +837,7 @@ export type UserUncheckedCreateWithoutAreasInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAreasInput = {
@@ -859,6 +882,7 @@ export type UserUpdateWithoutAreasInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAreasInput = {
@@ -887,6 +911,7 @@ export type UserUncheckedUpdateWithoutAreasInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCargoInput = {
@@ -915,6 +940,7 @@ export type UserCreateWithoutCargoInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCargoInput = {
@@ -943,6 +969,7 @@ export type UserUncheckedCreateWithoutCargoInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCargoInput = {
@@ -987,6 +1014,7 @@ export type UserUpdateWithoutCargoInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCargoInput = {
@@ -1015,6 +1043,7 @@ export type UserUncheckedUpdateWithoutCargoInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOptimizationsInput = {
@@ -1043,6 +1072,7 @@ export type UserCreateWithoutOptimizationsInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOptimizationsInput = {
@@ -1071,6 +1101,7 @@ export type UserUncheckedCreateWithoutOptimizationsInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOptimizationsInput = {
@@ -1115,6 +1146,7 @@ export type UserUpdateWithoutOptimizationsInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOptimizationsInput = {
@@ -1143,6 +1175,7 @@ export type UserUncheckedUpdateWithoutOptimizationsInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -1171,6 +1204,7 @@ export type UserCreateWithoutTeamMembersInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -1199,6 +1233,7 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -1243,6 +1278,7 @@ export type UserUpdateWithoutTeamMembersInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -1271,6 +1307,7 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApiKeysInput = {
@@ -1299,6 +1336,7 @@ export type UserCreateWithoutApiKeysInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -1327,6 +1365,7 @@ export type UserUncheckedCreateWithoutApiKeysInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -1371,6 +1410,7 @@ export type UserUpdateWithoutApiKeysInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -1399,6 +1439,7 @@ export type UserUncheckedUpdateWithoutApiKeysInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1427,6 +1468,7 @@ export type UserCreateWithoutNotificationsInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1455,6 +1497,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1499,6 +1542,7 @@ export type UserUpdateWithoutNotificationsInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1527,6 +1571,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTemplatesInput = {
@@ -1555,6 +1600,7 @@ export type UserCreateWithoutTemplatesInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTemplatesInput = {
@@ -1583,6 +1629,7 @@ export type UserUncheckedCreateWithoutTemplatesInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTemplatesInput = {
@@ -1627,6 +1674,7 @@ export type UserUpdateWithoutTemplatesInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTemplatesInput = {
@@ -1655,6 +1703,7 @@ export type UserUncheckedUpdateWithoutTemplatesInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1683,6 +1732,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1711,6 +1761,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1755,6 +1806,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1783,6 +1835,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMusterilerInput = {
@@ -1811,6 +1864,7 @@ export type UserCreateWithoutMusterilerInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMusterilerInput = {
@@ -1839,6 +1893,7 @@ export type UserUncheckedCreateWithoutMusterilerInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMusterilerInput = {
@@ -1883,6 +1938,7 @@ export type UserUpdateWithoutMusterilerInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMusterilerInput = {
@@ -1911,6 +1967,7 @@ export type UserUncheckedUpdateWithoutMusterilerInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSeferlerInput = {
@@ -1939,6 +1996,7 @@ export type UserCreateWithoutSeferlerInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSeferlerInput = {
@@ -1967,6 +2025,7 @@ export type UserUncheckedCreateWithoutSeferlerInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSeferlerInput = {
@@ -2011,6 +2070,7 @@ export type UserUpdateWithoutSeferlerInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeferlerInput = {
@@ -2039,6 +2099,7 @@ export type UserUncheckedUpdateWithoutSeferlerInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMaliIslemlerInput = {
@@ -2067,6 +2128,7 @@ export type UserCreateWithoutMaliIslemlerInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMaliIslemlerInput = {
@@ -2095,6 +2157,7 @@ export type UserUncheckedCreateWithoutMaliIslemlerInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMaliIslemlerInput = {
@@ -2139,6 +2202,7 @@ export type UserUpdateWithoutMaliIslemlerInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMaliIslemlerInput = {
@@ -2167,6 +2231,7 @@ export type UserUncheckedUpdateWithoutMaliIslemlerInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPersonellerInput = {
@@ -2195,6 +2260,7 @@ export type UserCreateWithoutPersonellerInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPersonellerInput = {
@@ -2223,6 +2289,7 @@ export type UserUncheckedCreateWithoutPersonellerInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPersonellerInput = {
@@ -2267,6 +2334,7 @@ export type UserUpdateWithoutPersonellerInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPersonellerInput = {
@@ -2295,6 +2363,7 @@ export type UserUncheckedUpdateWithoutPersonellerInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPuantajlarInput = {
@@ -2323,6 +2392,7 @@ export type UserCreateWithoutPuantajlarInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPuantajlarInput = {
@@ -2351,6 +2421,7 @@ export type UserUncheckedCreateWithoutPuantajlarInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPuantajlarInput = {
@@ -2395,6 +2466,7 @@ export type UserUpdateWithoutPuantajlarInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPuantajlarInput = {
@@ -2423,6 +2495,7 @@ export type UserUncheckedUpdateWithoutPuantajlarInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAraclarInput = {
@@ -2451,6 +2524,7 @@ export type UserCreateWithoutAraclarInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAraclarInput = {
@@ -2479,6 +2553,7 @@ export type UserUncheckedCreateWithoutAraclarInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAraclarInput = {
@@ -2523,6 +2598,7 @@ export type UserUpdateWithoutAraclarInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAraclarInput = {
@@ -2551,6 +2627,7 @@ export type UserUncheckedUpdateWithoutAraclarInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutYakitKayitlariInput = {
@@ -2579,6 +2656,7 @@ export type UserCreateWithoutYakitKayitlariInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutYakitKayitlariInput = {
@@ -2607,6 +2685,7 @@ export type UserUncheckedCreateWithoutYakitKayitlariInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutYakitKayitlariInput = {
@@ -2651,6 +2730,7 @@ export type UserUpdateWithoutYakitKayitlariInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutYakitKayitlariInput = {
@@ -2679,6 +2759,7 @@ export type UserUncheckedUpdateWithoutYakitKayitlariInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFaturalarInput = {
@@ -2707,6 +2788,7 @@ export type UserCreateWithoutFaturalarInput = {
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFaturalarInput = {
@@ -2735,6 +2817,7 @@ export type UserUncheckedCreateWithoutFaturalarInput = {
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFaturalarInput = {
@@ -2779,6 +2862,7 @@ export type UserUpdateWithoutFaturalarInput = {
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFaturalarInput = {
@@ -2807,6 +2891,7 @@ export type UserUncheckedUpdateWithoutFaturalarInput = {
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBordrolarInput = {
@@ -2835,6 +2920,7 @@ export type UserCreateWithoutBordrolarInput = {
   faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBordrolarInput = {
@@ -2863,6 +2949,7 @@ export type UserUncheckedCreateWithoutBordrolarInput = {
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBordrolarInput = {
@@ -2907,6 +2994,7 @@ export type UserUpdateWithoutBordrolarInput = {
   faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBordrolarInput = {
@@ -2935,6 +3023,7 @@ export type UserUncheckedUpdateWithoutBordrolarInput = {
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTahsilatlarInput = {
@@ -2963,6 +3052,7 @@ export type UserCreateWithoutTahsilatlarInput = {
   faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTahsilatlarInput = {
@@ -2991,6 +3081,7 @@ export type UserUncheckedCreateWithoutTahsilatlarInput = {
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTahsilatlarInput = {
@@ -3035,6 +3126,7 @@ export type UserUpdateWithoutTahsilatlarInput = {
   faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTahsilatlarInput = {
@@ -3063,6 +3155,139 @@ export type UserUncheckedUpdateWithoutTahsilatlarInput = {
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDonemlerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDonemlerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDonemlerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDonemlerInput, Prisma.UserUncheckedCreateWithoutDonemlerInput>
+}
+
+export type UserUpsertWithoutDonemlerInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDonemlerInput, Prisma.UserUncheckedUpdateWithoutDonemlerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDonemlerInput, Prisma.UserUncheckedCreateWithoutDonemlerInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDonemlerInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDonemlerInput, Prisma.UserUncheckedUpdateWithoutDonemlerInput>
+}
+
+export type UserUpdateWithoutDonemlerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDonemlerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutKonumKayitlariInput = {
@@ -3091,6 +3316,7 @@ export type UserCreateWithoutKonumKayitlariInput = {
   faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
   bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutKonumKayitlariInput = {
@@ -3119,6 +3345,7 @@ export type UserUncheckedCreateWithoutKonumKayitlariInput = {
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
   bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
   tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutKonumKayitlariInput = {
@@ -3163,6 +3390,7 @@ export type UserUpdateWithoutKonumKayitlariInput = {
   faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
   bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutKonumKayitlariInput = {
@@ -3191,6 +3419,7 @@ export type UserUncheckedUpdateWithoutKonumKayitlariInput = {
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
   bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
   tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -3218,6 +3447,7 @@ export type UserCountOutputType = {
   bordrolar: number
   konumKayitlari: number
   tahsilatlar: number
+  donemler: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3240,6 +3470,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   bordrolar?: boolean | UserCountOutputTypeCountBordrolarArgs
   konumKayitlari?: boolean | UserCountOutputTypeCountKonumKayitlariArgs
   tahsilatlar?: boolean | UserCountOutputTypeCountTahsilatlarArgs
+  donemler?: boolean | UserCountOutputTypeCountDonemlerArgs
 }
 
 /**
@@ -3385,6 +3616,13 @@ export type UserCountOutputTypeCountTahsilatlarArgs<ExtArgs extends runtime.Type
   where?: Prisma.TahsilatWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDonemlerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DonemWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3413,6 +3651,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   bordrolar?: boolean | Prisma.User$bordrolarArgs<ExtArgs>
   konumKayitlari?: boolean | Prisma.User$konumKayitlariArgs<ExtArgs>
   tahsilatlar?: boolean | Prisma.User$tahsilatlarArgs<ExtArgs>
+  donemler?: boolean | Prisma.User$donemlerArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3467,6 +3706,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bordrolar?: boolean | Prisma.User$bordrolarArgs<ExtArgs>
   konumKayitlari?: boolean | Prisma.User$konumKayitlariArgs<ExtArgs>
   tahsilatlar?: boolean | Prisma.User$tahsilatlarArgs<ExtArgs>
+  donemler?: boolean | Prisma.User$donemlerArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3494,6 +3734,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     bordrolar: Prisma.$BordroPayload<ExtArgs>[]
     konumKayitlari: Prisma.$KonumKaydiPayload<ExtArgs>[]
     tahsilatlar: Prisma.$TahsilatPayload<ExtArgs>[]
+    donemler: Prisma.$DonemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3916,6 +4157,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   bordrolar<T extends Prisma.User$bordrolarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bordrolarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BordroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   konumKayitlari<T extends Prisma.User$konumKayitlariArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$konumKayitlariArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$KonumKaydiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tahsilatlar<T extends Prisma.User$tahsilatlarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tahsilatlarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsilatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  donemler<T extends Prisma.User$donemlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$donemlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DonemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4798,6 +5040,30 @@ export type User$tahsilatlarArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.TahsilatScalarFieldEnum | Prisma.TahsilatScalarFieldEnum[]
+}
+
+/**
+ * User.donemler
+ */
+export type User$donemlerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Donem
+   */
+  select?: Prisma.DonemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Donem
+   */
+  omit?: Prisma.DonemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DonemInclude<ExtArgs> | null
+  where?: Prisma.DonemWhereInput
+  orderBy?: Prisma.DonemOrderByWithRelationInput | Prisma.DonemOrderByWithRelationInput[]
+  cursor?: Prisma.DonemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DonemScalarFieldEnum | Prisma.DonemScalarFieldEnum[]
 }
 
 /**

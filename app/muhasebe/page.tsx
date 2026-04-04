@@ -27,7 +27,12 @@ type FaturaSatiri = { aciklama: string; miktar: number; birimFiyat: number; kdvO
 type Fatura    = { id: string; faturaNo: string; tarih: string; vadeTarih: string | null; satirlar: string; araToplam: number; kdvToplam: number; genelToplam: number; notlar: string; durum: string; createdAt: string; musteri?: { id: string; ad: string; vergiNo: string; adres: string; email: string; telefon: string } | null; sefer?: { id: string; rotaDan: string; rotaAya: string; aracPlaka: string } | null };
 type Bordro    = { id: string; personelId: string; ay: string; brutMaas: number; fazlaMesaiUcret: number; sgkIsci: number; issizlikIsci: number; gelirVergisi: number; damgaVergisi: number; netMaas: number; sgkIsveren: number; toplamMaliyet: number; createdAt: string; personel?: { id: string; ad: string; unvan: string } };
 
-type Tab = 'genel' | 'seferler' | 'islemler' | 'cari' | 'araclar' | 'faturalar' | 'personel';
+type Tab = 'genel' | 'seferler' | 'islemler' | 'cari' | 'araclar' | 'faturalar' | 'personel' | 'raporlar' | 'donem';
+
+type SeferRapor   = { id: string; rotaDan: string; rotaAya: string; aracPlaka: string; tarih: string; durum: string; musteriAd: string | null; seferUcreti: number; yakitMaliyeti: number; toplamGelir: number; toplamGider: number; netKar: number; mesafeKm: number };
+type AracRapor    = { plaka: string; marka: string; model: string; seferGelir: number; seferSayisi: number; yakitTutar: number; kmTopla: number; netKar: number; kmBasiMaliyet: number };
+type MusteriRapor = { id: string; ad: string; vergiNo: string; seferSayisi: number; faturaSayisi: number; toplamFatura: number; toplamTahsilat: number; bakiye: number; bekleyenFatura: number; tahsilatOrani: number };
+type Donem        = { id: string; ay: string; durum: string; notlar: string; kapatildiAt: string | null; createdAt: string };
 
 /* ─── Sabit listeler ─────────────────────────────────────────── */
 const GIDER_KATEGORILER = ['Yakıt', 'Bakım', 'Sigorta', 'Ruhsat', 'Köprü / Geçiş', 'Personel Maaşı', 'Kira', 'Diğer'];
@@ -181,7 +186,14 @@ export default function MuhasebePage() {
   const [yakitlar,    setYakitlar]    = useState<YakitKaydi[]>([]);
   const [faturalar,   setFaturalar]   = useState<Fatura[]>([]);
   const [bordrolar,   setBordrolar]   = useState<Bordro[]>([]);
-  const [tahsilatlar, setTahsilatlar] = useState<Tahsilat[]>([]);
+  const [tahsilatlar,   setTahsilatlar]   = useState<Tahsilat[]>([]);
+  const [donemler,      setDonemler]      = useState<Donem[]>([]);
+  const [seferRapor,    setSeferRapor]    = useState<SeferRapor[]>([]);
+  const [aracRapor,     setAracRapor]     = useState<AracRapor[]>([]);
+  const [musteriRapor,  setMusteriRapor]  = useState<MusteriRapor[]>([]);
+  const [raporTip,      setRaporTip]      = useState<'seferler'|'araclar'|'musteriler'>('seferler');
+  const [raporDonem,    setRaporDonem]    = useState('');
+  const [raporYuklendi, setRaporYuklendi] = useState(false);
 
   // UI
   const [search,      setSearch]      = useState('');
@@ -224,6 +236,21 @@ export default function MuhasebePage() {
     if (aRes.ok) setAraclar(await aRes.json());
     if (fRes.ok) setFaturalar(await fRes.json());
     if (tRes.ok) setTahsilatlar(await tRes.json());
+    const dRes = await fetch('/api/muhasebe/donem');
+    if (dRes.ok) setDonemler(await dRes.json());
+  }, []);
+
+  const loadRapor = useCallback(async (tip: string, donem: string) => {
+    setRaporYuklendi(false);
+    const params = new URLSearchParams({ tip });
+    if (donem) params.set('donem', donem);
+    const res = await fetch(`/api/muhasebe/rapor?${params}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (tip === 'seferler')   setSeferRapor(data);
+    if (tip === 'araclar')    setAracRapor(data);
+    if (tip === 'musteriler') setMusteriRapor(data);
+    setRaporYuklendi(true);
   }, []);
 
   const loadYakit = useCallback(async () => {
@@ -254,6 +281,7 @@ export default function MuhasebePage() {
 
   useEffect(() => { if (authed && tab === 'personel') { loadPuantaj(); loadBordro(); } }, [authed, tab, puantajAy, selPersonel, bordroAy, loadPuantaj, loadBordro]);
   useEffect(() => { if (authed && tab === 'araclar') loadYakit(); }, [authed, tab, selArac, loadYakit]);
+  useEffect(() => { if (authed && tab === 'raporlar') loadRapor(raporTip, raporDonem); }, [authed, tab, raporTip, raporDonem, loadRapor]);
 
   /* ── Hesaplar ── */
   const toplamGelir = islemler.filter(i => i.tur === 'gelir').reduce((s, i) => s + i.tutar, 0);
@@ -273,6 +301,25 @@ export default function MuhasebePage() {
   async function deleteMusteri(id: string) {
     await fetch(`/api/muhasebe/musteriler/${id}`, { method: 'DELETE' });
     setMusteriler(p => p.filter(m => m.id !== id));
+  }
+
+  /* ── Handlers: Dönem ── */
+  async function donemOlustur(ay: string) {
+    const res = await fetch('/api/muhasebe/donem', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ay }) });
+    if (res.ok) { const n = await res.json(); setDonemler(p => { const ex = p.find(d => d.ay === ay); return ex ? p.map(d => d.ay === ay ? n : d) : [n, ...p]; }); }
+  }
+  async function donemKapat(id: string) {
+    const res = await fetch(`/api/muhasebe/donem/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ durum: 'kapali' }) });
+    if (res.ok) { const n = await res.json(); setDonemler(p => p.map(d => d.id === id ? n : d)); }
+  }
+  async function donemAc(id: string) {
+    const res = await fetch(`/api/muhasebe/donem/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ durum: 'acik' }) });
+    if (res.ok) { const n = await res.json(); setDonemler(p => p.map(d => d.id === id ? n : d)); }
+  }
+  async function donemSil(id: string) {
+    const res = await fetch(`/api/muhasebe/donem/${id}`, { method: 'DELETE' });
+    if (res.ok) setDonemler(p => p.filter(d => d.id !== id));
+    else { const e = await res.json(); alert(e.error); }
   }
 
   /* ── Handlers: Tahsilat ── */
@@ -415,6 +462,8 @@ export default function MuhasebePage() {
     { tab: 'araclar',  label: 'Araçlar & Yakıt',    icon: Car },
     { tab: 'faturalar',label: 'Faturalar',           icon: FileText },
     { tab: 'personel', label: 'Personel & Puantaj',  icon: UserCheck },
+    { tab: 'raporlar', label: 'Raporlar',             icon: TrendingUp },
+    { tab: 'donem',    label: 'Dönem Yönetimi',       icon: CalendarDays },
   ];
 
   return (
@@ -1274,6 +1323,233 @@ export default function MuhasebePage() {
                   <span className="text-purple-600">Toplam Maliyet: {TL(bordrolar.filter(b=>b.ay===bordroAy).reduce((s,b)=>s+b.toplamMaliyet,0))}</span>
                 </div>
               )}
+            </div>
+          </>
+        )}
+
+        {/* ════════════════════════════════════════════════════════
+            RAPORLAR
+        ════════════════════════════════════════════════════════ */}
+        {tab === 'raporlar' && (
+          <>
+            <div className="flex items-center gap-3 flex-wrap">
+              <h2 className="font-bold text-gray-900 flex-1">Raporlar</h2>
+              <div className="flex gap-2">
+                {(['seferler','araclar','musteriler'] as const).map(t => (
+                  <button key={t} onClick={()=>setRaporTip(t)}
+                    className={`text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors ${raporTip===t?'bg-blue-600 text-white':'bg-white border border-gray-200 text-gray-600 hover:border-blue-300'}`}>
+                    {t==='seferler'?'Sefer K/Z':t==='araclar'?'Araç K/Z':'Müşteri Ciro'}
+                  </button>
+                ))}
+              </div>
+              <input type="month" value={raporDonem} onChange={e=>setRaporDonem(e.target.value)}
+                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+              {raporDonem && <button onClick={()=>setRaporDonem('')} className="text-xs text-gray-400 hover:text-gray-600"><X className="w-4 h-4"/></button>}
+            </div>
+
+            {/* Sefer K/Z */}
+            {raporTip === 'seferler' && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                {raporYuklendi && seferRapor.length > 0 && (
+                  <div className="px-5 py-3 bg-blue-50 border-b border-blue-100 grid grid-cols-4 gap-4 text-xs font-semibold text-blue-800">
+                    <span>Toplam Sefer: {seferRapor.length}</span>
+                    <span className="text-green-700">Toplam Gelir: {TL(seferRapor.reduce((s,r)=>s+r.toplamGelir,0))}</span>
+                    <span className="text-red-600">Toplam Gider: {TL(seferRapor.reduce((s,r)=>s+r.toplamGider,0))}</span>
+                    <span className={seferRapor.reduce((s,r)=>s+r.netKar,0)>=0?'text-emerald-700':'text-red-700'}>
+                      Net K/Z: {TL(seferRapor.reduce((s,r)=>s+r.netKar,0))}
+                    </span>
+                  </div>
+                )}
+                <table className="w-full text-sm">
+                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota','Araç','Tarih','Müşteri','Ücret','Yakıt','Net K/Z','Durum'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {seferRapor.map(r=>(
+                      <tr key={r.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap">{r.rotaDan} → {r.rotaAya}</td>
+                        <td className="px-4 py-3 font-mono text-gray-600 text-xs">{r.aracPlaka}</td>
+                        <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(r.tarih)}</td>
+                        <td className="px-4 py-3 text-gray-500 text-xs">{r.musteriAd??'—'}</td>
+                        <td className="px-4 py-3 text-green-600 font-semibold whitespace-nowrap">{TL(r.seferUcreti)}</td>
+                        <td className="px-4 py-3 text-red-500 whitespace-nowrap">{TL(r.yakitMaliyeti)}</td>
+                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.netKar>=0?'text-emerald-600':'text-red-600'}`}>{TL(r.netKar)}</td>
+                        <td className="px-4 py-3"><DurumBadge durum={r.durum}/></td>
+                      </tr>
+                    ))}
+                    {!seferRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Bu dönemde sefer yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400 text-xs">Yükleniyor…</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Araç K/Z */}
+            {raporTip === 'araclar' && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Plaka','Marka/Model','Sefer','KM','Sefer Geliri','Yakıt Gideri','Net K/Z','km Maliyeti'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {aracRapor.map(r=>(
+                      <tr key={r.plaka} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-4 py-3 font-mono font-black text-gray-900">{r.plaka}</td>
+                        <td className="px-4 py-3 text-gray-500 text-xs">{[r.marka,r.model].filter(Boolean).join(' ')||'—'}</td>
+                        <td className="px-4 py-3 text-gray-700">{r.seferSayisi}</td>
+                        <td className="px-4 py-3 text-gray-500 text-xs">{r.kmTopla.toLocaleString('tr-TR')} km</td>
+                        <td className="px-4 py-3 text-green-600 font-semibold whitespace-nowrap">{TL(r.seferGelir)}</td>
+                        <td className="px-4 py-3 text-red-500 whitespace-nowrap">{TL(r.yakitTutar)}</td>
+                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.netKar>=0?'text-emerald-600':'text-red-600'}`}>{TL(r.netKar)}</td>
+                        <td className="px-4 py-3 text-gray-500 text-xs">{r.kmBasiMaliyet>0?`${r.kmBasiMaliyet.toFixed(2)} ₺/km`:'—'}</td>
+                      </tr>
+                    ))}
+                    {!aracRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Bu dönemde araç verisi yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400 text-xs">Yükleniyor…</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Müşteri Ciro */}
+            {raporTip === 'musteriler' && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Müşteri','Sefer','Fatura','Top. Fatura','Tahsilat','Tahsilat %','Bekleyen','Bakiye'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {musteriRapor.map(r=>(
+                      <tr key={r.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-4 py-3 font-semibold text-gray-900">{r.ad}</td>
+                        <td className="px-4 py-3 text-gray-600">{r.seferSayisi}</td>
+                        <td className="px-4 py-3 text-gray-600">{r.faturaSayisi}</td>
+                        <td className="px-4 py-3 text-gray-900 font-semibold whitespace-nowrap">{TL(r.toplamFatura)}</td>
+                        <td className="px-4 py-3 text-green-600 font-semibold whitespace-nowrap">{TL(r.toplamTahsilat)}</td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1 bg-gray-100 rounded-full h-1.5 min-w-[40px]">
+                              <div className={`h-1.5 rounded-full ${r.tahsilatOrani>=100?'bg-green-500':r.tahsilatOrani>=50?'bg-amber-400':'bg-red-400'}`} style={{width:`${Math.min(100,r.tahsilatOrani).toFixed(0)}%`}}/>
+                            </div>
+                            <span className="text-xs font-semibold text-gray-600">{r.tahsilatOrani.toFixed(0)}%</span>
+                          </div>
+                        </td>
+                        <td className={`px-4 py-3 font-semibold whitespace-nowrap ${r.bekleyenFatura>0?'text-amber-600':'text-gray-400'}`}>{r.bekleyenFatura>0?TL(r.bekleyenFatura):'—'}</td>
+                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.bakiye>0?'text-amber-600':r.bakiye<0?'text-green-600':'text-gray-400'}`}>{TL(r.bakiye)}</td>
+                      </tr>
+                    ))}
+                    {!musteriRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Müşteri verisi yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400 text-xs">Yükleniyor…</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* ════════════════════════════════════════════════════════
+            DÖNEM YÖNETİMİ
+        ════════════════════════════════════════════════════════ */}
+        {tab === 'donem' && (
+          <>
+            <div className="flex items-center gap-3 flex-wrap">
+              <h2 className="font-bold text-gray-900 flex-1">Dönem Yönetimi</h2>
+              <button onClick={()=>donemOlustur(thisMonth())}
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
+                <Plus className="w-4 h-4"/> Bu Ayı Ekle
+              </button>
+            </div>
+
+            {/* Çift kayıt açıklama kutusu */}
+            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5">
+              <p className="text-sm font-bold text-blue-800 mb-1">Dönem Kilitleme Hakkında</p>
+              <p className="text-xs text-blue-700 leading-relaxed">
+                Bir dönemi kapattığınızda o aya ait mali işlemler dondurulur ve denetim güvenliği sağlanır.
+                Kapalı bir dönem ancak yeniden açılarak değiştirilebilir.
+                <strong> Çift taraflı muhasebe özeti</strong>: Her dönemin toplam gelir/gider dengesi aşağıda gösterilir.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Dönem olmayan ayları otomatik göster */}
+              {(()=>{
+                const aylar: string[] = [];
+                const simdi = new Date();
+                for (let i = 0; i < 12; i++) {
+                  const d = new Date(simdi.getFullYear(), simdi.getMonth() - i, 1);
+                  aylar.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`);
+                }
+                return aylar.map(ay => {
+                  const donem = donemler.find(d => d.ay === ay);
+                  const ayIslemler = islemler.filter(i => i.tarih.startsWith(ay));
+                  const gelir = ayIslemler.filter(i=>i.tur==='gelir').reduce((s,i)=>s+i.tutar,0);
+                  const gider = ayIslemler.filter(i=>i.tur==='gider').reduce((s,i)=>s+i.tutar,0);
+                  const kapali = donem?.durum === 'kapali';
+                  return (
+                    <div key={ay} className={`bg-white rounded-2xl border shadow-sm p-5 ${kapali?'border-gray-300 opacity-80':'border-gray-100'}`}>
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <p className="font-black text-gray-900 text-lg">{ay}</p>
+                          <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${kapali?'bg-gray-100 text-gray-500':'bg-green-50 text-green-700'}`}>
+                            {kapali?'🔒 Kapalı':'🟢 Açık'}
+                          </span>
+                        </div>
+                        {donem && (
+                          <div className="flex gap-1">
+                            {kapali
+                              ? <button onClick={()=>donemAc(donem.id)} className="text-xs text-blue-600 hover:text-blue-800 border border-blue-200 px-2 py-1 rounded-lg">Aç</button>
+                              : <button onClick={()=>donemKapat(donem.id)} className="text-xs text-gray-500 hover:text-gray-800 border border-gray-200 px-2 py-1 rounded-lg">Kapat</button>
+                            }
+                            {!kapali && <button onClick={()=>donemSil(donem.id)} className="text-gray-200 hover:text-red-500 p-1"><Trash2 className="w-4 h-4"/></button>}
+                          </div>
+                        )}
+                        {!donem && (
+                          <button onClick={()=>donemOlustur(ay)} className="text-xs text-blue-600 border border-blue-100 px-2 py-1 rounded-lg hover:border-blue-300">Oluştur</button>
+                        )}
+                      </div>
+                      {/* Dönem özeti — basitleştirilmiş çift taraflı */}
+                      <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-50">
+                        <div><p className="text-xs text-gray-400">Gelir</p><p className="text-sm font-bold text-green-600">{TL(gelir)}</p></div>
+                        <div><p className="text-xs text-gray-400">Gider</p><p className="text-sm font-bold text-red-500">{TL(gider)}</p></div>
+                        <div><p className="text-xs text-gray-400">Net</p><p className={`text-sm font-black ${gelir-gider>=0?'text-emerald-600':'text-red-600'}`}>{TL(gelir-gider)}</p></div>
+                      </div>
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+
+            {/* Bilanço özeti (çift taraflı muhasebe basit formu) */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+              <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2"><Calculator className="w-4 h-4 text-blue-600"/> Basitleştirilmiş Bilanço</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* AKTİF */}
+                <div>
+                  <p className="text-xs font-black text-gray-500 uppercase tracking-wider mb-3">AKTİFLER (Ne var?)</p>
+                  <div className="space-y-2">
+                    {[
+                      { ad: 'Nakit / Tahsilatlar', tutar: tahsilatlar.reduce((s,t)=>s+t.tutar,0), renk: 'text-green-700' },
+                      { ad: 'Müşteri Alacakları', tutar: faturalar.filter(f=>f.durum!=='odendi').reduce((s,f)=>s+f.genelToplam,0), renk: 'text-amber-600' },
+                      { ad: 'Toplam Gelirler', tutar: islemler.filter(i=>i.tur==='gelir').reduce((s,i)=>s+i.tutar,0), renk: 'text-blue-700' },
+                    ].map(r=>(
+                      <div key={r.ad} className="flex items-center justify-between py-1.5 border-b border-gray-50">
+                        <span className="text-sm text-gray-600">{r.ad}</span>
+                        <span className={`text-sm font-bold ${r.renk}`}>{TL(r.tutar)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* PASİF */}
+                <div>
+                  <p className="text-xs font-black text-gray-500 uppercase tracking-wider mb-3">PASİFLER + ÖZKAYNAKLAR (Ne gitti?)</p>
+                  <div className="space-y-2">
+                    {[
+                      { ad: 'Toplam Giderler', tutar: islemler.filter(i=>i.tur==='gider').reduce((s,i)=>s+i.tutar,0), renk: 'text-red-600' },
+                      { ad: 'Personel Maliyeti', tutar: bordrolar.reduce((s,b)=>s+b.toplamMaliyet,0), renk: 'text-purple-600' },
+                      { ad: 'Net Kar / Zarar', tutar: islemler.filter(i=>i.tur==='gelir').reduce((s,i)=>s+i.tutar,0) - islemler.filter(i=>i.tur==='gider').reduce((s,i)=>s+i.tutar,0), renk: 'text-emerald-700 font-black' },
+                    ].map(r=>(
+                      <div key={r.ad} className="flex items-center justify-between py-1.5 border-b border-gray-50">
+                        <span className="text-sm text-gray-600">{r.ad}</span>
+                        <span className={`text-sm font-bold ${r.renk}`}>{TL(r.tutar)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </>
         )}

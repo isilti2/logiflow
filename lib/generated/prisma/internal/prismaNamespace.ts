@@ -404,6 +404,7 @@ export const ModelName = {
   Fatura: 'Fatura',
   Bordro: 'Bordro',
   Tahsilat: 'Tahsilat',
+  Donem: 'Donem',
   KonumKaydi: 'KonumKaydi'
 } as const
 
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "depotArea" | "cargoItem" | "optimizationRun" | "teamMember" | "apiKey" | "appNotification" | "optTemplate" | "passwordResetToken" | "auditLog" | "musteri" | "sefer" | "maliIslem" | "personel" | "puantaj" | "arac" | "yakitKaydi" | "fatura" | "bordro" | "tahsilat" | "konumKaydi"
+    modelProps: "user" | "depotArea" | "cargoItem" | "optimizationRun" | "teamMember" | "apiKey" | "appNotification" | "optTemplate" | "passwordResetToken" | "auditLog" | "musteri" | "sefer" | "maliIslem" | "personel" | "puantaj" | "arac" | "yakitKaydi" | "fatura" | "bordro" | "tahsilat" | "donem" | "konumKaydi"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1904,6 +1905,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Donem: {
+      payload: Prisma.$DonemPayload<ExtArgs>
+      fields: Prisma.DonemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DonemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DonemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>
+        }
+        findFirst: {
+          args: Prisma.DonemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DonemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>
+        }
+        findMany: {
+          args: Prisma.DonemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>[]
+        }
+        create: {
+          args: Prisma.DonemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>
+        }
+        createMany: {
+          args: Prisma.DonemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DonemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>[]
+        }
+        delete: {
+          args: Prisma.DonemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>
+        }
+        update: {
+          args: Prisma.DonemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>
+        }
+        deleteMany: {
+          args: Prisma.DonemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DonemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DonemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>[]
+        }
+        upsert: {
+          args: Prisma.DonemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DonemPayload>
+        }
+        aggregate: {
+          args: Prisma.DonemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDonem>
+        }
+        groupBy: {
+          args: Prisma.DonemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DonemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DonemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DonemCountAggregateOutputType> | number
+        }
+      }
+    }
     KonumKaydi: {
       payload: Prisma.$KonumKaydiPayload<ExtArgs>
       fields: Prisma.KonumKaydiFieldRefs
@@ -2325,6 +2400,19 @@ export const TahsilatScalarFieldEnum = {
 export type TahsilatScalarFieldEnum = (typeof TahsilatScalarFieldEnum)[keyof typeof TahsilatScalarFieldEnum]
 
 
+export const DonemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ay: 'ay',
+  durum: 'durum',
+  notlar: 'notlar',
+  kapatildiAt: 'kapatildiAt',
+  createdAt: 'createdAt'
+} as const
+
+export type DonemScalarFieldEnum = (typeof DonemScalarFieldEnum)[keyof typeof DonemScalarFieldEnum]
+
+
 export const KonumKaydiScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -2548,6 +2636,7 @@ export type GlobalOmitConfig = {
   fatura?: Prisma.FaturaOmit
   bordro?: Prisma.BordroOmit
   tahsilat?: Prisma.TahsilatOmit
+  donem?: Prisma.DonemOmit
   konumKaydi?: Prisma.KonumKaydiOmit
 }
 
