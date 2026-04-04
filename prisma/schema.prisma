@@ -29,6 +29,10 @@ model User {
   maliIslemler        MaliIslem[]
   personeller         Personel[]
   puantajlar          Puantaj[]
+  araclar             Arac[]
+  yakitKayitlari      YakitKaydi[]
+  faturalar           Fatura[]
+  bordrolar           Bordro[]
 }
 
 model DepotArea {
@@ -178,6 +182,7 @@ model Musteri {
   user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   seferler Sefer[]
   islemler MaliIslem[]
+  faturalar Fatura[]
 
   @@index([userId])
 }
@@ -198,9 +203,10 @@ model Sefer {
   durum         String   @default("planlandi")
   createdAt     DateTime @default(now())
 
-  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  musteri  Musteri?    @relation(fields: [musteriId], references: [id])
-  islemler MaliIslem[]
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  musteri   Musteri?    @relation(fields: [musteriId], references: [id])
+  islemler  MaliIslem[]
+  faturalar Fatura[]
 
   @@index([userId])
 }
@@ -240,6 +246,7 @@ model Personel {
 
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   puantajlar Puantaj[]
+  bordrolar  Bordro[]
 
   @@index([userId])
 }
@@ -261,5 +268,91 @@ model Puantaj {
 
   @@unique([personelId, tarih])
   @@index([personelId])
+  @@index([userId])
+}
+
+model Arac {
+  id         String   @id @default(cuid())
+  userId     String
+  plaka      String
+  marka      String   @default("")
+  model      String   @default("")
+  yil        Int?
+  ruhsatSon  String?
+  sigortaSon String?
+  muayeneSon String?
+  aktif      Boolean  @default(true)
+  notlar     String   @default("")
+  createdAt  DateTime @default(now())
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  yakitKayitlari YakitKaydi[]
+
+  @@index([userId])
+}
+
+model YakitKaydi {
+  id          String   @id @default(cuid())
+  userId      String
+  aracId      String
+  tarih       String
+  litre       Float
+  birimFiyat  Float
+  toplamTutar Float
+  kmSayaci    Float    @default(0)
+  istasyon    String   @default("")
+  notlar      String   @default("")
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  arac Arac @relation(fields: [aracId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([aracId])
+}
+
+model Fatura {
+  id          String   @id @default(cuid())
+  userId      String
+  musteriId   String?
+  seferId     String?
+  faturaNo    String
+  tarih       String
+  vadeTarih   String?
+  satirlar    String
+  araToplam   Float
+  kdvToplam   Float
+  genelToplam Float
+  notlar      String   @default("")
+  durum       String   @default("beklemede")
+  createdAt   DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  musteri Musteri? @relation(fields: [musteriId], references: [id])
+  sefer   Sefer?   @relation(fields: [seferId], references: [id])
+
+  @@index([userId])
+}
+
+model Bordro {
+  id              String   @id @default(cuid())
+  personelId      String
+  userId          String
+  ay              String
+  brutMaas        Float
+  fazlaMesaiUcret Float    @default(0)
+  sgkIsci         Float
+  issizlikIsci    Float
+  gelirVergisi    Float
+  damgaVergisi    Float
+  netMaas         Float
+  sgkIsveren      Float
+  toplamMaliyet   Float
+  createdAt       DateTime @default(now())
+
+  personel Personel @relation(fields: [personelId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([personelId, ay])
   @@index([userId])
 }
