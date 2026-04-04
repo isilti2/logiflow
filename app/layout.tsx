@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import 'leaflet/dist/leaflet.css';
 import Footer from '@/components/layout/Footer';
 import ToastContainer from '@/components/ui/Toast';
 import { LanguageProvider } from '@/components/ui/LanguageProvider';

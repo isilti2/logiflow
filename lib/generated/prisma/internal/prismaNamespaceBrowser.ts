@@ -60,7 +60,17 @@ export const ModelName = {
   AppNotification: 'AppNotification',
   OptTemplate: 'OptTemplate',
   PasswordResetToken: 'PasswordResetToken',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Musteri: 'Musteri',
+  Sefer: 'Sefer',
+  MaliIslem: 'MaliIslem',
+  Personel: 'Personel',
+  Puantaj: 'Puantaj',
+  Arac: 'Arac',
+  YakitKaydi: 'YakitKaydi',
+  Fatura: 'Fatura',
+  Bordro: 'Bordro',
+  KonumKaydi: 'KonumKaydi'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -211,6 +221,180 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const MusteriScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ad: 'ad',
+  vergiNo: 'vergiNo',
+  telefon: 'telefon',
+  email: 'email',
+  adres: 'adres',
+  createdAt: 'createdAt'
+} as const
+
+export type MusteriScalarFieldEnum = (typeof MusteriScalarFieldEnum)[keyof typeof MusteriScalarFieldEnum]
+
+
+export const SeferScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  musteriId: 'musteriId',
+  aracPlaka: 'aracPlaka',
+  rotaDan: 'rotaDan',
+  rotaAya: 'rotaAya',
+  mesafeKm: 'mesafeKm',
+  tarih: 'tarih',
+  yukAgirligi: 'yukAgirligi',
+  seferUcreti: 'seferUcreti',
+  yakitMaliyeti: 'yakitMaliyeti',
+  notlar: 'notlar',
+  durum: 'durum',
+  createdAt: 'createdAt'
+} as const
+
+export type SeferScalarFieldEnum = (typeof SeferScalarFieldEnum)[keyof typeof SeferScalarFieldEnum]
+
+
+export const MaliIslemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  seferId: 'seferId',
+  musteriId: 'musteriId',
+  tur: 'tur',
+  kategori: 'kategori',
+  tutar: 'tutar',
+  kdvOrani: 'kdvOrani',
+  aciklama: 'aciklama',
+  tarih: 'tarih',
+  createdAt: 'createdAt'
+} as const
+
+export type MaliIslemScalarFieldEnum = (typeof MaliIslemScalarFieldEnum)[keyof typeof MaliIslemScalarFieldEnum]
+
+
+export const PersonelScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ad: 'ad',
+  unvan: 'unvan',
+  telefon: 'telefon',
+  tcNo: 'tcNo',
+  maas: 'maas',
+  baslangicTarihi: 'baslangicTarihi',
+  aktif: 'aktif',
+  createdAt: 'createdAt'
+} as const
+
+export type PersonelScalarFieldEnum = (typeof PersonelScalarFieldEnum)[keyof typeof PersonelScalarFieldEnum]
+
+
+export const PuantajScalarFieldEnum = {
+  id: 'id',
+  personelId: 'personelId',
+  userId: 'userId',
+  tarih: 'tarih',
+  girisSaati: 'girisSaati',
+  cikisSaati: 'cikisSaati',
+  fazlaMesai: 'fazlaMesai',
+  izinTuru: 'izinTuru',
+  notlar: 'notlar',
+  createdAt: 'createdAt'
+} as const
+
+export type PuantajScalarFieldEnum = (typeof PuantajScalarFieldEnum)[keyof typeof PuantajScalarFieldEnum]
+
+
+export const AracScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  plaka: 'plaka',
+  marka: 'marka',
+  model: 'model',
+  yil: 'yil',
+  ruhsatSon: 'ruhsatSon',
+  sigortaSon: 'sigortaSon',
+  muayeneSon: 'muayeneSon',
+  aktif: 'aktif',
+  notlar: 'notlar',
+  createdAt: 'createdAt'
+} as const
+
+export type AracScalarFieldEnum = (typeof AracScalarFieldEnum)[keyof typeof AracScalarFieldEnum]
+
+
+export const YakitKaydiScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  aracId: 'aracId',
+  tarih: 'tarih',
+  litre: 'litre',
+  birimFiyat: 'birimFiyat',
+  toplamTutar: 'toplamTutar',
+  kmSayaci: 'kmSayaci',
+  istasyon: 'istasyon',
+  notlar: 'notlar',
+  createdAt: 'createdAt'
+} as const
+
+export type YakitKaydiScalarFieldEnum = (typeof YakitKaydiScalarFieldEnum)[keyof typeof YakitKaydiScalarFieldEnum]
+
+
+export const FaturaScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  musteriId: 'musteriId',
+  seferId: 'seferId',
+  faturaNo: 'faturaNo',
+  tarih: 'tarih',
+  vadeTarih: 'vadeTarih',
+  satirlar: 'satirlar',
+  araToplam: 'araToplam',
+  kdvToplam: 'kdvToplam',
+  genelToplam: 'genelToplam',
+  notlar: 'notlar',
+  durum: 'durum',
+  createdAt: 'createdAt'
+} as const
+
+export type FaturaScalarFieldEnum = (typeof FaturaScalarFieldEnum)[keyof typeof FaturaScalarFieldEnum]
+
+
+export const BordroScalarFieldEnum = {
+  id: 'id',
+  personelId: 'personelId',
+  userId: 'userId',
+  ay: 'ay',
+  brutMaas: 'brutMaas',
+  fazlaMesaiUcret: 'fazlaMesaiUcret',
+  sgkIsci: 'sgkIsci',
+  issizlikIsci: 'issizlikIsci',
+  gelirVergisi: 'gelirVergisi',
+  damgaVergisi: 'damgaVergisi',
+  netMaas: 'netMaas',
+  sgkIsveren: 'sgkIsveren',
+  toplamMaliyet: 'toplamMaliyet',
+  createdAt: 'createdAt'
+} as const
+
+export type BordroScalarFieldEnum = (typeof BordroScalarFieldEnum)[keyof typeof BordroScalarFieldEnum]
+
+
+export const KonumKaydiScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  seferId: 'seferId',
+  lat: 'lat',
+  lng: 'lng',
+  accuracy: 'accuracy',
+  hiz: 'hiz',
+  baslik: 'baslik',
+  notlar: 'notlar',
+  createdAt: 'createdAt'
+} as const
+
+export type KonumKaydiScalarFieldEnum = (typeof KonumKaydiScalarFieldEnum)[keyof typeof KonumKaydiScalarFieldEnum]
 
 
 export const SortOrder = {

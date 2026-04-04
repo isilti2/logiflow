@@ -24,7 +24,9 @@
       "Bash(grep -r \"Mock\\\\|mock\\\\|dummy\" /c/Users/Okan/Contacts/yuks/app --include=*.tsx --include=*.ts)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\Okan\\Contacts\\yuks\\app"
+      "c:\\Users\\Okan\\Contacts\\yuks\\app",
+      "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\musteriler",
+      "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\araclar"
     ]
   }
 }

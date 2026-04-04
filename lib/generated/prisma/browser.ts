@@ -67,3 +67,53 @@ export type PasswordResetToken = Prisma.PasswordResetTokenModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Musteri
+ * 
+ */
+export type Musteri = Prisma.MusteriModel
+/**
+ * Model Sefer
+ * 
+ */
+export type Sefer = Prisma.SeferModel
+/**
+ * Model MaliIslem
+ * 
+ */
+export type MaliIslem = Prisma.MaliIslemModel
+/**
+ * Model Personel
+ * 
+ */
+export type Personel = Prisma.PersonelModel
+/**
+ * Model Puantaj
+ * 
+ */
+export type Puantaj = Prisma.PuantajModel
+/**
+ * Model Arac
+ * 
+ */
+export type Arac = Prisma.AracModel
+/**
+ * Model YakitKaydi
+ * 
+ */
+export type YakitKaydi = Prisma.YakitKaydiModel
+/**
+ * Model Fatura
+ * 
+ */
+export type Fatura = Prisma.FaturaModel
+/**
+ * Model Bordro
+ * 
+ */
+export type Bordro = Prisma.BordroModel
+/**
+ * Model KonumKaydi
+ * 
+ */
+export type KonumKaydi = Prisma.KonumKaydiModel

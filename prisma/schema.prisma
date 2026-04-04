@@ -33,6 +33,7 @@ model User {
   yakitKayitlari      YakitKaydi[]
   faturalar           Fatura[]
   bordrolar           Bordro[]
+  konumKayitlari      KonumKaydi[]
 }
 
 model DepotArea {
@@ -203,10 +204,11 @@ model Sefer {
   durum         String   @default("planlandi")
   createdAt     DateTime @default(now())
 
-  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  musteri   Musteri?    @relation(fields: [musteriId], references: [id])
-  islemler  MaliIslem[]
-  faturalar Fatura[]
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  musteri       Musteri?     @relation(fields: [musteriId], references: [id])
+  islemler      MaliIslem[]
+  faturalar     Fatura[]
+  konumKayitlari KonumKaydi[]
 
   @@index([userId])
 }
@@ -355,4 +357,24 @@ model Bordro {
 
   @@unique([personelId, ay])
   @@index([userId])
+}
+
+model KonumKaydi {
+  id        String   @id @default(cuid())
+  userId    String
+  seferId   String?
+  lat       Float
+  lng       Float
+  accuracy  Float    @default(0)
+  hiz       Float    @default(0)
+  baslik    Float?
+  notlar    String   @default("")
+  createdAt DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sefer Sefer? @relation(fields: [seferId], references: [id])
+
+  @@index([userId])
+  @@index([seferId])
+  @@index([createdAt])
 }

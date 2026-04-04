@@ -206,6 +206,16 @@ export type UserWhereInput = {
   notifications?: Prisma.AppNotificationListRelationFilter
   templates?: Prisma.OptTemplateListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  musteriler?: Prisma.MusteriListRelationFilter
+  seferler?: Prisma.SeferListRelationFilter
+  maliIslemler?: Prisma.MaliIslemListRelationFilter
+  personeller?: Prisma.PersonelListRelationFilter
+  puantajlar?: Prisma.PuantajListRelationFilter
+  araclar?: Prisma.AracListRelationFilter
+  yakitKayitlari?: Prisma.YakitKaydiListRelationFilter
+  faturalar?: Prisma.FaturaListRelationFilter
+  bordrolar?: Prisma.BordroListRelationFilter
+  konumKayitlari?: Prisma.KonumKaydiListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -224,6 +234,16 @@ export type UserOrderByWithRelationInput = {
   notifications?: Prisma.AppNotificationOrderByRelationAggregateInput
   templates?: Prisma.OptTemplateOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  musteriler?: Prisma.MusteriOrderByRelationAggregateInput
+  seferler?: Prisma.SeferOrderByRelationAggregateInput
+  maliIslemler?: Prisma.MaliIslemOrderByRelationAggregateInput
+  personeller?: Prisma.PersonelOrderByRelationAggregateInput
+  puantajlar?: Prisma.PuantajOrderByRelationAggregateInput
+  araclar?: Prisma.AracOrderByRelationAggregateInput
+  yakitKayitlari?: Prisma.YakitKaydiOrderByRelationAggregateInput
+  faturalar?: Prisma.FaturaOrderByRelationAggregateInput
+  bordrolar?: Prisma.BordroOrderByRelationAggregateInput
+  konumKayitlari?: Prisma.KonumKaydiOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +265,16 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.AppNotificationListRelationFilter
   templates?: Prisma.OptTemplateListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  musteriler?: Prisma.MusteriListRelationFilter
+  seferler?: Prisma.SeferListRelationFilter
+  maliIslemler?: Prisma.MaliIslemListRelationFilter
+  personeller?: Prisma.PersonelListRelationFilter
+  puantajlar?: Prisma.PuantajListRelationFilter
+  araclar?: Prisma.AracListRelationFilter
+  yakitKayitlari?: Prisma.YakitKaydiListRelationFilter
+  faturalar?: Prisma.FaturaListRelationFilter
+  bordrolar?: Prisma.BordroListRelationFilter
+  konumKayitlari?: Prisma.KonumKaydiListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -289,6 +319,16 @@ export type UserCreateInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -307,6 +347,16 @@ export type UserUncheckedCreateInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -325,6 +375,16 @@ export type UserUpdateInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -343,6 +403,16 @@ export type UserUncheckedUpdateInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -530,6 +600,146 @@ export type UserUpdateOneRequiredWithoutPasswordResetTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetTokensInput, Prisma.UserUpdateWithoutPasswordResetTokensInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
 }
 
+export type UserCreateNestedOneWithoutMusterilerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMusterilerInput, Prisma.UserUncheckedCreateWithoutMusterilerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMusterilerInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMusterilerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMusterilerInput, Prisma.UserUncheckedCreateWithoutMusterilerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMusterilerInput
+  upsert?: Prisma.UserUpsertWithoutMusterilerInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMusterilerInput, Prisma.UserUpdateWithoutMusterilerInput>, Prisma.UserUncheckedUpdateWithoutMusterilerInput>
+}
+
+export type UserCreateNestedOneWithoutSeferlerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSeferlerInput, Prisma.UserUncheckedCreateWithoutSeferlerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeferlerInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSeferlerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSeferlerInput, Prisma.UserUncheckedCreateWithoutSeferlerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSeferlerInput
+  upsert?: Prisma.UserUpsertWithoutSeferlerInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSeferlerInput, Prisma.UserUpdateWithoutSeferlerInput>, Prisma.UserUncheckedUpdateWithoutSeferlerInput>
+}
+
+export type UserCreateNestedOneWithoutMaliIslemlerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMaliIslemlerInput, Prisma.UserUncheckedCreateWithoutMaliIslemlerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMaliIslemlerInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMaliIslemlerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMaliIslemlerInput, Prisma.UserUncheckedCreateWithoutMaliIslemlerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMaliIslemlerInput
+  upsert?: Prisma.UserUpsertWithoutMaliIslemlerInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMaliIslemlerInput, Prisma.UserUpdateWithoutMaliIslemlerInput>, Prisma.UserUncheckedUpdateWithoutMaliIslemlerInput>
+}
+
+export type UserCreateNestedOneWithoutPersonellerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonellerInput, Prisma.UserUncheckedCreateWithoutPersonellerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonellerInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPersonellerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPersonellerInput, Prisma.UserUncheckedCreateWithoutPersonellerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPersonellerInput
+  upsert?: Prisma.UserUpsertWithoutPersonellerInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPersonellerInput, Prisma.UserUpdateWithoutPersonellerInput>, Prisma.UserUncheckedUpdateWithoutPersonellerInput>
+}
+
+export type UserCreateNestedOneWithoutPuantajlarInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPuantajlarInput, Prisma.UserUncheckedCreateWithoutPuantajlarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPuantajlarInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPuantajlarNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPuantajlarInput, Prisma.UserUncheckedCreateWithoutPuantajlarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPuantajlarInput
+  upsert?: Prisma.UserUpsertWithoutPuantajlarInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPuantajlarInput, Prisma.UserUpdateWithoutPuantajlarInput>, Prisma.UserUncheckedUpdateWithoutPuantajlarInput>
+}
+
+export type UserCreateNestedOneWithoutAraclarInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAraclarInput, Prisma.UserUncheckedCreateWithoutAraclarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAraclarInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAraclarNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAraclarInput, Prisma.UserUncheckedCreateWithoutAraclarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAraclarInput
+  upsert?: Prisma.UserUpsertWithoutAraclarInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAraclarInput, Prisma.UserUpdateWithoutAraclarInput>, Prisma.UserUncheckedUpdateWithoutAraclarInput>
+}
+
+export type UserCreateNestedOneWithoutYakitKayitlariInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutYakitKayitlariInput, Prisma.UserUncheckedCreateWithoutYakitKayitlariInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutYakitKayitlariInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutYakitKayitlariNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutYakitKayitlariInput, Prisma.UserUncheckedCreateWithoutYakitKayitlariInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutYakitKayitlariInput
+  upsert?: Prisma.UserUpsertWithoutYakitKayitlariInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutYakitKayitlariInput, Prisma.UserUpdateWithoutYakitKayitlariInput>, Prisma.UserUncheckedUpdateWithoutYakitKayitlariInput>
+}
+
+export type UserCreateNestedOneWithoutFaturalarInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFaturalarInput, Prisma.UserUncheckedCreateWithoutFaturalarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaturalarInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFaturalarNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFaturalarInput, Prisma.UserUncheckedCreateWithoutFaturalarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaturalarInput
+  upsert?: Prisma.UserUpsertWithoutFaturalarInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFaturalarInput, Prisma.UserUpdateWithoutFaturalarInput>, Prisma.UserUncheckedUpdateWithoutFaturalarInput>
+}
+
+export type UserCreateNestedOneWithoutBordrolarInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBordrolarInput, Prisma.UserUncheckedCreateWithoutBordrolarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBordrolarInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBordrolarNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBordrolarInput, Prisma.UserUncheckedCreateWithoutBordrolarInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBordrolarInput
+  upsert?: Prisma.UserUpsertWithoutBordrolarInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBordrolarInput, Prisma.UserUpdateWithoutBordrolarInput>, Prisma.UserUncheckedUpdateWithoutBordrolarInput>
+}
+
+export type UserCreateNestedOneWithoutKonumKayitlariInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutKonumKayitlariInput, Prisma.UserUncheckedCreateWithoutKonumKayitlariInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutKonumKayitlariInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutKonumKayitlariNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutKonumKayitlariInput, Prisma.UserUncheckedCreateWithoutKonumKayitlariInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutKonumKayitlariInput
+  upsert?: Prisma.UserUpsertWithoutKonumKayitlariInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutKonumKayitlariInput, Prisma.UserUpdateWithoutKonumKayitlariInput>, Prisma.UserUncheckedUpdateWithoutKonumKayitlariInput>
+}
+
 export type UserCreateWithoutAreasInput = {
   id?: string
   email: string
@@ -545,6 +755,16 @@ export type UserCreateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAreasInput = {
@@ -562,6 +782,16 @@ export type UserUncheckedCreateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAreasInput = {
@@ -595,6 +825,16 @@ export type UserUpdateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAreasInput = {
@@ -612,6 +852,16 @@ export type UserUncheckedUpdateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCargoInput = {
@@ -629,6 +879,16 @@ export type UserCreateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCargoInput = {
@@ -646,6 +906,16 @@ export type UserUncheckedCreateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCargoInput = {
@@ -679,6 +949,16 @@ export type UserUpdateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCargoInput = {
@@ -696,6 +976,16 @@ export type UserUncheckedUpdateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOptimizationsInput = {
@@ -713,6 +1003,16 @@ export type UserCreateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOptimizationsInput = {
@@ -730,6 +1030,16 @@ export type UserUncheckedCreateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOptimizationsInput = {
@@ -763,6 +1073,16 @@ export type UserUpdateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOptimizationsInput = {
@@ -780,6 +1100,16 @@ export type UserUncheckedUpdateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTeamMembersInput = {
@@ -797,6 +1127,16 @@ export type UserCreateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTeamMembersInput = {
@@ -814,6 +1154,16 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTeamMembersInput = {
@@ -847,6 +1197,16 @@ export type UserUpdateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamMembersInput = {
@@ -864,6 +1224,16 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApiKeysInput = {
@@ -881,6 +1251,16 @@ export type UserCreateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -898,6 +1278,16 @@ export type UserUncheckedCreateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -931,6 +1321,16 @@ export type UserUpdateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -948,6 +1348,16 @@ export type UserUncheckedUpdateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -965,6 +1375,16 @@ export type UserCreateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -982,6 +1402,16 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1015,6 +1445,16 @@ export type UserUpdateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1032,6 +1472,16 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTemplatesInput = {
@@ -1049,6 +1499,16 @@ export type UserCreateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTemplatesInput = {
@@ -1066,6 +1526,16 @@ export type UserUncheckedCreateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTemplatesInput = {
@@ -1099,6 +1569,16 @@ export type UserUpdateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTemplatesInput = {
@@ -1116,6 +1596,16 @@ export type UserUncheckedUpdateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1133,6 +1623,16 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1150,6 +1650,16 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1183,6 +1693,16 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1200,6 +1720,1256 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMusterilerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMusterilerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMusterilerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMusterilerInput, Prisma.UserUncheckedCreateWithoutMusterilerInput>
+}
+
+export type UserUpsertWithoutMusterilerInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMusterilerInput, Prisma.UserUncheckedUpdateWithoutMusterilerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMusterilerInput, Prisma.UserUncheckedCreateWithoutMusterilerInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMusterilerInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMusterilerInput, Prisma.UserUncheckedUpdateWithoutMusterilerInput>
+}
+
+export type UserUpdateWithoutMusterilerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMusterilerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSeferlerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSeferlerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSeferlerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSeferlerInput, Prisma.UserUncheckedCreateWithoutSeferlerInput>
+}
+
+export type UserUpsertWithoutSeferlerInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSeferlerInput, Prisma.UserUncheckedUpdateWithoutSeferlerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSeferlerInput, Prisma.UserUncheckedCreateWithoutSeferlerInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSeferlerInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSeferlerInput, Prisma.UserUncheckedUpdateWithoutSeferlerInput>
+}
+
+export type UserUpdateWithoutSeferlerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSeferlerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMaliIslemlerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMaliIslemlerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMaliIslemlerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMaliIslemlerInput, Prisma.UserUncheckedCreateWithoutMaliIslemlerInput>
+}
+
+export type UserUpsertWithoutMaliIslemlerInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMaliIslemlerInput, Prisma.UserUncheckedUpdateWithoutMaliIslemlerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMaliIslemlerInput, Prisma.UserUncheckedCreateWithoutMaliIslemlerInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMaliIslemlerInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMaliIslemlerInput, Prisma.UserUncheckedUpdateWithoutMaliIslemlerInput>
+}
+
+export type UserUpdateWithoutMaliIslemlerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMaliIslemlerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPersonellerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPersonellerInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPersonellerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPersonellerInput, Prisma.UserUncheckedCreateWithoutPersonellerInput>
+}
+
+export type UserUpsertWithoutPersonellerInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPersonellerInput, Prisma.UserUncheckedUpdateWithoutPersonellerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPersonellerInput, Prisma.UserUncheckedCreateWithoutPersonellerInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPersonellerInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPersonellerInput, Prisma.UserUncheckedUpdateWithoutPersonellerInput>
+}
+
+export type UserUpdateWithoutPersonellerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPersonellerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPuantajlarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPuantajlarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPuantajlarInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPuantajlarInput, Prisma.UserUncheckedCreateWithoutPuantajlarInput>
+}
+
+export type UserUpsertWithoutPuantajlarInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPuantajlarInput, Prisma.UserUncheckedUpdateWithoutPuantajlarInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPuantajlarInput, Prisma.UserUncheckedCreateWithoutPuantajlarInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPuantajlarInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPuantajlarInput, Prisma.UserUncheckedUpdateWithoutPuantajlarInput>
+}
+
+export type UserUpdateWithoutPuantajlarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPuantajlarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAraclarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAraclarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAraclarInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAraclarInput, Prisma.UserUncheckedCreateWithoutAraclarInput>
+}
+
+export type UserUpsertWithoutAraclarInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAraclarInput, Prisma.UserUncheckedUpdateWithoutAraclarInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAraclarInput, Prisma.UserUncheckedCreateWithoutAraclarInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAraclarInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAraclarInput, Prisma.UserUncheckedUpdateWithoutAraclarInput>
+}
+
+export type UserUpdateWithoutAraclarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAraclarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutYakitKayitlariInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutYakitKayitlariInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutYakitKayitlariInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutYakitKayitlariInput, Prisma.UserUncheckedCreateWithoutYakitKayitlariInput>
+}
+
+export type UserUpsertWithoutYakitKayitlariInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutYakitKayitlariInput, Prisma.UserUncheckedUpdateWithoutYakitKayitlariInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutYakitKayitlariInput, Prisma.UserUncheckedCreateWithoutYakitKayitlariInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutYakitKayitlariInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutYakitKayitlariInput, Prisma.UserUncheckedUpdateWithoutYakitKayitlariInput>
+}
+
+export type UserUpdateWithoutYakitKayitlariInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutYakitKayitlariInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFaturalarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFaturalarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFaturalarInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFaturalarInput, Prisma.UserUncheckedCreateWithoutFaturalarInput>
+}
+
+export type UserUpsertWithoutFaturalarInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFaturalarInput, Prisma.UserUncheckedUpdateWithoutFaturalarInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFaturalarInput, Prisma.UserUncheckedCreateWithoutFaturalarInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFaturalarInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFaturalarInput, Prisma.UserUncheckedUpdateWithoutFaturalarInput>
+}
+
+export type UserUpdateWithoutFaturalarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFaturalarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBordrolarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBordrolarInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBordrolarInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBordrolarInput, Prisma.UserUncheckedCreateWithoutBordrolarInput>
+}
+
+export type UserUpsertWithoutBordrolarInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBordrolarInput, Prisma.UserUncheckedUpdateWithoutBordrolarInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBordrolarInput, Prisma.UserUncheckedCreateWithoutBordrolarInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBordrolarInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBordrolarInput, Prisma.UserUncheckedUpdateWithoutBordrolarInput>
+}
+
+export type UserUpdateWithoutBordrolarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBordrolarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutKonumKayitlariInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutKonumKayitlariInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutKonumKayitlariInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutKonumKayitlariInput, Prisma.UserUncheckedCreateWithoutKonumKayitlariInput>
+}
+
+export type UserUpsertWithoutKonumKayitlariInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutKonumKayitlariInput, Prisma.UserUncheckedUpdateWithoutKonumKayitlariInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutKonumKayitlariInput, Prisma.UserUncheckedCreateWithoutKonumKayitlariInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutKonumKayitlariInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutKonumKayitlariInput, Prisma.UserUncheckedUpdateWithoutKonumKayitlariInput>
+}
+
+export type UserUpdateWithoutKonumKayitlariInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutKonumKayitlariInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1216,6 +2986,16 @@ export type UserCountOutputType = {
   notifications: number
   templates: number
   passwordResetTokens: number
+  musteriler: number
+  seferler: number
+  maliIslemler: number
+  personeller: number
+  puantajlar: number
+  araclar: number
+  yakitKayitlari: number
+  faturalar: number
+  bordrolar: number
+  konumKayitlari: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1227,6 +3007,16 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   templates?: boolean | UserCountOutputTypeCountTemplatesArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
+  musteriler?: boolean | UserCountOutputTypeCountMusterilerArgs
+  seferler?: boolean | UserCountOutputTypeCountSeferlerArgs
+  maliIslemler?: boolean | UserCountOutputTypeCountMaliIslemlerArgs
+  personeller?: boolean | UserCountOutputTypeCountPersonellerArgs
+  puantajlar?: boolean | UserCountOutputTypeCountPuantajlarArgs
+  araclar?: boolean | UserCountOutputTypeCountAraclarArgs
+  yakitKayitlari?: boolean | UserCountOutputTypeCountYakitKayitlariArgs
+  faturalar?: boolean | UserCountOutputTypeCountFaturalarArgs
+  bordrolar?: boolean | UserCountOutputTypeCountBordrolarArgs
+  konumKayitlari?: boolean | UserCountOutputTypeCountKonumKayitlariArgs
 }
 
 /**
@@ -1295,6 +3085,76 @@ export type UserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends runt
   where?: Prisma.PasswordResetTokenWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMusterilerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MusteriWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSeferlerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SeferWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMaliIslemlerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MaliIslemWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPersonellerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PersonelWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPuantajlarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PuantajWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAraclarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AracWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountYakitKayitlariArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.YakitKaydiWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFaturalarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FaturaWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBordrolarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BordroWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountKonumKayitlariArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.KonumKaydiWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1312,6 +3172,16 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   templates?: boolean | Prisma.User$templatesArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  musteriler?: boolean | Prisma.User$musterilerArgs<ExtArgs>
+  seferler?: boolean | Prisma.User$seferlerArgs<ExtArgs>
+  maliIslemler?: boolean | Prisma.User$maliIslemlerArgs<ExtArgs>
+  personeller?: boolean | Prisma.User$personellerArgs<ExtArgs>
+  puantajlar?: boolean | Prisma.User$puantajlarArgs<ExtArgs>
+  araclar?: boolean | Prisma.User$araclarArgs<ExtArgs>
+  yakitKayitlari?: boolean | Prisma.User$yakitKayitlariArgs<ExtArgs>
+  faturalar?: boolean | Prisma.User$faturalarArgs<ExtArgs>
+  bordrolar?: boolean | Prisma.User$bordrolarArgs<ExtArgs>
+  konumKayitlari?: boolean | Prisma.User$konumKayitlariArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1355,6 +3225,16 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   templates?: boolean | Prisma.User$templatesArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  musteriler?: boolean | Prisma.User$musterilerArgs<ExtArgs>
+  seferler?: boolean | Prisma.User$seferlerArgs<ExtArgs>
+  maliIslemler?: boolean | Prisma.User$maliIslemlerArgs<ExtArgs>
+  personeller?: boolean | Prisma.User$personellerArgs<ExtArgs>
+  puantajlar?: boolean | Prisma.User$puantajlarArgs<ExtArgs>
+  araclar?: boolean | Prisma.User$araclarArgs<ExtArgs>
+  yakitKayitlari?: boolean | Prisma.User$yakitKayitlariArgs<ExtArgs>
+  faturalar?: boolean | Prisma.User$faturalarArgs<ExtArgs>
+  bordrolar?: boolean | Prisma.User$bordrolarArgs<ExtArgs>
+  konumKayitlari?: boolean | Prisma.User$konumKayitlariArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1371,6 +3251,16 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notifications: Prisma.$AppNotificationPayload<ExtArgs>[]
     templates: Prisma.$OptTemplatePayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    musteriler: Prisma.$MusteriPayload<ExtArgs>[]
+    seferler: Prisma.$SeferPayload<ExtArgs>[]
+    maliIslemler: Prisma.$MaliIslemPayload<ExtArgs>[]
+    personeller: Prisma.$PersonelPayload<ExtArgs>[]
+    puantajlar: Prisma.$PuantajPayload<ExtArgs>[]
+    araclar: Prisma.$AracPayload<ExtArgs>[]
+    yakitKayitlari: Prisma.$YakitKaydiPayload<ExtArgs>[]
+    faturalar: Prisma.$FaturaPayload<ExtArgs>[]
+    bordrolar: Prisma.$BordroPayload<ExtArgs>[]
+    konumKayitlari: Prisma.$KonumKaydiPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1782,6 +3672,16 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   templates<T extends Prisma.User$templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OptTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  musteriler<T extends Prisma.User$musterilerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$musterilerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MusteriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  seferler<T extends Prisma.User$seferlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seferlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  maliIslemler<T extends Prisma.User$maliIslemlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$maliIslemlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaliIslemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  personeller<T extends Prisma.User$personellerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$personellerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  puantajlar<T extends Prisma.User$puantajlarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$puantajlarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PuantajPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  araclar<T extends Prisma.User$araclarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$araclarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AracPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  yakitKayitlari<T extends Prisma.User$yakitKayitlariArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$yakitKayitlariArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$YakitKaydiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  faturalar<T extends Prisma.User$faturalarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$faturalarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FaturaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bordrolar<T extends Prisma.User$bordrolarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bordrolarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BordroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  konumKayitlari<T extends Prisma.User$konumKayitlariArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$konumKayitlariArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$KonumKaydiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2400,6 +4300,246 @@ export type User$passwordResetTokensArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.musteriler
+ */
+export type User$musterilerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Musteri
+   */
+  select?: Prisma.MusteriSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Musteri
+   */
+  omit?: Prisma.MusteriOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MusteriInclude<ExtArgs> | null
+  where?: Prisma.MusteriWhereInput
+  orderBy?: Prisma.MusteriOrderByWithRelationInput | Prisma.MusteriOrderByWithRelationInput[]
+  cursor?: Prisma.MusteriWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MusteriScalarFieldEnum | Prisma.MusteriScalarFieldEnum[]
+}
+
+/**
+ * User.seferler
+ */
+export type User$seferlerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sefer
+   */
+  select?: Prisma.SeferSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sefer
+   */
+  omit?: Prisma.SeferOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SeferInclude<ExtArgs> | null
+  where?: Prisma.SeferWhereInput
+  orderBy?: Prisma.SeferOrderByWithRelationInput | Prisma.SeferOrderByWithRelationInput[]
+  cursor?: Prisma.SeferWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SeferScalarFieldEnum | Prisma.SeferScalarFieldEnum[]
+}
+
+/**
+ * User.maliIslemler
+ */
+export type User$maliIslemlerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MaliIslem
+   */
+  select?: Prisma.MaliIslemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MaliIslem
+   */
+  omit?: Prisma.MaliIslemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MaliIslemInclude<ExtArgs> | null
+  where?: Prisma.MaliIslemWhereInput
+  orderBy?: Prisma.MaliIslemOrderByWithRelationInput | Prisma.MaliIslemOrderByWithRelationInput[]
+  cursor?: Prisma.MaliIslemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MaliIslemScalarFieldEnum | Prisma.MaliIslemScalarFieldEnum[]
+}
+
+/**
+ * User.personeller
+ */
+export type User$personellerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Personel
+   */
+  select?: Prisma.PersonelSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Personel
+   */
+  omit?: Prisma.PersonelOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PersonelInclude<ExtArgs> | null
+  where?: Prisma.PersonelWhereInput
+  orderBy?: Prisma.PersonelOrderByWithRelationInput | Prisma.PersonelOrderByWithRelationInput[]
+  cursor?: Prisma.PersonelWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PersonelScalarFieldEnum | Prisma.PersonelScalarFieldEnum[]
+}
+
+/**
+ * User.puantajlar
+ */
+export type User$puantajlarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Puantaj
+   */
+  select?: Prisma.PuantajSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Puantaj
+   */
+  omit?: Prisma.PuantajOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PuantajInclude<ExtArgs> | null
+  where?: Prisma.PuantajWhereInput
+  orderBy?: Prisma.PuantajOrderByWithRelationInput | Prisma.PuantajOrderByWithRelationInput[]
+  cursor?: Prisma.PuantajWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PuantajScalarFieldEnum | Prisma.PuantajScalarFieldEnum[]
+}
+
+/**
+ * User.araclar
+ */
+export type User$araclarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Arac
+   */
+  select?: Prisma.AracSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Arac
+   */
+  omit?: Prisma.AracOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AracInclude<ExtArgs> | null
+  where?: Prisma.AracWhereInput
+  orderBy?: Prisma.AracOrderByWithRelationInput | Prisma.AracOrderByWithRelationInput[]
+  cursor?: Prisma.AracWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AracScalarFieldEnum | Prisma.AracScalarFieldEnum[]
+}
+
+/**
+ * User.yakitKayitlari
+ */
+export type User$yakitKayitlariArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the YakitKaydi
+   */
+  select?: Prisma.YakitKaydiSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the YakitKaydi
+   */
+  omit?: Prisma.YakitKaydiOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.YakitKaydiInclude<ExtArgs> | null
+  where?: Prisma.YakitKaydiWhereInput
+  orderBy?: Prisma.YakitKaydiOrderByWithRelationInput | Prisma.YakitKaydiOrderByWithRelationInput[]
+  cursor?: Prisma.YakitKaydiWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.YakitKaydiScalarFieldEnum | Prisma.YakitKaydiScalarFieldEnum[]
+}
+
+/**
+ * User.faturalar
+ */
+export type User$faturalarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Fatura
+   */
+  select?: Prisma.FaturaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Fatura
+   */
+  omit?: Prisma.FaturaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FaturaInclude<ExtArgs> | null
+  where?: Prisma.FaturaWhereInput
+  orderBy?: Prisma.FaturaOrderByWithRelationInput | Prisma.FaturaOrderByWithRelationInput[]
+  cursor?: Prisma.FaturaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FaturaScalarFieldEnum | Prisma.FaturaScalarFieldEnum[]
+}
+
+/**
+ * User.bordrolar
+ */
+export type User$bordrolarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Bordro
+   */
+  select?: Prisma.BordroSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Bordro
+   */
+  omit?: Prisma.BordroOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BordroInclude<ExtArgs> | null
+  where?: Prisma.BordroWhereInput
+  orderBy?: Prisma.BordroOrderByWithRelationInput | Prisma.BordroOrderByWithRelationInput[]
+  cursor?: Prisma.BordroWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BordroScalarFieldEnum | Prisma.BordroScalarFieldEnum[]
+}
+
+/**
+ * User.konumKayitlari
+ */
+export type User$konumKayitlariArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the KonumKaydi
+   */
+  select?: Prisma.KonumKaydiSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the KonumKaydi
+   */
+  omit?: Prisma.KonumKaydiOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KonumKaydiInclude<ExtArgs> | null
+  where?: Prisma.KonumKaydiWhereInput
+  orderBy?: Prisma.KonumKaydiOrderByWithRelationInput | Prisma.KonumKaydiOrderByWithRelationInput[]
+  cursor?: Prisma.KonumKaydiWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.KonumKaydiScalarFieldEnum | Prisma.KonumKaydiScalarFieldEnum[]
 }
 
 /**

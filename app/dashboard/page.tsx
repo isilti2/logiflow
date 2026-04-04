@@ -7,7 +7,7 @@ import { logout } from '@/lib/auth';
 import {
   Package, BarChart3, Building2, Share2,
   LogOut, TrendingUp, Truck, Clock, ChevronRight, Shield,
-  Zap, Box, Calculator,
+  Zap, Box, Calculator, Navigation,
 } from 'lucide-react';
 import OnboardingWizard from '@/components/ui/OnboardingWizard';
 import NotificationBell from '@/components/ui/NotificationBell';
@@ -58,6 +58,15 @@ const APP_FEATURES = [
     color: 'green',
     badge: 'Yeni',
   },
+  {
+    id: 'konum',
+    title: 'Canlı Konum Takibi',
+    description: 'Şoförler telefonda konum paylaşır, harita üzerinde anlık takip.',
+    icon: Navigation,
+    href: '/konum',
+    color: 'teal',
+    badge: 'Yeni',
+  },
 ];
 
 interface OptRecord {
@@ -83,6 +92,7 @@ const COLOR_MAP: Record<string, string> = {
   indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 hover:border-indigo-300 hover:shadow-indigo-50',
   sky:   'bg-sky-50 text-sky-600 border-sky-100 hover:border-sky-300 hover:shadow-sky-50',
   green: 'bg-green-50 text-green-600 border-green-100 hover:border-green-300 hover:shadow-green-50',
+  teal:  'bg-teal-50 text-teal-600 border-teal-100 hover:border-teal-300 hover:shadow-teal-50',
 };
 
 export default function DashboardPage() {
