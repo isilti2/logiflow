@@ -14,6 +14,7 @@ import {
   ClipboardList, Calculator,
 } from 'lucide-react';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 /* ─── Types ─────────────────────────────────────────────────── */
 type Musteri   = { id: string; ad: string; vergiNo: string; telefon: string; email: string; adres: string; bakiye: number; createdAt: string };
