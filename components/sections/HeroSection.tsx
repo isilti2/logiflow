@@ -3,6 +3,48 @@ import { FEATURES } from '@/lib/constants';
 
 const FEATURE_ICONS = ['📦', '📊', '🗄️', '🔗'];
 
+const PLATFORM_MODULLERI = [
+  {
+    href: '/muhasebe',
+    icon: '📒',
+    badge: 'Yeni',
+    badgeColor: 'bg-green-500',
+    title: 'Lojistik Muhasebe',
+    desc: 'Sefer takibi, gelir/gider yönetimi, cari hesap, fatura kesme, personel bordrosu ve araç filosu — tüm mali operasyonlar tek ekranda.',
+    stat: '7 modül',
+    statLabel: 'entegre',
+    color: 'from-green-500 to-emerald-600',
+    bg: 'bg-green-50 hover:bg-green-100/60',
+    border: 'border-green-100 hover:border-green-300',
+  },
+  {
+    href: '/konum',
+    icon: '📍',
+    badge: 'Canlı',
+    badgeColor: 'bg-blue-500',
+    title: 'Canlı Konum Takibi',
+    desc: 'Filodaki tüm araçları gerçek zamanlı haritada izleyin. Şoför hızı, GPS doğruluğu ve sefer bazlı rota geçmişi otomatik güncellenir.',
+    stat: '20 sn',
+    statLabel: 'yenileme',
+    color: 'from-blue-500 to-blue-700',
+    bg: 'bg-blue-50 hover:bg-blue-100/60',
+    border: 'border-blue-100 hover:border-blue-300',
+  },
+  {
+    href: '/sofor',
+    icon: '🚛',
+    badge: 'Mobil',
+    badgeColor: 'bg-indigo-500',
+    title: 'Şoför Paneli',
+    desc: 'Şoförler telefon tarayıcısından sefer başlatır, konum paylaşımı arka planda çalışmaya devam eder. WakeLock ile ekran uyanık kalır.',
+    stat: 'GPS',
+    statLabel: 'watchPosition',
+    color: 'from-indigo-500 to-purple-600',
+    bg: 'bg-indigo-50 hover:bg-indigo-100/60',
+    border: 'border-indigo-100 hover:border-indigo-300',
+  },
+];
+
 export default function HeroSection() {
   return (
     <>
@@ -118,6 +160,65 @@ export default function HeroSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Platform Modülleri (yeni) ── */}
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 text-green-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              Yeni Modüller
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+              Operasyonunuzun tamamı,{' '}
+              <span className="text-blue-600">tek platformda</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto text-sm leading-relaxed">
+              Kargo optimizasyonunun ötesinde — lojistik muhasebe, gerçek zamanlı filo takibi
+              ve mobil şoför uygulaması artık LogiFlow&apos;da.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {PLATFORM_MODULLERI.map((m) => (
+              <Link
+                key={m.href}
+                href={m.href}
+                className={`group flex flex-col gap-5 p-7 rounded-2xl border transition-all duration-200 shadow-sm hover:shadow-md ${m.bg} ${m.border}`}
+              >
+                <div className="flex items-start justify-between">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${m.color} flex items-center justify-center text-3xl shadow-sm`}>
+                    {m.icon}
+                  </div>
+                  <span className={`text-xs font-bold text-white px-2.5 py-1 rounded-full ${m.badgeColor}`}>
+                    {m.badge}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-gray-900 mb-2 group-hover:text-blue-700 transition-colors">
+                    {m.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-3">
+                    {m.desc}
+                  </p>
+                </div>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-black/5">
+                  <div>
+                    <p className="text-lg font-black text-gray-800">{m.stat}</p>
+                    <p className="text-xs text-gray-400">{m.statLabel}</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs font-semibold text-blue-600 group-hover:gap-2 transition-all">
+                    Uygulamayı Aç
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

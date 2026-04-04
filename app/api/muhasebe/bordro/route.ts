@@ -28,7 +28,7 @@ function hesaplaBordro(brutMaas: number, fazlaMesaiUcret: number) {
   // Damga vergisi: %0.759
   const damgaVergisi = toplamBrut * 0.00759;
 
-  const netMaas = toplamBrut - sgkIsci - issizlikIsci - gelirVergisi - damgaVergisi;
+  const netMaas = Math.max(0, toplamBrut - sgkIsci - issizlikIsci - gelirVergisi - damgaVergisi);
 
   // SGK işveren payı: %15.5 + %2 işsizlik = %17.5
   const sgkIsveren   = toplamBrut * 0.155;

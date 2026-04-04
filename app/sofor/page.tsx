@@ -42,6 +42,10 @@ export default function SoforPage() {
   const sonGonderilen = useRef<{ lat: number; lng: number } | null>(null);
   const sonGonderZaman = useRef<number>(0);
   const wakeLockRef   = useRef<WakeLockSentinel | null>(null);
+  const seciliSeferRef = useRef(seciliSefer);
+
+  // seciliSefer değişince ref'i güncelle — stale closure koruması
+  useEffect(() => { seciliSeferRef.current = seciliSefer; }, [seciliSefer]);
 
   /* ── Auth + sefer yükle ── */
   useEffect(() => {
@@ -88,13 +92,13 @@ export default function SoforPage() {
       await fetch('/api/konum', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ seferId: seciliSefer || null, lat, lng, accuracy, hiz, baslik }),
+        body: JSON.stringify({ seferId: seciliSeferRef.current || null, lat, lng, accuracy, hiz, baslik }),
       });
       setGonderilen(n => n + 1);
       sonGonderilen.current = { lat, lng };
       sonGonderZaman.current = Date.now();
     } catch { /* ağ hatası, sessizce geç */ }
-  }, [seciliSefer]);
+  }, []);
 
   /* ── watchPosition callback ── */
   const konumAlındı = useCallback((pos: GeolocationPosition) => {

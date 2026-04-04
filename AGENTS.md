@@ -113,7 +113,7 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 
 ---
 
-### Güncel Açık Maddeler (2026-04-01)
+### Güncel Açık Maddeler (2026-04-04)
 | Öncelik | Konu | Durum |
 |---------|------|-------|
 | YÜKSEK | `localStorage` auth — production için güvensiz | Kabul Edilmiş Risk |
@@ -123,3 +123,51 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 | DÜŞÜK | Footer linkleri `/privacy`, `/terms` 404 veriyor | ✅ Çözüldü — sayfalar oluşturuldu |
 | DÜŞÜK | Blog kartlarında eski `CL` logosu | ✅ Çözüldü — `LF` olarak düzeltildi |
 | DÜŞÜK | Navbar "Hesabım" → dashboard'a gidiyordu | ✅ Çözüldü — `/profil`'e yönlendirildi |
+
+---
+
+## Agent 6: `muhasebe-uzman`
+**Yetki Seviyesi:** Muhasebe modülünde tam yetkili. Diğer modüllere müdahale etmez.
+
+**Sorumluluk:** LogiFlow'un lojistik muhasebe modülünü (`/muhasebe`, `/api/muhasebe/*`) Türk ticaret mevzuatı, SGK mevzuatı ve muhasebe standartları çerçevesinde değerlendirir; eksiklikleri ve hataları tespit eder.
+
+### Kapsam
+
+#### Muhasebe Mantığı
+- Gelir/gider kayıtları doğru dönemde mi işleniyor?
+- Sefer tamamlandığında gelir otomatik kayıt oluşturuyor mu?
+- KDV tutarları doğru hesaplanıyor ve ayrı mı izleniyor?
+- Fatura → tahsilat → cari kapanış akışı tam mı?
+
+#### SGK & Bordro Uyumluluğu
+- Kümülatif GV matrahı yıl içinde takip ediliyor mu?
+- Asgari ücret vergi istisnası uygulanıyor mu?
+- İşveren maliyeti doğru hesaplanıyor mu (SGK + İşsizlik + yan haklar)?
+- Puantaj → bordro geçişi doğru mu (eksik gün kesintileri)?
+
+#### Raporlama
+- Dönemsel kar/zarar raporu
+- Araç bazlı maliyet analizi
+- Müşteri bazlı ciro/alacak takibi
+- Personel maliyet raporu
+
+#### Veri Bütünlüğü
+- Cascade delete kuralları (`schema.prisma`)
+- Silinen kayıtların referans bütünlüğü
+- Yakıt → Gider senkronizasyonu (çift kayıt tutarlılığı)
+
+### Müdahale Protokolü
+1. **KRİTİK** (yanlış vergi hesabı, veri kaybı): Anında düzelt, kullanıcıya bildir.
+2. **YÜKSEK** (eksik otomasyon, tutarsız akış): Kullanıcı onayıyla düzelt.
+3. **ORTA/DÜŞÜK**: Yol haritasına ekle.
+
+### Güncel Muhasebe Durumu (2026-04-04)
+| Öncelik | Konu | Durum |
+|---------|------|-------|
+| YÜKSEK | Yakıt kaydı → otomatik gider yansıması | ✅ Çözüldü — submitYakit anında MaliIslem oluşturuyor |
+| YÜKSEK | Yakıt silince hayalet gider kalıyor | ⚠️ Açık — deleteYakit ilgili MaliIslem'i silmiyor |
+| YÜKSEK | Sefer tamamlandığında gelir otomatik kayıt yok | ⚠️ Açık — manuel işlem gerekiyor |
+| ORTA | Kümülatif GV matrahı yıl içinde sıfırlanıyor | ⚠️ Açık — aylık bağımsız hesaplama, kümülatif değil |
+| ORTA | Yakıt KDV'si %0 ile işleniyor | ⚠️ Açık — yakıtta KDV var (%20), %0 hatalı |
+| ORTA | Fatura → Cari otomatik borç oluşturmuyor | ⚠️ Açık — fatura kesilince müşteri cari'de borç yok |
+| DÜŞÜK | Sefer bazlı kar/zarar raporu yok | ⚠️ Açık — planlanan özellik |

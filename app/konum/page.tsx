@@ -230,7 +230,7 @@ export default function KonumPage() {
           {/* Harita */}
           <div className="lg:col-span-3 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden" style={{ minHeight: '480px' }}>
             <RouteMap
-              canliSoforler={rota.length === 0 ? canliSoforler : []}
+              canliSoforler={canliSoforler}
               rota={rota}
             />
           </div>

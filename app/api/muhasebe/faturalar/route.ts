@@ -26,10 +26,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Zorunlu alanlar eksik' }, { status: 400 });
   }
 
-  // Fatura no: F-YYYY-NNN
-  const count = await db.fatura.count({ where: { userId: s.userId } });
+  // Fatura no: F-YYYY-NNN — son fatura üzerinden üret (race condition'dan korunmak için count yerine max)
   const year = new Date().getFullYear();
-  const faturaNo = `F-${year}-${String(count + 1).padStart(3, '0')}`;
+  const lastFatura = await db.fatura.findFirst({
+    where: { userId: s.userId, faturaNo: { startsWith: `F-${year}-` } },
+    orderBy: { faturaNo: 'desc' },
+    select: { faturaNo: true },
+  });
+  const lastNum = lastFatura ? parseInt(lastFatura.faturaNo.split('-')[2] ?? '0', 10) : 0;
+  const faturaNo = `F-${year}-${String(lastNum + 1).padStart(3, '0')}`;
 
   type Satir = { aciklama: string; miktar: number; birimFiyat: number; kdvOrani: number };
   const satirDizi: Satir[] = satirlar;
