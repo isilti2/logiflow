@@ -9,13 +9,15 @@ import {
   ChevronRight, MapPin, Clock, Gauge, Users,
   Radio,
 } from 'lucide-react';
+import { Spinner } from '@/components/ui/Spinner';
+import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { logout } from '@/lib/auth';
 
 const RouteMap = dynamic(() => import('@/components/map/RouteMap'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-2xl">
-      <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      <Spinner size="md" />
     </div>
   ),
 });
@@ -41,14 +43,20 @@ export default function KonumPage() {
   const [rota,         setRota]         = useState<RotaNokta[]>([]);
   const [sonYenileme,  setSonYenileme]  = useState('');
   const [yukluyor,     setYukluyor]     = useState(false);
+  const [netError,     setNetError]     = useState('');
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const canliYukle = useCallback(async () => {
     setYukluyor(true);
-    const res = await fetch('/api/konum/canli');
-    if (res.ok) setCanliSoforler(await res.json());
-    setSonYenileme(new Date().toLocaleTimeString('tr-TR'));
-    setYukluyor(false);
+    try {
+      const res = await fetch('/api/konum/canli');
+      if (res.ok) setCanliSoforler(await res.json());
+      setSonYenileme(new Date().toLocaleTimeString('tr-TR'));
+    } catch {
+      setNetError('Konum verisi alınamadı. Bağlantınızı kontrol edin.');
+    } finally {
+      setYukluyor(false);
+    }
   }, []);
 
   const rotaYukle = useCallback(async (seferId: string) => {
@@ -80,7 +88,7 @@ export default function KonumPage() {
 
   if (!authed) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      <Spinner size="lg" />
     </div>
   );
 
@@ -111,19 +119,25 @@ export default function KonumPage() {
           </div>
           <div className="flex items-center gap-2">
             <button onClick={canliYukle} disabled={yukluyor}
-              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 border border-gray-200 px-3 py-2 rounded-xl transition-colors">
-              <RefreshCw className={`w-4 h-4 ${yukluyor ? 'animate-spin' : ''}`} /> Yenile
+              aria-label="Konumları yenile"
+              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 border border-gray-200 px-3 py-2 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <RefreshCw className={`w-4 h-4 ${yukluyor ? 'animate-spin' : ''}`} aria-hidden="true" /> Yenile
             </button>
             <Link href="/dashboard" className="text-sm text-gray-500 hover:text-blue-600 px-3 py-1.5 rounded-lg transition-colors hidden sm:block">← Dashboard</Link>
             <button onClick={async () => { await logout(); window.location.href = '/'; }}
+              aria-label="Çıkış yap"
               className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 border border-gray-200 px-3 py-2 rounded-xl transition-colors">
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
       </header>
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 flex-1 flex flex-col gap-6">
+
+        {netError && (
+          <ErrorAlert message={netError} onDismiss={() => setNetError('')} />
+        )}
 
         {/* Üst stat bar */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

@@ -13,6 +13,7 @@ import {
   FileText, Printer, AlertTriangle, ShieldCheck,
   ClipboardList, Calculator,
 } from 'lucide-react';
+import { ErrorAlert } from '@/components/ui/ErrorAlert';
 
 /* ─── Types ─────────────────────────────────────────────────── */
 type Musteri   = { id: string; ad: string; vergiNo: string; telefon: string; email: string; adres: string; bakiye: number; createdAt: string };
@@ -175,6 +176,7 @@ export default function MuhasebePage() {
   const router = useRouter();
   const [authed, setAuthed]     = useState<boolean | null>(null);
   const [tab, setTab]           = useState<Tab>('genel');
+  const [netError, setNetError] = useState('');
 
   // Core data
   const [musteriler,  setMusteriler]  = useState<Musteri[]>([]);
@@ -272,11 +274,17 @@ export default function MuhasebePage() {
   }, [bordroAy]);
 
   useEffect(() => {
-    fetch('/api/auth/me').then(async (r) => {
-      if (r.status === 401) { router.replace('/login'); return; }
-      setAuthed(true);
-      await loadAll();
-    });
+    fetch('/api/auth/me')
+      .then(async (r) => {
+        if (r.status === 401) { router.replace('/login'); return; }
+        setAuthed(true);
+        try {
+          await loadAll();
+        } catch {
+          setNetError('Veriler yüklenemedi. Lütfen sayfayı yenileyin.');
+        }
+      })
+      .catch(() => setNetError('Sunucuya bağlanılamadı.'));
   }, [router, loadAll]);
 
   useEffect(() => { if (authed && tab === 'personel') { loadPuantaj(); loadBordro(); } }, [authed, tab, puantajAy, selPersonel, bordroAy, loadPuantaj, loadBordro]);
@@ -450,7 +458,7 @@ export default function MuhasebePage() {
 
   if (!authed) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" role="status" aria-label="Yükleniyor" />
     </div>
   );
 
@@ -506,6 +514,10 @@ export default function MuhasebePage() {
       </div>
 
       <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6 flex-1 space-y-6">
+
+        {netError && (
+          <ErrorAlert message={netError} onDismiss={() => setNetError('')} />
+        )}
 
         {/* ════════════════════════════════════════════════════════
             GENEL BAKIŞ

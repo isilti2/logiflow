@@ -252,25 +252,27 @@ export default function SoforPage() {
         {durum === 'bekliyor' || durum === 'durduruldu' ? (
           <button
             onClick={baslat}
+            aria-label="Yolculuğu başlat ve konum takibini aktif et"
             className="w-full bg-green-500 hover:bg-green-400 active:bg-green-600 text-white font-black text-xl py-6 rounded-3xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-green-900/50 select-none"
           >
-            <Play className="w-8 h-8" />
+            <Play className="w-8 h-8" aria-hidden="true" />
             Yolculuğu Başlat
           </button>
         ) : durum === 'aktif' ? (
           <button
             onClick={durdur}
+            aria-label="Yolculuğu bitir ve konum takibini durdur"
             className="w-full bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-black text-xl py-6 rounded-3xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-red-900/50 select-none"
           >
-            <Square className="w-7 h-7 fill-white" />
+            <Square className="w-7 h-7 fill-white" aria-hidden="true" />
             Yolculuğu Bitir
           </button>
         ) : null}
 
         {/* Hata */}
         {hata && (
-          <div className="bg-red-900/40 border border-red-700/50 rounded-2xl p-4 flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+          <div role="alert" className="bg-red-900/40 border border-red-700/50 rounded-2xl p-4 flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <p className="text-sm font-bold text-red-300 mb-1">Konum Hatası</p>
               <p className="text-xs text-red-400">{hata}</p>

@@ -9,6 +9,7 @@ import {
   LogOut, TrendingUp, Truck, Clock, ChevronRight, Shield,
   Zap, Box, Calculator, Navigation,
 } from 'lucide-react';
+import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import OnboardingWizard from '@/components/ui/OnboardingWizard';
 import NotificationBell from '@/components/ui/NotificationBell';
 
@@ -109,6 +110,7 @@ export default function DashboardPage() {
   const [lastOpt, setLastOpt]       = useState<OptRecord | null>(null);
   const [areaInfos, setAreaInfos]   = useState<AreaInfo[]>([]);
   const [loading, setLoading]       = useState(true);
+  const [netError, setNetError]     = useState('');
 
   useEffect(() => {
     async function load() {
@@ -148,7 +150,7 @@ export default function DashboardPage() {
         });
         setAreaInfos(infos);
       } catch {
-        // network error — show empty state
+        setNetError('Sunucuya bağlanılamadı. Lütfen sayfayı yenileyin.');
       } finally {
         setLoading(false);
       }
@@ -210,6 +212,11 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {netError && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+          <ErrorAlert message={netError} onDismiss={() => setNetError('')} />
+        </div>
+      )}
       <OnboardingWizard />
 
       {/* App topbar */}

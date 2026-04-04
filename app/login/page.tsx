@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Zap, Shield, BarChart3 } from 'lucide-react';
+import { ErrorAlert } from '@/components/ui/ErrorAlert';
+import { Spinner } from '@/components/ui/Spinner';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -166,10 +168,7 @@ export default function LoginPage() {
 
             {/* Error */}
             {error && (
-              <div role="alert" className="text-xs text-red-600 bg-red-50 border border-red-100 px-3 py-2.5 rounded-xl flex items-start gap-2">
-                <span className="shrink-0 mt-0.5">⚠️</span>
-                {error}
-              </div>
+              <ErrorAlert message={error} onDismiss={() => setError('')} />
             )}
 
             {/* Submit */}
@@ -179,7 +178,7 @@ export default function LoginPage() {
               className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-2.5 rounded-xl transition-all text-sm shadow-sm shadow-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               {loading ? (
-                <><div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" aria-hidden="true" /> Giriş yapılıyor…</>
+                <><Spinner size="sm" className="border-white/30 border-t-white" /> Giriş yapılıyor…</>
               ) : 'Giriş Yap'}
             </button>
           </form>
