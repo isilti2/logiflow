@@ -41,6 +41,8 @@ export async function POST(req: Request) {
   const araToplam = satirDizi.reduce((s: number, r: Satir) => s + r.miktar * r.birimFiyat, 0);
   const kdvToplam = satirDizi.reduce((s: number, r: Satir) => s + r.miktar * r.birimFiyat * (r.kdvOrani / 100), 0);
 
+  const genelToplam = araToplam + kdvToplam;
+
   const row = await db.fatura.create({
     data: {
       userId: s.userId,
@@ -52,7 +54,7 @@ export async function POST(req: Request) {
       satirlar: JSON.stringify(satirlar),
       araToplam,
       kdvToplam,
-      genelToplam: araToplam + kdvToplam,
+      genelToplam,
       notlar: notlar ?? '',
       durum: durum ?? 'beklemede',
     },
@@ -61,5 +63,14 @@ export async function POST(req: Request) {
       sefer:   { select: { id: true, rotaDan: true, rotaAya: true, aracPlaka: true } },
     },
   });
+
+  // Müşteriye bağlı fatura ise bakiyeyi artır (borçlandır)
+  if (musteriId) {
+    await db.musteri.update({
+      where: { id: musteriId },
+      data: { bakiye: { increment: genelToplam } },
+    });
+  }
+
   return NextResponse.json(row, { status: 201 });
 }

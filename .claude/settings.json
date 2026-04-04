@@ -26,7 +26,9 @@
     "additionalDirectories": [
       "c:\\Users\\Okan\\Contacts\\yuks\\app",
       "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\musteriler",
-      "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\araclar"
+      "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\araclar",
+      "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\tahsilat",
+      "c:\\Users\\Okan\\Contacts\\yuks\\app\\api\\muhasebe\\faturalar\\[id]"
     ]
   }
 }

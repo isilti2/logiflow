@@ -70,6 +70,7 @@ export const ModelName = {
   YakitKaydi: 'YakitKaydi',
   Fatura: 'Fatura',
   Bordro: 'Bordro',
+  Tahsilat: 'Tahsilat',
   KonumKaydi: 'KonumKaydi'
 } as const
 
@@ -231,6 +232,7 @@ export const MusteriScalarFieldEnum = {
   telefon: 'telefon',
   email: 'email',
   adres: 'adres',
+  bakiye: 'bakiye',
   createdAt: 'createdAt'
 } as const
 
@@ -375,10 +377,25 @@ export const BordroScalarFieldEnum = {
   netMaas: 'netMaas',
   sgkIsveren: 'sgkIsveren',
   toplamMaliyet: 'toplamMaliyet',
+  gvKumulatif: 'gvKumulatif',
   createdAt: 'createdAt'
 } as const
 
 export type BordroScalarFieldEnum = (typeof BordroScalarFieldEnum)[keyof typeof BordroScalarFieldEnum]
+
+
+export const TahsilatScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  musteriId: 'musteriId',
+  faturaId: 'faturaId',
+  tutar: 'tutar',
+  tarih: 'tarih',
+  notlar: 'notlar',
+  createdAt: 'createdAt'
+} as const
+
+export type TahsilatScalarFieldEnum = (typeof TahsilatScalarFieldEnum)[keyof typeof TahsilatScalarFieldEnum]
 
 
 export const KonumKaydiScalarFieldEnum = {

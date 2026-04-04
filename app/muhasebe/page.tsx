@@ -15,7 +15,8 @@ import {
 } from 'lucide-react';
 
 /* ─── Types ─────────────────────────────────────────────────── */
-type Musteri   = { id: string; ad: string; vergiNo: string; telefon: string; email: string; adres: string; createdAt: string };
+type Musteri   = { id: string; ad: string; vergiNo: string; telefon: string; email: string; adres: string; bakiye: number; createdAt: string };
+type Tahsilat  = { id: string; musteriId: string; faturaId: string | null; tutar: number; tarih: string; notlar: string; createdAt: string; musteri?: { id: string; ad: string }; fatura?: { id: string; faturaNo: string; genelToplam: number } | null };
 type Sefer     = { id: string; musteriId: string | null; musteri?: { id: string; ad: string } | null; aracPlaka: string; rotaDan: string; rotaAya: string; mesafeKm: number; tarih: string; yukAgirligi: number; seferUcreti: number; yakitMaliyeti: number; notlar: string; durum: string; createdAt: string };
 type MaliIslem = { id: string; seferId: string | null; musteriId: string | null; sefer?: { rotaDan: string; rotaAya: string } | null; musteri?: { ad: string } | null; tur: string; kategori: string; tutar: number; kdvOrani: number; aciklama: string; tarih: string; createdAt: string };
 type Personel  = { id: string; ad: string; unvan: string; telefon: string; tcNo: string; maas: number; baslangicTarihi: string; aktif: boolean; createdAt: string; _count?: { puantajlar: number } };
@@ -180,6 +181,7 @@ export default function MuhasebePage() {
   const [yakitlar,    setYakitlar]    = useState<YakitKaydi[]>([]);
   const [faturalar,   setFaturalar]   = useState<Fatura[]>([]);
   const [bordrolar,   setBordrolar]   = useState<Bordro[]>([]);
+  const [tahsilatlar, setTahsilatlar] = useState<Tahsilat[]>([]);
 
   // UI
   const [search,      setSearch]      = useState('');
@@ -189,7 +191,9 @@ export default function MuhasebePage() {
   const [selPersonel, setSelPersonel] = useState('');
   const [bordroAy,    setBordroAy]    = useState(thisMonth);
   const [selArac,     setSelArac]     = useState('');
-  const [plakaManuel, setPlakaManuel] = useState(false);
+  const [plakaManuel,    setPlakaManuel]    = useState(false);
+  const [selMusteri,     setSelMusteri]     = useState('');
+  const [tahsilatForm,   setTahsilatForm]   = useState({ musteriId: '', faturaId: '', tutar: '', tarih: '', notlar: '' });
 
   // Forms
   const [musteriForm,  setMusteriForm]  = useState({ ad: '', vergiNo: '', telefon: '', email: '', adres: '' });
@@ -204,13 +208,14 @@ export default function MuhasebePage() {
 
   /* ── Veri yükleme ── */
   const loadAll = useCallback(async () => {
-    const [mRes, sRes, iRes, pRes, aRes, fRes] = await Promise.all([
+    const [mRes, sRes, iRes, pRes, aRes, fRes, tRes] = await Promise.all([
       fetch('/api/muhasebe/musteriler'),
       fetch('/api/muhasebe/seferler'),
       fetch('/api/muhasebe/islemler'),
       fetch('/api/muhasebe/personel'),
       fetch('/api/muhasebe/araclar'),
       fetch('/api/muhasebe/faturalar'),
+      fetch('/api/muhasebe/tahsilat'),
     ]);
     if (mRes.ok) setMusteriler(await mRes.json());
     if (sRes.ok) setSeferler(await sRes.json());
@@ -218,6 +223,7 @@ export default function MuhasebePage() {
     if (pRes.ok) setPersoneller(await pRes.json());
     if (aRes.ok) setAraclar(await aRes.json());
     if (fRes.ok) setFaturalar(await fRes.json());
+    if (tRes.ok) setTahsilatlar(await tRes.json());
   }, []);
 
   const loadYakit = useCallback(async () => {
@@ -267,6 +273,26 @@ export default function MuhasebePage() {
   async function deleteMusteri(id: string) {
     await fetch(`/api/muhasebe/musteriler/${id}`, { method: 'DELETE' });
     setMusteriler(p => p.filter(m => m.id !== id));
+  }
+
+  /* ── Handlers: Tahsilat ── */
+  async function submitTahsilat(e: React.FormEvent) {
+    e.preventDefault();
+    const res = await fetch('/api/muhasebe/tahsilat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(tahsilatForm) });
+    if (res.ok) {
+      const n = await res.json();
+      setTahsilatlar(p => [n, ...p]);
+      setMusteriler(p => p.map(m => m.id === tahsilatForm.musteriId ? { ...m, bakiye: m.bakiye - Number(tahsilatForm.tutar) } : m));
+      if (tahsilatForm.faturaId) setFaturalar(p => p.map(f => f.id === tahsilatForm.faturaId && Number(tahsilatForm.tutar) >= f.genelToplam ? { ...f, durum: 'odendi' } : f));
+      setTahsilatForm({ musteriId: '', faturaId: '', tutar: '', tarih: '', notlar: '' });
+      setShowForm(false);
+    }
+  }
+  async function deleteTahsilat(id: string) {
+    const t = tahsilatlar.find(x => x.id === id);
+    await fetch(`/api/muhasebe/tahsilat/${id}`, { method: 'DELETE' });
+    setTahsilatlar(p => p.filter(x => x.id !== id));
+    if (t) setMusteriler(p => p.map(m => m.id === t.musteriId ? { ...m, bakiye: m.bakiye + t.tutar } : m));
   }
 
   /* ── Handlers: Sefer ── */
@@ -728,15 +754,16 @@ export default function MuhasebePage() {
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {musteriler.filter(m=>!search||m.ad.toLowerCase().includes(search.toLowerCase())).map(m=>{
-                const mGelir = islemler.filter(i=>i.musteriId===m.id&&i.tur==='gelir').reduce((s,i)=>s+i.tutar,0);
                 const mSefer = seferler.filter(s=>s.musteriId===m.id).length;
                 const mFatura = faturalar.filter(f=>f.musteri?.id===m.id);
                 const bekleyen = mFatura.filter(f=>f.durum==='beklemede').reduce((s,f)=>s+f.genelToplam,0);
+                const borclu = m.bakiye > 0;
+                const alacakli = m.bakiye < 0;
                 return (
-                  <div key={m.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                  <div key={m.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${borclu?'border-amber-200':alacakli?'border-green-200':'border-gray-100'}`}>
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0"><Building2 className="w-5 h-5 text-blue-600"/></div>
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${borclu?'bg-amber-50':'bg-blue-50'}`}><Building2 className={`w-5 h-5 ${borclu?'text-amber-600':'text-blue-600'}`}/></div>
                         <div><p className="font-bold text-gray-900">{m.ad}</p>{m.vergiNo&&<p className="text-xs text-gray-400">VN: {m.vergiNo}</p>}</div>
                       </div>
                       <button onClick={()=>deleteMusteri(m.id)} className="text-gray-200 hover:text-red-500 transition-colors shrink-0"><Trash2 className="w-4 h-4"/></button>
@@ -746,15 +773,83 @@ export default function MuhasebePage() {
                       {m.email&&<p className="flex items-center gap-2 text-xs text-gray-500"><Mail className="w-3.5 h-3.5"/>{m.email}</p>}
                       {m.adres&&<p className="flex items-center gap-2 text-xs text-gray-500"><MapPin className="w-3.5 h-3.5"/>{m.adres}</p>}
                     </div>
-                    <div className="flex gap-4 pt-3 border-t border-gray-50">
-                      <div><p className="text-base font-black text-green-600">{TL(mGelir)}</p><p className="text-xs text-gray-400">Tahsilat</p></div>
-                      {bekleyen>0&&<div><p className="text-base font-black text-amber-600">{TL(bekleyen)}</p><p className="text-xs text-gray-400">Bekleyen</p></div>}
-                      <div><p className="text-base font-black text-gray-900">{mSefer}</p><p className="text-xs text-gray-400">Sefer</p></div>
+                    {/* Bakiye gösterimi */}
+                    <div className={`rounded-xl px-3 py-2 mb-3 flex items-center justify-between ${borclu?'bg-amber-50':alacakli?'bg-green-50':'bg-gray-50'}`}>
+                      <span className="text-xs font-semibold text-gray-500">Cari Bakiye</span>
+                      <span className={`font-black text-base ${borclu?'text-amber-700':alacakli?'text-green-700':'text-gray-400'}`}>
+                        {m.bakiye > 0 ? '+' : ''}{TL(m.bakiye)}
+                        <span className="text-xs font-normal ml-1">{borclu?'borçlu':alacakli?'alacaklı':'sıfır'}</span>
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-50">
+                      <div className="flex gap-4">
+                        {bekleyen>0&&<div><p className="text-sm font-bold text-amber-600">{TL(bekleyen)}</p><p className="text-xs text-gray-400">Bekleyen fatura</p></div>}
+                        <div><p className="text-sm font-bold text-gray-900">{mSefer}</p><p className="text-xs text-gray-400">Sefer</p></div>
+                      </div>
+                      <button onClick={()=>{setTahsilatForm(f=>({...f,musteriId:m.id,tarih:new Date().toISOString().slice(0,10)}));setSelMusteri(m.id);setShowForm(true);setEditId('tahsilat');}}
+                        className="flex items-center gap-1.5 text-xs text-green-700 hover:text-green-900 font-semibold border border-green-200 bg-green-50 px-3 py-1.5 rounded-lg transition-colors">
+                        <Wallet className="w-3.5 h-3.5"/> Tahsilat
+                      </button>
                     </div>
                   </div>
                 );
               })}
               {!musteriler.length&&<div className="col-span-full py-16 text-center text-gray-400 text-sm">Henüz müşteri yok.</div>}
+            </div>
+
+            {/* Tahsilat formu */}
+            {showForm && editId==='tahsilat' && (
+              <form onSubmit={submitTahsilat} className="bg-white rounded-2xl border border-green-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="col-span-full flex items-center justify-between">
+                  <h3 className="font-bold text-gray-900">Tahsilat Kaydı — {musteriler.find(m=>m.id===tahsilatForm.musteriId)?.ad}</h3>
+                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                </div>
+                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri *</label>
+                  <select required value={tahsilatForm.musteriId} onChange={e=>setTahsilatForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="">— Seç —</option>{musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
+                  </select></div>
+                <div><label className="block text-xs font-semibold text-gray-600 mb-1">İlgili Fatura (opsiyonel)</label>
+                  <select value={tahsilatForm.faturaId} onChange={e=>setTahsilatForm(p=>({...p,faturaId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="">— Seç —</option>
+                    {faturalar.filter(f=>f.musteri?.id===tahsilatForm.musteriId&&f.durum!=='odendi').map(f=><option key={f.id} value={f.id}>{f.faturaNo} — {TL(f.genelToplam)}</option>)}
+                  </select></div>
+                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tutar (₺) *</label>
+                  <input required type="number" min="0" step="0.01" value={tahsilatForm.tutar} onChange={e=>setTahsilatForm(p=>({...p,tutar:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label>
+                  <input required type="date" value={tahsilatForm.tarih} onChange={e=>setTahsilatForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
+                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 mb-1">Notlar</label>
+                  <input value={tahsilatForm.notlar} onChange={e=>setTahsilatForm(p=>({...p,notlar:e.target.value}))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
+                <div className="col-span-full flex gap-2 justify-end">
+                  <button type="submit" className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4"/> Kaydet</button>
+                </div>
+              </form>
+            )}
+
+            {/* Tahsilat tablosu */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
+                <Wallet className="w-4 h-4 text-gray-400"/>
+                <h3 className="font-bold text-gray-900 text-sm">Tahsilat Geçmişi</h3>
+                <select value={selMusteri} onChange={e=>setSelMusteri(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none ml-auto">
+                  <option value="">Tüm Müşteriler</option>{musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
+                </select>
+              </div>
+              <table className="w-full text-sm">
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Müşteri','Fatura','Tutar','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">{h}</th>)}</tr></thead>
+                <tbody className="divide-y divide-gray-50">
+                  {tahsilatlar.filter(t=>!selMusteri||t.musteriId===selMusteri).map(t=>(
+                    <tr key={t.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(t.tarih)}</td>
+                      <td className="px-4 py-3 font-semibold text-gray-800">{t.musteri?.ad??'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">{t.fatura?.faturaNo??'—'}</td>
+                      <td className="px-4 py-3 font-bold text-green-600 whitespace-nowrap">{TL(t.tutar)}</td>
+                      <td className="px-4 py-3 text-gray-400 text-xs">{t.notlar||'—'}</td>
+                      <td className="px-4 py-3"><button onClick={()=>deleteTahsilat(t.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
+                    </tr>
+                  ))}
+                  {!tahsilatlar.length&&<tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400">Henüz tahsilat kaydı yok.</td></tr>}
+                </tbody>
+              </table>
             </div>
           </>
         )}

@@ -34,6 +34,7 @@ model User {
   faturalar           Fatura[]
   bordrolar           Bordro[]
   konumKayitlari      KonumKaydi[]
+  tahsilatlar         Tahsilat[]
 }
 
 model DepotArea {
@@ -178,12 +179,14 @@ model Musteri {
   telefon   String   @default("")
   email     String   @default("")
   adres     String   @default("")
+  bakiye    Float    @default(0)  // pozitif = borçlu, negatif = alacaklı
   createdAt DateTime @default(now())
 
-  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  seferler Sefer[]
-  islemler MaliIslem[]
-  faturalar Fatura[]
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  seferler   Sefer[]
+  islemler   MaliIslem[]
+  faturalar  Fatura[]
+  tahsilatlar Tahsilat[]
 
   @@index([userId])
 }
@@ -329,9 +332,10 @@ model Fatura {
   durum       String   @default("beklemede")
   createdAt   DateTime @default(now())
 
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  musteri Musteri? @relation(fields: [musteriId], references: [id], onDelete: SetNull)
-  sefer   Sefer?   @relation(fields: [seferId], references: [id], onDelete: SetNull)
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  musteri     Musteri?   @relation(fields: [musteriId], references: [id], onDelete: SetNull)
+  sefer       Sefer?     @relation(fields: [seferId], references: [id], onDelete: SetNull)
+  tahsilatlar Tahsilat[]
 
   @@index([userId])
 }
@@ -350,6 +354,7 @@ model Bordro {
   netMaas         Float
   sgkIsveren      Float
   toplamMaliyet   Float
+  gvKumulatif     Float    @default(0)  // yıl başından itibaren birikimli GV matrahı
   createdAt       DateTime @default(now())
 
   personel Personel @relation(fields: [personelId], references: [id], onDelete: Cascade)
@@ -357,6 +362,24 @@ model Bordro {
 
   @@unique([personelId, ay])
   @@index([userId])
+}
+
+model Tahsilat {
+  id        String   @id @default(cuid())
+  userId    String
+  musteriId String
+  faturaId  String?
+  tutar     Float
+  tarih     String
+  notlar    String   @default("")
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  musteri Musteri @relation(fields: [musteriId], references: [id], onDelete: Cascade)
+  fatura  Fatura? @relation(fields: [faturaId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([musteriId])
 }
 
 model KonumKaydi {

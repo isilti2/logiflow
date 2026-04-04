@@ -299,6 +299,7 @@ export type FaturaWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   musteri?: Prisma.XOR<Prisma.MusteriNullableScalarRelationFilter, Prisma.MusteriWhereInput> | null
   sefer?: Prisma.XOR<Prisma.SeferNullableScalarRelationFilter, Prisma.SeferWhereInput> | null
+  tahsilatlar?: Prisma.TahsilatListRelationFilter
 }
 
 export type FaturaOrderByWithRelationInput = {
@@ -319,6 +320,7 @@ export type FaturaOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   musteri?: Prisma.MusteriOrderByWithRelationInput
   sefer?: Prisma.SeferOrderByWithRelationInput
+  tahsilatlar?: Prisma.TahsilatOrderByRelationAggregateInput
 }
 
 export type FaturaWhereUniqueInput = Prisma.AtLeast<{
@@ -342,6 +344,7 @@ export type FaturaWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   musteri?: Prisma.XOR<Prisma.MusteriNullableScalarRelationFilter, Prisma.MusteriWhereInput> | null
   sefer?: Prisma.XOR<Prisma.SeferNullableScalarRelationFilter, Prisma.SeferWhereInput> | null
+  tahsilatlar?: Prisma.TahsilatListRelationFilter
 }, "id">
 
 export type FaturaOrderByWithAggregationInput = {
@@ -401,6 +404,7 @@ export type FaturaCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutFaturalarInput
   musteri?: Prisma.MusteriCreateNestedOneWithoutFaturalarInput
   sefer?: Prisma.SeferCreateNestedOneWithoutFaturalarInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaUncheckedCreateInput = {
@@ -418,6 +422,7 @@ export type FaturaUncheckedCreateInput = {
   notlar?: string
   durum?: string
   createdAt?: Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaUpdateInput = {
@@ -435,6 +440,7 @@ export type FaturaUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutFaturalarNestedInput
   musteri?: Prisma.MusteriUpdateOneWithoutFaturalarNestedInput
   sefer?: Prisma.SeferUpdateOneWithoutFaturalarNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateInput = {
@@ -452,6 +458,7 @@ export type FaturaUncheckedUpdateInput = {
   notlar?: Prisma.StringFieldUpdateOperationsInput | string
   durum?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaCreateManyInput = {
@@ -573,6 +580,11 @@ export type FaturaSumOrderByAggregateInput = {
   araToplam?: Prisma.SortOrder
   kdvToplam?: Prisma.SortOrder
   genelToplam?: Prisma.SortOrder
+}
+
+export type FaturaNullableScalarRelationFilter = {
+  is?: Prisma.FaturaWhereInput | null
+  isNot?: Prisma.FaturaWhereInput | null
 }
 
 export type FaturaCreateNestedManyWithoutUserInput = {
@@ -701,6 +713,22 @@ export type FaturaUncheckedUpdateManyWithoutSeferNestedInput = {
   deleteMany?: Prisma.FaturaScalarWhereInput | Prisma.FaturaScalarWhereInput[]
 }
 
+export type FaturaCreateNestedOneWithoutTahsilatlarInput = {
+  create?: Prisma.XOR<Prisma.FaturaCreateWithoutTahsilatlarInput, Prisma.FaturaUncheckedCreateWithoutTahsilatlarInput>
+  connectOrCreate?: Prisma.FaturaCreateOrConnectWithoutTahsilatlarInput
+  connect?: Prisma.FaturaWhereUniqueInput
+}
+
+export type FaturaUpdateOneWithoutTahsilatlarNestedInput = {
+  create?: Prisma.XOR<Prisma.FaturaCreateWithoutTahsilatlarInput, Prisma.FaturaUncheckedCreateWithoutTahsilatlarInput>
+  connectOrCreate?: Prisma.FaturaCreateOrConnectWithoutTahsilatlarInput
+  upsert?: Prisma.FaturaUpsertWithoutTahsilatlarInput
+  disconnect?: Prisma.FaturaWhereInput | boolean
+  delete?: Prisma.FaturaWhereInput | boolean
+  connect?: Prisma.FaturaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FaturaUpdateToOneWithWhereWithoutTahsilatlarInput, Prisma.FaturaUpdateWithoutTahsilatlarInput>, Prisma.FaturaUncheckedUpdateWithoutTahsilatlarInput>
+}
+
 export type FaturaCreateWithoutUserInput = {
   id?: string
   faturaNo: string
@@ -715,6 +743,7 @@ export type FaturaCreateWithoutUserInput = {
   createdAt?: Date | string
   musteri?: Prisma.MusteriCreateNestedOneWithoutFaturalarInput
   sefer?: Prisma.SeferCreateNestedOneWithoutFaturalarInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaUncheckedCreateWithoutUserInput = {
@@ -731,6 +760,7 @@ export type FaturaUncheckedCreateWithoutUserInput = {
   notlar?: string
   durum?: string
   createdAt?: Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaCreateOrConnectWithoutUserInput = {
@@ -793,6 +823,7 @@ export type FaturaCreateWithoutMusteriInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFaturalarInput
   sefer?: Prisma.SeferCreateNestedOneWithoutFaturalarInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaUncheckedCreateWithoutMusteriInput = {
@@ -809,6 +840,7 @@ export type FaturaUncheckedCreateWithoutMusteriInput = {
   notlar?: string
   durum?: string
   createdAt?: Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaCreateOrConnectWithoutMusteriInput = {
@@ -851,6 +883,7 @@ export type FaturaCreateWithoutSeferInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFaturalarInput
   musteri?: Prisma.MusteriCreateNestedOneWithoutFaturalarInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaUncheckedCreateWithoutSeferInput = {
@@ -867,6 +900,7 @@ export type FaturaUncheckedCreateWithoutSeferInput = {
   notlar?: string
   durum?: string
   createdAt?: Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutFaturaInput
 }
 
 export type FaturaCreateOrConnectWithoutSeferInput = {
@@ -893,6 +927,90 @@ export type FaturaUpdateWithWhereUniqueWithoutSeferInput = {
 export type FaturaUpdateManyWithWhereWithoutSeferInput = {
   where: Prisma.FaturaScalarWhereInput
   data: Prisma.XOR<Prisma.FaturaUpdateManyMutationInput, Prisma.FaturaUncheckedUpdateManyWithoutSeferInput>
+}
+
+export type FaturaCreateWithoutTahsilatlarInput = {
+  id?: string
+  faturaNo: string
+  tarih: string
+  vadeTarih?: string | null
+  satirlar: string
+  araToplam: number
+  kdvToplam: number
+  genelToplam: number
+  notlar?: string
+  durum?: string
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutFaturalarInput
+  musteri?: Prisma.MusteriCreateNestedOneWithoutFaturalarInput
+  sefer?: Prisma.SeferCreateNestedOneWithoutFaturalarInput
+}
+
+export type FaturaUncheckedCreateWithoutTahsilatlarInput = {
+  id?: string
+  userId: string
+  musteriId?: string | null
+  seferId?: string | null
+  faturaNo: string
+  tarih: string
+  vadeTarih?: string | null
+  satirlar: string
+  araToplam: number
+  kdvToplam: number
+  genelToplam: number
+  notlar?: string
+  durum?: string
+  createdAt?: Date | string
+}
+
+export type FaturaCreateOrConnectWithoutTahsilatlarInput = {
+  where: Prisma.FaturaWhereUniqueInput
+  create: Prisma.XOR<Prisma.FaturaCreateWithoutTahsilatlarInput, Prisma.FaturaUncheckedCreateWithoutTahsilatlarInput>
+}
+
+export type FaturaUpsertWithoutTahsilatlarInput = {
+  update: Prisma.XOR<Prisma.FaturaUpdateWithoutTahsilatlarInput, Prisma.FaturaUncheckedUpdateWithoutTahsilatlarInput>
+  create: Prisma.XOR<Prisma.FaturaCreateWithoutTahsilatlarInput, Prisma.FaturaUncheckedCreateWithoutTahsilatlarInput>
+  where?: Prisma.FaturaWhereInput
+}
+
+export type FaturaUpdateToOneWithWhereWithoutTahsilatlarInput = {
+  where?: Prisma.FaturaWhereInput
+  data: Prisma.XOR<Prisma.FaturaUpdateWithoutTahsilatlarInput, Prisma.FaturaUncheckedUpdateWithoutTahsilatlarInput>
+}
+
+export type FaturaUpdateWithoutTahsilatlarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
+  tarih?: Prisma.StringFieldUpdateOperationsInput | string
+  vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
+  araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
+  kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
+  genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
+  notlar?: Prisma.StringFieldUpdateOperationsInput | string
+  durum?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutFaturalarNestedInput
+  musteri?: Prisma.MusteriUpdateOneWithoutFaturalarNestedInput
+  sefer?: Prisma.SeferUpdateOneWithoutFaturalarNestedInput
+}
+
+export type FaturaUncheckedUpdateWithoutTahsilatlarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  musteriId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seferId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
+  tarih?: Prisma.StringFieldUpdateOperationsInput | string
+  vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
+  araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
+  kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
+  genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
+  notlar?: Prisma.StringFieldUpdateOperationsInput | string
+  durum?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FaturaCreateManyUserInput = {
@@ -925,6 +1043,7 @@ export type FaturaUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   musteri?: Prisma.MusteriUpdateOneWithoutFaturalarNestedInput
   sefer?: Prisma.SeferUpdateOneWithoutFaturalarNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateWithoutUserInput = {
@@ -941,6 +1060,7 @@ export type FaturaUncheckedUpdateWithoutUserInput = {
   notlar?: Prisma.StringFieldUpdateOperationsInput | string
   durum?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateManyWithoutUserInput = {
@@ -989,6 +1109,7 @@ export type FaturaUpdateWithoutMusteriInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFaturalarNestedInput
   sefer?: Prisma.SeferUpdateOneWithoutFaturalarNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateWithoutMusteriInput = {
@@ -1005,6 +1126,7 @@ export type FaturaUncheckedUpdateWithoutMusteriInput = {
   notlar?: Prisma.StringFieldUpdateOperationsInput | string
   durum?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateManyWithoutMusteriInput = {
@@ -1053,6 +1175,7 @@ export type FaturaUpdateWithoutSeferInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFaturalarNestedInput
   musteri?: Prisma.MusteriUpdateOneWithoutFaturalarNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateWithoutSeferInput = {
@@ -1069,6 +1192,7 @@ export type FaturaUncheckedUpdateWithoutSeferInput = {
   notlar?: Prisma.StringFieldUpdateOperationsInput | string
   durum?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutFaturaNestedInput
 }
 
 export type FaturaUncheckedUpdateManyWithoutSeferInput = {
@@ -1087,6 +1211,35 @@ export type FaturaUncheckedUpdateManyWithoutSeferInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type FaturaCountOutputType
+ */
+
+export type FaturaCountOutputType = {
+  tahsilatlar: number
+}
+
+export type FaturaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tahsilatlar?: boolean | FaturaCountOutputTypeCountTahsilatlarArgs
+}
+
+/**
+ * FaturaCountOutputType without action
+ */
+export type FaturaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FaturaCountOutputType
+   */
+  select?: Prisma.FaturaCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FaturaCountOutputType without action
+ */
+export type FaturaCountOutputTypeCountTahsilatlarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TahsilatWhereInput
+}
 
 
 export type FaturaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1107,6 +1260,8 @@ export type FaturaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   musteri?: boolean | Prisma.Fatura$musteriArgs<ExtArgs>
   sefer?: boolean | Prisma.Fatura$seferArgs<ExtArgs>
+  tahsilatlar?: boolean | Prisma.Fatura$tahsilatlarArgs<ExtArgs>
+  _count?: boolean | Prisma.FaturaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fatura"]>
 
 export type FaturaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1171,6 +1326,8 @@ export type FaturaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   musteri?: boolean | Prisma.Fatura$musteriArgs<ExtArgs>
   sefer?: boolean | Prisma.Fatura$seferArgs<ExtArgs>
+  tahsilatlar?: boolean | Prisma.Fatura$tahsilatlarArgs<ExtArgs>
+  _count?: boolean | Prisma.FaturaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FaturaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1189,6 +1346,7 @@ export type $FaturaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     user: Prisma.$UserPayload<ExtArgs>
     musteri: Prisma.$MusteriPayload<ExtArgs> | null
     sefer: Prisma.$SeferPayload<ExtArgs> | null
+    tahsilatlar: Prisma.$TahsilatPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1602,6 +1760,7 @@ export interface Prisma__FaturaClient<T, Null = never, ExtArgs extends runtime.T
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   musteri<T extends Prisma.Fatura$musteriArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Fatura$musteriArgs<ExtArgs>>): Prisma.Prisma__MusteriClient<runtime.Types.Result.GetResult<Prisma.$MusteriPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sefer<T extends Prisma.Fatura$seferArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Fatura$seferArgs<ExtArgs>>): Prisma.Prisma__SeferClient<runtime.Types.Result.GetResult<Prisma.$SeferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tahsilatlar<T extends Prisma.Fatura$tahsilatlarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Fatura$tahsilatlarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsilatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2081,6 +2240,30 @@ export type Fatura$seferArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.SeferInclude<ExtArgs> | null
   where?: Prisma.SeferWhereInput
+}
+
+/**
+ * Fatura.tahsilatlar
+ */
+export type Fatura$tahsilatlarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tahsilat
+   */
+  select?: Prisma.TahsilatSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tahsilat
+   */
+  omit?: Prisma.TahsilatOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahsilatInclude<ExtArgs> | null
+  where?: Prisma.TahsilatWhereInput
+  orderBy?: Prisma.TahsilatOrderByWithRelationInput | Prisma.TahsilatOrderByWithRelationInput[]
+  cursor?: Prisma.TahsilatWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TahsilatScalarFieldEnum | Prisma.TahsilatScalarFieldEnum[]
 }
 
 /**

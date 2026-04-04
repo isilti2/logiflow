@@ -20,8 +20,18 @@ export type MusteriModel = runtime.Types.Result.DefaultSelection<Prisma.$Musteri
 
 export type AggregateMusteri = {
   _count: MusteriCountAggregateOutputType | null
+  _avg: MusteriAvgAggregateOutputType | null
+  _sum: MusteriSumAggregateOutputType | null
   _min: MusteriMinAggregateOutputType | null
   _max: MusteriMaxAggregateOutputType | null
+}
+
+export type MusteriAvgAggregateOutputType = {
+  bakiye: number | null
+}
+
+export type MusteriSumAggregateOutputType = {
+  bakiye: number | null
 }
 
 export type MusteriMinAggregateOutputType = {
@@ -32,6 +42,7 @@ export type MusteriMinAggregateOutputType = {
   telefon: string | null
   email: string | null
   adres: string | null
+  bakiye: number | null
   createdAt: Date | null
 }
 
@@ -43,6 +54,7 @@ export type MusteriMaxAggregateOutputType = {
   telefon: string | null
   email: string | null
   adres: string | null
+  bakiye: number | null
   createdAt: Date | null
 }
 
@@ -54,10 +66,19 @@ export type MusteriCountAggregateOutputType = {
   telefon: number
   email: number
   adres: number
+  bakiye: number
   createdAt: number
   _all: number
 }
 
+
+export type MusteriAvgAggregateInputType = {
+  bakiye?: true
+}
+
+export type MusteriSumAggregateInputType = {
+  bakiye?: true
+}
 
 export type MusteriMinAggregateInputType = {
   id?: true
@@ -67,6 +88,7 @@ export type MusteriMinAggregateInputType = {
   telefon?: true
   email?: true
   adres?: true
+  bakiye?: true
   createdAt?: true
 }
 
@@ -78,6 +100,7 @@ export type MusteriMaxAggregateInputType = {
   telefon?: true
   email?: true
   adres?: true
+  bakiye?: true
   createdAt?: true
 }
 
@@ -89,6 +112,7 @@ export type MusteriCountAggregateInputType = {
   telefon?: true
   email?: true
   adres?: true
+  bakiye?: true
   createdAt?: true
   _all?: true
 }
@@ -131,6 +155,18 @@ export type MusteriAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: MusteriAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: MusteriSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: MusteriMinAggregateInputType
@@ -161,6 +197,8 @@ export type MusteriGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: MusteriCountAggregateInputType | true
+  _avg?: MusteriAvgAggregateInputType
+  _sum?: MusteriSumAggregateInputType
   _min?: MusteriMinAggregateInputType
   _max?: MusteriMaxAggregateInputType
 }
@@ -173,8 +211,11 @@ export type MusteriGroupByOutputType = {
   telefon: string
   email: string
   adres: string
+  bakiye: number
   createdAt: Date
   _count: MusteriCountAggregateOutputType | null
+  _avg: MusteriAvgAggregateOutputType | null
+  _sum: MusteriSumAggregateOutputType | null
   _min: MusteriMinAggregateOutputType | null
   _max: MusteriMaxAggregateOutputType | null
 }
@@ -205,11 +246,13 @@ export type MusteriWhereInput = {
   telefon?: Prisma.StringFilter<"Musteri"> | string
   email?: Prisma.StringFilter<"Musteri"> | string
   adres?: Prisma.StringFilter<"Musteri"> | string
+  bakiye?: Prisma.FloatFilter<"Musteri"> | number
   createdAt?: Prisma.DateTimeFilter<"Musteri"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   seferler?: Prisma.SeferListRelationFilter
   islemler?: Prisma.MaliIslemListRelationFilter
   faturalar?: Prisma.FaturaListRelationFilter
+  tahsilatlar?: Prisma.TahsilatListRelationFilter
 }
 
 export type MusteriOrderByWithRelationInput = {
@@ -220,11 +263,13 @@ export type MusteriOrderByWithRelationInput = {
   telefon?: Prisma.SortOrder
   email?: Prisma.SortOrder
   adres?: Prisma.SortOrder
+  bakiye?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   seferler?: Prisma.SeferOrderByRelationAggregateInput
   islemler?: Prisma.MaliIslemOrderByRelationAggregateInput
   faturalar?: Prisma.FaturaOrderByRelationAggregateInput
+  tahsilatlar?: Prisma.TahsilatOrderByRelationAggregateInput
 }
 
 export type MusteriWhereUniqueInput = Prisma.AtLeast<{
@@ -238,11 +283,13 @@ export type MusteriWhereUniqueInput = Prisma.AtLeast<{
   telefon?: Prisma.StringFilter<"Musteri"> | string
   email?: Prisma.StringFilter<"Musteri"> | string
   adres?: Prisma.StringFilter<"Musteri"> | string
+  bakiye?: Prisma.FloatFilter<"Musteri"> | number
   createdAt?: Prisma.DateTimeFilter<"Musteri"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   seferler?: Prisma.SeferListRelationFilter
   islemler?: Prisma.MaliIslemListRelationFilter
   faturalar?: Prisma.FaturaListRelationFilter
+  tahsilatlar?: Prisma.TahsilatListRelationFilter
 }, "id">
 
 export type MusteriOrderByWithAggregationInput = {
@@ -253,10 +300,13 @@ export type MusteriOrderByWithAggregationInput = {
   telefon?: Prisma.SortOrder
   email?: Prisma.SortOrder
   adres?: Prisma.SortOrder
+  bakiye?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MusteriCountOrderByAggregateInput
+  _avg?: Prisma.MusteriAvgOrderByAggregateInput
   _max?: Prisma.MusteriMaxOrderByAggregateInput
   _min?: Prisma.MusteriMinOrderByAggregateInput
+  _sum?: Prisma.MusteriSumOrderByAggregateInput
 }
 
 export type MusteriScalarWhereWithAggregatesInput = {
@@ -270,6 +320,7 @@ export type MusteriScalarWhereWithAggregatesInput = {
   telefon?: Prisma.StringWithAggregatesFilter<"Musteri"> | string
   email?: Prisma.StringWithAggregatesFilter<"Musteri"> | string
   adres?: Prisma.StringWithAggregatesFilter<"Musteri"> | string
+  bakiye?: Prisma.FloatWithAggregatesFilter<"Musteri"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Musteri"> | Date | string
 }
 
@@ -280,11 +331,13 @@ export type MusteriCreateInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMusterilerInput
   seferler?: Prisma.SeferCreateNestedManyWithoutMusteriInput
   islemler?: Prisma.MaliIslemCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriUncheckedCreateInput = {
@@ -295,10 +348,12 @@ export type MusteriUncheckedCreateInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutMusteriInput
   islemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriUpdateInput = {
@@ -308,11 +363,13 @@ export type MusteriUpdateInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMusterilerNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutMusteriNestedInput
   islemler?: Prisma.MaliIslemUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriUncheckedUpdateInput = {
@@ -323,10 +380,12 @@ export type MusteriUncheckedUpdateInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutMusteriNestedInput
   islemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriCreateManyInput = {
@@ -337,6 +396,7 @@ export type MusteriCreateManyInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
 }
 
@@ -347,6 +407,7 @@ export type MusteriUpdateManyMutationInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -358,6 +419,7 @@ export type MusteriUncheckedUpdateManyInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -379,7 +441,12 @@ export type MusteriCountOrderByAggregateInput = {
   telefon?: Prisma.SortOrder
   email?: Prisma.SortOrder
   adres?: Prisma.SortOrder
+  bakiye?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type MusteriAvgOrderByAggregateInput = {
+  bakiye?: Prisma.SortOrder
 }
 
 export type MusteriMaxOrderByAggregateInput = {
@@ -390,6 +457,7 @@ export type MusteriMaxOrderByAggregateInput = {
   telefon?: Prisma.SortOrder
   email?: Prisma.SortOrder
   adres?: Prisma.SortOrder
+  bakiye?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -401,12 +469,22 @@ export type MusteriMinOrderByAggregateInput = {
   telefon?: Prisma.SortOrder
   email?: Prisma.SortOrder
   adres?: Prisma.SortOrder
+  bakiye?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type MusteriSumOrderByAggregateInput = {
+  bakiye?: Prisma.SortOrder
 }
 
 export type MusteriNullableScalarRelationFilter = {
   is?: Prisma.MusteriWhereInput | null
   isNot?: Prisma.MusteriWhereInput | null
+}
+
+export type MusteriScalarRelationFilter = {
+  is?: Prisma.MusteriWhereInput
+  isNot?: Prisma.MusteriWhereInput
 }
 
 export type MusteriCreateNestedManyWithoutUserInput = {
@@ -499,6 +577,20 @@ export type MusteriUpdateOneWithoutFaturalarNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MusteriUpdateToOneWithWhereWithoutFaturalarInput, Prisma.MusteriUpdateWithoutFaturalarInput>, Prisma.MusteriUncheckedUpdateWithoutFaturalarInput>
 }
 
+export type MusteriCreateNestedOneWithoutTahsilatlarInput = {
+  create?: Prisma.XOR<Prisma.MusteriCreateWithoutTahsilatlarInput, Prisma.MusteriUncheckedCreateWithoutTahsilatlarInput>
+  connectOrCreate?: Prisma.MusteriCreateOrConnectWithoutTahsilatlarInput
+  connect?: Prisma.MusteriWhereUniqueInput
+}
+
+export type MusteriUpdateOneRequiredWithoutTahsilatlarNestedInput = {
+  create?: Prisma.XOR<Prisma.MusteriCreateWithoutTahsilatlarInput, Prisma.MusteriUncheckedCreateWithoutTahsilatlarInput>
+  connectOrCreate?: Prisma.MusteriCreateOrConnectWithoutTahsilatlarInput
+  upsert?: Prisma.MusteriUpsertWithoutTahsilatlarInput
+  connect?: Prisma.MusteriWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MusteriUpdateToOneWithWhereWithoutTahsilatlarInput, Prisma.MusteriUpdateWithoutTahsilatlarInput>, Prisma.MusteriUncheckedUpdateWithoutTahsilatlarInput>
+}
+
 export type MusteriCreateWithoutUserInput = {
   id?: string
   ad: string
@@ -506,10 +598,12 @@ export type MusteriCreateWithoutUserInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   seferler?: Prisma.SeferCreateNestedManyWithoutMusteriInput
   islemler?: Prisma.MaliIslemCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriUncheckedCreateWithoutUserInput = {
@@ -519,10 +613,12 @@ export type MusteriUncheckedCreateWithoutUserInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutMusteriInput
   islemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriCreateOrConnectWithoutUserInput = {
@@ -562,6 +658,7 @@ export type MusteriScalarWhereInput = {
   telefon?: Prisma.StringFilter<"Musteri"> | string
   email?: Prisma.StringFilter<"Musteri"> | string
   adres?: Prisma.StringFilter<"Musteri"> | string
+  bakiye?: Prisma.FloatFilter<"Musteri"> | number
   createdAt?: Prisma.DateTimeFilter<"Musteri"> | Date | string
 }
 
@@ -572,10 +669,12 @@ export type MusteriCreateWithoutSeferlerInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMusterilerInput
   islemler?: Prisma.MaliIslemCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriUncheckedCreateWithoutSeferlerInput = {
@@ -586,9 +685,11 @@ export type MusteriUncheckedCreateWithoutSeferlerInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   islemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriCreateOrConnectWithoutSeferlerInput = {
@@ -614,10 +715,12 @@ export type MusteriUpdateWithoutSeferlerInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMusterilerNestedInput
   islemler?: Prisma.MaliIslemUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriUncheckedUpdateWithoutSeferlerInput = {
@@ -628,9 +731,11 @@ export type MusteriUncheckedUpdateWithoutSeferlerInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   islemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriCreateWithoutIslemlerInput = {
@@ -640,10 +745,12 @@ export type MusteriCreateWithoutIslemlerInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMusterilerInput
   seferler?: Prisma.SeferCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriUncheckedCreateWithoutIslemlerInput = {
@@ -654,9 +761,11 @@ export type MusteriUncheckedCreateWithoutIslemlerInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutMusteriInput
   faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriCreateOrConnectWithoutIslemlerInput = {
@@ -682,10 +791,12 @@ export type MusteriUpdateWithoutIslemlerInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMusterilerNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriUncheckedUpdateWithoutIslemlerInput = {
@@ -696,9 +807,11 @@ export type MusteriUncheckedUpdateWithoutIslemlerInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriCreateWithoutFaturalarInput = {
@@ -708,10 +821,12 @@ export type MusteriCreateWithoutFaturalarInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutMusterilerInput
   seferler?: Prisma.SeferCreateNestedManyWithoutMusteriInput
   islemler?: Prisma.MaliIslemCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriUncheckedCreateWithoutFaturalarInput = {
@@ -722,9 +837,11 @@ export type MusteriUncheckedCreateWithoutFaturalarInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutMusteriInput
   islemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutMusteriInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutMusteriInput
 }
 
 export type MusteriCreateOrConnectWithoutFaturalarInput = {
@@ -750,10 +867,12 @@ export type MusteriUpdateWithoutFaturalarInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutMusterilerNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutMusteriNestedInput
   islemler?: Prisma.MaliIslemUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriUncheckedUpdateWithoutFaturalarInput = {
@@ -764,9 +883,87 @@ export type MusteriUncheckedUpdateWithoutFaturalarInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutMusteriNestedInput
   islemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutMusteriNestedInput
+}
+
+export type MusteriCreateWithoutTahsilatlarInput = {
+  id?: string
+  ad: string
+  vergiNo?: string
+  telefon?: string
+  email?: string
+  adres?: string
+  bakiye?: number
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutMusterilerInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutMusteriInput
+  islemler?: Prisma.MaliIslemCreateNestedManyWithoutMusteriInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutMusteriInput
+}
+
+export type MusteriUncheckedCreateWithoutTahsilatlarInput = {
+  id?: string
+  userId: string
+  ad: string
+  vergiNo?: string
+  telefon?: string
+  email?: string
+  adres?: string
+  bakiye?: number
+  createdAt?: Date | string
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutMusteriInput
+  islemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutMusteriInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutMusteriInput
+}
+
+export type MusteriCreateOrConnectWithoutTahsilatlarInput = {
+  where: Prisma.MusteriWhereUniqueInput
+  create: Prisma.XOR<Prisma.MusteriCreateWithoutTahsilatlarInput, Prisma.MusteriUncheckedCreateWithoutTahsilatlarInput>
+}
+
+export type MusteriUpsertWithoutTahsilatlarInput = {
+  update: Prisma.XOR<Prisma.MusteriUpdateWithoutTahsilatlarInput, Prisma.MusteriUncheckedUpdateWithoutTahsilatlarInput>
+  create: Prisma.XOR<Prisma.MusteriCreateWithoutTahsilatlarInput, Prisma.MusteriUncheckedCreateWithoutTahsilatlarInput>
+  where?: Prisma.MusteriWhereInput
+}
+
+export type MusteriUpdateToOneWithWhereWithoutTahsilatlarInput = {
+  where?: Prisma.MusteriWhereInput
+  data: Prisma.XOR<Prisma.MusteriUpdateWithoutTahsilatlarInput, Prisma.MusteriUncheckedUpdateWithoutTahsilatlarInput>
+}
+
+export type MusteriUpdateWithoutTahsilatlarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ad?: Prisma.StringFieldUpdateOperationsInput | string
+  vergiNo?: Prisma.StringFieldUpdateOperationsInput | string
+  telefon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutMusterilerNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutMusteriNestedInput
+  islemler?: Prisma.MaliIslemUpdateManyWithoutMusteriNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutMusteriNestedInput
+}
+
+export type MusteriUncheckedUpdateWithoutTahsilatlarInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  ad?: Prisma.StringFieldUpdateOperationsInput | string
+  vergiNo?: Prisma.StringFieldUpdateOperationsInput | string
+  telefon?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutMusteriNestedInput
+  islemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutMusteriNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriCreateManyUserInput = {
@@ -776,6 +973,7 @@ export type MusteriCreateManyUserInput = {
   telefon?: string
   email?: string
   adres?: string
+  bakiye?: number
   createdAt?: Date | string
 }
 
@@ -786,10 +984,12 @@ export type MusteriUpdateWithoutUserInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seferler?: Prisma.SeferUpdateManyWithoutMusteriNestedInput
   islemler?: Prisma.MaliIslemUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriUncheckedUpdateWithoutUserInput = {
@@ -799,10 +999,12 @@ export type MusteriUncheckedUpdateWithoutUserInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutMusteriNestedInput
   islemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutMusteriNestedInput
   faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutMusteriNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutMusteriNestedInput
 }
 
 export type MusteriUncheckedUpdateManyWithoutUserInput = {
@@ -812,6 +1014,7 @@ export type MusteriUncheckedUpdateManyWithoutUserInput = {
   telefon?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   adres?: Prisma.StringFieldUpdateOperationsInput | string
+  bakiye?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -824,12 +1027,14 @@ export type MusteriCountOutputType = {
   seferler: number
   islemler: number
   faturalar: number
+  tahsilatlar: number
 }
 
 export type MusteriCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   seferler?: boolean | MusteriCountOutputTypeCountSeferlerArgs
   islemler?: boolean | MusteriCountOutputTypeCountIslemlerArgs
   faturalar?: boolean | MusteriCountOutputTypeCountFaturalarArgs
+  tahsilatlar?: boolean | MusteriCountOutputTypeCountTahsilatlarArgs
 }
 
 /**
@@ -863,6 +1068,13 @@ export type MusteriCountOutputTypeCountFaturalarArgs<ExtArgs extends runtime.Typ
   where?: Prisma.FaturaWhereInput
 }
 
+/**
+ * MusteriCountOutputType without action
+ */
+export type MusteriCountOutputTypeCountTahsilatlarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TahsilatWhereInput
+}
+
 
 export type MusteriSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -872,11 +1084,13 @@ export type MusteriSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   telefon?: boolean
   email?: boolean
   adres?: boolean
+  bakiye?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   seferler?: boolean | Prisma.Musteri$seferlerArgs<ExtArgs>
   islemler?: boolean | Prisma.Musteri$islemlerArgs<ExtArgs>
   faturalar?: boolean | Prisma.Musteri$faturalarArgs<ExtArgs>
+  tahsilatlar?: boolean | Prisma.Musteri$tahsilatlarArgs<ExtArgs>
   _count?: boolean | Prisma.MusteriCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["musteri"]>
 
@@ -888,6 +1102,7 @@ export type MusteriSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   telefon?: boolean
   email?: boolean
   adres?: boolean
+  bakiye?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["musteri"]>
@@ -900,6 +1115,7 @@ export type MusteriSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   telefon?: boolean
   email?: boolean
   adres?: boolean
+  bakiye?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["musteri"]>
@@ -912,15 +1128,17 @@ export type MusteriSelectScalar = {
   telefon?: boolean
   email?: boolean
   adres?: boolean
+  bakiye?: boolean
   createdAt?: boolean
 }
 
-export type MusteriOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "ad" | "vergiNo" | "telefon" | "email" | "adres" | "createdAt", ExtArgs["result"]["musteri"]>
+export type MusteriOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "ad" | "vergiNo" | "telefon" | "email" | "adres" | "bakiye" | "createdAt", ExtArgs["result"]["musteri"]>
 export type MusteriInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   seferler?: boolean | Prisma.Musteri$seferlerArgs<ExtArgs>
   islemler?: boolean | Prisma.Musteri$islemlerArgs<ExtArgs>
   faturalar?: boolean | Prisma.Musteri$faturalarArgs<ExtArgs>
+  tahsilatlar?: boolean | Prisma.Musteri$tahsilatlarArgs<ExtArgs>
   _count?: boolean | Prisma.MusteriCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MusteriIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -937,6 +1155,7 @@ export type $MusteriPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     seferler: Prisma.$SeferPayload<ExtArgs>[]
     islemler: Prisma.$MaliIslemPayload<ExtArgs>[]
     faturalar: Prisma.$FaturaPayload<ExtArgs>[]
+    tahsilatlar: Prisma.$TahsilatPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -946,6 +1165,7 @@ export type $MusteriPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     telefon: string
     email: string
     adres: string
+    bakiye: number
     createdAt: Date
   }, ExtArgs["result"]["musteri"]>
   composites: {}
@@ -1345,6 +1565,7 @@ export interface Prisma__MusteriClient<T, Null = never, ExtArgs extends runtime.
   seferler<T extends Prisma.Musteri$seferlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Musteri$seferlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   islemler<T extends Prisma.Musteri$islemlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Musteri$islemlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaliIslemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   faturalar<T extends Prisma.Musteri$faturalarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Musteri$faturalarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FaturaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tahsilatlar<T extends Prisma.Musteri$tahsilatlarArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Musteri$tahsilatlarArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TahsilatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1381,6 +1602,7 @@ export interface MusteriFieldRefs {
   readonly telefon: Prisma.FieldRef<"Musteri", 'String'>
   readonly email: Prisma.FieldRef<"Musteri", 'String'>
   readonly adres: Prisma.FieldRef<"Musteri", 'String'>
+  readonly bakiye: Prisma.FieldRef<"Musteri", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Musteri", 'DateTime'>
 }
     
@@ -1852,6 +2074,30 @@ export type Musteri$faturalarArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.FaturaScalarFieldEnum | Prisma.FaturaScalarFieldEnum[]
+}
+
+/**
+ * Musteri.tahsilatlar
+ */
+export type Musteri$tahsilatlarArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tahsilat
+   */
+  select?: Prisma.TahsilatSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tahsilat
+   */
+  omit?: Prisma.TahsilatOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TahsilatInclude<ExtArgs> | null
+  where?: Prisma.TahsilatWhereInput
+  orderBy?: Prisma.TahsilatOrderByWithRelationInput | Prisma.TahsilatOrderByWithRelationInput[]
+  cursor?: Prisma.TahsilatWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TahsilatScalarFieldEnum | Prisma.TahsilatScalarFieldEnum[]
 }
 
 /**

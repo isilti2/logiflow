@@ -36,6 +36,7 @@ export type BordroAvgAggregateOutputType = {
   netMaas: number | null
   sgkIsveren: number | null
   toplamMaliyet: number | null
+  gvKumulatif: number | null
 }
 
 export type BordroSumAggregateOutputType = {
@@ -48,6 +49,7 @@ export type BordroSumAggregateOutputType = {
   netMaas: number | null
   sgkIsveren: number | null
   toplamMaliyet: number | null
+  gvKumulatif: number | null
 }
 
 export type BordroMinAggregateOutputType = {
@@ -64,6 +66,7 @@ export type BordroMinAggregateOutputType = {
   netMaas: number | null
   sgkIsveren: number | null
   toplamMaliyet: number | null
+  gvKumulatif: number | null
   createdAt: Date | null
 }
 
@@ -81,6 +84,7 @@ export type BordroMaxAggregateOutputType = {
   netMaas: number | null
   sgkIsveren: number | null
   toplamMaliyet: number | null
+  gvKumulatif: number | null
   createdAt: Date | null
 }
 
@@ -98,6 +102,7 @@ export type BordroCountAggregateOutputType = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif: number
   createdAt: number
   _all: number
 }
@@ -113,6 +118,7 @@ export type BordroAvgAggregateInputType = {
   netMaas?: true
   sgkIsveren?: true
   toplamMaliyet?: true
+  gvKumulatif?: true
 }
 
 export type BordroSumAggregateInputType = {
@@ -125,6 +131,7 @@ export type BordroSumAggregateInputType = {
   netMaas?: true
   sgkIsveren?: true
   toplamMaliyet?: true
+  gvKumulatif?: true
 }
 
 export type BordroMinAggregateInputType = {
@@ -141,6 +148,7 @@ export type BordroMinAggregateInputType = {
   netMaas?: true
   sgkIsveren?: true
   toplamMaliyet?: true
+  gvKumulatif?: true
   createdAt?: true
 }
 
@@ -158,6 +166,7 @@ export type BordroMaxAggregateInputType = {
   netMaas?: true
   sgkIsveren?: true
   toplamMaliyet?: true
+  gvKumulatif?: true
   createdAt?: true
 }
 
@@ -175,6 +184,7 @@ export type BordroCountAggregateInputType = {
   netMaas?: true
   sgkIsveren?: true
   toplamMaliyet?: true
+  gvKumulatif?: true
   createdAt?: true
   _all?: true
 }
@@ -279,6 +289,7 @@ export type BordroGroupByOutputType = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif: number
   createdAt: Date
   _count: BordroCountAggregateOutputType | null
   _avg: BordroAvgAggregateOutputType | null
@@ -319,6 +330,7 @@ export type BordroWhereInput = {
   netMaas?: Prisma.FloatFilter<"Bordro"> | number
   sgkIsveren?: Prisma.FloatFilter<"Bordro"> | number
   toplamMaliyet?: Prisma.FloatFilter<"Bordro"> | number
+  gvKumulatif?: Prisma.FloatFilter<"Bordro"> | number
   createdAt?: Prisma.DateTimeFilter<"Bordro"> | Date | string
   personel?: Prisma.XOR<Prisma.PersonelScalarRelationFilter, Prisma.PersonelWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -338,6 +350,7 @@ export type BordroOrderByWithRelationInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   personel?: Prisma.PersonelOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
@@ -361,6 +374,7 @@ export type BordroWhereUniqueInput = Prisma.AtLeast<{
   netMaas?: Prisma.FloatFilter<"Bordro"> | number
   sgkIsveren?: Prisma.FloatFilter<"Bordro"> | number
   toplamMaliyet?: Prisma.FloatFilter<"Bordro"> | number
+  gvKumulatif?: Prisma.FloatFilter<"Bordro"> | number
   createdAt?: Prisma.DateTimeFilter<"Bordro"> | Date | string
   personel?: Prisma.XOR<Prisma.PersonelScalarRelationFilter, Prisma.PersonelWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -380,6 +394,7 @@ export type BordroOrderByWithAggregationInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.BordroCountOrderByAggregateInput
   _avg?: Prisma.BordroAvgOrderByAggregateInput
@@ -405,6 +420,7 @@ export type BordroScalarWhereWithAggregatesInput = {
   netMaas?: Prisma.FloatWithAggregatesFilter<"Bordro"> | number
   sgkIsveren?: Prisma.FloatWithAggregatesFilter<"Bordro"> | number
   toplamMaliyet?: Prisma.FloatWithAggregatesFilter<"Bordro"> | number
+  gvKumulatif?: Prisma.FloatWithAggregatesFilter<"Bordro"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Bordro"> | Date | string
 }
 
@@ -420,6 +436,7 @@ export type BordroCreateInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
   personel: Prisma.PersonelCreateNestedOneWithoutBordrolarInput
   user: Prisma.UserCreateNestedOneWithoutBordrolarInput
@@ -439,6 +456,7 @@ export type BordroUncheckedCreateInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
 }
 
@@ -454,6 +472,7 @@ export type BordroUpdateInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personel?: Prisma.PersonelUpdateOneRequiredWithoutBordrolarNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBordrolarNestedInput
@@ -473,6 +492,7 @@ export type BordroUncheckedUpdateInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -490,6 +510,7 @@ export type BordroCreateManyInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
 }
 
@@ -505,6 +526,7 @@ export type BordroUpdateManyMutationInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -522,6 +544,7 @@ export type BordroUncheckedUpdateManyInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -554,6 +577,7 @@ export type BordroCountOrderByAggregateInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -567,6 +591,7 @@ export type BordroAvgOrderByAggregateInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
 }
 
 export type BordroMaxOrderByAggregateInput = {
@@ -583,6 +608,7 @@ export type BordroMaxOrderByAggregateInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -600,6 +626,7 @@ export type BordroMinOrderByAggregateInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -613,6 +640,7 @@ export type BordroSumOrderByAggregateInput = {
   netMaas?: Prisma.SortOrder
   sgkIsveren?: Prisma.SortOrder
   toplamMaliyet?: Prisma.SortOrder
+  gvKumulatif?: Prisma.SortOrder
 }
 
 export type BordroCreateNestedManyWithoutUserInput = {
@@ -711,6 +739,7 @@ export type BordroCreateWithoutUserInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
   personel: Prisma.PersonelCreateNestedOneWithoutBordrolarInput
 }
@@ -728,6 +757,7 @@ export type BordroUncheckedCreateWithoutUserInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
 }
 
@@ -774,6 +804,7 @@ export type BordroScalarWhereInput = {
   netMaas?: Prisma.FloatFilter<"Bordro"> | number
   sgkIsveren?: Prisma.FloatFilter<"Bordro"> | number
   toplamMaliyet?: Prisma.FloatFilter<"Bordro"> | number
+  gvKumulatif?: Prisma.FloatFilter<"Bordro"> | number
   createdAt?: Prisma.DateTimeFilter<"Bordro"> | Date | string
 }
 
@@ -789,6 +820,7 @@ export type BordroCreateWithoutPersonelInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBordrolarInput
 }
@@ -806,6 +838,7 @@ export type BordroUncheckedCreateWithoutPersonelInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
 }
 
@@ -848,6 +881,7 @@ export type BordroCreateManyUserInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
 }
 
@@ -863,6 +897,7 @@ export type BordroUpdateWithoutUserInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personel?: Prisma.PersonelUpdateOneRequiredWithoutBordrolarNestedInput
 }
@@ -880,6 +915,7 @@ export type BordroUncheckedUpdateWithoutUserInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -896,6 +932,7 @@ export type BordroUncheckedUpdateManyWithoutUserInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -912,6 +949,7 @@ export type BordroCreateManyPersonelInput = {
   netMaas: number
   sgkIsveren: number
   toplamMaliyet: number
+  gvKumulatif?: number
   createdAt?: Date | string
 }
 
@@ -927,6 +965,7 @@ export type BordroUpdateWithoutPersonelInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBordrolarNestedInput
 }
@@ -944,6 +983,7 @@ export type BordroUncheckedUpdateWithoutPersonelInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -960,6 +1000,7 @@ export type BordroUncheckedUpdateManyWithoutPersonelInput = {
   netMaas?: Prisma.FloatFieldUpdateOperationsInput | number
   sgkIsveren?: Prisma.FloatFieldUpdateOperationsInput | number
   toplamMaliyet?: Prisma.FloatFieldUpdateOperationsInput | number
+  gvKumulatif?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -979,6 +1020,7 @@ export type BordroSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   netMaas?: boolean
   sgkIsveren?: boolean
   toplamMaliyet?: boolean
+  gvKumulatif?: boolean
   createdAt?: boolean
   personel?: boolean | Prisma.PersonelDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -998,6 +1040,7 @@ export type BordroSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   netMaas?: boolean
   sgkIsveren?: boolean
   toplamMaliyet?: boolean
+  gvKumulatif?: boolean
   createdAt?: boolean
   personel?: boolean | Prisma.PersonelDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1017,6 +1060,7 @@ export type BordroSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   netMaas?: boolean
   sgkIsveren?: boolean
   toplamMaliyet?: boolean
+  gvKumulatif?: boolean
   createdAt?: boolean
   personel?: boolean | Prisma.PersonelDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1036,10 +1080,11 @@ export type BordroSelectScalar = {
   netMaas?: boolean
   sgkIsveren?: boolean
   toplamMaliyet?: boolean
+  gvKumulatif?: boolean
   createdAt?: boolean
 }
 
-export type BordroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "personelId" | "userId" | "ay" | "brutMaas" | "fazlaMesaiUcret" | "sgkIsci" | "issizlikIsci" | "gelirVergisi" | "damgaVergisi" | "netMaas" | "sgkIsveren" | "toplamMaliyet" | "createdAt", ExtArgs["result"]["bordro"]>
+export type BordroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "personelId" | "userId" | "ay" | "brutMaas" | "fazlaMesaiUcret" | "sgkIsci" | "issizlikIsci" | "gelirVergisi" | "damgaVergisi" | "netMaas" | "sgkIsveren" | "toplamMaliyet" | "gvKumulatif" | "createdAt", ExtArgs["result"]["bordro"]>
 export type BordroInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   personel?: boolean | Prisma.PersonelDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1073,6 +1118,7 @@ export type $BordroPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     netMaas: number
     sgkIsveren: number
     toplamMaliyet: number
+    gvKumulatif: number
     createdAt: Date
   }, ExtArgs["result"]["bordro"]>
   composites: {}
@@ -1512,6 +1558,7 @@ export interface BordroFieldRefs {
   readonly netMaas: Prisma.FieldRef<"Bordro", 'Float'>
   readonly sgkIsveren: Prisma.FieldRef<"Bordro", 'Float'>
   readonly toplamMaliyet: Prisma.FieldRef<"Bordro", 'Float'>
+  readonly gvKumulatif: Prisma.FieldRef<"Bordro", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Bordro", 'DateTime'>
 }
     

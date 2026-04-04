@@ -403,6 +403,7 @@ export const ModelName = {
   YakitKaydi: 'YakitKaydi',
   Fatura: 'Fatura',
   Bordro: 'Bordro',
+  Tahsilat: 'Tahsilat',
   KonumKaydi: 'KonumKaydi'
 } as const
 
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "depotArea" | "cargoItem" | "optimizationRun" | "teamMember" | "apiKey" | "appNotification" | "optTemplate" | "passwordResetToken" | "auditLog" | "musteri" | "sefer" | "maliIslem" | "personel" | "puantaj" | "arac" | "yakitKaydi" | "fatura" | "bordro" | "konumKaydi"
+    modelProps: "user" | "depotArea" | "cargoItem" | "optimizationRun" | "teamMember" | "apiKey" | "appNotification" | "optTemplate" | "passwordResetToken" | "auditLog" | "musteri" | "sefer" | "maliIslem" | "personel" | "puantaj" | "arac" | "yakitKaydi" | "fatura" | "bordro" | "tahsilat" | "konumKaydi"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1829,6 +1830,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Tahsilat: {
+      payload: Prisma.$TahsilatPayload<ExtArgs>
+      fields: Prisma.TahsilatFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TahsilatFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TahsilatFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>
+        }
+        findFirst: {
+          args: Prisma.TahsilatFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TahsilatFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>
+        }
+        findMany: {
+          args: Prisma.TahsilatFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>[]
+        }
+        create: {
+          args: Prisma.TahsilatCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>
+        }
+        createMany: {
+          args: Prisma.TahsilatCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TahsilatCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>[]
+        }
+        delete: {
+          args: Prisma.TahsilatDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>
+        }
+        update: {
+          args: Prisma.TahsilatUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>
+        }
+        deleteMany: {
+          args: Prisma.TahsilatDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TahsilatUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TahsilatUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>[]
+        }
+        upsert: {
+          args: Prisma.TahsilatUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TahsilatPayload>
+        }
+        aggregate: {
+          args: Prisma.TahsilatAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTahsilat>
+        }
+        groupBy: {
+          args: Prisma.TahsilatGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TahsilatGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TahsilatCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TahsilatCountAggregateOutputType> | number
+        }
+      }
+    }
     KonumKaydi: {
       payload: Prisma.$KonumKaydiPayload<ExtArgs>
       fields: Prisma.KonumKaydiFieldRefs
@@ -2084,6 +2159,7 @@ export const MusteriScalarFieldEnum = {
   telefon: 'telefon',
   email: 'email',
   adres: 'adres',
+  bakiye: 'bakiye',
   createdAt: 'createdAt'
 } as const
 
@@ -2228,10 +2304,25 @@ export const BordroScalarFieldEnum = {
   netMaas: 'netMaas',
   sgkIsveren: 'sgkIsveren',
   toplamMaliyet: 'toplamMaliyet',
+  gvKumulatif: 'gvKumulatif',
   createdAt: 'createdAt'
 } as const
 
 export type BordroScalarFieldEnum = (typeof BordroScalarFieldEnum)[keyof typeof BordroScalarFieldEnum]
+
+
+export const TahsilatScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  musteriId: 'musteriId',
+  faturaId: 'faturaId',
+  tutar: 'tutar',
+  tarih: 'tarih',
+  notlar: 'notlar',
+  createdAt: 'createdAt'
+} as const
+
+export type TahsilatScalarFieldEnum = (typeof TahsilatScalarFieldEnum)[keyof typeof TahsilatScalarFieldEnum]
 
 
 export const KonumKaydiScalarFieldEnum = {
@@ -2456,6 +2547,7 @@ export type GlobalOmitConfig = {
   yakitKaydi?: Prisma.YakitKaydiOmit
   fatura?: Prisma.FaturaOmit
   bordro?: Prisma.BordroOmit
+  tahsilat?: Prisma.TahsilatOmit
   konumKaydi?: Prisma.KonumKaydiOmit
 }
 

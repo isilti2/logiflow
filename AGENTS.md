@@ -161,13 +161,17 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 2. **YÜKSEK** (eksik otomasyon, tutarsız akış): Kullanıcı onayıyla düzelt.
 3. **ORTA/DÜŞÜK**: Yol haritasına ekle.
 
-### Güncel Muhasebe Durumu (2026-04-04)
+### Güncel Muhasebe Durumu (2026-04-05)
 | Öncelik | Konu | Durum |
 |---------|------|-------|
 | YÜKSEK | Yakıt kaydı → otomatik gider yansıması | ✅ Çözüldü — submitYakit anında MaliIslem oluşturuyor |
-| YÜKSEK | Yakıt silince hayalet gider kalıyor | ⚠️ Açık — deleteYakit ilgili MaliIslem'i silmiyor |
-| YÜKSEK | Sefer tamamlandığında gelir otomatik kayıt yok | ⚠️ Açık — manuel işlem gerekiyor |
-| ORTA | Kümülatif GV matrahı yıl içinde sıfırlanıyor | ⚠️ Açık — aylık bağımsız hesaplama, kümülatif değil |
-| ORTA | Yakıt KDV'si %0 ile işleniyor | ⚠️ Açık — yakıtta KDV var (%20), %0 hatalı |
-| ORTA | Fatura → Cari otomatik borç oluşturmuyor | ⚠️ Açık — fatura kesilince müşteri cari'de borç yok |
+| YÜKSEK | Yakıt silince hayalet gider kalıyor | ✅ Çözüldü — deleteYakit ilgili MaliIslem'i de siliyor |
+| YÜKSEK | Sefer tamamlandığında gelir otomatik kayıt yok | ✅ Çözüldü — durum 'tamamlandi' geçişinde MaliIslem oluşuyor |
+| YÜKSEK | Fatura → Cari otomatik borç oluşturmuyor | ✅ Çözüldü — Tahsilat modeli + musteri.bakiye otomasyonu |
+| ORTA | Kümülatif GV matrahı yıl içinde sıfırlanıyor | ✅ Çözüldü — bordro.gvKumulatif + önceki ay lookup |
+| ORTA | Yakıt KDV'si %0 ile işleniyor | ✅ Çözüldü — yakıt gider kaydında kdvOrani: 18 |
+| ORTA | Cascade delete — orphan kayıtlar | ✅ Çözüldü — onDelete: SetNull tüm ilişkilerde |
+| ORTA | Müşteri cari bakiye takibi yok | ✅ Çözüldü — musteri.bakiye, Tahsilat tablosu, UI |
 | DÜŞÜK | Sefer bazlı kar/zarar raporu yok | ⚠️ Açık — planlanan özellik |
+| DÜŞÜK | Çift kayıt (double-entry) muhasebe | ⚠️ Açık — büyük mimari değişiklik, onay bekliyor |
+| DÜŞÜK | Dönem kapanışı mekanizması yok | ⚠️ Açık — planlanan özellik |

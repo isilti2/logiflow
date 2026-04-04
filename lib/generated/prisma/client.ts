@@ -137,6 +137,11 @@ export type Fatura = Prisma.FaturaModel
  */
 export type Bordro = Prisma.BordroModel
 /**
+ * Model Tahsilat
+ * 
+ */
+export type Tahsilat = Prisma.TahsilatModel
+/**
  * Model KonumKaydi
  * 
  */

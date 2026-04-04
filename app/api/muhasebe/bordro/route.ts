@@ -2,47 +2,74 @@ import { NextResponse } from 'next/server';
 import { getSession } from '@/lib/session';
 import { db } from '@/lib/db';
 
-/* ── Bordro Hesaplama (2025 Türkiye, basitleştirilmiş) ─── */
-function hesaplaBordro(brutMaas: number, fazlaMesaiUcret: number) {
+/* ── GV Dilimleri — 2025 Türkiye yıllık sınırlar ─── */
+const GV_DILIMLERI = [
+  { sinir: 96_000,  oran: 0.15 },
+  { sinir: 230_000, oran: 0.20 },
+  { sinir: 580_000, oran: 0.27 },
+  { sinir: Infinity, oran: 0.35 },
+];
+
+// Kümülatif GV: yıl başından o ana kadar birikmiş matrah üzerinden aylık GV farkı hesaplar
+function hesaplaKumulatifGV(oncekiKumulatif: number, aylikMatrah: number): number {
+  const yeniKumulatif = oncekiKumulatif + aylikMatrah;
+  let oncekiVergi = 0;
+  let yeniVergi   = 0;
+  let kalan = 0;
+
+  for (const { sinir, oran } of GV_DILIMLERI) {
+    // Önceki kümülatif için vergi
+    if (oncekiKumulatif > kalan) {
+      const dilimGiren = Math.min(oncekiKumulatif, sinir) - kalan;
+      oncekiVergi += Math.max(0, dilimGiren) * oran;
+    }
+    // Yeni kümülatif için vergi
+    if (yeniKumulatif > kalan) {
+      const dilimGiren = Math.min(yeniKumulatif, sinir) - kalan;
+      yeniVergi += Math.max(0, dilimGiren) * oran;
+    }
+    kalan = sinir;
+    if (sinir === Infinity) break;
+  }
+
+  return Math.max(0, yeniVergi - oncekiVergi);
+}
+
+/* ── Bordro Hesaplama (2025 Türkiye, kümülatif GV) ─── */
+function hesaplaBordro(brutMaas: number, fazlaMesaiUcret: number, oncekiGvKumulatif: number) {
   const toplamBrut = brutMaas + fazlaMesaiUcret;
 
-  // SGK işçi payı: %14 emeklilik + %1 işsizlik = %15
+  // SGK işçi payı: %14 emeklilik + %1 işsizlik
   const sgkIsci      = toplamBrut * 0.14;
   const issizlikIsci = toplamBrut * 0.01;
 
-  // Gelir vergisi matrahı
+  // GV matrahı (aylık)
   const gvMatrah = toplamBrut - sgkIsci - issizlikIsci;
 
-  // Aylık GV dilimleri (2025 tahmini, kümülatif değil basit)
-  let gelirVergisi = 0;
-  if (gvMatrah <= 96_000 / 12) {
-    gelirVergisi = gvMatrah * 0.15;
-  } else if (gvMatrah <= 230_000 / 12) {
-    gelirVergisi = (96_000 / 12) * 0.15 + (gvMatrah - 96_000 / 12) * 0.20;
-  } else if (gvMatrah <= 580_000 / 12) {
-    gelirVergisi = (96_000 / 12) * 0.15 + (134_000 / 12) * 0.20 + (gvMatrah - 230_000 / 12) * 0.27;
-  } else {
-    gelirVergisi = (96_000 / 12) * 0.15 + (134_000 / 12) * 0.20 + (350_000 / 12) * 0.27 + (gvMatrah - 580_000 / 12) * 0.35;
-  }
+  // Kümülatif GV hesabı — yıl içinde dilim geçişleri doğru yansır
+  const gelirVergisi = hesaplaKumulatifGV(oncekiGvKumulatif, gvMatrah);
+  const yeniGvKumulatif = oncekiGvKumulatif + gvMatrah;
 
   // Damga vergisi: %0.759
   const damgaVergisi = toplamBrut * 0.00759;
 
   const netMaas = Math.max(0, toplamBrut - sgkIsci - issizlikIsci - gelirVergisi - damgaVergisi);
 
-  // SGK işveren payı: %15.5 + %2 işsizlik = %17.5
-  const sgkIsveren   = toplamBrut * 0.155;
+  // SGK işveren payı: %15.5 + %2 işsizlik
+  const sgkIsveren      = toplamBrut * 0.155;
   const issizlikIsveren = toplamBrut * 0.02;
   const toplamMaliyet   = toplamBrut + sgkIsveren + issizlikIsveren;
 
+  const r = (n: number) => Math.round(n * 100) / 100;
   return {
-    sgkIsci: Math.round(sgkIsci * 100) / 100,
-    issizlikIsci: Math.round(issizlikIsci * 100) / 100,
-    gelirVergisi: Math.round(gelirVergisi * 100) / 100,
-    damgaVergisi: Math.round(damgaVergisi * 100) / 100,
-    netMaas: Math.round(netMaas * 100) / 100,
-    sgkIsveren: Math.round((sgkIsveren + issizlikIsveren) * 100) / 100,
-    toplamMaliyet: Math.round(toplamMaliyet * 100) / 100,
+    sgkIsci:       r(sgkIsci),
+    issizlikIsci:  r(issizlikIsci),
+    gelirVergisi:  r(gelirVergisi),
+    damgaVergisi:  r(damgaVergisi),
+    netMaas:       r(netMaas),
+    sgkIsveren:    r(sgkIsveren + issizlikIsveren),
+    toplamMaliyet: r(toplamMaliyet),
+    gvKumulatif:   r(yeniGvKumulatif),
   };
 }
 
@@ -84,7 +111,20 @@ export async function POST(req: Request) {
   }
 
   const fazlaUcret = Number(fazlaMesaiUcret) || hesaplananFazla;
-  const hesap = hesaplaBordro(personel.maas, fazlaUcret);
+
+  // Bu aydan önceki en son bordrodan kümülatif GV matrahını al (aynı yıl)
+  const yil = ay.slice(0, 4);
+  const oncekiBordro = await db.bordro.findFirst({
+    where: {
+      personelId,
+      ay: { startsWith: yil, lt: ay },
+    },
+    orderBy: { ay: 'desc' },
+    select: { gvKumulatif: true },
+  });
+  const oncekiGvKumulatif = oncekiBordro?.gvKumulatif ?? 0;
+
+  const hesap = hesaplaBordro(personel.maas, fazlaUcret, oncekiGvKumulatif);
 
   const row = await db.bordro.upsert({
     where: { personelId_ay: { personelId, ay } },
