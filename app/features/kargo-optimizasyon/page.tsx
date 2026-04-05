@@ -774,9 +774,9 @@ export default function KargoOptimizasyonPage() {
                 </select>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {([
+                    { field: 'depth',     label: 'Uzunluk (cm)' },
                     { field: 'width',     label: 'Genişlik (cm)' },
                     { field: 'height',    label: 'Yükseklik (cm)' },
-                    { field: 'depth',     label: 'Derinlik (cm)' },
                     { field: 'maxWeight', label: 'Maks. Ağırlık (kg)' },
                   ] as { field: keyof ContainerDims; label: string }[]).map(({ field, label }) => (
                     <div key={field}>
