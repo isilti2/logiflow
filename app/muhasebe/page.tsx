@@ -11,7 +11,7 @@ import {
   Search, X, CheckCircle2, Clock, Building2, Phone,
   Mail, MapPin, Save, CalendarDays, Car, Fuel,
   FileText, Printer, AlertTriangle, ShieldCheck,
-  ClipboardList, Calculator,
+  ClipboardList, Calculator, AlertCircle,
 } from 'lucide-react';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -27,7 +27,7 @@ type Puantaj   = { id: string; personelId: string; tarih: string; girisSaati: st
 type Arac      = { id: string; plaka: string; marka: string; model: string; yil: number | null; ruhsatSon: string | null; sigortaSon: string | null; muayeneSon: string | null; aktif: boolean; notlar: string; createdAt: string; _count?: { yakitKayitlari: number } };
 type YakitKaydi = { id: string; aracId: string; tarih: string; litre: number; birimFiyat: number; toplamTutar: number; kmSayaci: number; istasyon: string; notlar: string; arac?: { id: string; plaka: string; marka: string; model: string } };
 type FaturaSatiri = { aciklama: string; miktar: number; birimFiyat: number; kdvOrani: number };
-type Fatura    = { id: string; faturaNo: string; tarih: string; vadeTarih: string | null; satirlar: string; araToplam: number; kdvToplam: number; genelToplam: number; notlar: string; durum: string; createdAt: string; musteri?: { id: string; ad: string; vergiNo: string; adres: string; email: string; telefon: string } | null; sefer?: { id: string; rotaDan: string; rotaAya: string; aracPlaka: string } | null };
+type Fatura    = { id: string; faturaNo: string; tarih: string; vadeTarih: string | null; satirlar: string; araToplam: number; kdvToplam: number; genelToplam: number; notlar: string; durum: string; dosyaUrl: string | null; createdAt: string; musteri?: { id: string; ad: string; vergiNo: string; adres: string; email: string; telefon: string } | null; sefer?: { id: string; rotaDan: string; rotaAya: string; aracPlaka: string } | null };
 type Bordro    = { id: string; personelId: string; ay: string; brutMaas: number; fazlaMesaiUcret: number; sgkIsci: number; issizlikIsci: number; gelirVergisi: number; damgaVergisi: number; netMaas: number; sgkIsveren: number; toplamMaliyet: number; createdAt: string; personel?: { id: string; ad: string; unvan: string } };
 
 type Tab = 'genel' | 'seferler' | 'islemler' | 'cari' | 'araclar' | 'faturalar' | 'personel' | 'raporlar' | 'donem';
@@ -219,8 +219,7 @@ export default function MuhasebePage() {
   const [puantajForm,  setPuantajForm]  = useState({ personelId: '', tarih: '', girisSaati: '08:00', cikisSaati: '17:00', fazlaMesai: '0', izinTuru: '', notlar: '' });
   const [aracForm,     setAracForm]     = useState({ plaka: '', marka: '', model: '', yil: '', ruhsatSon: '', sigortaSon: '', muayeneSon: '', notlar: '' });
   const [yakitForm,    setYakitForm]    = useState({ aracId: '', tarih: '', litre: '', birimFiyat: '', kmSayaci: '', istasyon: '', notlar: '' });
-  const [faturaForm,   setFaturaForm]   = useState({ musteriId: '', seferId: '', tarih: '', vadeTarih: '', notlar: '', durum: 'beklemede' });
-  const [faturaSatirlari, setFaturaSatirlari] = useState<FaturaSatiri[]>([{ aciklama: '', miktar: 1, birimFiyat: 0, kdvOrani: 20 }]);
+  const [faturaForm,   setFaturaForm]   = useState({ musteriId: '', seferId: '', tarih: '', vadeTarih: '', aciklama: '', durum: 'beklemede', tutar: '', kdvOrani: '20', dosyaUrl: '' });
 
   /* ── Veri yükleme ── */
   const loadAll = useCallback(async () => {
@@ -306,8 +305,22 @@ export default function MuhasebePage() {
   const netKar      = toplamGelir - toplamGider;
   const aktifSefer  = seferler.filter(s => s.durum === 'devam').length;
 
-  const faturaAraToplam = faturaSatirlari.reduce((s, r) => s + r.miktar * r.birimFiyat, 0);
-  const faturaKdvToplam = faturaSatirlari.reduce((s, r) => s + r.miktar * r.birimFiyat * (r.kdvOrani / 100), 0);
+  // vade durumu hesaplama
+  function vadeDurumu(f: Fatura): 'gecikti' | 'yaklasi' | 'normal' | 'odendi' {
+    if (f.durum === 'odendi' || f.durum === 'iptal') return 'odendi';
+    if (!f.vadeTarih) return 'normal';
+    const bugun = new Date(); bugun.setHours(0,0,0,0);
+    const vade  = new Date(f.vadeTarih); vade.setHours(0,0,0,0);
+    const fark  = Math.round((vade.getTime() - bugun.getTime()) / 86400000);
+    if (fark < 0)  return 'gecikti';
+    if (fark <= 7) return 'yaklasi';
+    return 'normal';
+  }
+  function vadeFark(vadeTarih: string): number {
+    const bugun = new Date(); bugun.setHours(0,0,0,0);
+    const vade  = new Date(vadeTarih); vade.setHours(0,0,0,0);
+    return Math.round((vade.getTime() - bugun.getTime()) / 86400000);
+  }
 
   /* ── Handlers: Müşteri ── */
   async function submitMusteri(e: React.FormEvent) {
@@ -446,15 +459,38 @@ export default function MuhasebePage() {
   }
 
   /* ── Handlers: Fatura ── */
-  function addFaturaSatiri() { setFaturaSatirlari(p => [...p, { aciklama: '', miktar: 1, birimFiyat: 0, kdvOrani: 20 }]); }
-  function removeFaturaSatiri(i: number) { setFaturaSatirlari(p => p.filter((_, idx) => idx !== i)); }
-  function updateSatir(i: number, field: keyof FaturaSatiri, value: string | number) {
-    setFaturaSatirlari(p => p.map((s, idx) => idx === i ? { ...s, [field]: typeof value === 'string' ? value : Number(value) } : s));
+  async function handleFaturaDosya(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { alert('Dosya 5 MB\'dan büyük olamaz.'); return; }
+    const reader = new FileReader();
+    reader.onload = () => setFaturaForm(p => ({ ...p, dosyaUrl: reader.result as string }));
+    reader.readAsDataURL(file);
   }
   async function submitFatura(e: React.FormEvent) {
     e.preventDefault();
-    const res = await fetch('/api/muhasebe/faturalar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...faturaForm, satirlar: faturaSatirlari }) });
-    if (res.ok) { const n = await res.json(); setFaturalar(p => [n, ...p]); setFaturaForm({ musteriId: '', seferId: '', tarih: '', vadeTarih: '', notlar: '', durum: 'beklemede' }); setFaturaSatirlari([{ aciklama: '', miktar: 1, birimFiyat: 0, kdvOrani: 20 }]); setShowForm(false); }
+    if (!faturaForm.tutar || Number(faturaForm.tutar) <= 0) return;
+    const res = await fetch('/api/muhasebe/faturalar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        musteriId: faturaForm.musteriId,
+        seferId:   faturaForm.seferId,
+        tarih:     faturaForm.tarih,
+        vadeTarih: faturaForm.vadeTarih,
+        tutar:     Number(faturaForm.tutar),
+        kdvOrani:  Number(faturaForm.kdvOrani),
+        aciklama:  faturaForm.aciklama,
+        durum:     faturaForm.durum,
+        dosyaUrl:  faturaForm.dosyaUrl || null,
+      }),
+    });
+    if (res.ok) {
+      const n = await res.json();
+      setFaturalar(p => [...p, n].sort((a,b) => (a.vadeTarih??'9999') < (b.vadeTarih??'9999') ? -1 : 1));
+      setFaturaForm({ musteriId: '', seferId: '', tarih: '', vadeTarih: '', aciklama: '', durum: 'beklemede', tutar: '', kdvOrani: '20', dosyaUrl: '' });
+      setShowForm(false);
+    }
   }
   async function updateFaturaDurum(id: string, durum: string) {
     const res = await fetch(`/api/muhasebe/faturalar/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ durum }) });
@@ -1097,126 +1133,195 @@ export default function MuhasebePage() {
         {/* ════════════════════════════════════════════════════════
             FATURALAR
         ════════════════════════════════════════════════════════ */}
-        {tab === 'faturalar' && (
-          <>
-            <div className="grid grid-cols-3 gap-4">
-              <StatCard label="Toplam Fatura" value={TL(faturalar.reduce((s,f)=>s+f.genelToplam,0))} color="blue" icon={FileText} sub={`${faturalar.length} adet`}/>
-              <StatCard label="Ödenen" value={TL(faturalar.filter(f=>f.durum==='odendi').reduce((s,f)=>s+f.genelToplam,0))} color="green" icon={CheckCircle2}/>
-              <StatCard label="Bekleyen" value={TL(faturalar.filter(f=>f.durum==='beklemede').reduce((s,f)=>s+f.genelToplam,0))} color="amber" icon={Clock} sub={`${faturalar.filter(f=>f.durum==='beklemede').length} açık`}/>
-            </div>
-
-            <div className="flex items-center gap-3 flex-wrap">
-              <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"/>
-                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Fatura no veya müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        {tab === 'faturalar' && (() => {
+          const gecikmisFaturalar = faturalar.filter(f => vadeDurumu(f) === 'gecikti');
+          const yaklasiyor       = faturalar.filter(f => vadeDurumu(f) === 'yaklasi');
+          const filtreliF = faturalar.filter(f =>
+            !search ||
+            f.faturaNo.toLowerCase().includes(search.toLowerCase()) ||
+            (f.musteri?.ad ?? '').toLowerCase().includes(search.toLowerCase())
+          );
+          return (
+            <>
+              {/* Özet kartlar */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <StatCard label="Toplam Fatura" value={TL(faturalar.reduce((s,f)=>s+f.genelToplam,0))} color="blue" icon={FileText} sub={`${faturalar.length} adet`}/>
+                <StatCard label="Ödenen" value={TL(faturalar.filter(f=>f.durum==='odendi').reduce((s,f)=>s+f.genelToplam,0))} color="green" icon={CheckCircle2} sub={`${faturalar.filter(f=>f.durum==='odendi').length} fatura`}/>
+                <StatCard label="Bekleyen" value={TL(faturalar.filter(f=>f.durum==='beklemede').reduce((s,f)=>s+f.genelToplam,0))} color="amber" icon={Clock} sub={`${faturalar.filter(f=>f.durum==='beklemede').length} açık`}/>
+                <StatCard label="Gecikmiş" value={TL(gecikmisFaturalar.reduce((s,f)=>s+f.genelToplam,0))} color="red" icon={AlertCircle} sub={`${gecikmisFaturalar.length} fatura gecikmiş`}/>
               </div>
-              <button onClick={()=>setShowForm(p=>!p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4"/> Yeni Fatura</button>
-            </div>
 
-            {showForm && (
-              <form onSubmit={submitFatura} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-gray-900">Yeni Fatura</h3>
-                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div><label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri</label>
-                    <select value={faturaForm.musteriId} onChange={e=>setFaturaForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option value="">— Seç —</option>{musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
-                    </select></div>
-                  <div><label className="block text-xs font-semibold text-gray-600 mb-1">İlgili Sefer</label>
-                    <select value={faturaForm.seferId} onChange={e=>setFaturaForm(p=>({...p,seferId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option value="">— Seç —</option>{seferler.map(s=><option key={s.id} value={s.id}>{s.rotaDan}→{s.rotaAya} ({s.aracPlaka})</option>)}
-                    </select></div>
-                  <div><label className="block text-xs font-semibold text-gray-600 mb-1">Fatura Tarihi *</label><input required type="date" value={faturaForm.tarih} onChange={e=>setFaturaForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
-                  <div><label className="block text-xs font-semibold text-gray-600 mb-1">Vade Tarihi</label><input type="date" value={faturaForm.vadeTarih} onChange={e=>setFaturaForm(p=>({...p,vadeTarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
-                </div>
-
-                {/* Satır kalemleri */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Fatura Kalemleri</label>
-                    <button type="button" onClick={addFaturaSatiri} className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-semibold"><Plus className="w-3.5 h-3.5"/> Satır Ekle</button>
-                  </div>
-                  <div className="overflow-x-auto rounded-xl border border-gray-100">
-                    <table className="w-full text-sm">
-                      <thead><tr className="bg-gray-50 border-b border-gray-100">
-                        {['Açıklama','Miktar','Birim Fiyat (₺)','KDV (%)','Toplam',''].map(h=><th key={h} className="text-left px-3 py-2 text-xs font-semibold text-gray-500 whitespace-nowrap">{h}</th>)}
-                      </tr></thead>
-                      <tbody>
-                        {faturaSatirlari.map((s,i)=>(
-                          <tr key={i} className="border-b border-gray-50">
-                            <td className="px-3 py-2"><input value={s.aciklama} onChange={e=>updateSatir(i,'aciklama',e.target.value)} placeholder="Hizmet/Ürün açıklaması" className="w-full min-w-[180px] px-2 py-1 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></td>
-                            <td className="px-3 py-2"><input type="number" min="1" value={s.miktar} onChange={e=>updateSatir(i,'miktar',e.target.value)} className="w-20 px-2 py-1 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></td>
-                            <td className="px-3 py-2"><input type="number" min="0" step="0.01" value={s.birimFiyat} onChange={e=>updateSatir(i,'birimFiyat',e.target.value)} className="w-28 px-2 py-1 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></td>
-                            <td className="px-3 py-2">
-                              <select value={s.kdvOrani} onChange={e=>updateSatir(i,'kdvOrani',e.target.value)} className="w-20 px-2 py-1 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                {KDV_ORANLARI.map(k=><option key={k} value={k}>%{k}</option>)}
-                              </select></td>
-                            <td className="px-3 py-2 font-semibold text-gray-800 whitespace-nowrap">{TL(s.miktar*s.birimFiyat*(1+s.kdvOrani/100))}</td>
-                            <td className="px-3 py-2"><button type="button" onClick={()=>removeFaturaSatiri(i)} className="text-gray-300 hover:text-red-500"><Trash2 className="w-4 h-4"/></button></td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="flex justify-end gap-6 mt-3 pr-3 text-sm">
-                    <span className="text-gray-500">Ara: <strong>{TL(faturaAraToplam)}</strong></span>
-                    <span className="text-gray-500">KDV: <strong>{TL(faturaKdvToplam)}</strong></span>
-                    <span className="text-gray-900 font-black">Toplam: {TL(faturaAraToplam+faturaKdvToplam)}</span>
+              {/* Uyarı bantları */}
+              {gecikmisFaturalar.length > 0 && (
+                <div className="bg-red-50 border border-red-200 rounded-2xl p-4 flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5"/>
+                  <div>
+                    <p className="text-sm font-bold text-red-700">{gecikmisFaturalar.length} Faturanın Vadesi Geçmiş</p>
+                    <p className="text-xs text-red-600 mt-0.5">{gecikmisFaturalar.map(f=>`${f.faturaNo} (${f.musteri?.ad??'—'})`).join(' · ')}</p>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div><label className="block text-xs font-semibold text-gray-600 mb-1">Notlar</label><input value={faturaForm.notlar} onChange={e=>setFaturaForm(p=>({...p,notlar:e.target.value}))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
-                  <div><label className="block text-xs font-semibold text-gray-600 mb-1">Durum</label>
-                    <select value={faturaForm.durum} onChange={e=>setFaturaForm(p=>({...p,durum:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option value="beklemede">Beklemede</option><option value="odendi">Ödendi</option><option value="iptal">İptal</option>
-                    </select></div>
+              )}
+              {yaklasiyor.length > 0 && (
+                <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
+                  <Clock className="w-5 h-5 text-amber-500 shrink-0 mt-0.5"/>
+                  <div>
+                    <p className="text-sm font-bold text-amber-700">{yaklasiyor.length} Faturanın Vadesi 7 Gün İçinde</p>
+                    <p className="text-xs text-amber-600 mt-0.5">{yaklasiyor.map(f=>`${f.faturaNo} — ${vadeFark(f.vadeTarih!)} gün kaldı`).join(' · ')}</p>
+                  </div>
                 </div>
-                <div className="flex gap-2 justify-end">
-                  <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl"><Save className="w-4 h-4"/> Fatura Oluştur</button>
-                </div>
-              </form>
-            )}
+              )}
 
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Fatura No','Tarih','Vade','Müşteri','Sefer','Tutar','KDV','Toplam','Durum',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                <tbody className="divide-y divide-gray-50">
-                  {faturalar.filter(f=>!search||f.faturaNo.toLowerCase().includes(search.toLowerCase())||(f.musteri?.ad??'').toLowerCase().includes(search.toLowerCase())).map(f=>(
-                    <tr key={f.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 font-mono font-bold text-gray-900">{f.faturaNo}</td>
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(f.tarih)}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs whitespace-nowrap">{f.vadeTarih?fmtDate(f.vadeTarih):'—'}</td>
-                      <td className="px-4 py-3 text-gray-700 font-semibold">{f.musteri?.ad??'—'}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{f.sefer?`${f.sefer.rotaDan}→${f.sefer.rotaAya}`:'—'}</td>
-                      <td className="px-4 py-3 text-gray-600 whitespace-nowrap">{TL(f.araToplam)}</td>
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{TL(f.kdvToplam)}</td>
-                      <td className="px-4 py-3 font-black text-gray-900 whitespace-nowrap">{TL(f.genelToplam)}</td>
-                      <td className="px-4 py-3">
-                        <select value={f.durum} onChange={e=>updateFaturaDurum(f.id,e.target.value)} className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          <option value="beklemede">Beklemede</option><option value="odendi">Ödendi</option><option value="iptal">İptal</option>
-                        </select>
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-2">
-                          <button onClick={()=>printFatura(f)} title="Yazdır / PDF" className="text-gray-500 hover:text-blue-600 transition-colors"><Printer className="w-4 h-4"/></button>
-                          <button onClick={()=>deleteFatura(f.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {!faturalar.length&&(
-                    <tr><td colSpan={10}>
-                      <EmptyState icon={FileText} title="Henüz fatura yok" description="Müşterilerinize fatura keserek alacak takibine başlayın." action={{ label: 'Fatura Oluştur', onClick: () => setShowForm(true) }} />
-                    </td></tr>
+              {/* Arama + Ekle */}
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="relative flex-1 min-w-[200px]">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"/>
+                  <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Fatura no veya müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                </div>
+                <button onClick={()=>setShowForm(p=>!p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
+                  <Plus className="w-4 h-4"/> Fatura Ekle
+                </button>
+              </div>
+
+              {/* Form: basit giriş */}
+              {showForm && (
+                <form onSubmit={submitFatura} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-gray-900">Fatura Bilgisi Gir</h3>
+                    <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri / Tedarikçi</label>
+                      <select value={faturaForm.musteriId} onChange={e=>setFaturaForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">— Seç (opsiyonel) —</option>
+                        {musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Fatura Tarihi *</label>
+                      <input required type="date" value={faturaForm.tarih} onChange={e=>setFaturaForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Vade Tarihi</label>
+                      <input type="date" value={faturaForm.vadeTarih} onChange={e=>setFaturaForm(p=>({...p,vadeTarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Tutar (KDV Dahil ₺) *</label>
+                      <input required type="number" min="0" step="0.01" value={faturaForm.tutar} onChange={e=>setFaturaForm(p=>({...p,tutar:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">KDV Oranı</label>
+                      <select value={faturaForm.kdvOrani} onChange={e=>setFaturaForm(p=>({...p,kdvOrani:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {[0,1,8,10,18,20].map(k=><option key={k} value={k}>%{k}</option>)}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Durum</label>
+                      <select value={faturaForm.durum} onChange={e=>setFaturaForm(p=>({...p,durum:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="beklemede">Beklemede</option>
+                        <option value="odendi">Ödendi</option>
+                        <option value="iptal">İptal</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Açıklama / Notlar</label>
+                      <input value={faturaForm.aciklama} onChange={e=>setFaturaForm(p=>({...p,aciklama:e.target.value}))} placeholder="Fatura konusu, referans no vb." className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Fatura Dosyası (PDF / Resim, maks. 5 MB)</label>
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={handleFaturaDosya} className="w-full text-sm text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                      {faturaForm.dosyaUrl && <p className="text-xs text-emerald-600 mt-1">✓ Dosya hazır</p>}
+                    </div>
+                  </div>
+
+                  {faturaForm.tutar && Number(faturaForm.tutar) > 0 && (
+                    <div className="bg-gray-50 rounded-xl p-3 text-xs text-gray-600 flex gap-6">
+                      <span>Ara toplam: <strong>{TL(Number(faturaForm.tutar)/(1+Number(faturaForm.kdvOrani)/100))}</strong></span>
+                      <span>KDV (%{faturaForm.kdvOrani}): <strong>{TL(Number(faturaForm.tutar)-Number(faturaForm.tutar)/(1+Number(faturaForm.kdvOrani)/100))}</strong></span>
+                      <span className="font-black text-gray-900">Genel Toplam: {TL(Number(faturaForm.tutar))}</span>
+                    </div>
                   )}
-                </tbody>
-              </table>
-            </div>
-          </>
-        )}
+
+                  <div className="flex justify-end">
+                    <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl">
+                      <Save className="w-4 h-4"/> Kaydet
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* Fatura listesi */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-100">
+                      {['','Fatura No','Müşteri','Fatura Tar.','Vade / Kalan','Tutar','Durum',''].map(h=>(
+                        <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {filtreliF.map(f => {
+                      const durum = vadeDurumu(f);
+                      const rowBg = durum==='gecikti' ? 'bg-red-50/60 hover:bg-red-50' : durum==='yaklasi' ? 'bg-amber-50/50 hover:bg-amber-50' : 'hover:bg-gray-50';
+                      const fark  = f.vadeTarih ? vadeFark(f.vadeTarih) : null;
+                      return (
+                        <tr key={f.id} className={`transition-colors ${rowBg}`}>
+                          {/* Durum göstergesi */}
+                          <td className="pl-4 py-3 w-2">
+                            <span className={`block w-2 h-2 rounded-full ${durum==='gecikti'?'bg-red-500':durum==='yaklasi'?'bg-amber-400':durum==='odendi'?'bg-emerald-400':'bg-gray-300'}`}/>
+                          </td>
+                          <td className="px-4 py-3 font-mono font-bold text-gray-900">{f.faturaNo}</td>
+                          <td className="px-4 py-3 font-semibold text-gray-700">{f.musteri?.ad??'—'}</td>
+                          <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(f.tarih)}</td>
+                          <td className="px-4 py-3 whitespace-nowrap">
+                            {f.vadeTarih ? (
+                              <div>
+                                <p className="text-xs text-gray-500">{fmtDate(f.vadeTarih)}</p>
+                                {durum!=='odendi' && fark!==null && (
+                                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${fark<0?'bg-red-100 text-red-700':fark<=7?'bg-amber-100 text-amber-700':'bg-gray-100 text-gray-500'}`}>
+                                    {fark<0?`${Math.abs(fark)} gün geçti`:fark===0?'Bugün vadeli':`${fark} gün kaldı`}
+                                  </span>
+                                )}
+                              </div>
+                            ) : <span className="text-gray-400 text-xs">—</span>}
+                          </td>
+                          <td className="px-4 py-3 font-black text-gray-900 whitespace-nowrap">{TL(f.genelToplam)}</td>
+                          <td className="px-4 py-3">
+                            <select value={f.durum} onChange={e=>updateFaturaDurum(f.id,e.target.value)} className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                              <option value="beklemede">Beklemede</option>
+                              <option value="odendi">Ödendi</option>
+                              <option value="iptal">İptal</option>
+                            </select>
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="flex items-center gap-2">
+                              {f.dosyaUrl && (
+                                <a href={f.dosyaUrl} target="_blank" rel="noopener noreferrer" title="Dosyayı Gör" className="text-gray-500 hover:text-blue-600 transition-colors">
+                                  <FileText className="w-4 h-4"/>
+                                </a>
+                              )}
+                              <button onClick={()=>deleteFatura(f.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    {!faturalar.length && (
+                      <tr><td colSpan={8}>
+                        <EmptyState icon={FileText} title="Henüz fatura yok" description="Fatura ekleyerek vade takibine başlayın. El ile giriş veya dosya yükleyebilirsiniz." action={{ label: 'Fatura Ekle', onClick: () => setShowForm(true) }} />
+                      </td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          );
+        })()}
 
         {/* ════════════════════════════════════════════════════════
             PERSONEL & PUANTAJ & BORDRO

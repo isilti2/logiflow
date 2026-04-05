@@ -332,6 +332,7 @@ model Fatura {
   genelToplam Float
   notlar      String   @default("")
   durum       String   @default("beklemede")
+  dosyaUrl    String?
   createdAt   DateTime @default(now())
 
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
