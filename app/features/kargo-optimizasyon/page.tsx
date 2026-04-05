@@ -1040,16 +1040,16 @@ export default function KargoOptimizasyonPage() {
                       />
                     </div>
 
-                    {/* Boyutlar: Uzunluk × Genişlik × Yükseklik */}
+                    {/* Boyutlar: Genişlik × Yükseklik × Derinlik */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">
-                        Boyutlar <span className="font-normal normal-case text-gray-300">(Uzunluk × Genişlik × Yükseklik — cm)</span>
+                        Boyutlar <span className="font-normal normal-case text-gray-300">(Genişlik × Yükseklik × Derinlik — cm)</span>
                       </label>
                       <div className="flex items-center gap-1.5">
                         {([
-                          { field: 'width',  ph: 'Uzunluk' },
-                          { field: 'height', ph: 'Genişlik' },
-                          { field: 'depth',  ph: 'Yükseklik' },
+                          { field: 'width',  ph: 'Genişlik' },
+                          { field: 'height', ph: 'Yükseklik' },
+                          { field: 'depth',  ph: 'Derinlik' },
                         ] as { field: 'width' | 'height' | 'depth'; ph: string }[]).map(({ field, ph }, i) => (
                           <>
                             <div key={field} className="flex flex-col gap-0.5 flex-1">
