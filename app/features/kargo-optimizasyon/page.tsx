@@ -874,7 +874,7 @@ export default function KargoOptimizasyonPage() {
                     <thead>
                       <tr className="border-b border-gray-100 text-gray-400">
                         <th className="text-left pb-2 pr-2 font-semibold">Ad</th>
-                        <th className="text-left pb-2 pr-2 font-semibold">G×Y×D (cm)</th>
+                        <th className="text-left pb-2 pr-2 font-semibold">U×G×Y (cm)</th>
                         <th className="text-center pb-2 pr-2 font-semibold">Adet</th>
                         <th className="text-center pb-2 pr-2 font-semibold">Ağırlık</th>
                         <th className="text-center pb-2 pr-2 font-semibold">Rot.</th>
@@ -912,7 +912,7 @@ export default function KargoOptimizasyonPage() {
                                   ))}
                                 </div>
                               ) : (
-                                <span className="text-gray-500 font-mono">{item.width}×{item.height}×{item.depth}</span>
+                                <span className="text-gray-500 font-mono">{item.depth}×{item.width}×{item.height}</span>
                               )}
                             </td>
                             <td className="py-1.5 pr-2 text-center">
@@ -1040,16 +1040,16 @@ export default function KargoOptimizasyonPage() {
                       />
                     </div>
 
-                    {/* Boyutlar: Genişlik × Yükseklik × Derinlik */}
+                    {/* Boyutlar: Uzunluk × Genişlik × Yükseklik */}
                     <div className="flex flex-col gap-1">
                       <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">
-                        Boyutlar <span className="font-normal normal-case text-gray-300">(Genişlik × Yükseklik × Derinlik — cm)</span>
+                        Boyutlar <span className="font-normal normal-case text-gray-300">(Uzunluk × Genişlik × Yükseklik — cm)</span>
                       </label>
                       <div className="flex items-center gap-1.5">
                         {([
+                          { field: 'depth',  ph: 'Uzunluk' },
                           { field: 'width',  ph: 'Genişlik' },
                           { field: 'height', ph: 'Yükseklik' },
-                          { field: 'depth',  ph: 'Derinlik' },
                         ] as { field: 'width' | 'height' | 'depth'; ph: string }[]).map(({ field, ph }, i) => (
                           <>
                             <div key={field} className="flex flex-col gap-0.5 flex-1">
