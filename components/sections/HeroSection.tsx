@@ -165,13 +165,13 @@ export default function HeroSection() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
               <Link href="/register"
-                className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-200 shadow-xl shadow-blue-900/40 text-sm ring-1 ring-blue-500">
-                Ücretsiz Başla
+                className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-200 shadow-xl shadow-blue-900/50 text-sm ring-1 ring-blue-400">
+                Ücretsiz Başla — Kredi Kartı Yok
                 <span className="group-hover:translate-x-0.5 transition-transform"><ArrowRight /></span>
               </Link>
               <Link href="/login"
-                className="inline-flex items-center gap-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 font-medium px-8 py-4 rounded-2xl transition-all duration-200 text-sm backdrop-blur">
-                Giriş Yap
+                className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-300 font-medium text-sm px-4 py-4 transition-colors">
+                Zaten hesabım var →
               </Link>
             </div>
 
@@ -365,13 +365,13 @@ export default function HeroSection() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link href="/register"
-                  className="group inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-blue-700 font-bold px-8 py-4 rounded-2xl transition-all duration-200 shadow-lg text-sm">
-                  Ücretsiz Başla
+                  className="group inline-flex items-center gap-2 bg-white hover:bg-gray-50 active:scale-95 text-blue-700 font-bold px-8 py-4 rounded-2xl transition-all duration-200 shadow-lg text-sm">
+                  Ücretsiz Başla — Kredi Kartı Yok
                   <span className="group-hover:translate-x-0.5 transition-transform"><ArrowRight /></span>
                 </Link>
                 <Link href="/login"
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-8 py-4 rounded-2xl transition-all duration-200 text-sm backdrop-blur">
-                  Mevcut Hesabım Var
+                  className="inline-flex items-center gap-2 text-blue-200 hover:text-white font-medium text-sm px-4 py-4 transition-colors">
+                  Zaten hesabım var →
                 </Link>
               </div>
             </div>

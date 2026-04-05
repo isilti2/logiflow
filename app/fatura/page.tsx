@@ -8,6 +8,7 @@ import {
   CreditCard, CheckCircle2, LogOut, Zap, Shield, BarChart3,
   Users, Package, ArrowRight, Star,
 } from 'lucide-react';
+import { Breadcrumb } from '@/components/ui/Breadcrumb';
 
 const PLANS = [
   {
@@ -147,6 +148,7 @@ export default function FaturaPage() {
       </header>
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+        <Breadcrumb items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Plan & Fatura' }]} className="mb-2" />
 
         {/* Hero */}
         <div className="flex items-center gap-3">

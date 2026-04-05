@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { Spinner } from '@/components/ui/Spinner';
+import { Breadcrumb } from '@/components/ui/Breadcrumb';
 
 
 export default function ProfilPage() {
@@ -132,6 +133,7 @@ export default function ProfilPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-5">
+        <Breadcrumb items={[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Hesabım' }]} className="mb-2" />
 
         {/* Profile header card */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col sm:flex-row items-start sm:items-center gap-5">

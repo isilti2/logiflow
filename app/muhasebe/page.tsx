@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { Breadcrumb } from '@/components/ui/Breadcrumb';
 
 /* ─── Types ─────────────────────────────────────────────────── */
 type Musteri   = { id: string; ad: string; vergiNo: string; telefon: string; email: string; adres: string; bakiye: number; createdAt: string };
@@ -499,6 +500,14 @@ export default function MuhasebePage() {
           </div>
         </div>
       </header>
+
+      {/* Breadcrumb */}
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-4 pb-1">
+        <Breadcrumb items={[
+          { label: 'Dashboard', href: '/dashboard' },
+          { label: 'Lojistik Muhasebe' },
+        ]} />
+      </div>
 
       {/* Tab nav */}
       <div className="bg-white border-b border-gray-100 sticky top-16 z-30">
