@@ -13,6 +13,9 @@ import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { EmptyState } from '@/components/ui/EmptyState';
 import OnboardingWizard from '@/components/ui/OnboardingWizard';
 import NotificationBell from '@/components/ui/NotificationBell';
+import dynamic from 'next/dynamic';
+
+const DashboardCharts = dynamic(() => import('@/components/charts/DashboardCharts'), { ssr: false });
 
 const APP_FEATURES = [
   {
@@ -313,6 +316,9 @@ export default function DashboardPage() {
             </div>
           ))}
         </div>
+
+        {/* Mali Analitik Charts */}
+        <DashboardCharts />
 
         {/* Getting started — only when no data yet */}
         {recentOpts.length === 0 && areaInfos.length === 0 && (
