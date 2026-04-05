@@ -293,6 +293,13 @@ export default function MuhasebePage() {
   useEffect(() => { if (authed && tab === 'araclar') loadYakit(); }, [authed, tab, selArac, loadYakit]);
   useEffect(() => { if (authed && tab === 'raporlar') loadRapor(raporTip, raporDonem); }, [authed, tab, raporTip, raporDonem, loadRapor]);
 
+  /* Escape ile form kapat */
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) { if (e.key === 'Escape' && showForm) setShowForm(false); }
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [showForm]);
+
   /* ── Hesaplar ── */
   const toplamGelir = islemler.filter(i => i.tur === 'gelir').reduce((s, i) => s + i.tutar, 0);
   const toplamGider = islemler.filter(i => i.tur === 'gider').reduce((s, i) => s + i.tutar, 0);

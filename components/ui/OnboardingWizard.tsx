@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Package, BarChart3, Building2, Share2, Zap,
   ChevronRight, X, CheckCircle2, Calculator, Navigation, Truck,
@@ -63,6 +63,7 @@ const COLOR: Record<string, { bg: string; icon: string; dot: string; btn: string
 export default function OnboardingWizard() {
   const [visible, setVisible] = useState(false);
   const [step, setStep] = useState(0);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -70,6 +71,33 @@ export default function OnboardingWizard() {
       if (!done) setVisible(true);
     }
   }, []);
+
+  /* Focus trap: Tab tuşu modal içinde kalır */
+  useEffect(() => {
+    if (!visible) return;
+    const el = dialogRef.current;
+    if (!el) return;
+
+    const focusable = el.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
+    first?.focus();
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') { finish(); return; }
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first?.focus(); }
+      }
+    }
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [visible, step]); // step değişince focusable elementler yeniden hesapla
 
   function finish() {
     localStorage.setItem(LS_KEY, 'true');
@@ -90,6 +118,7 @@ export default function OnboardingWizard() {
 
       {/* Card */}
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="onboarding-title"

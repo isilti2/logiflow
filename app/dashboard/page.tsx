@@ -194,7 +194,7 @@ export default function DashboardPage() {
             ))}
           </div>
           {/* Skeleton cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5 space-y-4 shadow-sm">
                 <div className="w-11 h-11 bg-gray-100 rounded-xl animate-pulse" />
@@ -299,7 +299,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map(({ label, value, delta, icon: Icon }) => (
             <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
               <div className="flex items-center justify-between mb-3">
@@ -347,7 +347,7 @@ export default function DashboardPage() {
         {/* Feature cards */}
         <div>
           <h2 className="text-base font-bold text-gray-900 mb-4">Uygulamalar</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {APP_FEATURES.map((feature) => {
               const Icon = feature.icon;
               const colors = COLOR_MAP[feature.color];

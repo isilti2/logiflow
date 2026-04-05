@@ -19,8 +19,8 @@ export function toast(message: string, type: ToastType = 'success') {
 
 const ICONS = {
   success: CheckCircle2,
-  error: AlertTriangle,
-  info: Info,
+  error:   AlertTriangle,
+  info:    Info,
 };
 
 const COLORS = {
@@ -54,21 +54,31 @@ export default function ToastContainer() {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-[9999] flex flex-col gap-2 items-end pointer-events-none">
+    /* Mobile: üst-sağ (butonları kapatmaz) | Desktop: alt-sağ */
+    <div
+      role="region"
+      aria-live="polite"
+      aria-label="Bildirimler"
+      className="fixed z-[9999] flex flex-col gap-2 items-end pointer-events-none
+        top-5 right-5
+        sm:top-auto sm:bottom-5 sm:right-5"
+    >
       {toasts.map((t) => {
         const Icon = ICONS[t.type];
         return (
           <div
             key={t.id}
-            className={`flex items-center gap-3 px-4 py-3 rounded-2xl border shadow-2xl text-sm font-medium pointer-events-auto max-w-xs animate-in slide-in-from-right-5 fade-in duration-300 ${COLORS[t.type]}`}
+            role="alert"
+            className={`flex items-center gap-3 px-4 py-3 rounded-2xl border shadow-2xl text-sm font-medium pointer-events-auto max-w-xs w-full sm:w-auto animate-in slide-in-from-right-5 fade-in duration-300 ${COLORS[t.type]}`}
           >
-            <Icon className={`w-4 h-4 shrink-0 ${ICON_COLORS[t.type]}`} />
+            <Icon className={`w-4 h-4 shrink-0 ${ICON_COLORS[t.type]}`} aria-hidden="true" />
             <span className="flex-1">{t.message}</span>
             <button
               onClick={() => setToasts((prev) => prev.filter((x) => x.id !== t.id))}
-              className="text-gray-500 hover:text-white transition-colors"
+              aria-label="Bildirimi kapat"
+              className="text-gray-500 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-white/30 rounded"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           </div>
         );

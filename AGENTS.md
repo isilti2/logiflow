@@ -237,23 +237,23 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 2. **YÜKSEK** (tutarsızlık, boş state eksikliği, CTA sorunu): Kullanıcı onayıyla düzelt.
 3. **ORTA/DÜŞÜK**: Roadmap'e ekle, bir sonraki sprint'te birleştir.
 
-### Güncel UI/UX Durumu (2026-04-05)
+### Güncel UI/UX Durumu (2026-04-05 → güncellendi 2026-04-05)
 | Öncelik | Konu | Durum |
 |---------|------|-------|
-| KRİTİK | Onboarding akışı: Register → Dashboard ilk adım rehberliği yok | Açık |
-| KRİTİK | Network error handling: fetch catch eksik tüm data sayfalarında | Açık |
-| YÜKSEK | Renk sistemi: Landing (dark) ↔ App (light) kopukluğu | Açık |
-| YÜKSEK | Aria-label'lar: Icon-only butonlarda eksik | Açık |
-| YÜKSEK | CTA hiyerarşi: Hero'da primary/secondary farkı belirsiz | Açık |
-| YÜKSEK | Form ErrorAlert: Bileşen yok, her sayfa farklı gösteriyor | Açık |
-| YÜKSEK | Empty state tasarımı: Dashboard, Konum, Muhasebe yetersiz | Açık |
-| ORTA | Typography scale: H1→H4 tutarsız tüm sayfalarda | Açık |
-| ORTA | Spinner bileşeni: Her sayfada farklı boyut/renk | Açık |
-| ORTA | Breadcrumb: Muhasebe, Profil, Fatura sayfalarında yok | Açık |
-| ORTA | Keyboard navigation: Focus ring + modal focus trap eksik | Açık |
-| ORTA | Renk kontrastı: text-gray-400/500 WCAG AA altında | Açık |
-| ORTA | Button hover/active: active:scale-95 + transition standardı yok | Açık |
-| ORTA | Navbar modül dropdown: Muhasebe/Konum/Şoför linkleri gizli | Açık |
-| DÜŞÜK | Toast mobil pozisyon: bottom-5 butonları kapatıyor | Açık |
-| DÜŞÜK | Page title/metadata: Tüm sayfalar "LogiFlow" diye bitiyor | Açık |
-| DÜŞÜK | Tablet breakpoint (md:): Grid kolonlarda atlanmış | Açık |
+| KRİTİK | Onboarding akışı: Register → Dashboard ilk adım rehberliği yok | ✅ Çözüldü — 5 adımlı OnboardingWizard (Muhasebe, Konum, Şoför dahil) |
+| KRİTİK | Network error handling: fetch catch eksik tüm data sayfalarında | ✅ Çözüldü — try/catch + netError state + ErrorAlert banner |
+| YÜKSEK | Renk sistemi: Landing (dark) ↔ App (light) kopukluğu | ✅ Çözüldü — hero altına gradient fade (dark→white) |
+| YÜKSEK | Aria-label'lar: Icon-only butonlarda eksik | ✅ Çözüldü — Şoför, Konum, Dashboard butonlarına eklendi |
+| YÜKSEK | CTA hiyerarşi: Hero'da primary/secondary farkı belirsiz | ✅ Çözüldü — primary güçlendirildi, secondary text-link'e dönüştü |
+| YÜKSEK | Form ErrorAlert: Bileşen yok, her sayfa farklı gösteriyor | ✅ Çözüldü — ErrorAlert bileşeni (error/success/info, dismiss destekli) |
+| YÜKSEK | Empty state tasarımı: Dashboard, Konum, Muhasebe yetersiz | ✅ Çözüldü — EmptyState bileşeni, 11+ lokasyonda entegre |
+| ORTA | Typography scale: H1→H4 tutarsız tüm sayfalarda | Açık — sonraki sprint |
+| ORTA | Spinner bileşeni: Her sayfada farklı boyut/renk | ✅ Çözüldü — Spinner bileşeni (sm/md/lg, role=status) |
+| ORTA | Breadcrumb: Muhasebe, Profil, Fatura sayfalarında yok | ✅ Çözüldü — Breadcrumb bileşeni + 3 sayfada entegre |
+| ORTA | Keyboard navigation: Focus ring + modal focus trap eksik | ✅ Çözüldü — OnboardingWizard focus trap, Muhasebe Escape ile kapat |
+| ORTA | Renk kontrastı: text-gray-400/500 WCAG AA altında | Açık — sonraki sprint |
+| ORTA | Button hover/active: active:scale-95 + transition standardı yok | ✅ Çözüldü — Button.tsx standardize, active:scale-95 + focus:ring |
+| ORTA | Navbar modül dropdown: Muhasebe/Konum/Şoför linkleri gizli | ✅ Çözüldü — 6 modüllü dropdown panel + mobile mega-menu |
+| DÜŞÜK | Toast mobil pozisyon: bottom-5 butonları kapatıyor | ✅ Çözüldü — mobile=top-5, desktop=bottom-5, aria-live=polite |
+| DÜŞÜK | Page title/metadata: Tüm sayfalar "LogiFlow" diye bitiyor | ✅ Çözüldü — 9 sayfa için ayrı layout.tsx metadata |
+| DÜŞÜK | Tablet breakpoint (md:): Grid kolonlarda atlanmış | ✅ Çözüldü — Dashboard grid md:grid-cols-3 eklendi |
