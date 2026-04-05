@@ -7,7 +7,7 @@ import Navbar from '@/components/layout/Navbar';
 import AuthGuard from '@/components/AuthGuard';
 import {
   Package, Box, BarChart3, CheckCircle2, ChevronRight,
-  Plus, Trash2, Zap, AlertTriangle, Printer, RotateCcw,
+  Plus, Trash2, Zap, AlertTriangle, Printer, RotateCcw, Lightbulb,
   Pencil, Maximize2, Minimize2,
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
@@ -1352,6 +1352,159 @@ export default function KargoOptimizasyonPage() {
                             </span>
                           </div>
                         )}
+                      </div>
+                    );
+                  })()}
+
+                  {/* ─── Akıllı Öneri Paneli ─── */}
+                  {(() => {
+                    type Oneri = { seviye: 'kritik' | 'uyari' | 'ipucu'; baslik: string; aciklama: string };
+                    const oneriler: Oneri[] = [];
+
+                    const { frontWeight: fw2, rearWeight: rw2, leftWeight: lw2, rightWeight: rght2 } = result;
+                    const totalW2   = fw2 + rw2;
+                    const frontPct2 = Math.round((fw2 / Math.max(totalW2, 1)) * 100);
+                    const leftPct2  = Math.round((lw2 / Math.max(lw2 + rght2, 1)) * 100);
+                    const cogZPct2  = cog ? Math.round((cog.z / container.depth) * 100) : null;
+                    const trailerAL = cog ? Math.round(result.totalWeight * (cog.z / container.depth)) : null;
+                    const kingpinL  = trailerAL !== null ? Math.round(result.totalWeight - trailerAL) : null;
+                    const KP_MAX = 12000, TR_MAX = 24000;
+
+                    // 1. Beşinci teker limit aşımı
+                    if (kingpinL !== null && kingpinL > KP_MAX) {
+                      const fazla = ((kingpinL - KP_MAX) / 1000).toFixed(1);
+                      oneriler.push({
+                        seviye: 'kritik',
+                        baslik: `Beşinci Teker Limiti Aşıldı (+${fazla} t)`,
+                        aciklama: `${(kingpinL / 1000).toFixed(1)} t yük var, yasal limit 12 t. Ağır kalemleri dorsenin arka yarısına (z > ${Math.round(container.depth / 2)} cm) taşıyın veya toplam yükü ${Math.round(kingpinL - KP_MAX).toLocaleString('tr-TR')} kg azaltın.`,
+                      });
+                    }
+
+                    // 2. Dorse aks limit aşımı
+                    if (trailerAL !== null && trailerAL > TR_MAX) {
+                      const fazla = ((trailerAL - TR_MAX) / 1000).toFixed(1);
+                      oneriler.push({
+                        seviye: 'kritik',
+                        baslik: `Dorse Aks Limiti Aşıldı (+${fazla} t)`,
+                        aciklama: `Dorse üzerinde ${(trailerAL / 1000).toFixed(1)} t var, tandem limit 24 t. Ağır kalemlerin bir kısmını öne alın veya yükü ikinci konteynere bölün.`,
+                      });
+                    }
+
+                    // 3. Ön ağırlıklı yük
+                    if (frontPct2 > 62) {
+                      const onKalemler = result.placed
+                        .filter((p) => p.z < container.depth / 2)
+                        .map((p) => cargoItems.find((c) => c.id === p.cargoId)?.name)
+                        .filter(Boolean);
+                      const onAd = [...new Set(onKalemler)].slice(0, 2).join(', ');
+                      oneriler.push({
+                        seviye: 'uyari',
+                        baslik: `Öne Ağırlıklı Yerleşim (%${frontPct2} ön)`,
+                        aciklama: `İdeal ön-arka oranı %40-60. ${onAd ? `"${onAd}" gibi ağır kalemleri` : 'Ağır kalemleri'} dorsenin arka yarısına alın. Kalemlerin "Çıkış Sırası"nı "Sonra Çıkar" yaparak algoritmayı arkaya yönlendirin.`,
+                      });
+                    }
+
+                    // 4. Arka ağırlıklı yük
+                    if (frontPct2 < 38 && totalW2 > 0) {
+                      oneriler.push({
+                        seviye: 'uyari',
+                        baslik: `Arkaya Ağırlıklı Yerleşim (%${100 - frontPct2} arka)`,
+                        aciklama: `Ağır kalemleri "Önce Çıkar" (kapıya yakın) olarak işaretleyin — algoritma onları ön bölüme yerleştirir.`,
+                      });
+                    }
+
+                    // 5. Sol-sağ dengesi
+                    if (Math.abs(leftPct2 - 50) > 15 && totalW2 > 0) {
+                      const taraf = leftPct2 > 50 ? 'sola' : 'sağa';
+                      const rotasyonluAdlar = cargoItems
+                        .filter((c) => c.canRotate && result.placed.some((p) => p.cargoId === c.id))
+                        .map((c) => c.name).join(', ');
+                      oneriler.push({
+                        seviye: 'uyari',
+                        baslik: `Yan Dengesizlik — ${taraf === 'sola' ? `Sol %${leftPct2}` : `Sağ %${100 - leftPct2}`}`,
+                        aciklama: `Rotasyon açık kalemler (${rotasyonluAdlar || 'yok'}) için yeniden optimize edin. Dikdörtgen kalemlerde rotasyon ağırlığı sola-sağa dağıtabilir.`,
+                      });
+                    }
+
+                    // 6. CoG Z ekseni aralık dışı
+                    if (cogZPct2 !== null && (cogZPct2 < 35 || cogZPct2 > 55)) {
+                      const yon = cogZPct2 < 35 ? 'çok öne' : 'çok arkaya';
+                      oneriler.push({
+                        seviye: 'uyari',
+                        baslik: `Ağırlık Merkezi Aralık Dışı (%${cogZPct2})`,
+                        aciklama: `AB 96/53/EC standardı %35-55. Yük ${yon} kaymış. ${cogZPct2 < 35 ? 'Ağır kalemleri "Sonra Çıkar" yapın — arkaya itilirler.' : 'Ağır kalemleri "Önce Çıkar" yapın — öne çekilirler.'}`,
+                      });
+                    }
+
+                    // 7. Düşük doluluk
+                    if (fillPct < 50 && result.placed.length > 0) {
+                      oneriler.push({
+                        seviye: 'ipucu',
+                        baslik: `Düşük Hacim Kullanımı (%${fillPct})`,
+                        aciklama: `Konteyner kapasitesinin yarısından azı kullanılıyor. Bir sonraki sevkiyatla birleştirin veya daha küçük konteyner/araç seçin.`,
+                      });
+                    }
+
+                    // 8. Rotasyon kapalı kalemler varsa ve denge bozuk
+                    if (Math.abs(leftPct2 - 50) > 10 || frontPct2 > 60 || frontPct2 < 40) {
+                      const rotKapali = cargoItems.filter(
+                        (c) => !c.canRotate && result.placed.some((p) => p.cargoId === c.id)
+                      );
+                      if (rotKapali.length > 0) {
+                        oneriler.push({
+                          seviye: 'ipucu',
+                          baslik: `Rotasyon Deneyin: "${rotKapali.map((c) => c.name).join(', ')}"`,
+                          aciklama: `Bu kalemlerin rotasyonu kapalı. Açarsanız algoritma farklı yönlerde deneyerek daha iyi dağılım bulabilir.`,
+                        });
+                      }
+                    }
+
+                    if (oneriler.length === 0) {
+                      return (
+                        <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-center gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                          <div>
+                            <p className="text-sm font-bold text-emerald-700">Yerleşim Optimize</p>
+                            <p className="text-xs text-emerald-600 mt-0.5">Ağırlık dağılımı, aks yükleri ve hacim kullanımı kabul edilebilir aralıkta.</p>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    const renkMap = {
+                      kritik: { bg: 'bg-red-50', border: 'border-red-200', badge: 'bg-red-100 text-red-700', dot: 'bg-red-500', label: 'KRİTİK' },
+                      uyari:  { bg: 'bg-amber-50', border: 'border-amber-100', badge: 'bg-amber-100 text-amber-700', dot: 'bg-amber-400', label: 'UYARI' },
+                      ipucu:  { bg: 'bg-blue-50', border: 'border-blue-100', badge: 'bg-blue-100 text-blue-700', dot: 'bg-blue-400', label: 'İPUCU' },
+                    };
+
+                    return (
+                      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
+                        <div className="flex items-center gap-2">
+                          <Lightbulb className="w-4 h-4 text-amber-500" />
+                          <h3 className="text-sm font-bold text-gray-900">Akıllı Öneriler</h3>
+                          <span className="ml-auto text-[10px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                            {oneriler.length} öneri
+                          </span>
+                        </div>
+                        <div className="space-y-2">
+                          {oneriler.map((o, i) => {
+                            const r = renkMap[o.seviye];
+                            return (
+                              <div key={i} className={`${r.bg} border ${r.border} rounded-xl p-3`}>
+                                <div className="flex items-start gap-2.5">
+                                  <span className={`w-2 h-2 rounded-full ${r.dot} shrink-0 mt-1.5`} />
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                                      <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${r.badge}`}>{r.label}</span>
+                                      <p className="text-xs font-bold text-gray-900">{o.baslik}</p>
+                                    </div>
+                                    <p className="text-xs text-gray-600 leading-relaxed">{o.aciklama}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     );
                   })()}
