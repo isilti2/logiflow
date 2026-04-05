@@ -154,8 +154,8 @@ export default function ProfilPage() {
                 </span>
               )}
             </div>
-            <p className="text-gray-400 text-sm mt-0.5">{profile.email}</p>
-            <p className="text-gray-400 text-xs mt-0.5">{profile.dept}</p>
+            <p className="text-gray-500 text-sm mt-0.5">{profile.email}</p>
+            <p className="text-gray-500 text-xs mt-0.5">{profile.dept}</p>
           </div>
           {!editing ? (
             <button onClick={() => setEditing(true)}
@@ -194,10 +194,10 @@ export default function ProfilPage() {
                 ].map(({ label, key, icon: Icon, type, placeholder, editable }) => (
                   <div key={key} className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center shrink-0">
-                      <Icon className="w-3.5 h-3.5 text-gray-400" />
+                      <Icon className="w-3.5 h-3.5 text-gray-500" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs text-gray-400 mb-1">{label}</p>
+                      <p className="text-xs text-gray-500 mb-1">{label}</p>
                       {editing && editable ? (
                         <input
                           type={type}
@@ -228,7 +228,7 @@ export default function ProfilPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-semibold text-gray-800">Şifre</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{pwSaved ? '✓ Şifre güncellendi' : 'Şifrenizi değiştirin'}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{pwSaved ? '✓ Şifre güncellendi' : 'Şifrenizi değiştirin'}</p>
                     </div>
                     <button
                       onClick={() => { setPwOpen((o) => !o); setPwError(''); }}
@@ -261,14 +261,14 @@ export default function ProfilPage() {
                 <div className="flex items-center justify-between py-3 border-b border-gray-50">
                   <div>
                     <p className="text-sm font-semibold text-gray-800">İki Faktörlü Doğrulama</p>
-                    <p className="text-xs text-gray-400 mt-0.5">Hesabınızı ekstra koruma altına alın</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Hesabınızı ekstra koruma altına alın</p>
                   </div>
-                  <span className="text-xs font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">Kapalı</span>
+                  <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">Kapalı</span>
                 </div>
                 <div className="flex items-center justify-between py-3">
                   <div>
                     <p className="text-sm font-semibold text-gray-800">Oturum Yönetimi</p>
-                    <p className="text-xs text-gray-400 mt-0.5">Aktif oturum sayısı: 1</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Aktif oturum sayısı: 1</p>
                   </div>
                   <button className="text-xs font-semibold text-red-500 hover:text-red-600 border border-red-100 hover:bg-red-50 px-3 py-1.5 rounded-xl transition-colors">
                     Tümünü Kapat
@@ -338,7 +338,7 @@ export default function ProfilPage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-800">Hesabı Sil</p>
-              <p className="text-xs text-gray-400 mt-0.5">Tüm verileriniz kalıcı olarak silinir. Bu işlem geri alınamaz.</p>
+              <p className="text-xs text-gray-500 mt-0.5">Tüm verileriniz kalıcı olarak silinir. Bu işlem geri alınamaz.</p>
             </div>
             {!deleteConfirm ? (
               <button onClick={() => setDeleteConfirm(true)}
@@ -367,7 +367,7 @@ export default function ProfilPage() {
           </div>
           <div className="divide-y divide-gray-50">
             {activity.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-8 text-gray-400">
+              <div className="flex flex-col items-center justify-center py-8 text-gray-500">
                 <p className="text-sm">Henüz aktivite yok</p>
                 <Link href="/features/kargo-optimizasyon" className="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-700">
                   İlk optimizasyonu başlat →
@@ -378,9 +378,9 @@ export default function ProfilPage() {
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-800 truncate">{a.label}</p>
-                  <p className="text-xs text-gray-400">{a.module}</p>
+                  <p className="text-xs text-gray-500">{a.module}</p>
                 </div>
-                <span className="text-xs text-gray-400 shrink-0">{a.time}</span>
+                <span className="text-xs text-gray-500 shrink-0">{a.time}</span>
               </div>
             ))}
           </div>

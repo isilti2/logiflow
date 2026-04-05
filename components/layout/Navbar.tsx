@@ -169,7 +169,7 @@ export default function Navbar() {
                             </div>
                             <div>
                               <p className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight">{m.label}</p>
-                              <p className="text-xs text-gray-400 leading-tight mt-0.5">{m.desc}</p>
+                              <p className="text-xs text-gray-500 leading-tight mt-0.5">{m.desc}</p>
                             </div>
                           </Link>
                         );
@@ -282,7 +282,7 @@ export default function Navbar() {
               </Link>
 
               {/* Modüller grup başlığı */}
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 pt-3 pb-1">Modüller</p>
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest px-3 pt-3 pb-1">Modüller</p>
               {MODULLER.map((m) => {
                 const Icon = m.icon;
                 return (

@@ -247,11 +247,11 @@ Her sayfa o özelliği detaylı anlatan içerik, mock UI bileşenleri ve "Uygula
 | YÜKSEK | CTA hiyerarşi: Hero'da primary/secondary farkı belirsiz | ✅ Çözüldü — primary güçlendirildi, secondary text-link'e dönüştü |
 | YÜKSEK | Form ErrorAlert: Bileşen yok, her sayfa farklı gösteriyor | ✅ Çözüldü — ErrorAlert bileşeni (error/success/info, dismiss destekli) |
 | YÜKSEK | Empty state tasarımı: Dashboard, Konum, Muhasebe yetersiz | ✅ Çözüldü — EmptyState bileşeni, 11+ lokasyonda entegre |
-| ORTA | Typography scale: H1→H4 tutarsız tüm sayfalarda | Açık — sonraki sprint |
+| ORTA | Typography scale: H1→H4 tutarsız tüm sayfalarda | ✅ Çözüldü — globals.css @theme token'ları (.h1-.h4, .body-*, .caption, .label, .card) |
 | ORTA | Spinner bileşeni: Her sayfada farklı boyut/renk | ✅ Çözüldü — Spinner bileşeni (sm/md/lg, role=status) |
 | ORTA | Breadcrumb: Muhasebe, Profil, Fatura sayfalarında yok | ✅ Çözüldü — Breadcrumb bileşeni + 3 sayfada entegre |
 | ORTA | Keyboard navigation: Focus ring + modal focus trap eksik | ✅ Çözüldü — OnboardingWizard focus trap, Muhasebe Escape ile kapat |
-| ORTA | Renk kontrastı: text-gray-400/500 WCAG AA altında | Açık — sonraki sprint |
+| ORTA | Renk kontrastı: text-gray-400/500 WCAG AA altında | ✅ Çözüldü — text-gray-400 → text-gray-500 (4.6:1) tüm içerik metinlerde |
 | ORTA | Button hover/active: active:scale-95 + transition standardı yok | ✅ Çözüldü — Button.tsx standardize, active:scale-95 + focus:ring |
 | ORTA | Navbar modül dropdown: Muhasebe/Konum/Şoför linkleri gizli | ✅ Çözüldü — 6 modüllü dropdown panel + mobile mega-menu |
 | DÜŞÜK | Toast mobil pozisyon: bottom-5 butonları kapatıyor | ✅ Çözüldü — mobile=top-5, desktop=bottom-5, aria-live=polite |

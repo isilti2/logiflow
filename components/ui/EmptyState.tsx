@@ -31,7 +31,7 @@ export function EmptyState({
         <Icon className="w-8 h-8 text-gray-300" aria-hidden="true" />
       </div>
       <h3 className="text-sm font-bold text-gray-700 mb-1">{title}</h3>
-      <p className="text-xs text-gray-400 leading-relaxed max-w-xs mb-5">{description}</p>
+      <p className="text-xs text-gray-500 leading-relaxed max-w-xs mb-5">{description}</p>
       {action && (
         <div className="flex flex-col sm:flex-row items-center gap-2">
           {action.href ? (

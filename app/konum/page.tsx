@@ -148,7 +148,7 @@ export default function KonumPage() {
             </div>
             <div>
               <p className="text-2xl font-black text-gray-900">{canliSoforler.length}</p>
-              <p className="text-xs text-gray-400">Aktif Şoför</p>
+              <p className="text-xs text-gray-500">Aktif Şoför</p>
             </div>
           </div>
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center gap-3">
@@ -157,7 +157,7 @@ export default function KonumPage() {
             </div>
             <div>
               <p className="text-2xl font-black text-gray-900">{seferler.filter(s => s.durum === 'devam').length}</p>
-              <p className="text-xs text-gray-400">Devam Eden Sefer</p>
+              <p className="text-xs text-gray-500">Devam Eden Sefer</p>
             </div>
           </div>
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center gap-3">
@@ -170,7 +170,7 @@ export default function KonumPage() {
                   ? Math.round(canliSoforler.reduce((s, d) => s + d.hiz, 0) / canliSoforler.length)
                   : 0}
               </p>
-              <p className="text-xs text-gray-400">Ort. Hız (km/s)</p>
+              <p className="text-xs text-gray-500">Ort. Hız (km/s)</p>
             </div>
           </div>
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center gap-3">
@@ -179,7 +179,7 @@ export default function KonumPage() {
             </div>
             <div>
               <p className="text-sm font-bold text-gray-900">{sonYenileme || '—'}</p>
-              <p className="text-xs text-gray-400">Son güncelleme</p>
+              <p className="text-xs text-gray-500">Son güncelleme</p>
             </div>
           </div>
         </div>

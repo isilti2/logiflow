@@ -303,13 +303,13 @@ export default function DashboardPage() {
           {stats.map(({ label, value, delta, icon: Icon }) => (
             <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs text-gray-400 font-medium">{label}</span>
+                <span className="text-xs text-gray-500 font-medium">{label}</span>
                 <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
                   <Icon className="w-4 h-4 text-blue-600" />
                 </div>
               </div>
               <p className="text-2xl font-black text-gray-900">{value}</p>
-              <p className="text-xs text-gray-400 mt-1">{delta}</p>
+              <p className="text-xs text-gray-500 mt-1">{delta}</p>
             </div>
           ))}
         </div>

@@ -61,7 +61,7 @@ function ExpiryPill({ label, date }: { label: string; date: string | null | unde
     expired: { cls: 'bg-red-50 text-red-700 border border-red-100',   icon: <AlertTriangle className="w-3 h-3" /> },
     warn:    { cls: 'bg-amber-50 text-amber-700 border border-amber-100', icon: <Clock className="w-3 h-3" /> },
     ok:      { cls: 'bg-green-50 text-green-700 border border-green-100', icon: <ShieldCheck className="w-3 h-3" /> },
-    none:    { cls: 'bg-gray-50 text-gray-400 border border-gray-100',  icon: null },
+    none:    { cls: 'bg-gray-50 text-gray-500 border border-gray-100',  icon: null },
   }[s];
   return (
     <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.cls}`}>
@@ -102,13 +102,13 @@ function StatCard({ label, value, sub, color, icon: Icon }: { label: string; val
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{label}</span>
+        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{label}</span>
         <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${colors[color] ?? colors.blue}`}>
           <Icon className="w-4 h-4" />
         </div>
       </div>
       <p className="text-2xl font-black text-gray-900">{value}</p>
-      {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+      {sub && <p className="text-xs text-gray-500 mt-1">{sub}</p>}
     </div>
   );
 }
@@ -591,7 +591,7 @@ export default function MuhasebePage() {
                       <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0"><Truck className="w-4 h-4 text-blue-600" /></div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-900 truncate">{s.rotaDan} → {s.rotaAya}</p>
-                        <p className="text-xs text-gray-400">{s.aracPlaka} · {fmtDate(s.tarih)}</p>
+                        <p className="text-xs text-gray-500">{s.aracPlaka} · {fmtDate(s.tarih)}</p>
                       </div>
                       <div className="text-right shrink-0">
                         <p className="text-sm font-bold text-gray-900">{TL(s.seferUcreti)}</p>
@@ -620,7 +620,7 @@ export default function MuhasebePage() {
                       <div className="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center shrink-0"><FileText className="w-4 h-4 text-purple-600" /></div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-900">{f.faturaNo}</p>
-                        <p className="text-xs text-gray-400">{f.musteri?.ad ?? '—'} · {fmtDate(f.tarih)}</p>
+                        <p className="text-xs text-gray-500">{f.musteri?.ad ?? '—'} · {fmtDate(f.tarih)}</p>
                       </div>
                       <div className="text-right shrink-0">
                         <p className="text-sm font-bold text-gray-900">{TL(f.genelToplam)}</p>
@@ -644,7 +644,7 @@ export default function MuhasebePage() {
           <>
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Plaka veya rota ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <button onClick={() => setShowForm(p => !p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
@@ -715,7 +715,7 @@ export default function MuhasebePage() {
 
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota', 'Plaka', 'Tarih', 'Müşteri', 'Ücret', 'Yakıt', 'Net', 'Durum', ''].map(h => <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota', 'Plaka', 'Tarih', 'Müşteri', 'Ücret', 'Yakıt', 'Net', 'Durum', ''].map(h => <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {seferler.filter(s => !search || s.aracPlaka.toLowerCase().includes(search.toLowerCase()) || s.rotaDan.toLowerCase().includes(search.toLowerCase()) || s.rotaAya.toLowerCase().includes(search.toLowerCase())).map(s => (
                     <tr key={s.id} className="hover:bg-gray-50 transition-colors">
@@ -734,7 +734,7 @@ export default function MuhasebePage() {
                       <td className="px-4 py-3"><button onClick={() => deleteSefer(s.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4" /></button></td>
                     </tr>
                   ))}
-                  {!seferler.length && <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-400">Henüz sefer kaydı yok.</td></tr>}
+                  {!seferler.length && <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-500">Henüz sefer kaydı yok.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -753,7 +753,7 @@ export default function MuhasebePage() {
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Kategori veya açıklama ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <button onClick={() => setShowForm(p => !p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4" /> Yeni İşlem</button>
@@ -792,7 +792,7 @@ export default function MuhasebePage() {
             )}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Tür','Kategori','Açıklama','Sefer','Müşteri','KDV','Tutar',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Tür','Kategori','Açıklama','Sefer','Müşteri','KDV','Tutar',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {islemler.filter(i => !search || i.kategori.toLowerCase().includes(search.toLowerCase()) || i.aciklama.toLowerCase().includes(search.toLowerCase())).map(i => (
                     <tr key={i.id} className="hover:bg-gray-50 transition-colors">
@@ -802,7 +802,7 @@ export default function MuhasebePage() {
                       <td className="px-4 py-3 text-gray-500 max-w-[140px] truncate">{i.aciklama||'—'}</td>
                       <td className="px-4 py-3 text-gray-500 text-xs">{i.sefer?`${i.sefer.rotaDan}→${i.sefer.rotaAya}`:'—'}</td>
                       <td className="px-4 py-3 text-gray-500 text-xs">{i.musteri?.ad??'—'}</td>
-                      <td className="px-4 py-3 text-gray-400 text-xs">%{i.kdvOrani}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">%{i.kdvOrani}</td>
                       <td className={`px-4 py-3 font-bold whitespace-nowrap ${i.tur==='gelir'?'text-green-600':'text-red-500'}`}>{i.tur==='gelir'?'+':'-'}{TL(i.tutar)}</td>
                       <td className="px-4 py-3"><button onClick={()=>deleteIslem(i.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
@@ -825,7 +825,7 @@ export default function MuhasebePage() {
           <>
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
               </div>
               <button onClick={()=>setShowForm(p=>!p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4"/> Yeni Müşteri</button>
@@ -855,7 +855,7 @@ export default function MuhasebePage() {
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${borclu?'bg-amber-50':'bg-blue-50'}`}><Building2 className={`w-5 h-5 ${borclu?'text-amber-600':'text-blue-600'}`}/></div>
-                        <div><p className="font-bold text-gray-900">{m.ad}</p>{m.vergiNo&&<p className="text-xs text-gray-400">VN: {m.vergiNo}</p>}</div>
+                        <div><p className="font-bold text-gray-900">{m.ad}</p>{m.vergiNo&&<p className="text-xs text-gray-500">VN: {m.vergiNo}</p>}</div>
                       </div>
                       <button onClick={()=>deleteMusteri(m.id)} className="text-gray-200 hover:text-red-500 transition-colors shrink-0"><Trash2 className="w-4 h-4"/></button>
                     </div>
@@ -867,15 +867,15 @@ export default function MuhasebePage() {
                     {/* Bakiye gösterimi */}
                     <div className={`rounded-xl px-3 py-2 mb-3 flex items-center justify-between ${borclu?'bg-amber-50':alacakli?'bg-green-50':'bg-gray-50'}`}>
                       <span className="text-xs font-semibold text-gray-500">Cari Bakiye</span>
-                      <span className={`font-black text-base ${borclu?'text-amber-700':alacakli?'text-green-700':'text-gray-400'}`}>
+                      <span className={`font-black text-base ${borclu?'text-amber-700':alacakli?'text-green-700':'text-gray-500'}`}>
                         {m.bakiye > 0 ? '+' : ''}{TL(m.bakiye)}
                         <span className="text-xs font-normal ml-1">{borclu?'borçlu':alacakli?'alacaklı':'sıfır'}</span>
                       </span>
                     </div>
                     <div className="flex items-center justify-between pt-3 border-t border-gray-50">
                       <div className="flex gap-4">
-                        {bekleyen>0&&<div><p className="text-sm font-bold text-amber-600">{TL(bekleyen)}</p><p className="text-xs text-gray-400">Bekleyen fatura</p></div>}
-                        <div><p className="text-sm font-bold text-gray-900">{mSefer}</p><p className="text-xs text-gray-400">Sefer</p></div>
+                        {bekleyen>0&&<div><p className="text-sm font-bold text-amber-600">{TL(bekleyen)}</p><p className="text-xs text-gray-500">Bekleyen fatura</p></div>}
+                        <div><p className="text-sm font-bold text-gray-900">{mSefer}</p><p className="text-xs text-gray-500">Sefer</p></div>
                       </div>
                       <button onClick={()=>{setTahsilatForm(f=>({...f,musteriId:m.id,tarih:new Date().toISOString().slice(0,10)}));setSelMusteri(m.id);setShowForm(true);setEditId('tahsilat');}}
                         className="flex items-center gap-1.5 text-xs text-green-700 hover:text-green-900 font-semibold border border-green-200 bg-green-50 px-3 py-1.5 rounded-lg transition-colors">
@@ -902,7 +902,7 @@ export default function MuhasebePage() {
               <form onSubmit={submitTahsilat} className="bg-white rounded-2xl border border-green-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="col-span-full flex items-center justify-between">
                   <h3 className="font-bold text-gray-900">Tahsilat Kaydı — {musteriler.find(m=>m.id===tahsilatForm.musteriId)?.ad}</h3>
-                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
                 </div>
                 <div><label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri *</label>
                   <select required value={tahsilatForm.musteriId} onChange={e=>setTahsilatForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
@@ -928,14 +928,14 @@ export default function MuhasebePage() {
             {/* Tahsilat tablosu */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <Wallet className="w-4 h-4 text-gray-400"/>
+                <Wallet className="w-4 h-4 text-gray-500"/>
                 <h3 className="font-bold text-gray-900 text-sm">Tahsilat Geçmişi</h3>
                 <select value={selMusteri} onChange={e=>setSelMusteri(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none ml-auto">
                   <option value="">Tüm Müşteriler</option>{musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
                 </select>
               </div>
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Müşteri','Fatura','Tutar','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">{h}</th>)}</tr></thead>
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Müşteri','Fatura','Tutar','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>)}</tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {tahsilatlar.filter(t=>!selMusteri||t.musteriId===selMusteri).map(t=>(
                     <tr key={t.id} className="hover:bg-gray-50 transition-colors">
@@ -943,11 +943,11 @@ export default function MuhasebePage() {
                       <td className="px-4 py-3 font-semibold text-gray-800">{t.musteri?.ad??'—'}</td>
                       <td className="px-4 py-3 text-gray-500 text-xs">{t.fatura?.faturaNo??'—'}</td>
                       <td className="px-4 py-3 font-bold text-green-600 whitespace-nowrap">{TL(t.tutar)}</td>
-                      <td className="px-4 py-3 text-gray-400 text-xs">{t.notlar||'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">{t.notlar||'—'}</td>
                       <td className="px-4 py-3"><button onClick={()=>deleteTahsilat(t.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!tahsilatlar.length&&<tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400">Henüz tahsilat kaydı yok.</td></tr>}
+                  {!tahsilatlar.length&&<tr><td colSpan={6} className="px-4 py-12 text-center text-gray-500">Henüz tahsilat kaydı yok.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -994,7 +994,7 @@ export default function MuhasebePage() {
                         </div>
                         <div>
                           <p className="font-black text-gray-900 text-lg">{a.plaka}</p>
-                          <p className="text-xs text-gray-400">{[a.marka,a.model,a.yil].filter(Boolean).join(' ')}</p>
+                          <p className="text-xs text-gray-500">{[a.marka,a.model,a.yil].filter(Boolean).join(' ')}</p>
                         </div>
                       </div>
                       <button onClick={()=>deleteArac(a.id)} className="text-gray-200 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button>
@@ -1007,7 +1007,7 @@ export default function MuhasebePage() {
                     <div className="flex items-center justify-between pt-3 border-t border-gray-50">
                       <div>
                         <p className="text-sm font-bold text-gray-900">{TL(toplamYakit)}</p>
-                        <p className="text-xs text-gray-400">{a._count?.yakitKayitlari??0} yakıt kaydı</p>
+                        <p className="text-xs text-gray-500">{a._count?.yakitKayitlari??0} yakıt kaydı</p>
                       </div>
                       <button onClick={()=>{setYakitForm(p=>({...p,aracId:a.id}));setShowForm(true);setEditId('yakit');setSelArac(a.id);}}
                         className="flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-800 font-semibold border border-indigo-100 bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors">
@@ -1034,7 +1034,7 @@ export default function MuhasebePage() {
               <form onSubmit={submitYakit} className="bg-white rounded-2xl border border-indigo-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="col-span-full flex items-center justify-between">
                   <h3 className="font-bold text-gray-900">Yakıt Kaydı — {araclar.find(a=>a.id===yakitForm.aracId)?.plaka}</h3>
-                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
                 </div>
                 <div><label className="block text-xs font-semibold text-gray-600 mb-1">Araç *</label>
                   <select required value={yakitForm.aracId} onChange={e=>setYakitForm(p=>({...p,aracId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -1059,7 +1059,7 @@ export default function MuhasebePage() {
             {/* Yakıt tablosu */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <Fuel className="w-4 h-4 text-gray-400"/>
+                <Fuel className="w-4 h-4 text-gray-500"/>
                 <h3 className="font-bold text-gray-900 text-sm">Yakıt Kayıtları</h3>
                 <select value={selArac} onChange={e=>setSelArac(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 ml-auto">
                   <option value="">Tüm Araçlar</option>{araclar.map(a=><option key={a.id} value={a.id}>{a.plaka}</option>)}
@@ -1073,7 +1073,7 @@ export default function MuhasebePage() {
                 </div>
               )}
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Araç','Litre','₺/L','Toplam','KM','İstasyon',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Araç','Litre','₺/L','Toplam','KM','İstasyon',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {yakitlar.map(y=>(
                     <tr key={y.id} className="hover:bg-gray-50 transition-colors">
@@ -1082,12 +1082,12 @@ export default function MuhasebePage() {
                       <td className="px-4 py-3 text-gray-700">{y.litre.toFixed(1)} L</td>
                       <td className="px-4 py-3 text-gray-500">{y.birimFiyat.toFixed(3)} ₺</td>
                       <td className="px-4 py-3 font-semibold text-red-500 whitespace-nowrap">{TL(y.toplamTutar)}</td>
-                      <td className="px-4 py-3 text-gray-400 text-xs">{y.kmSayaci>0?`${y.kmSayaci.toLocaleString('tr-TR')} km`:'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">{y.kmSayaci>0?`${y.kmSayaci.toLocaleString('tr-TR')} km`:'—'}</td>
                       <td className="px-4 py-3 text-gray-500 text-xs">{y.istasyon||'—'}</td>
                       <td className="px-4 py-3"><button onClick={()=>deleteYakit(y.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!yakitlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Henüz yakıt kaydı yok.</td></tr>}
+                  {!yakitlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Henüz yakıt kaydı yok.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -1107,7 +1107,7 @@ export default function MuhasebePage() {
 
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"/>
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"/>
                 <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Fatura no veya müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
               </div>
               <button onClick={()=>setShowForm(p=>!p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4"/> Yeni Fatura</button>
@@ -1117,7 +1117,7 @@ export default function MuhasebePage() {
               <form onSubmit={submitFatura} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-gray-900">Yeni Fatura</h3>
-                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div><label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri</label>
@@ -1141,7 +1141,7 @@ export default function MuhasebePage() {
                   <div className="overflow-x-auto rounded-xl border border-gray-100">
                     <table className="w-full text-sm">
                       <thead><tr className="bg-gray-50 border-b border-gray-100">
-                        {['Açıklama','Miktar','Birim Fiyat (₺)','KDV (%)','Toplam',''].map(h=><th key={h} className="text-left px-3 py-2 text-xs font-semibold text-gray-400 whitespace-nowrap">{h}</th>)}
+                        {['Açıklama','Miktar','Birim Fiyat (₺)','KDV (%)','Toplam',''].map(h=><th key={h} className="text-left px-3 py-2 text-xs font-semibold text-gray-500 whitespace-nowrap">{h}</th>)}
                       </tr></thead>
                       <tbody>
                         {faturaSatirlari.map((s,i)=>(
@@ -1182,17 +1182,17 @@ export default function MuhasebePage() {
 
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Fatura No','Tarih','Vade','Müşteri','Sefer','Tutar','KDV','Toplam','Durum',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Fatura No','Tarih','Vade','Müşteri','Sefer','Tutar','KDV','Toplam','Durum',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {faturalar.filter(f=>!search||f.faturaNo.toLowerCase().includes(search.toLowerCase())||(f.musteri?.ad??'').toLowerCase().includes(search.toLowerCase())).map(f=>(
                     <tr key={f.id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-4 py-3 font-mono font-bold text-gray-900">{f.faturaNo}</td>
                       <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(f.tarih)}</td>
-                      <td className="px-4 py-3 text-gray-400 text-xs whitespace-nowrap">{f.vadeTarih?fmtDate(f.vadeTarih):'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs whitespace-nowrap">{f.vadeTarih?fmtDate(f.vadeTarih):'—'}</td>
                       <td className="px-4 py-3 text-gray-700 font-semibold">{f.musteri?.ad??'—'}</td>
-                      <td className="px-4 py-3 text-gray-400 text-xs">{f.sefer?`${f.sefer.rotaDan}→${f.sefer.rotaAya}`:'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">{f.sefer?`${f.sefer.rotaDan}→${f.sefer.rotaAya}`:'—'}</td>
                       <td className="px-4 py-3 text-gray-600 whitespace-nowrap">{TL(f.araToplam)}</td>
-                      <td className="px-4 py-3 text-gray-400 whitespace-nowrap">{TL(f.kdvToplam)}</td>
+                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{TL(f.kdvToplam)}</td>
                       <td className="px-4 py-3 font-black text-gray-900 whitespace-nowrap">{TL(f.genelToplam)}</td>
                       <td className="px-4 py-3">
                         <select value={f.durum} onChange={e=>updateFaturaDurum(f.id,e.target.value)} className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -1201,7 +1201,7 @@ export default function MuhasebePage() {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <button onClick={()=>printFatura(f)} title="Yazdır / PDF" className="text-gray-400 hover:text-blue-600 transition-colors"><Printer className="w-4 h-4"/></button>
+                          <button onClick={()=>printFatura(f)} title="Yazdır / PDF" className="text-gray-500 hover:text-blue-600 transition-colors"><Printer className="w-4 h-4"/></button>
                           <button onClick={()=>deleteFatura(f.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button>
                         </div>
                       </td>
@@ -1248,9 +1248,9 @@ export default function MuhasebePage() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${p.aktif?'bg-indigo-50':'bg-gray-100'}`}>
-                        <Users className={`w-5 h-5 ${p.aktif?'text-indigo-600':'text-gray-400'}`}/>
+                        <Users className={`w-5 h-5 ${p.aktif?'text-indigo-600':'text-gray-500'}`}/>
                       </div>
-                      <div><p className="font-bold text-gray-900">{p.ad}</p><p className="text-xs text-gray-400">{p.unvan||'Pozisyon belirtilmemiş'}</p></div>
+                      <div><p className="font-bold text-gray-900">{p.ad}</p><p className="text-xs text-gray-500">{p.unvan||'Pozisyon belirtilmemiş'}</p></div>
                     </div>
                     <button onClick={()=>deletePersonel(p.id)} className="text-gray-200 hover:text-red-500 transition-colors shrink-0"><Trash2 className="w-4 h-4"/></button>
                   </div>
@@ -1259,7 +1259,7 @@ export default function MuhasebePage() {
                     <p className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5"/>{fmtDate(p.baslangicTarihi)}&apos;dan beri</p>
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t border-gray-50 gap-2 flex-wrap">
-                    <div><p className="text-base font-black text-gray-900">{TL(p.maas)}</p><p className="text-xs text-gray-400">/ay brüt</p></div>
+                    <div><p className="text-base font-black text-gray-900">{TL(p.maas)}</p><p className="text-xs text-gray-500">/ay brüt</p></div>
                     <div className="flex gap-2">
                       <button onClick={()=>{setSelPersonel(p.id);setEditId(p.id);setShowForm(true);setPuantajForm(prev=>({...prev,personelId:p.id}));}}
                         className="flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-800 font-semibold border border-indigo-100 bg-indigo-50 px-2.5 py-1.5 rounded-lg transition-colors">
@@ -1290,7 +1290,7 @@ export default function MuhasebePage() {
               <form onSubmit={submitPuantaj} className="bg-white rounded-2xl border border-indigo-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="col-span-full flex items-center justify-between">
                   <h3 className="font-bold text-gray-900">Puantaj Girişi — {personeller.find(p=>p.id===editId)?.ad}</h3>
-                  <button type="button" onClick={()=>{setShowForm(false);setEditId(null);}} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <button type="button" onClick={()=>{setShowForm(false);setEditId(null);}} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
                 </div>
                 <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label><input required type="date" value={puantajForm.tarih} onChange={e=>setPuantajForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
                 <div><label className="block text-xs font-semibold text-gray-600 mb-1">Giriş Saati</label><input type="time" value={puantajForm.girisSaati} onChange={e=>setPuantajForm(p=>({...p,girisSaati:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
@@ -1310,28 +1310,28 @@ export default function MuhasebePage() {
             {/* Puantaj tablosu */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <CalendarDays className="w-4 h-4 text-gray-400"/><h3 className="font-bold text-gray-900 text-sm">Puantaj Tablosu</h3>
+                <CalendarDays className="w-4 h-4 text-gray-500"/><h3 className="font-bold text-gray-900 text-sm">Puantaj Tablosu</h3>
                 <input type="month" value={puantajAy} onChange={e=>setPuantajAy(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
                 <select value={selPersonel} onChange={e=>setSelPersonel(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                   <option value="">Tüm Personel</option>{personeller.map(p=><option key={p.id} value={p.id}>{p.ad}</option>)}
                 </select>
               </div>
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Personel','Tarih','Giriş','Çıkış','Fazla Mesai','Durum','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Personel','Tarih','Giriş','Çıkış','Fazla Mesai','Durum','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {puantajlar.map(pt=>(
                     <tr key={pt.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap">{pt.personel?.ad??'—'}{pt.personel?.unvan&&<span className="block text-xs text-gray-400 font-normal">{pt.personel.unvan}</span>}</td>
+                      <td className="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap">{pt.personel?.ad??'—'}{pt.personel?.unvan&&<span className="block text-xs text-gray-500 font-normal">{pt.personel.unvan}</span>}</td>
                       <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(pt.tarih)}</td>
                       <td className="px-4 py-3 text-gray-700 font-mono">{pt.girisSaati??'—'}</td>
                       <td className="px-4 py-3 text-gray-700 font-mono">{pt.cikisSaati??'—'}</td>
                       <td className="px-4 py-3 text-center">{pt.fazlaMesai>0?<span className="text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">+{pt.fazlaMesai}s</span>:<span className="text-xs text-gray-300">—</span>}</td>
                       <td className="px-4 py-3"><IzinBadge izin={pt.izinTuru}/></td>
-                      <td className="px-4 py-3 text-gray-400 text-xs max-w-[120px] truncate">{pt.notlar||'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs max-w-[120px] truncate">{pt.notlar||'—'}</td>
                       <td className="px-4 py-3"><button onClick={()=>deletePuantaj(pt.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!puantajlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Bu ay için puantaj kaydı yok.</td></tr>}
+                  {!puantajlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Bu ay için puantaj kaydı yok.</td></tr>}
                 </tbody>
               </table>
               {puantajlar.length>0&&(
@@ -1347,21 +1347,21 @@ export default function MuhasebePage() {
             {/* ── Bordro ── */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <Calculator className="w-4 h-4 text-gray-400"/>
+                <Calculator className="w-4 h-4 text-gray-500"/>
                 <h3 className="font-bold text-gray-900 text-sm">Bordro Hesaplama</h3>
                 <input type="month" value={bordroAy} onChange={e=>setBordroAy(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
-                <span className="text-xs text-gray-400 ml-auto">2025 Türkiye SGK oranları · tahmini hesap</span>
+                <span className="text-xs text-gray-500 ml-auto">2025 Türkiye SGK oranları · tahmini hesap</span>
               </div>
               <table className="w-full text-sm">
                 <thead><tr className="bg-gray-50 border-b border-gray-100">
-                  {['Personel','Brüt','Fazla Mesai','SGK İşçi','İşsizlik','Gel. Vergisi','Damga','NET MAAŞ','İşveren Toplam',''].map(h=><th key={h} className="text-left px-3 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}
+                  {['Personel','Brüt','Fazla Mesai','SGK İşçi','İşsizlik','Gel. Vergisi','Damga','NET MAAŞ','İşveren Toplam',''].map(h=><th key={h} className="text-left px-3 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}
                 </tr></thead>
                 <tbody className="divide-y divide-gray-50">
                   {personeller.map(p => {
                     const b = bordrolar.find(b=>b.personelId===p.id&&b.ay===bordroAy);
                     return (
                       <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-3 py-3 font-semibold text-gray-900 whitespace-nowrap">{p.ad}<span className="block text-xs text-gray-400 font-normal">{p.unvan}</span></td>
+                        <td className="px-3 py-3 font-semibold text-gray-900 whitespace-nowrap">{p.ad}<span className="block text-xs text-gray-500 font-normal">{p.unvan}</span></td>
                         {b ? (
                           <>
                             <td className="px-3 py-3 text-gray-700 whitespace-nowrap">{TL(b.brutMaas)}</td>
@@ -1421,7 +1421,7 @@ export default function MuhasebePage() {
               </div>
               <input type="month" value={raporDonem} onChange={e=>setRaporDonem(e.target.value)}
                 className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {raporDonem && <button onClick={()=>setRaporDonem('')} className="text-xs text-gray-400 hover:text-gray-600"><X className="w-4 h-4"/></button>}
+              {raporDonem && <button onClick={()=>setRaporDonem('')} className="text-xs text-gray-500 hover:text-gray-600"><X className="w-4 h-4"/></button>}
             </div>
 
             {/* Sefer K/Z */}
@@ -1438,7 +1438,7 @@ export default function MuhasebePage() {
                   </div>
                 )}
                 <table className="w-full text-sm">
-                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota','Araç','Tarih','Müşteri','Ücret','Yakıt','Net K/Z','Durum'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota','Araç','Tarih','Müşteri','Ücret','Yakıt','Net K/Z','Durum'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                   <tbody className="divide-y divide-gray-50">
                     {seferRapor.map(r=>(
                       <tr key={r.id} className="hover:bg-gray-50 transition-colors">
@@ -1452,8 +1452,8 @@ export default function MuhasebePage() {
                         <td className="px-4 py-3"><DurumBadge durum={r.durum}/></td>
                       </tr>
                     ))}
-                    {!seferRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Bu dönemde sefer yok.</td></tr>}
-                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400 text-xs">Yükleniyor…</td></tr>}
+                    {!seferRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Bu dönemde sefer yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 text-xs">Yükleniyor…</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1463,7 +1463,7 @@ export default function MuhasebePage() {
             {raporTip === 'araclar' && (
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Plaka','Marka/Model','Sefer','KM','Sefer Geliri','Yakıt Gideri','Net K/Z','km Maliyeti'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Plaka','Marka/Model','Sefer','KM','Sefer Geliri','Yakıt Gideri','Net K/Z','km Maliyeti'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                   <tbody className="divide-y divide-gray-50">
                     {aracRapor.map(r=>(
                       <tr key={r.plaka} className="hover:bg-gray-50 transition-colors">
@@ -1477,8 +1477,8 @@ export default function MuhasebePage() {
                         <td className="px-4 py-3 text-gray-500 text-xs">{r.kmBasiMaliyet>0?`${r.kmBasiMaliyet.toFixed(2)} ₺/km`:'—'}</td>
                       </tr>
                     ))}
-                    {!aracRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Bu dönemde araç verisi yok.</td></tr>}
-                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400 text-xs">Yükleniyor…</td></tr>}
+                    {!aracRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Bu dönemde araç verisi yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 text-xs">Yükleniyor…</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1488,7 +1488,7 @@ export default function MuhasebePage() {
             {raporTip === 'musteriler' && (
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Müşteri','Sefer','Fatura','Top. Fatura','Tahsilat','Tahsilat %','Bekleyen','Bakiye'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Müşteri','Sefer','Fatura','Top. Fatura','Tahsilat','Tahsilat %','Bekleyen','Bakiye'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
                   <tbody className="divide-y divide-gray-50">
                     {musteriRapor.map(r=>(
                       <tr key={r.id} className="hover:bg-gray-50 transition-colors">
@@ -1505,12 +1505,12 @@ export default function MuhasebePage() {
                             <span className="text-xs font-semibold text-gray-600">{r.tahsilatOrani.toFixed(0)}%</span>
                           </div>
                         </td>
-                        <td className={`px-4 py-3 font-semibold whitespace-nowrap ${r.bekleyenFatura>0?'text-amber-600':'text-gray-400'}`}>{r.bekleyenFatura>0?TL(r.bekleyenFatura):'—'}</td>
-                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.bakiye>0?'text-amber-600':r.bakiye<0?'text-green-600':'text-gray-400'}`}>{TL(r.bakiye)}</td>
+                        <td className={`px-4 py-3 font-semibold whitespace-nowrap ${r.bekleyenFatura>0?'text-amber-600':'text-gray-500'}`}>{r.bekleyenFatura>0?TL(r.bekleyenFatura):'—'}</td>
+                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.bakiye>0?'text-amber-600':r.bakiye<0?'text-green-600':'text-gray-500'}`}>{TL(r.bakiye)}</td>
                       </tr>
                     ))}
-                    {!musteriRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-400">Müşteri verisi yok.</td></tr>}
-                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400 text-xs">Yükleniyor…</td></tr>}
+                    {!musteriRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Müşteri verisi yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 text-xs">Yükleniyor…</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1580,9 +1580,9 @@ export default function MuhasebePage() {
                       </div>
                       {/* Dönem özeti — basitleştirilmiş çift taraflı */}
                       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-50">
-                        <div><p className="text-xs text-gray-400">Gelir</p><p className="text-sm font-bold text-green-600">{TL(gelir)}</p></div>
-                        <div><p className="text-xs text-gray-400">Gider</p><p className="text-sm font-bold text-red-500">{TL(gider)}</p></div>
-                        <div><p className="text-xs text-gray-400">Net</p><p className={`text-sm font-black ${gelir-gider>=0?'text-emerald-600':'text-red-600'}`}>{TL(gelir-gider)}</p></div>
+                        <div><p className="text-xs text-gray-500">Gelir</p><p className="text-sm font-bold text-green-600">{TL(gelir)}</p></div>
+                        <div><p className="text-xs text-gray-500">Gider</p><p className="text-sm font-bold text-red-500">{TL(gider)}</p></div>
+                        <div><p className="text-xs text-gray-500">Net</p><p className={`text-sm font-black ${gelir-gider>=0?'text-emerald-600':'text-red-600'}`}>{TL(gelir-gider)}</p></div>
                       </div>
                     </div>
                   );

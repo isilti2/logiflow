@@ -157,7 +157,7 @@ export default function FaturaPage() {
           </div>
           <div>
             <h1 className="text-2xl font-black text-gray-900">Fatura & Abonelik</h1>
-            <p className="text-sm text-gray-400 mt-0.5">Planınızı yönetin ve kullanım durumunuzu takip edin.</p>
+            <p className="text-sm text-gray-500 mt-0.5">Planınızı yönetin ve kullanım durumunuzu takip edin.</p>
           </div>
         </div>
 
@@ -189,7 +189,7 @@ export default function FaturaPage() {
                 </div>
                 <p className="text-2xl font-black text-gray-900">
                   {used}
-                  {total > 0 && <span className="text-sm text-gray-400 font-medium"> / {total}</span>}
+                  {total > 0 && <span className="text-sm text-gray-500 font-medium"> / {total}</span>}
                 </p>
                 {total > 0 && (
                   <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
@@ -226,12 +226,12 @@ export default function FaturaPage() {
                     </div>
                   )}
                   <div className="mb-4">
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{plan.label}</p>
+                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{plan.label}</p>
                     <div className="flex items-end gap-1 mt-1">
                       <span className="text-3xl font-black text-gray-900">{plan.price}</span>
-                      {plan.period && <span className="text-sm text-gray-400 mb-1">{plan.period}</span>}
+                      {plan.period && <span className="text-sm text-gray-500 mb-1">{plan.period}</span>}
                     </div>
-                    <p className="text-xs text-gray-400 mt-1">{plan.desc}</p>
+                    <p className="text-xs text-gray-500 mt-1">{plan.desc}</p>
                   </div>
 
                   <ul className="flex flex-col gap-2 mb-6 flex-1">
@@ -252,7 +252,7 @@ export default function FaturaPage() {
                     disabled={isCurrent || upgrading === plan.key}
                     className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                       isCurrent
-                        ? 'bg-gray-100 text-gray-400 cursor-default'
+                        ? 'bg-gray-100 text-gray-500 cursor-default'
                         : isPopular
                         ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm'
                         : 'bg-gray-900 hover:bg-gray-800 text-white'
@@ -280,7 +280,7 @@ export default function FaturaPage() {
             <thead>
               <tr className="bg-gray-50 text-left">
                 {['Tarih', 'Plan', 'Tutar', 'Durum'].map((h) => (
-                  <th key={h} className="px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">{h}</th>
+                  <th key={h} className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -299,7 +299,7 @@ export default function FaturaPage() {
               ))}
             </tbody>
           </table>
-          <div className="px-6 py-3 text-xs text-gray-400 border-t border-gray-100">{INVOICES.length} kayıt</div>
+          <div className="px-6 py-3 text-xs text-gray-500 border-t border-gray-100">{INVOICES.length} kayıt</div>
         </div>
 
       </main>
