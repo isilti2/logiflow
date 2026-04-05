@@ -322,11 +322,13 @@ function packBoxes(items: CargoItem[], container: ContainerDims): PackResult {
 
 
 interface OptRecord {
+  id?: string;
   date: string;
   containerLabel: string;
   fillPct: number;
   itemCount: number;
   placedCount: number;
+  payload?: { items: CargoItem[]; container: ContainerDims };
 }
 
 /* ─── Page ───────────────────────────────────────────────── */
@@ -428,6 +430,7 @@ export default function KargoOptimizasyonPage() {
         fillPct: fill,
         itemCount: cargoItems.reduce((s, i) => s + i.qty, 0),
         placedCount: res.placed.length,
+        payload: { items: cargoItems, container },
       };
       fetch('/api/optimizations', {
         method: 'POST',
@@ -472,6 +475,19 @@ export default function KargoOptimizasyonPage() {
   }
 
   function handleEditCancel() { setEditId(null); setEditDraft(null); }
+
+  function handleRestoreOpt(rec: OptRecord) {
+    if (!rec.payload) { toast('Bu çalışmada kaydedilmiş yük verisi yok.', 'info'); return; }
+    const { items, container: savedContainer } = rec.payload;
+    nextId = Math.max(...items.map((i) => i.id), 0) + 1;
+    setCargoItems(items);
+    setContainer(savedContainer);
+    setResult(null);
+    setResult2(null);
+    setShowResult(false);
+    toast(`"${rec.containerLabel}" geri yüklendi — ${items.length} tip, ${items.reduce((s,i)=>s+i.qty,0)} birim`, 'success');
+    setTimeout(() => document.getElementById('optimizer')?.scrollIntoView({ behavior: 'smooth' }), 100);
+  }
 
   function handleSecondContainer() {
     if (!result || result.unplacedItems.length === 0) return;
@@ -1701,11 +1717,12 @@ export default function KargoOptimizasyonPage() {
                       <th className="text-center px-5 py-3 font-semibold">Doluluk</th>
                       <th className="text-center px-5 py-3 font-semibold">Toplam Birim</th>
                       <th className="text-center px-5 py-3 font-semibold">Yerleştirilen</th>
+                      <th className="w-24 px-5 py-3" />
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-50">
                     {optHistory.slice(0, 10).map((rec, i) => (
-                      <tr key={i} className="hover:bg-gray-50 transition-colors">
+                      <tr key={i} className="hover:bg-blue-50/30 transition-colors group">
                         <td className="px-5 py-3 text-gray-400 text-xs font-mono">{rec.date}</td>
                         <td className="px-5 py-3 font-medium text-gray-700">{rec.containerLabel}</td>
                         <td className="px-5 py-3 text-center">
@@ -1721,6 +1738,16 @@ export default function KargoOptimizasyonPage() {
                           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${rec.placedCount === rec.itemCount ? 'bg-green-50 text-green-700' : 'bg-orange-50 text-orange-700'}`}>
                             {rec.placedCount} / {rec.itemCount}
                           </span>
+                        </td>
+                        <td className="px-5 py-3 text-right">
+                          <button
+                            onClick={() => handleRestoreOpt(rec)}
+                            disabled={!rec.payload}
+                            title={rec.payload ? 'Yük bilgilerini geri yükle' : 'Bu çalışmada veri yok'}
+                            className="text-xs font-semibold text-blue-600 hover:text-blue-800 hover:bg-blue-100 disabled:text-gray-300 disabled:cursor-not-allowed px-3 py-1 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                          >
+                            ↩ Yükle
+                          </button>
                         </td>
                       </tr>
                     ))}
