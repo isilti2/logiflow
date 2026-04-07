@@ -206,6 +206,7 @@ export type UserWhereInput = {
   notifications?: Prisma.AppNotificationListRelationFilter
   templates?: Prisma.OptTemplateListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  refreshTokens?: Prisma.RefreshTokenListRelationFilter
   musteriler?: Prisma.MusteriListRelationFilter
   seferler?: Prisma.SeferListRelationFilter
   maliIslemler?: Prisma.MaliIslemListRelationFilter
@@ -236,6 +237,7 @@ export type UserOrderByWithRelationInput = {
   notifications?: Prisma.AppNotificationOrderByRelationAggregateInput
   templates?: Prisma.OptTemplateOrderByRelationAggregateInput
   passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   musteriler?: Prisma.MusteriOrderByRelationAggregateInput
   seferler?: Prisma.SeferOrderByRelationAggregateInput
   maliIslemler?: Prisma.MaliIslemOrderByRelationAggregateInput
@@ -269,6 +271,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.AppNotificationListRelationFilter
   templates?: Prisma.OptTemplateListRelationFilter
   passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  refreshTokens?: Prisma.RefreshTokenListRelationFilter
   musteriler?: Prisma.MusteriListRelationFilter
   seferler?: Prisma.SeferListRelationFilter
   maliIslemler?: Prisma.MaliIslemListRelationFilter
@@ -325,6 +328,7 @@ export type UserCreateInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -355,6 +359,7 @@ export type UserUncheckedCreateInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -385,6 +390,7 @@ export type UserUpdateInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -415,6 +421,7 @@ export type UserUncheckedUpdateInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -598,6 +605,20 @@ export type UserUpdateOneRequiredWithoutTemplatesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutTemplatesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTemplatesInput, Prisma.UserUpdateWithoutTemplatesInput>, Prisma.UserUncheckedUpdateWithoutTemplatesInput>
+}
+
+export type UserCreateNestedOneWithoutRefreshTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
+  upsert?: Prisma.UserUpsertWithoutRefreshTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefreshTokensInput, Prisma.UserUpdateWithoutRefreshTokensInput>, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
 }
 
 export type UserCreateNestedOneWithoutPasswordResetTokensInput = {
@@ -797,6 +818,7 @@ export type UserCreateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -826,6 +848,7 @@ export type UserUncheckedCreateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -871,6 +894,7 @@ export type UserUpdateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -900,6 +924,7 @@ export type UserUncheckedUpdateWithoutAreasInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -929,6 +954,7 @@ export type UserCreateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -958,6 +984,7 @@ export type UserUncheckedCreateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1003,6 +1030,7 @@ export type UserUpdateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1032,6 +1060,7 @@ export type UserUncheckedUpdateWithoutCargoInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -1061,6 +1090,7 @@ export type UserCreateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -1090,6 +1120,7 @@ export type UserUncheckedCreateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1135,6 +1166,7 @@ export type UserUpdateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1164,6 +1196,7 @@ export type UserUncheckedUpdateWithoutOptimizationsInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -1193,6 +1226,7 @@ export type UserCreateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -1222,6 +1256,7 @@ export type UserUncheckedCreateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1267,6 +1302,7 @@ export type UserUpdateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1296,6 +1332,7 @@ export type UserUncheckedUpdateWithoutTeamMembersInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -1325,6 +1362,7 @@ export type UserCreateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -1354,6 +1392,7 @@ export type UserUncheckedCreateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1399,6 +1438,7 @@ export type UserUpdateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1428,6 +1468,7 @@ export type UserUncheckedUpdateWithoutApiKeysInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -1457,6 +1498,7 @@ export type UserCreateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -1486,6 +1528,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1531,6 +1574,7 @@ export type UserUpdateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1560,6 +1604,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -1589,6 +1634,7 @@ export type UserCreateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -1618,6 +1664,7 @@ export type UserUncheckedCreateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1663,6 +1710,7 @@ export type UserUpdateWithoutTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1691,6 +1739,143 @@ export type UserUncheckedUpdateWithoutTemplatesInput = {
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUncheckedUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUncheckedUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUncheckedUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUncheckedUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedUpdateManyWithoutUserNestedInput
+  tahsilatlar?: Prisma.TahsilatUncheckedUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRefreshTokensInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiCreateNestedManyWithoutUserInput
+  tahsilatlar?: Prisma.TahsilatCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRefreshTokensInput = {
+  id?: string
+  email: string
+  password: string
+  name?: string
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  areas?: Prisma.DepotAreaUncheckedCreateNestedManyWithoutUserInput
+  cargo?: Prisma.CargoItemUncheckedCreateNestedManyWithoutUserInput
+  optimizations?: Prisma.OptimizationRunUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
+  templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
+  seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
+  maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
+  personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
+  puantajlar?: Prisma.PuantajUncheckedCreateNestedManyWithoutUserInput
+  araclar?: Prisma.AracUncheckedCreateNestedManyWithoutUserInput
+  yakitKayitlari?: Prisma.YakitKaydiUncheckedCreateNestedManyWithoutUserInput
+  faturalar?: Prisma.FaturaUncheckedCreateNestedManyWithoutUserInput
+  bordrolar?: Prisma.BordroUncheckedCreateNestedManyWithoutUserInput
+  konumKayitlari?: Prisma.KonumKaydiUncheckedCreateNestedManyWithoutUserInput
+  tahsilatlar?: Prisma.TahsilatUncheckedCreateNestedManyWithoutUserInput
+  donemler?: Prisma.DonemUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRefreshTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+}
+
+export type UserUpsertWithoutRefreshTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+}
+
+export type UserUpdateWithoutRefreshTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
+  seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
+  maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
+  personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
+  puantajlar?: Prisma.PuantajUpdateManyWithoutUserNestedInput
+  araclar?: Prisma.AracUpdateManyWithoutUserNestedInput
+  yakitKayitlari?: Prisma.YakitKaydiUpdateManyWithoutUserNestedInput
+  faturalar?: Prisma.FaturaUpdateManyWithoutUserNestedInput
+  bordrolar?: Prisma.BordroUpdateManyWithoutUserNestedInput
+  konumKayitlari?: Prisma.KonumKaydiUpdateManyWithoutUserNestedInput
+  tahsilatlar?: Prisma.TahsilatUpdateManyWithoutUserNestedInput
+  donemler?: Prisma.DonemUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  areas?: Prisma.DepotAreaUncheckedUpdateManyWithoutUserNestedInput
+  cargo?: Prisma.CargoItemUncheckedUpdateManyWithoutUserNestedInput
+  optimizations?: Prisma.OptimizationRunUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
+  templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
@@ -1721,6 +1906,7 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -1750,6 +1936,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -1795,6 +1982,7 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -1824,6 +2012,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -1854,6 +2043,7 @@ export type UserCreateWithoutMusterilerInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
   personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
@@ -1883,6 +2073,7 @@ export type UserUncheckedCreateWithoutMusterilerInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
   personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
@@ -1928,6 +2119,7 @@ export type UserUpdateWithoutMusterilerInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
   personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
@@ -1957,6 +2149,7 @@ export type UserUncheckedUpdateWithoutMusterilerInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
   personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
@@ -1986,6 +2179,7 @@ export type UserCreateWithoutSeferlerInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
   personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
@@ -2015,6 +2209,7 @@ export type UserUncheckedCreateWithoutSeferlerInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
   personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
@@ -2060,6 +2255,7 @@ export type UserUpdateWithoutSeferlerInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
   personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
@@ -2089,6 +2285,7 @@ export type UserUncheckedUpdateWithoutSeferlerInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
   personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
@@ -2118,6 +2315,7 @@ export type UserCreateWithoutMaliIslemlerInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   personeller?: Prisma.PersonelCreateNestedManyWithoutUserInput
@@ -2147,6 +2345,7 @@ export type UserUncheckedCreateWithoutMaliIslemlerInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   personeller?: Prisma.PersonelUncheckedCreateNestedManyWithoutUserInput
@@ -2192,6 +2391,7 @@ export type UserUpdateWithoutMaliIslemlerInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   personeller?: Prisma.PersonelUpdateManyWithoutUserNestedInput
@@ -2221,6 +2421,7 @@ export type UserUncheckedUpdateWithoutMaliIslemlerInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   personeller?: Prisma.PersonelUncheckedUpdateManyWithoutUserNestedInput
@@ -2250,6 +2451,7 @@ export type UserCreateWithoutPersonellerInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -2279,6 +2481,7 @@ export type UserUncheckedCreateWithoutPersonellerInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -2324,6 +2527,7 @@ export type UserUpdateWithoutPersonellerInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -2353,6 +2557,7 @@ export type UserUncheckedUpdateWithoutPersonellerInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -2382,6 +2587,7 @@ export type UserCreateWithoutPuantajlarInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -2411,6 +2617,7 @@ export type UserUncheckedCreateWithoutPuantajlarInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -2456,6 +2663,7 @@ export type UserUpdateWithoutPuantajlarInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -2485,6 +2693,7 @@ export type UserUncheckedUpdateWithoutPuantajlarInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -2514,6 +2723,7 @@ export type UserCreateWithoutAraclarInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -2543,6 +2753,7 @@ export type UserUncheckedCreateWithoutAraclarInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -2588,6 +2799,7 @@ export type UserUpdateWithoutAraclarInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -2617,6 +2829,7 @@ export type UserUncheckedUpdateWithoutAraclarInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -2646,6 +2859,7 @@ export type UserCreateWithoutYakitKayitlariInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -2675,6 +2889,7 @@ export type UserUncheckedCreateWithoutYakitKayitlariInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -2720,6 +2935,7 @@ export type UserUpdateWithoutYakitKayitlariInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -2749,6 +2965,7 @@ export type UserUncheckedUpdateWithoutYakitKayitlariInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -2778,6 +2995,7 @@ export type UserCreateWithoutFaturalarInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -2807,6 +3025,7 @@ export type UserUncheckedCreateWithoutFaturalarInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -2852,6 +3071,7 @@ export type UserUpdateWithoutFaturalarInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -2881,6 +3101,7 @@ export type UserUncheckedUpdateWithoutFaturalarInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -2910,6 +3131,7 @@ export type UserCreateWithoutBordrolarInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -2939,6 +3161,7 @@ export type UserUncheckedCreateWithoutBordrolarInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -2984,6 +3207,7 @@ export type UserUpdateWithoutBordrolarInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -3013,6 +3237,7 @@ export type UserUncheckedUpdateWithoutBordrolarInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -3042,6 +3267,7 @@ export type UserCreateWithoutTahsilatlarInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -3071,6 +3297,7 @@ export type UserUncheckedCreateWithoutTahsilatlarInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -3116,6 +3343,7 @@ export type UserUpdateWithoutTahsilatlarInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -3145,6 +3373,7 @@ export type UserUncheckedUpdateWithoutTahsilatlarInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -3174,6 +3403,7 @@ export type UserCreateWithoutDonemlerInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -3203,6 +3433,7 @@ export type UserUncheckedCreateWithoutDonemlerInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -3248,6 +3479,7 @@ export type UserUpdateWithoutDonemlerInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -3277,6 +3509,7 @@ export type UserUncheckedUpdateWithoutDonemlerInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -3306,6 +3539,7 @@ export type UserCreateWithoutKonumKayitlariInput = {
   notifications?: Prisma.AppNotificationCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemCreateNestedManyWithoutUserInput
@@ -3335,6 +3569,7 @@ export type UserUncheckedCreateWithoutKonumKayitlariInput = {
   notifications?: Prisma.AppNotificationUncheckedCreateNestedManyWithoutUserInput
   templates?: Prisma.OptTemplateUncheckedCreateNestedManyWithoutUserInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   musteriler?: Prisma.MusteriUncheckedCreateNestedManyWithoutUserInput
   seferler?: Prisma.SeferUncheckedCreateNestedManyWithoutUserInput
   maliIslemler?: Prisma.MaliIslemUncheckedCreateNestedManyWithoutUserInput
@@ -3380,6 +3615,7 @@ export type UserUpdateWithoutKonumKayitlariInput = {
   notifications?: Prisma.AppNotificationUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUpdateManyWithoutUserNestedInput
@@ -3409,6 +3645,7 @@ export type UserUncheckedUpdateWithoutKonumKayitlariInput = {
   notifications?: Prisma.AppNotificationUncheckedUpdateManyWithoutUserNestedInput
   templates?: Prisma.OptTemplateUncheckedUpdateManyWithoutUserNestedInput
   passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   musteriler?: Prisma.MusteriUncheckedUpdateManyWithoutUserNestedInput
   seferler?: Prisma.SeferUncheckedUpdateManyWithoutUserNestedInput
   maliIslemler?: Prisma.MaliIslemUncheckedUpdateManyWithoutUserNestedInput
@@ -3436,6 +3673,7 @@ export type UserCountOutputType = {
   notifications: number
   templates: number
   passwordResetTokens: number
+  refreshTokens: number
   musteriler: number
   seferler: number
   maliIslemler: number
@@ -3459,6 +3697,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   templates?: boolean | UserCountOutputTypeCountTemplatesArgs
   passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
+  refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   musteriler?: boolean | UserCountOutputTypeCountMusterilerArgs
   seferler?: boolean | UserCountOutputTypeCountSeferlerArgs
   maliIslemler?: boolean | UserCountOutputTypeCountMaliIslemlerArgs
@@ -3537,6 +3776,13 @@ export type UserCountOutputTypeCountTemplatesArgs<ExtArgs extends runtime.Types.
  */
 export type UserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PasswordResetTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefreshTokenWhereInput
 }
 
 /**
@@ -3640,6 +3886,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   templates?: boolean | Prisma.User$templatesArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   musteriler?: boolean | Prisma.User$musterilerArgs<ExtArgs>
   seferler?: boolean | Prisma.User$seferlerArgs<ExtArgs>
   maliIslemler?: boolean | Prisma.User$maliIslemlerArgs<ExtArgs>
@@ -3695,6 +3942,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   templates?: boolean | Prisma.User$templatesArgs<ExtArgs>
   passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   musteriler?: boolean | Prisma.User$musterilerArgs<ExtArgs>
   seferler?: boolean | Prisma.User$seferlerArgs<ExtArgs>
   maliIslemler?: boolean | Prisma.User$maliIslemlerArgs<ExtArgs>
@@ -3723,6 +3971,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notifications: Prisma.$AppNotificationPayload<ExtArgs>[]
     templates: Prisma.$OptTemplatePayload<ExtArgs>[]
     passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     musteriler: Prisma.$MusteriPayload<ExtArgs>[]
     seferler: Prisma.$SeferPayload<ExtArgs>[]
     maliIslemler: Prisma.$MaliIslemPayload<ExtArgs>[]
@@ -4146,6 +4395,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   templates<T extends Prisma.User$templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OptTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   musteriler<T extends Prisma.User$musterilerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$musterilerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MusteriPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   seferler<T extends Prisma.User$seferlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seferlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   maliIslemler<T extends Prisma.User$maliIslemlerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$maliIslemlerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaliIslemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4776,6 +5026,30 @@ export type User$passwordResetTokensArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.refreshTokens
+ */
+export type User$refreshTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RefreshToken
+   */
+  select?: Prisma.RefreshTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RefreshToken
+   */
+  omit?: Prisma.RefreshTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RefreshTokenInclude<ExtArgs> | null
+  where?: Prisma.RefreshTokenWhereInput
+  orderBy?: Prisma.RefreshTokenOrderByWithRelationInput | Prisma.RefreshTokenOrderByWithRelationInput[]
+  cursor?: Prisma.RefreshTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RefreshTokenScalarFieldEnum | Prisma.RefreshTokenScalarFieldEnum[]
 }
 
 /**

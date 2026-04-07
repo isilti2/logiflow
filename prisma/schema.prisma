@@ -24,6 +24,7 @@ model User {
   notifications       AppNotification[]
   templates           OptTemplate[]
   passwordResetTokens PasswordResetToken[]
+  refreshTokens       RefreshToken[]
   musteriler          Musteri[]
   seferler            Sefer[]
   maliIslemler        MaliIslem[]
@@ -143,6 +144,19 @@ model OptTemplate {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique   // SHA-256 hash — plaintext cookie'de saklanır
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model PasswordResetToken {

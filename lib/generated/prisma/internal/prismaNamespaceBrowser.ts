@@ -59,6 +59,7 @@ export const ModelName = {
   ApiKey: 'ApiKey',
   AppNotification: 'AppNotification',
   OptTemplate: 'OptTemplate',
+  RefreshToken: 'RefreshToken',
   PasswordResetToken: 'PasswordResetToken',
   AuditLog: 'AuditLog',
   Musteri: 'Musteri',
@@ -199,6 +200,17 @@ export const OptTemplateScalarFieldEnum = {
 } as const
 
 export type OptTemplateScalarFieldEnum = (typeof OptTemplateScalarFieldEnum)[keyof typeof OptTemplateScalarFieldEnum]
+
+
+export const RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
 export const PasswordResetTokenScalarFieldEnum = {

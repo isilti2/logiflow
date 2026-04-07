@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getSession } from '@/lib/session';
 import { db } from '@/lib/db';
+import { encrypt, decryptPersonel } from '@/lib/encrypt';
 
 export async function GET() {
   const s = await getSession();
@@ -11,7 +12,7 @@ export async function GET() {
     orderBy: { createdAt: 'desc' },
     include: { _count: { select: { puantajlar: true } } },
   });
-  return NextResponse.json(rows);
+  return NextResponse.json(rows.map(decryptPersonel));
 }
 
 export async function POST(req: Request) {
@@ -27,13 +28,13 @@ export async function POST(req: Request) {
     data: {
       userId: s.userId,
       ad,
-      unvan: unvan ?? '',
-      telefon: telefon ?? '',
-      tcNo: tcNo ?? '',
-      maas: Number(maas) || 0,
+      unvan:          unvan ?? '',
+      telefon:        encrypt(telefon ?? ''),
+      tcNo:           encrypt(tcNo    ?? ''),
+      maas:           Number(maas) || 0,
       baslangicTarihi,
     },
     include: { _count: { select: { puantajlar: true } } },
   });
-  return NextResponse.json(row, { status: 201 });
+  return NextResponse.json(decryptPersonel(row), { status: 201 });
 }

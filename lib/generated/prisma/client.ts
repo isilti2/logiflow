@@ -82,6 +82,11 @@ export type AppNotification = Prisma.AppNotificationModel
  */
 export type OptTemplate = Prisma.OptTemplateModel
 /**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
+/**
  * Model PasswordResetToken
  * 
  */
