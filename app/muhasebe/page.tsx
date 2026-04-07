@@ -479,6 +479,27 @@ export default function MuhasebePage() {
     }
   }
 
+  function openAyiDoldur() {
+    // Seçili ayın ilk ve son gününü hesapla
+    const [yil, ay] = puantajAy.split('-').map(Number);
+    const baslangic = `${puantajAy}-01`;
+    const sonGun = new Date(yil, ay, 0).getDate();
+    const bitis = `${puantajAy}-${String(sonGun).padStart(2, '0')}`;
+    setTopluForm(p => ({
+      ...p,
+      baslangic,
+      bitis,
+      haftaGunleri: [1, 2, 3, 4, 5],
+      personelIds: personeller.filter(x => x.aktif).map(x => x.id),
+      girisSaati: '08:00',
+      cikisSaati: '17:00',
+      fazlaMesai: '0',
+      izinTuru: '',
+      notlar: '',
+    }));
+    setShowToplu(true);
+  }
+
   async function hesaplaBordro(personelId: string) {
     const res = await fetch('/api/muhasebe/bordro', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ personelId, ay: bordroAy }) });
     if (res.ok) { const n = await res.json(); setBordrolar(p => { const existing = p.find(b => b.personelId === personelId && b.ay === bordroAy); return existing ? p.map(b => b.personelId === personelId && b.ay === bordroAy ? n : b) : [n, ...p]; }); }
@@ -1610,10 +1631,16 @@ export default function MuhasebePage() {
                 <select value={selPersonel} onChange={e=>setSelPersonel(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                   <option value="">Tüm Personel</option>{personeller.map(p=><option key={p.id} value={p.id}>{p.ad}</option>)}
                 </select>
-                <button onClick={()=>setShowToplu(true)}
-                  className="ml-auto flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95">
-                  <Plus className="w-3.5 h-3.5"/>Toplu Giriş
-                </button>
+                <div className="ml-auto flex items-center gap-2">
+                  <button onClick={openAyiDoldur}
+                    className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95">
+                    <CalendarDays className="w-3.5 h-3.5"/>Ayı Doldur
+                  </button>
+                  <button onClick={()=>setShowToplu(true)}
+                    className="flex items-center gap-1.5 border border-indigo-200 text-indigo-700 hover:bg-indigo-50 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95">
+                    <Plus className="w-3.5 h-3.5"/>Özel Giriş
+                  </button>
+                </div>
               </div>
               <table className="w-full text-sm">
                 <thead><tr className="bg-gray-50 border-b border-gray-100">{['Personel','Tarih','Giriş','Çıkış','Fazla Mesai','Durum','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
