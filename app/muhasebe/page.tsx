@@ -205,6 +205,19 @@ export default function MuhasebePage() {
   const [editId,      setEditId]      = useState<string | null>(null);
   const [puantajAy,   setPuantajAy]   = useState(thisMonth);
   const [selPersonel, setSelPersonel] = useState('');
+  const [showToplu,   setShowToplu]   = useState(false);
+  const [topluForm,   setTopluForm]   = useState({
+    personelIds: [] as string[],
+    baslangic: '',
+    bitis: '',
+    haftaGunleri: [1, 2, 3, 4, 5] as number[], // 0=Paz … 6=Cmt
+    girisSaati: '08:00',
+    cikisSaati: '17:00',
+    fazlaMesai: '0',
+    izinTuru: '',
+    notlar: '',
+  });
+  const [topluYukleniyor, setTopluYukleniyor] = useState(false);
   const [bordroAy,    setBordroAy]    = useState(thisMonth);
   const [selArac,     setSelArac]     = useState('');
   const [plakaManuel,    setPlakaManuel]    = useState(false);
@@ -419,6 +432,53 @@ export default function MuhasebePage() {
     await fetch(`/api/muhasebe/puantaj/${id}`, { method: 'DELETE' });
     setPuantajlar(p => p.filter(x => x.id !== id));
   }
+
+  function topluTarihler(): string[] {
+    if (!topluForm.baslangic || !topluForm.bitis) return [];
+    const result: string[] = [];
+    const cur = new Date(topluForm.baslangic);
+    const end = new Date(topluForm.bitis);
+    while (cur <= end) {
+      if (topluForm.haftaGunleri.includes(cur.getDay())) {
+        result.push(cur.toISOString().slice(0, 10));
+      }
+      cur.setDate(cur.getDate() + 1);
+    }
+    return result;
+  }
+
+  async function submitTopluPuantaj(e: React.FormEvent) {
+    e.preventDefault();
+    if (topluForm.personelIds.length === 0) { alert('En az bir personel seçin.'); return; }
+    const tarihler = topluTarihler();
+    if (tarihler.length === 0) { alert('Seçilen aralıkta uygun gün yok.'); return; }
+    setTopluYukleniyor(true);
+    const entries = topluForm.personelIds.flatMap(personelId =>
+      tarihler.map(tarih => ({
+        personelId,
+        tarih,
+        girisSaati: topluForm.izinTuru ? '' : topluForm.girisSaati,
+        cikisSaati: topluForm.izinTuru ? '' : topluForm.cikisSaati,
+        fazlaMesai: Number(topluForm.fazlaMesai) || 0,
+        izinTuru: topluForm.izinTuru || undefined,
+        notlar: topluForm.notlar,
+      }))
+    );
+    const res = await fetch('/api/muhasebe/puantaj/toplu', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entries }),
+    });
+    setTopluYukleniyor(false);
+    if (res.ok) {
+      const { created, updated } = await res.json();
+      alert(`${created} yeni kayıt oluşturuldu, ${updated} kayıt güncellendi.`);
+      setShowToplu(false);
+      setTopluForm(p => ({ ...p, baslangic: '', bitis: '', personelIds: [], fazlaMesai: '0', izinTuru: '', notlar: '' }));
+      await loadPuantaj();
+    }
+  }
+
   async function hesaplaBordro(personelId: string) {
     const res = await fetch('/api/muhasebe/bordro', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ personelId, ay: bordroAy }) });
     if (res.ok) { const n = await res.json(); setBordrolar(p => { const existing = p.find(b => b.personelId === personelId && b.ay === bordroAy); return existing ? p.map(b => b.personelId === personelId && b.ay === bordroAy ? n : b) : [n, ...p]; }); }
@@ -1412,6 +1472,136 @@ export default function MuhasebePage() {
               </form>
             )}
 
+            {/* Toplu Giriş Modal */}
+            {showToplu && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <form onSubmit={submitTopluPuantaj}>
+                    <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+                      <div>
+                        <h2 className="text-lg font-bold text-gray-900">Toplu Puantaj Girişi</h2>
+                        <p className="text-xs text-gray-500 mt-0.5">Birden fazla personel için aynı anda kayıt oluştur</p>
+                      </div>
+                      <button type="button" onClick={()=>setShowToplu(false)} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                    </div>
+
+                    <div className="px-6 py-5 space-y-5">
+                      {/* Personel Seçimi */}
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <label className="text-xs font-semibold text-gray-700">Personel *</label>
+                          <button type="button"
+                            onClick={()=>setTopluForm(p=>({...p, personelIds: p.personelIds.length===personeller.length ? [] : personeller.map(x=>x.id)}))}
+                            className="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
+                            {topluForm.personelIds.length===personeller.length ? 'Seçimi kaldır' : 'Tümünü seç'}
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto border border-gray-100 rounded-xl p-3">
+                          {personeller.filter(p=>p.aktif).map(p=>(
+                            <label key={p.id} className="flex items-center gap-2 text-sm cursor-pointer select-none">
+                              <input type="checkbox" checked={topluForm.personelIds.includes(p.id)}
+                                onChange={e=>setTopluForm(prev=>({...prev, personelIds: e.target.checked ? [...prev.personelIds, p.id] : prev.personelIds.filter(id=>id!==p.id)}))}
+                                className="rounded accent-indigo-600"/>
+                              <span className="text-gray-800 truncate">{p.ad}</span>
+                            </label>
+                          ))}
+                          {personeller.filter(p=>p.aktif).length===0 && <p className="text-xs text-gray-400 col-span-full">Aktif personel yok</p>}
+                        </div>
+                      </div>
+
+                      {/* Tarih Aralığı */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">Başlangıç Tarihi *</label>
+                          <input required type="date" value={topluForm.baslangic} onChange={e=>setTopluForm(p=>({...p,baslangic:e.target.value}))}
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">Bitiş Tarihi *</label>
+                          <input required type="date" value={topluForm.bitis} min={topluForm.baslangic} onChange={e=>setTopluForm(p=>({...p,bitis:e.target.value}))}
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                        </div>
+                      </div>
+
+                      {/* Hafta Günleri */}
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-700 mb-2">Günler</label>
+                        <div className="flex gap-2 flex-wrap">
+                          {[['Paz',0],['Pts',1],['Sal',2],['Çar',3],['Per',4],['Cum',5],['Cmt',6]].map(([label, val])=>(
+                            <button key={val} type="button"
+                              onClick={()=>setTopluForm(p=>({...p, haftaGunleri: p.haftaGunleri.includes(val as number) ? p.haftaGunleri.filter(g=>g!==val) : [...p.haftaGunleri, val as number]}))}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${topluForm.haftaGunleri.includes(val as number) ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-500 border-gray-200 hover:border-indigo-300'}`}>
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Çalışma Saatleri & Mesai */}
+                      <div className="grid grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">Giriş Saati</label>
+                          <input type="time" value={topluForm.girisSaati} onChange={e=>setTopluForm(p=>({...p,girisSaati:e.target.value}))}
+                            disabled={!!topluForm.izinTuru}
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-40"/>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">Çıkış Saati</label>
+                          <input type="time" value={topluForm.cikisSaati} onChange={e=>setTopluForm(p=>({...p,cikisSaati:e.target.value}))}
+                            disabled={!!topluForm.izinTuru}
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-40"/>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">Fazla Mesai (s)</label>
+                          <input type="number" min="0" step="0.5" value={topluForm.fazlaMesai} onChange={e=>setTopluForm(p=>({...p,fazlaMesai:e.target.value}))}
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                        </div>
+                      </div>
+
+                      {/* İzin Türü & Not */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">İzin Türü</label>
+                          <select value={topluForm.izinTuru} onChange={e=>setTopluForm(p=>({...p,izinTuru:e.target.value}))}
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="">Çalışıldı</option>
+                            <option value="yillik">Yıllık İzin</option>
+                            <option value="hastalik">Hastalık İzni</option>
+                            <option value="ucretsiz">Ücretsiz İzin</option>
+                            <option value="resmi">Resmi Tatil</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-700 mb-1">Not</label>
+                          <input value={topluForm.notlar} onChange={e=>setTopluForm(p=>({...p,notlar:e.target.value}))}
+                            placeholder="Opsiyonel…"
+                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                        </div>
+                      </div>
+
+                      {/* Önizleme */}
+                      {topluForm.baslangic && topluForm.bitis && (
+                        <div className={`rounded-xl px-4 py-3 text-sm flex items-center gap-2 ${topluTarihler().length>0 ? 'bg-indigo-50 text-indigo-800' : 'bg-gray-50 text-gray-500'}`}>
+                          <CalendarDays className="w-4 h-4 shrink-0"/>
+                          {topluTarihler().length > 0
+                            ? <span><b>{topluForm.personelIds.length}</b> personel × <b>{topluTarihler().length}</b> gün = <b>{topluForm.personelIds.length * topluTarihler().length}</b> kayıt oluşturulacak</span>
+                            : <span>Seçilen aralıkta uygun gün bulunamadı</span>}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3">
+                      <button type="button" onClick={()=>setShowToplu(false)} className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-800">İptal</button>
+                      <button type="submit" disabled={topluYukleniyor || topluForm.personelIds.length===0 || topluTarihler().length===0}
+                        className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-semibold px-5 py-2 rounded-xl transition-colors active:scale-95">
+                        {topluYukleniyor ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block"/>Kaydediliyor…</> : <><Save className="w-4 h-4"/>Toplu Kaydet</>}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
             {/* Puantaj tablosu */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
@@ -1420,6 +1610,10 @@ export default function MuhasebePage() {
                 <select value={selPersonel} onChange={e=>setSelPersonel(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                   <option value="">Tüm Personel</option>{personeller.map(p=><option key={p.id} value={p.id}>{p.ad}</option>)}
                 </select>
+                <button onClick={()=>setShowToplu(true)}
+                  className="ml-auto flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95">
+                  <Plus className="w-3.5 h-3.5"/>Toplu Giriş
+                </button>
               </div>
               <table className="w-full text-sm">
                 <thead><tr className="bg-gray-50 border-b border-gray-100">{['Personel','Tarih','Giriş','Çıkış','Fazla Mesai','Durum','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
