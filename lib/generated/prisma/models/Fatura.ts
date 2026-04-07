@@ -46,7 +46,6 @@ export type FaturaMinAggregateOutputType = {
   faturaNo: string | null
   tarih: string | null
   vadeTarih: string | null
-  satirlar: string | null
   araToplam: number | null
   kdvToplam: number | null
   genelToplam: number | null
@@ -64,7 +63,6 @@ export type FaturaMaxAggregateOutputType = {
   faturaNo: string | null
   tarih: string | null
   vadeTarih: string | null
-  satirlar: string | null
   araToplam: number | null
   kdvToplam: number | null
   genelToplam: number | null
@@ -82,7 +80,6 @@ export type FaturaCountAggregateOutputType = {
   faturaNo: number
   tarih: number
   vadeTarih: number
-  satirlar: number
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -114,7 +111,6 @@ export type FaturaMinAggregateInputType = {
   faturaNo?: true
   tarih?: true
   vadeTarih?: true
-  satirlar?: true
   araToplam?: true
   kdvToplam?: true
   genelToplam?: true
@@ -132,7 +128,6 @@ export type FaturaMaxAggregateInputType = {
   faturaNo?: true
   tarih?: true
   vadeTarih?: true
-  satirlar?: true
   araToplam?: true
   kdvToplam?: true
   genelToplam?: true
@@ -150,7 +145,6 @@ export type FaturaCountAggregateInputType = {
   faturaNo?: true
   tarih?: true
   vadeTarih?: true
-  satirlar?: true
   araToplam?: true
   kdvToplam?: true
   genelToplam?: true
@@ -255,7 +249,6 @@ export type FaturaGroupByOutputType = {
   faturaNo: string
   tarih: string
   vadeTarih: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -296,7 +289,6 @@ export type FaturaWhereInput = {
   faturaNo?: Prisma.StringFilter<"Fatura"> | string
   tarih?: Prisma.StringFilter<"Fatura"> | string
   vadeTarih?: Prisma.StringNullableFilter<"Fatura"> | string | null
-  satirlar?: Prisma.StringFilter<"Fatura"> | string
   araToplam?: Prisma.FloatFilter<"Fatura"> | number
   kdvToplam?: Prisma.FloatFilter<"Fatura"> | number
   genelToplam?: Prisma.FloatFilter<"Fatura"> | number
@@ -318,7 +310,6 @@ export type FaturaOrderByWithRelationInput = {
   faturaNo?: Prisma.SortOrder
   tarih?: Prisma.SortOrder
   vadeTarih?: Prisma.SortOrderInput | Prisma.SortOrder
-  satirlar?: Prisma.SortOrder
   araToplam?: Prisma.SortOrder
   kdvToplam?: Prisma.SortOrder
   genelToplam?: Prisma.SortOrder
@@ -343,7 +334,6 @@ export type FaturaWhereUniqueInput = Prisma.AtLeast<{
   faturaNo?: Prisma.StringFilter<"Fatura"> | string
   tarih?: Prisma.StringFilter<"Fatura"> | string
   vadeTarih?: Prisma.StringNullableFilter<"Fatura"> | string | null
-  satirlar?: Prisma.StringFilter<"Fatura"> | string
   araToplam?: Prisma.FloatFilter<"Fatura"> | number
   kdvToplam?: Prisma.FloatFilter<"Fatura"> | number
   genelToplam?: Prisma.FloatFilter<"Fatura"> | number
@@ -365,7 +355,6 @@ export type FaturaOrderByWithAggregationInput = {
   faturaNo?: Prisma.SortOrder
   tarih?: Prisma.SortOrder
   vadeTarih?: Prisma.SortOrderInput | Prisma.SortOrder
-  satirlar?: Prisma.SortOrder
   araToplam?: Prisma.SortOrder
   kdvToplam?: Prisma.SortOrder
   genelToplam?: Prisma.SortOrder
@@ -391,7 +380,6 @@ export type FaturaScalarWhereWithAggregatesInput = {
   faturaNo?: Prisma.StringWithAggregatesFilter<"Fatura"> | string
   tarih?: Prisma.StringWithAggregatesFilter<"Fatura"> | string
   vadeTarih?: Prisma.StringNullableWithAggregatesFilter<"Fatura"> | string | null
-  satirlar?: Prisma.StringWithAggregatesFilter<"Fatura"> | string
   araToplam?: Prisma.FloatWithAggregatesFilter<"Fatura"> | number
   kdvToplam?: Prisma.FloatWithAggregatesFilter<"Fatura"> | number
   genelToplam?: Prisma.FloatWithAggregatesFilter<"Fatura"> | number
@@ -406,7 +394,6 @@ export type FaturaCreateInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -428,7 +415,6 @@ export type FaturaUncheckedCreateInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -444,7 +430,6 @@ export type FaturaUpdateInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -466,7 +451,6 @@ export type FaturaUncheckedUpdateInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -485,7 +469,6 @@ export type FaturaCreateManyInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -500,7 +483,6 @@ export type FaturaUpdateManyMutationInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -518,7 +500,6 @@ export type FaturaUncheckedUpdateManyInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -546,7 +527,6 @@ export type FaturaCountOrderByAggregateInput = {
   faturaNo?: Prisma.SortOrder
   tarih?: Prisma.SortOrder
   vadeTarih?: Prisma.SortOrder
-  satirlar?: Prisma.SortOrder
   araToplam?: Prisma.SortOrder
   kdvToplam?: Prisma.SortOrder
   genelToplam?: Prisma.SortOrder
@@ -570,7 +550,6 @@ export type FaturaMaxOrderByAggregateInput = {
   faturaNo?: Prisma.SortOrder
   tarih?: Prisma.SortOrder
   vadeTarih?: Prisma.SortOrder
-  satirlar?: Prisma.SortOrder
   araToplam?: Prisma.SortOrder
   kdvToplam?: Prisma.SortOrder
   genelToplam?: Prisma.SortOrder
@@ -588,7 +567,6 @@ export type FaturaMinOrderByAggregateInput = {
   faturaNo?: Prisma.SortOrder
   tarih?: Prisma.SortOrder
   vadeTarih?: Prisma.SortOrder
-  satirlar?: Prisma.SortOrder
   araToplam?: Prisma.SortOrder
   kdvToplam?: Prisma.SortOrder
   genelToplam?: Prisma.SortOrder
@@ -756,7 +734,6 @@ export type FaturaCreateWithoutUserInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -776,7 +753,6 @@ export type FaturaUncheckedCreateWithoutUserInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -824,7 +800,6 @@ export type FaturaScalarWhereInput = {
   faturaNo?: Prisma.StringFilter<"Fatura"> | string
   tarih?: Prisma.StringFilter<"Fatura"> | string
   vadeTarih?: Prisma.StringNullableFilter<"Fatura"> | string | null
-  satirlar?: Prisma.StringFilter<"Fatura"> | string
   araToplam?: Prisma.FloatFilter<"Fatura"> | number
   kdvToplam?: Prisma.FloatFilter<"Fatura"> | number
   genelToplam?: Prisma.FloatFilter<"Fatura"> | number
@@ -839,7 +814,6 @@ export type FaturaCreateWithoutMusteriInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -859,7 +833,6 @@ export type FaturaUncheckedCreateWithoutMusteriInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -901,7 +874,6 @@ export type FaturaCreateWithoutSeferInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -921,7 +893,6 @@ export type FaturaUncheckedCreateWithoutSeferInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -963,7 +934,6 @@ export type FaturaCreateWithoutTahsilatlarInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -984,7 +954,6 @@ export type FaturaUncheckedCreateWithoutTahsilatlarInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -1015,7 +984,6 @@ export type FaturaUpdateWithoutTahsilatlarInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1036,7 +1004,6 @@ export type FaturaUncheckedUpdateWithoutTahsilatlarInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1053,7 +1020,6 @@ export type FaturaCreateManyUserInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -1068,7 +1034,6 @@ export type FaturaUpdateWithoutUserInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1088,7 +1053,6 @@ export type FaturaUncheckedUpdateWithoutUserInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1106,7 +1070,6 @@ export type FaturaUncheckedUpdateManyWithoutUserInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1123,7 +1086,6 @@ export type FaturaCreateManyMusteriInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -1138,7 +1100,6 @@ export type FaturaUpdateWithoutMusteriInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1158,7 +1119,6 @@ export type FaturaUncheckedUpdateWithoutMusteriInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1176,7 +1136,6 @@ export type FaturaUncheckedUpdateManyWithoutMusteriInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1193,7 +1152,6 @@ export type FaturaCreateManySeferInput = {
   faturaNo: string
   tarih: string
   vadeTarih?: string | null
-  satirlar: string
   araToplam: number
   kdvToplam: number
   genelToplam: number
@@ -1208,7 +1166,6 @@ export type FaturaUpdateWithoutSeferInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1228,7 +1185,6 @@ export type FaturaUncheckedUpdateWithoutSeferInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1246,7 +1202,6 @@ export type FaturaUncheckedUpdateManyWithoutSeferInput = {
   faturaNo?: Prisma.StringFieldUpdateOperationsInput | string
   tarih?: Prisma.StringFieldUpdateOperationsInput | string
   vadeTarih?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  satirlar?: Prisma.StringFieldUpdateOperationsInput | string
   araToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   kdvToplam?: Prisma.FloatFieldUpdateOperationsInput | number
   genelToplam?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1295,7 +1250,6 @@ export type FaturaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   faturaNo?: boolean
   tarih?: boolean
   vadeTarih?: boolean
-  satirlar?: boolean
   araToplam?: boolean
   kdvToplam?: boolean
   genelToplam?: boolean
@@ -1318,7 +1272,6 @@ export type FaturaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   faturaNo?: boolean
   tarih?: boolean
   vadeTarih?: boolean
-  satirlar?: boolean
   araToplam?: boolean
   kdvToplam?: boolean
   genelToplam?: boolean
@@ -1339,7 +1292,6 @@ export type FaturaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   faturaNo?: boolean
   tarih?: boolean
   vadeTarih?: boolean
-  satirlar?: boolean
   araToplam?: boolean
   kdvToplam?: boolean
   genelToplam?: boolean
@@ -1360,7 +1312,6 @@ export type FaturaSelectScalar = {
   faturaNo?: boolean
   tarih?: boolean
   vadeTarih?: boolean
-  satirlar?: boolean
   araToplam?: boolean
   kdvToplam?: boolean
   genelToplam?: boolean
@@ -1370,7 +1321,7 @@ export type FaturaSelectScalar = {
   createdAt?: boolean
 }
 
-export type FaturaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "musteriId" | "seferId" | "faturaNo" | "tarih" | "vadeTarih" | "satirlar" | "araToplam" | "kdvToplam" | "genelToplam" | "notlar" | "durum" | "dosyaUrl" | "createdAt", ExtArgs["result"]["fatura"]>
+export type FaturaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "musteriId" | "seferId" | "faturaNo" | "tarih" | "vadeTarih" | "araToplam" | "kdvToplam" | "genelToplam" | "notlar" | "durum" | "dosyaUrl" | "createdAt", ExtArgs["result"]["fatura"]>
 export type FaturaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   musteri?: boolean | Prisma.Fatura$musteriArgs<ExtArgs>
@@ -1405,7 +1356,6 @@ export type $FaturaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     faturaNo: string
     tarih: string
     vadeTarih: string | null
-    satirlar: string
     araToplam: number
     kdvToplam: number
     genelToplam: number
@@ -1847,7 +1797,6 @@ export interface FaturaFieldRefs {
   readonly faturaNo: Prisma.FieldRef<"Fatura", 'String'>
   readonly tarih: Prisma.FieldRef<"Fatura", 'String'>
   readonly vadeTarih: Prisma.FieldRef<"Fatura", 'String'>
-  readonly satirlar: Prisma.FieldRef<"Fatura", 'String'>
   readonly araToplam: Prisma.FieldRef<"Fatura", 'Float'>
   readonly kdvToplam: Prisma.FieldRef<"Fatura", 'Float'>
   readonly genelToplam: Prisma.FieldRef<"Fatura", 'Float'>

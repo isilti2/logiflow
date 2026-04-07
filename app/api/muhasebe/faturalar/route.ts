@@ -53,7 +53,6 @@ export async function POST(req: Request) {
       faturaNo,
       tarih,
       vadeTarih:  vadeTarih  || null,
-      satirlar:   '[]',
       araToplam,
       kdvToplam,
       genelToplam,

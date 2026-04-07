@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { registerAction } from '@/app/actions/auth';
-import { checkRateLimit } from '@/lib/rateLimit';
+import { checkRateLimit, resetRateLimit } from '@/lib/rateLimit';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
@@ -18,5 +18,6 @@ export async function POST(req: NextRequest) {
 
   const error = await registerAction(email, password, name ?? '');
   if (error) return NextResponse.json({ error }, { status: 400 });
+  resetRateLimit(key); // başarılı kayıtta sayacı sıfırla
   return NextResponse.json({ ok: true });
 }

@@ -326,7 +326,6 @@ model Fatura {
   faturaNo    String
   tarih       String
   vadeTarih   String?
-  satirlar    String
   araToplam   Float
   kdvToplam   Float
   genelToplam Float

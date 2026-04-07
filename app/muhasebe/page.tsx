@@ -358,6 +358,18 @@ export default function MuhasebePage() {
     if (res.ok) { const n = await res.json(); setBordrolar(p => { const existing = p.find(b => b.personelId === personelId && b.ay === bordroAy); return existing ? p.map(b => b.personelId === personelId && b.ay === bordroAy ? n : b) : [n, ...p]; }); }
   }
 
+  const [bordroYukleniyor, setBordroYukleniyor] = useState(false);
+  async function hesaplaHepsiBordro() {
+    const aktifler = personeller.filter(p => p.aktif);
+    if (aktifler.length === 0) return;
+    setBordroYukleniyor(true);
+    for (const p of aktifler) {
+      const res = await fetch('/api/muhasebe/bordro', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ personelId: p.id, ay: bordroAy }) });
+      if (res.ok) { const n = await res.json(); setBordrolar(prev => { const ex = prev.find(b => b.personelId === p.id && b.ay === bordroAy); return ex ? prev.map(b => b.personelId === p.id && b.ay === bordroAy ? n : b) : [n, ...prev]; }); }
+    }
+    setBordroYukleniyor(false);
+  }
+
   /* ── Handlers: Araç & Yakıt ── */
   async function submitArac(e: React.FormEvent) {
     e.preventDefault();
@@ -1529,7 +1541,13 @@ export default function MuhasebePage() {
                 <Calculator className="w-4 h-4 text-gray-500"/>
                 <h3 className="font-bold text-gray-900 text-sm">Bordro Hesaplama</h3>
                 <input type="month" value={bordroAy} onChange={e=>setBordroAy(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
-                <span className="text-xs text-gray-500 ml-auto">2025 Türkiye SGK oranları · tahmini hesap</span>
+                <span className="text-xs text-gray-500">2025 Türkiye SGK oranları · tahmini hesap</span>
+                <button onClick={hesaplaHepsiBordro} disabled={bordroYukleniyor || personeller.filter(p=>p.aktif).length===0}
+                  className="ml-auto flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95">
+                  {bordroYukleniyor
+                    ? <><span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block"/>Hesaplanıyor…</>
+                    : <><Calculator className="w-3.5 h-3.5"/>Tümünü Hesapla</>}
+                </button>
               </div>
               <table className="w-full text-sm">
                 <thead><tr className="bg-gray-50 border-b border-gray-100">

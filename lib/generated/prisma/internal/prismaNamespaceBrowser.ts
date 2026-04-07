@@ -353,7 +353,6 @@ export const FaturaScalarFieldEnum = {
   faturaNo: 'faturaNo',
   tarih: 'tarih',
   vadeTarih: 'vadeTarih',
-  satirlar: 'satirlar',
   araToplam: 'araToplam',
   kdvToplam: 'kdvToplam',
   genelToplam: 'genelToplam',
