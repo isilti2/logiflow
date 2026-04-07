@@ -8,170 +8,23 @@ import {
   LayoutDashboard, Truck, Receipt, Users, UserCheck,
   LogOut, Plus, Trash2, ChevronRight, ArrowUpRight,
   ArrowDownRight, TrendingUp, Wallet, Calendar,
-  Search, X, CheckCircle2, Clock, Building2, Phone,
+  Search, X, CheckCircle2, Clock, AlertTriangle, Building2, Phone,
   Mail, MapPin, Save, CalendarDays, Car, Fuel,
-  FileText, Printer, AlertTriangle, ShieldCheck,
-  ClipboardList, Calculator, AlertCircle,
+  FileText, Printer, ClipboardList, Calculator, AlertCircle,
 } from 'lucide-react';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
-
-/* ─── Types ─────────────────────────────────────────────────── */
-type Musteri   = { id: string; ad: string; vergiNo: string; telefon: string; email: string; adres: string; bakiye: number; createdAt: string };
-type Tahsilat  = { id: string; musteriId: string; faturaId: string | null; tutar: number; tarih: string; notlar: string; createdAt: string; musteri?: { id: string; ad: string }; fatura?: { id: string; faturaNo: string; genelToplam: number } | null };
-type Sefer     = { id: string; musteriId: string | null; musteri?: { id: string; ad: string } | null; aracPlaka: string; rotaDan: string; rotaAya: string; mesafeKm: number; tarih: string; yukAgirligi: number; seferUcreti: number; yakitMaliyeti: number; notlar: string; durum: string; createdAt: string };
-type MaliIslem = { id: string; seferId: string | null; musteriId: string | null; sefer?: { rotaDan: string; rotaAya: string } | null; musteri?: { ad: string } | null; tur: string; kategori: string; tutar: number; kdvOrani: number; aciklama: string; tarih: string; createdAt: string };
-type Personel  = { id: string; ad: string; unvan: string; telefon: string; tcNo: string; maas: number; baslangicTarihi: string; aktif: boolean; createdAt: string; _count?: { puantajlar: number } };
-type Puantaj   = { id: string; personelId: string; tarih: string; girisSaati: string | null; cikisSaati: string | null; fazlaMesai: number; izinTuru: string | null; notlar: string; personel?: { id: string; ad: string; unvan: string } };
-type Arac      = { id: string; plaka: string; marka: string; model: string; yil: number | null; ruhsatSon: string | null; sigortaSon: string | null; muayeneSon: string | null; aktif: boolean; notlar: string; createdAt: string; _count?: { yakitKayitlari: number } };
-type YakitKaydi = { id: string; aracId: string; tarih: string; litre: number; birimFiyat: number; toplamTutar: number; kmSayaci: number; istasyon: string; notlar: string; arac?: { id: string; plaka: string; marka: string; model: string } };
-type FaturaSatiri = { aciklama: string; miktar: number; birimFiyat: number; kdvOrani: number };
-type Fatura    = { id: string; faturaNo: string; tarih: string; vadeTarih: string | null; satirlar: string; araToplam: number; kdvToplam: number; genelToplam: number; notlar: string; durum: string; dosyaUrl: string | null; createdAt: string; musteri?: { id: string; ad: string; vergiNo: string; adres: string; email: string; telefon: string } | null; sefer?: { id: string; rotaDan: string; rotaAya: string; aracPlaka: string } | null };
-type Bordro    = { id: string; personelId: string; ay: string; brutMaas: number; fazlaMesaiUcret: number; sgkIsci: number; issizlikIsci: number; gelirVergisi: number; damgaVergisi: number; netMaas: number; sgkIsveren: number; toplamMaliyet: number; createdAt: string; personel?: { id: string; ad: string; unvan: string } };
-
-type Tab = 'genel' | 'seferler' | 'islemler' | 'cari' | 'araclar' | 'faturalar' | 'personel' | 'raporlar' | 'donem';
-
-type SeferRapor   = { id: string; rotaDan: string; rotaAya: string; aracPlaka: string; tarih: string; durum: string; musteriAd: string | null; seferUcreti: number; yakitMaliyeti: number; toplamGelir: number; toplamGider: number; netKar: number; mesafeKm: number };
-type AracRapor    = { plaka: string; marka: string; model: string; seferGelir: number; seferSayisi: number; yakitTutar: number; kmTopla: number; netKar: number; kmBasiMaliyet: number };
-type MusteriRapor = { id: string; ad: string; vergiNo: string; seferSayisi: number; faturaSayisi: number; toplamFatura: number; toplamTahsilat: number; bakiye: number; bekleyenFatura: number; tahsilatOrani: number };
-type Donem        = { id: string; ay: string; durum: string; notlar: string; kapatildiAt: string | null; createdAt: string };
-
-/* ─── Sabit listeler ─────────────────────────────────────────── */
-const GIDER_KATEGORILER = ['Yakıt', 'Bakım', 'Sigorta', 'Ruhsat', 'Köprü / Geçiş', 'Personel Maaşı', 'Kira', 'Diğer'];
-const GELIR_KATEGORILER = ['Sefer Ücreti', 'Kira Geliri', 'Diğer'];
-const KDV_ORANLARI      = [0, 10, 20];
-
-/* ─── Yardımcılar ────────────────────────────────────────────── */
-const TL       = (n: number) => new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(n);
-const fmtDate  = (d: string) => new Date(d).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-const thisMonth = () => new Date().toISOString().slice(0, 7);
-
-function expiryStatus(dateStr: string | null | undefined): 'expired' | 'warn' | 'ok' | 'none' {
-  if (!dateStr) return 'none';
-  const diff = new Date(dateStr).getTime() - Date.now();
-  const days = diff / 86_400_000;
-  if (days < 0) return 'expired';
-  if (days <= 30) return 'warn';
-  return 'ok';
-}
-function ExpiryPill({ label, date }: { label: string; date: string | null | undefined }) {
-  const s = expiryStatus(date);
-  const cfg = {
-    expired: { cls: 'bg-red-50 text-red-700 border border-red-100',   icon: <AlertTriangle className="w-3 h-3" /> },
-    warn:    { cls: 'bg-amber-50 text-amber-700 border border-amber-100', icon: <Clock className="w-3 h-3" /> },
-    ok:      { cls: 'bg-green-50 text-green-700 border border-green-100', icon: <ShieldCheck className="w-3 h-3" /> },
-    none:    { cls: 'bg-gray-50 text-gray-500 border border-gray-100',  icon: null },
-  }[s];
-  return (
-    <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.cls}`}>
-      {cfg.icon} {label}{date ? `: ${fmtDate(date)}` : ': —'}
-    </span>
-  );
-}
-
-function DurumBadge({ durum }: { durum: string }) {
-  const map: Record<string, { label: string; cls: string }> = {
-    planlandi:  { label: 'Planlandı',    cls: 'bg-blue-50 text-blue-700' },
-    devam:      { label: 'Devam Ediyor', cls: 'bg-amber-50 text-amber-700' },
-    tamamlandi: { label: 'Tamamlandı',  cls: 'bg-green-50 text-green-700' },
-    iptal:      { label: 'İptal',        cls: 'bg-red-50 text-red-600' },
-    beklemede:  { label: 'Beklemede',   cls: 'bg-yellow-50 text-yellow-700' },
-    odendi:     { label: 'Ödendi',       cls: 'bg-green-50 text-green-700' },
-  };
-  const d = map[durum] ?? { label: durum, cls: 'bg-gray-100 text-gray-600' };
-  return <span className={`inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full ${d.cls}`}>{d.label}</span>;
-}
-
-function IzinBadge({ izin }: { izin: string | null }) {
-  if (!izin) return <span className="text-xs text-green-700 font-semibold">Çalışıldı</span>;
-  const map: Record<string, string> = { yillik: 'Yıllık İzin', hastalik: 'Hastalık', ucretsiz: 'Ücretsiz', resmi: 'Resmi Tatil' };
-  const colors: Record<string, string> = { yillik: 'text-blue-700', hastalik: 'text-red-600', ucretsiz: 'text-orange-600', resmi: 'text-purple-700' };
-  return <span className={`text-xs font-semibold ${colors[izin] ?? 'text-gray-500'}`}>{map[izin] ?? izin}</span>;
-}
-
-function StatCard({ label, value, sub, color, icon: Icon }: { label: string; value: string; sub?: string; color: string; icon: React.ComponentType<{ className?: string }> }) {
-  const colors: Record<string, string> = {
-    green:  'bg-green-50 text-green-600',
-    red:    'bg-red-50 text-red-600',
-    blue:   'bg-blue-50 text-blue-600',
-    purple: 'bg-purple-50 text-purple-600',
-    amber:  'bg-amber-50 text-amber-600',
-    indigo: 'bg-indigo-50 text-indigo-600',
-  };
-  return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{label}</span>
-        <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${colors[color] ?? colors.blue}`}>
-          <Icon className="w-4 h-4" />
-        </div>
-      </div>
-      <p className="text-2xl font-black text-gray-900">{value}</p>
-      {sub && <p className="text-xs text-gray-500 mt-1">{sub}</p>}
-    </div>
-  );
-}
-
-/* ─── Fatura Yazdır ──────────────────────────────────────────── */
-function printFatura(fatura: Fatura) {
-  const satirlar: FaturaSatiri[] = JSON.parse(fatura.satirlar || '[]');
-  const html = `<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><title>Fatura ${fatura.faturaNo}</title>
-  <style>
-    *{box-sizing:border-box}body{font-family:Arial,sans-serif;padding:40px;color:#111;font-size:14px}
-    .hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px}
-    .logo{font-size:22px;font-weight:900}.logo span{color:#2563eb}
-    .badge{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;background:${fatura.durum==='odendi'?'#dcfce7':fatura.durum==='iptal'?'#fee2e2':'#fef9c3'};color:${fatura.durum==='odendi'?'#166534':fatura.durum==='iptal'?'#991b1b':'#854d0e'}}
-    .musteri-box{border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:24px;background:#f9fafb}
-    table{width:100%;border-collapse:collapse;margin-bottom:16px}
-    th{background:#f3f4f6;padding:9px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280}
-    td{padding:9px 12px;border-bottom:1px solid #f3f4f6}
-    .tr{text-align:right}.totals{width:280px;margin-left:auto}
-    .totals td{padding:5px 12px;font-size:13px}.grand{font-weight:700;font-size:15px;border-top:2px solid #111}
-    .footer{margin-top:36px;text-align:center;font-size:11px;color:#9ca3af}
-    @media print{body{padding:20px}}
-  </style></head><body>
-  <div class="hdr">
-    <div><div class="logo">Logi<span>Flow</span></div><div style="font-size:11px;color:#6b7280;margin-top:3px">Lojistik Yönetim Platformu</div></div>
-    <div style="text-align:right">
-      <div style="font-size:18px;font-weight:700">${fatura.faturaNo}</div>
-      <div style="color:#6b7280;font-size:12px">Tarih: ${fmtDate(fatura.tarih)}</div>
-      ${fatura.vadeTarih ? `<div style="color:#6b7280;font-size:12px">Vade: ${fmtDate(fatura.vadeTarih)}</div>` : ''}
-      <div class="badge">${fatura.durum === 'odendi' ? 'ÖDENDİ' : fatura.durum === 'iptal' ? 'İPTAL' : 'BEKLEMEDE'}</div>
-    </div>
-  </div>
-  ${fatura.musteri ? `<div class="musteri-box">
-    <div style="font-size:10px;color:#9ca3af;margin-bottom:4px;text-transform:uppercase">Fatura Kesilen</div>
-    <div style="font-weight:700;font-size:15px">${fatura.musteri.ad}</div>
-    ${fatura.musteri.vergiNo ? `<div style="font-size:12px;color:#6b7280">Vergi No: ${fatura.musteri.vergiNo}</div>` : ''}
-    ${fatura.musteri.adres ? `<div style="font-size:12px;color:#6b7280">${fatura.musteri.adres}</div>` : ''}
-    ${fatura.musteri.email ? `<div style="font-size:12px;color:#6b7280">${fatura.musteri.email}</div>` : ''}
-  </div>` : ''}
-  <table>
-    <thead><tr><th>Açıklama</th><th class="tr">Miktar</th><th class="tr">Birim Fiyat</th><th class="tr">KDV</th><th class="tr">Toplam</th></tr></thead>
-    <tbody>${satirlar.map(s => `<tr>
-      <td>${s.aciklama}</td><td class="tr">${s.miktar}</td>
-      <td class="tr">${new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(s.birimFiyat)}</td>
-      <td class="tr">%${s.kdvOrani}</td>
-      <td class="tr">${new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(s.miktar*s.birimFiyat*(1+s.kdvOrani/100))}</td>
-    </tr>`).join('')}</tbody>
-  </table>
-  <table class="totals">
-    <tr><td>Ara Toplam</td><td class="tr">${new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(fatura.araToplam)}</td></tr>
-    <tr><td>KDV Toplam</td><td class="tr">${new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(fatura.kdvToplam)}</td></tr>
-    <tr class="grand"><td>GENEL TOPLAM</td><td class="tr">${new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(fatura.genelToplam)}</td></tr>
-  </table>
-  ${fatura.notlar ? `<div style="margin-top:16px;padding:12px;background:#f9fafb;border-radius:6px;font-size:12px"><b>Notlar:</b> ${fatura.notlar}</div>` : ''}
-  ${fatura.sefer ? `<div style="margin-top:8px;font-size:12px;color:#6b7280">İlgili Sefer: ${fatura.sefer.rotaDan} → ${fatura.sefer.rotaAya} (${fatura.sefer.aracPlaka})</div>` : ''}
-  <div class="footer">Bu fatura LogiFlow lojistik yönetim sistemi ile oluşturulmuştur.</div>
-  </body></html>`;
-
-  const win = window.open('', '_blank', 'width=800,height=900');
-  if (!win) return;
-  win.document.write(html);
-  win.document.close();
-  win.onload = () => { win.focus(); win.print(); };
-}
+import {
+  Musteri, Tahsilat, Sefer, MaliIslem, Personel, Puantaj,
+  Arac, YakitKaydi, Fatura, Bordro, Donem,
+  SeferRapor, AracRapor, MusteriRapor, Tab,
+  GIDER_KATEGORILER, GELIR_KATEGORILER, KDV_ORANLARI,
+  TL, fmtDate, thisMonth,
+} from './types';
+import {
+  expiryStatus, ExpiryPill, DurumBadge, IzinBadge, StatCard, printFatura,
+} from './muhasebe-components';
 
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function MuhasebePage() {

@@ -68,6 +68,7 @@ export type OptimizationRunCountAggregateOutputType = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload: number
   createdAt: number
   _all: number
 }
@@ -115,6 +116,7 @@ export type OptimizationRunCountAggregateInputType = {
   fillPct?: true
   itemCount?: true
   placedCount?: true
+  payload?: true
   createdAt?: true
   _all?: true
 }
@@ -213,6 +215,7 @@ export type OptimizationRunGroupByOutputType = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload: runtime.JsonValue | null
   createdAt: Date
   _count: OptimizationRunCountAggregateOutputType | null
   _avg: OptimizationRunAvgAggregateOutputType | null
@@ -247,6 +250,7 @@ export type OptimizationRunWhereInput = {
   fillPct?: Prisma.IntFilter<"OptimizationRun"> | number
   itemCount?: Prisma.IntFilter<"OptimizationRun"> | number
   placedCount?: Prisma.IntFilter<"OptimizationRun"> | number
+  payload?: Prisma.JsonNullableFilter<"OptimizationRun">
   createdAt?: Prisma.DateTimeFilter<"OptimizationRun"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -259,6 +263,7 @@ export type OptimizationRunOrderByWithRelationInput = {
   fillPct?: Prisma.SortOrder
   itemCount?: Prisma.SortOrder
   placedCount?: Prisma.SortOrder
+  payload?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -274,6 +279,7 @@ export type OptimizationRunWhereUniqueInput = Prisma.AtLeast<{
   fillPct?: Prisma.IntFilter<"OptimizationRun"> | number
   itemCount?: Prisma.IntFilter<"OptimizationRun"> | number
   placedCount?: Prisma.IntFilter<"OptimizationRun"> | number
+  payload?: Prisma.JsonNullableFilter<"OptimizationRun">
   createdAt?: Prisma.DateTimeFilter<"OptimizationRun"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
@@ -286,6 +292,7 @@ export type OptimizationRunOrderByWithAggregationInput = {
   fillPct?: Prisma.SortOrder
   itemCount?: Prisma.SortOrder
   placedCount?: Prisma.SortOrder
+  payload?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.OptimizationRunCountOrderByAggregateInput
   _avg?: Prisma.OptimizationRunAvgOrderByAggregateInput
@@ -305,6 +312,7 @@ export type OptimizationRunScalarWhereWithAggregatesInput = {
   fillPct?: Prisma.IntWithAggregatesFilter<"OptimizationRun"> | number
   itemCount?: Prisma.IntWithAggregatesFilter<"OptimizationRun"> | number
   placedCount?: Prisma.IntWithAggregatesFilter<"OptimizationRun"> | number
+  payload?: Prisma.JsonNullableWithAggregatesFilter<"OptimizationRun">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OptimizationRun"> | Date | string
 }
 
@@ -315,6 +323,7 @@ export type OptimizationRunCreateInput = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutOptimizationsInput
 }
@@ -327,6 +336,7 @@ export type OptimizationRunUncheckedCreateInput = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -337,6 +347,7 @@ export type OptimizationRunUpdateInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutOptimizationsNestedInput
 }
@@ -349,6 +360,7 @@ export type OptimizationRunUncheckedUpdateInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -360,6 +372,7 @@ export type OptimizationRunCreateManyInput = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -370,6 +383,7 @@ export type OptimizationRunUpdateManyMutationInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -381,6 +395,7 @@ export type OptimizationRunUncheckedUpdateManyInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -402,6 +417,7 @@ export type OptimizationRunCountOrderByAggregateInput = {
   fillPct?: Prisma.SortOrder
   itemCount?: Prisma.SortOrder
   placedCount?: Prisma.SortOrder
+  payload?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -488,6 +504,7 @@ export type OptimizationRunCreateWithoutUserInput = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -498,6 +515,7 @@ export type OptimizationRunUncheckedCreateWithoutUserInput = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -538,6 +556,7 @@ export type OptimizationRunScalarWhereInput = {
   fillPct?: Prisma.IntFilter<"OptimizationRun"> | number
   itemCount?: Prisma.IntFilter<"OptimizationRun"> | number
   placedCount?: Prisma.IntFilter<"OptimizationRun"> | number
+  payload?: Prisma.JsonNullableFilter<"OptimizationRun">
   createdAt?: Prisma.DateTimeFilter<"OptimizationRun"> | Date | string
 }
 
@@ -548,6 +567,7 @@ export type OptimizationRunCreateManyUserInput = {
   fillPct: number
   itemCount: number
   placedCount: number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -558,6 +578,7 @@ export type OptimizationRunUpdateWithoutUserInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -568,6 +589,7 @@ export type OptimizationRunUncheckedUpdateWithoutUserInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -578,6 +600,7 @@ export type OptimizationRunUncheckedUpdateManyWithoutUserInput = {
   fillPct?: Prisma.IntFieldUpdateOperationsInput | number
   itemCount?: Prisma.IntFieldUpdateOperationsInput | number
   placedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  payload?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -591,6 +614,7 @@ export type OptimizationRunSelect<ExtArgs extends runtime.Types.Extensions.Inter
   fillPct?: boolean
   itemCount?: boolean
   placedCount?: boolean
+  payload?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["optimizationRun"]>
@@ -603,6 +627,7 @@ export type OptimizationRunSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   fillPct?: boolean
   itemCount?: boolean
   placedCount?: boolean
+  payload?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["optimizationRun"]>
@@ -615,6 +640,7 @@ export type OptimizationRunSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   fillPct?: boolean
   itemCount?: boolean
   placedCount?: boolean
+  payload?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["optimizationRun"]>
@@ -627,10 +653,11 @@ export type OptimizationRunSelectScalar = {
   fillPct?: boolean
   itemCount?: boolean
   placedCount?: boolean
+  payload?: boolean
   createdAt?: boolean
 }
 
-export type OptimizationRunOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "date" | "containerLabel" | "fillPct" | "itemCount" | "placedCount" | "createdAt", ExtArgs["result"]["optimizationRun"]>
+export type OptimizationRunOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "date" | "containerLabel" | "fillPct" | "itemCount" | "placedCount" | "payload" | "createdAt", ExtArgs["result"]["optimizationRun"]>
 export type OptimizationRunInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -654,6 +681,7 @@ export type $OptimizationRunPayload<ExtArgs extends runtime.Types.Extensions.Int
     fillPct: number
     itemCount: number
     placedCount: number
+    payload: runtime.JsonValue | null
     createdAt: Date
   }, ExtArgs["result"]["optimizationRun"]>
   composites: {}
@@ -1086,6 +1114,7 @@ export interface OptimizationRunFieldRefs {
   readonly fillPct: Prisma.FieldRef<"OptimizationRun", 'Int'>
   readonly itemCount: Prisma.FieldRef<"OptimizationRun", 'Int'>
   readonly placedCount: Prisma.FieldRef<"OptimizationRun", 'Int'>
+  readonly payload: Prisma.FieldRef<"OptimizationRun", 'Json'>
   readonly createdAt: Prisma.FieldRef<"OptimizationRun", 'DateTime'>
 }
     

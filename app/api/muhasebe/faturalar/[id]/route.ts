@@ -11,6 +11,20 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   if (!fatura) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
   const { durum } = await req.json();
+
+  // Bakiye senkronizasyonu: durum geçişine göre müşteri bakiyesini güncelle
+  if (fatura.musteriId) {
+    const eskiIptal = fatura.durum === 'iptal';
+    const yeniIptal = durum === 'iptal';
+    if (!eskiIptal && yeniIptal) {
+      // Aktif → İptal: müşteri artık bu faturayı ödemeyecek, bakiyeyi düşür
+      await db.musteri.update({ where: { id: fatura.musteriId }, data: { bakiye: { decrement: fatura.genelToplam } } });
+    } else if (eskiIptal && !yeniIptal) {
+      // İptal → Aktif: fatura tekrar geçerli, bakiyeyi artır
+      await db.musteri.update({ where: { id: fatura.musteriId }, data: { bakiye: { increment: fatura.genelToplam } } });
+    }
+  }
+
   const row = await db.fatura.update({
     where: { id },
     data: { durum },
