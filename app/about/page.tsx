@@ -1,4 +1,5 @@
 import Navbar from '@/components/layout/Navbar';
+import { Target, Eye, Heart } from 'lucide-react';
 
 const teamMembers = [
   { name: 'Ahmet Yılmaz', role: 'Kurucu & CEO', initials: 'AY' },
@@ -10,19 +11,19 @@ const teamMembers = [
 const cards = [
   {
     title: 'Misyon',
-    icon: '🎯',
+    Icon: Target,
     description:
       'Lojistik sektörünü dönüştürmek için yapay zeka destekli 3D kargo optimizasyon çözümleri sunarak şirketlerin taşıma maliyetlerini düşürmesine ve verimliliği artırmasına yardımcı olmak.',
   },
   {
     title: 'Vizyon',
-    icon: '🔭',
+    Icon: Eye,
     description:
       'Dünya genelinde her lojistik operasyonunun akıllı, sürdürülebilir ve veriye dayalı kararlar almasını sağlayan lider teknoloji platformu olmak.',
   },
   {
     title: 'Değerlerimiz',
-    icon: '💎',
+    Icon: Heart,
     description:
       'Şeffaflık, yenilikçilik ve müşteri odaklılık temel değerlerimizdir. Her geliştirdiğimiz özellikte kullanıcı deneyimini ön planda tutarak sektörde güvenilir bir çözüm ortağı olmayı hedefliyoruz.',
   },
@@ -58,8 +59,8 @@ export default function AboutPage() {
               key={card.title}
               className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-2xl mb-5">
-                {card.icon}
+              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                <card.Icon className="w-6 h-6 text-blue-600" aria-hidden="true" />
               </div>
               <h2 className="text-xl font-bold text-gray-900 mb-3">
                 {card.title}

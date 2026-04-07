@@ -253,7 +253,7 @@ export default function SoforPage() {
           <button
             onClick={baslat}
             aria-label="Yolculuğu başlat ve konum takibini aktif et"
-            className="w-full bg-green-500 hover:bg-green-400 active:bg-green-600 text-white font-black text-xl py-6 rounded-3xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-green-900/50 select-none"
+            className="w-full bg-green-500 hover:bg-green-400 active:bg-green-600 active:scale-[0.98] text-white font-black text-xl py-6 rounded-3xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-green-900/50 select-none focus:outline-none focus:ring-4 focus:ring-green-400/50"
           >
             <Play className="w-8 h-8" aria-hidden="true" />
             Yolculuğu Başlat
@@ -262,7 +262,7 @@ export default function SoforPage() {
           <button
             onClick={durdur}
             aria-label="Yolculuğu bitir ve konum takibini durdur"
-            className="w-full bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-black text-xl py-6 rounded-3xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-red-900/50 select-none"
+            className="w-full bg-red-600 hover:bg-red-500 active:bg-red-700 active:scale-[0.98] text-white font-black text-xl py-6 rounded-3xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-red-900/50 select-none focus:outline-none focus:ring-4 focus:ring-red-400/50"
           >
             <Square className="w-7 h-7 fill-white" aria-hidden="true" />
             Yolculuğu Bitir

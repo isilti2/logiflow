@@ -113,8 +113,21 @@ export default function FaturaPage() {
   }
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-100 h-16" />
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+        <div className="h-5 w-48 bg-gray-200 rounded animate-pulse" />
+        <div className="h-20 bg-blue-50 rounded-2xl animate-pulse" />
+        <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+          <div className="h-4 w-36 bg-gray-200 rounded animate-pulse" />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[1,2,3,4].map(i => <div key={i} className="h-16 bg-gray-100 rounded-xl animate-pulse" />)}
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[1,2,3].map(i => <div key={i} className="h-64 bg-white rounded-2xl border border-gray-100 animate-pulse" />)}
+        </div>
+      </main>
     </div>
   );
 
@@ -172,7 +185,7 @@ export default function FaturaPage() {
           </div>
           <button
             onClick={() => handleUpgrade('pro')}
-            className="shrink-0 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
+            className="shrink-0 flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
           >
             Pro&apos;ya Geç <ArrowRight className="w-3.5 h-3.5" />
           </button>
@@ -250,12 +263,12 @@ export default function FaturaPage() {
                   <button
                     onClick={() => handleUpgrade(plan.key)}
                     disabled={isCurrent || upgrading === plan.key}
-                    className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                    className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                       isCurrent
                         ? 'bg-gray-100 text-gray-500 cursor-default'
                         : isPopular
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm'
-                        : 'bg-gray-900 hover:bg-gray-800 text-white'
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm focus:ring-blue-400'
+                        : 'bg-gray-900 hover:bg-gray-800 text-white focus:ring-gray-500'
                     }`}
                   >
                     {upgrading === plan.key ? (
