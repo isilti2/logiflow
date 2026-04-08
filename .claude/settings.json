@@ -26,7 +26,9 @@
       "Bash(sed -i 's/text-xs text-gray-400 mt-1/text-xs text-gray-500 mt-1/g' app/dashboard/page.tsx)",
       "Bash(sed -i 's/<p className=\"text-xs text-gray-400\">Aktif Şoför<\\\\/p>/<p className=\"text-xs text-gray-500\">Aktif Şoför<\\\\/p>/g' app/konum/page.tsx)",
       "Bash(sed -i 's/<p className=\"text-xs text-gray-400\">Devam Eden Sefer<\\\\/p>/<p className=\"text-xs text-gray-500\">Devam Eden Sefer<\\\\/p>/g' app/konum/page.tsx)",
-      "Bash(sed -i 's/<p className=\"text-xs text-gray-400\">Ort. Hız \\(km\\\\/s\\)<\\\\/p>/<p className=\"text-xs text-gray-500\">Ort. Hız \\(km\\\\/s\\)<\\\\/p>/g' app/konum/page.tsx)"
+      "Bash(sed -i 's/<p className=\"text-xs text-gray-400\">Ort. Hız \\(km\\\\/s\\)<\\\\/p>/<p className=\"text-xs text-gray-500\">Ort. Hız \\(km\\\\/s\\)<\\\\/p>/g' app/konum/page.tsx)",
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(node_modules/.bin/tsc --noEmit --pretty false)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Okan\\Contacts\\yuks\\app",
