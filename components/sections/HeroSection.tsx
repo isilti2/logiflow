@@ -58,7 +58,7 @@ export default function HeroSection() {
   return (
     <>
       {/* ══════════════════ HERO — açık, temiz, bold ══════════════════ */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden bg-white dark:bg-gray-950">
         {/* Üst gradient fon */}
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,235,0.07) 0%, transparent 70%)' }} />
@@ -66,7 +66,7 @@ export default function HeroSection() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 md:pt-32 md:pb-20">
           {/* Badge */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 border border-blue-100 bg-blue-50 text-blue-700 text-xs font-semibold px-4 py-2 rounded-full">
+            <div className="inline-flex items-center gap-2 border border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold px-4 py-2 rounded-full">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
@@ -77,7 +77,7 @@ export default function HeroSection() {
 
           {/* Başlık */}
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.06] text-gray-900 mb-6">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.06] text-gray-900 dark:text-white mb-6">
               Lojistiğinizi{' '}
               <span style={{
                 background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%)',
@@ -87,7 +87,7 @@ export default function HeroSection() {
                 dönüştürün
               </span>
             </h1>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
+            <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-10">
               Kargo optimizasyonu, canlı filo takibi ve lojistik muhasebesi —
               hepsi tek platformda, kurulum gerektirmez.
             </p>
@@ -101,13 +101,13 @@ export default function HeroSection() {
                 <span className="group-hover:translate-x-0.5 transition-transform"><ArrowRight /></span>
               </Link>
               <Link href="/login"
-                className="inline-flex items-center gap-1.5 text-gray-500 hover:text-gray-800 font-medium text-sm px-5 py-4 rounded-2xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all">
+                className="inline-flex items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
                 Giriş Yap
               </Link>
             </div>
 
             {/* Güven satırı */}
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-400">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-400 dark:text-gray-500">
               {['Kredi kartı gerekmez', 'Anında kurulum', 'KVKK uyumlu', '500+ aktif şirket'].map((t) => (
                 <span key={t} className="flex items-center gap-1.5">
                   <span className="text-emerald-500"><Check /></span>
@@ -123,27 +123,27 @@ export default function HeroSection() {
             <div className="absolute -inset-4 rounded-[2.5rem] pointer-events-none"
               style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(37,99,235,0.12) 0%, transparent 70%)' }} />
 
-            <div className="relative bg-white rounded-[1.75rem] border border-gray-200 shadow-2xl shadow-gray-200/80 overflow-hidden">
+            <div className="relative bg-white dark:bg-gray-900 rounded-[1.75rem] border border-gray-200 dark:border-gray-700 shadow-2xl shadow-gray-200/80 dark:shadow-black/40 overflow-hidden">
               {/* Tarayıcı chrome */}
-              <div className="flex items-center gap-2 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
+              <div className="flex items-center gap-2 px-5 py-3.5 bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <span className="w-3 h-3 rounded-full bg-red-400" />
                 <span className="w-3 h-3 rounded-full bg-amber-400" />
                 <span className="w-3 h-3 rounded-full bg-green-400" />
-                <div className="flex-1 mx-4 bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center gap-2">
+                <div className="flex-1 mx-4 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-1.5 flex items-center gap-2">
                   <svg className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
                   </svg>
-                  <span className="text-xs text-gray-400 font-mono">app.logiflow.com/dashboard</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-400 font-mono">app.logiflow.com/dashboard</span>
                 </div>
               </div>
 
               {/* Dashboard UI mockup */}
-              <div className="bg-gray-50 p-5 sm:p-7">
+              <div className="bg-gray-50 dark:bg-gray-900 p-5 sm:p-7">
                 {/* Üst bar */}
                 <div className="flex items-center justify-between mb-5">
                   <div>
-                    <div className="text-base font-black text-gray-900">Hoş geldiniz, Ahmet 👋</div>
-                    <div className="text-xs text-gray-500 mt-0.5">Bugün ne optimize etmek istersiniz?</div>
+                    <div className="text-base font-black text-gray-900 dark:text-white">Hoş geldiniz, Ahmet 👋</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Bugün ne optimize etmek istersiniz?</div>
                   </div>
                   <div className="hidden sm:flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
@@ -160,13 +160,13 @@ export default function HeroSection() {
                     { l: 'Canlı Araç', v: '5', sub: 'GPS aktif', bar: 50, c: '#059669' },
                     { l: 'Sefer Geliri', v: '₺84K', sub: 'bu ay', bar: 91, c: '#d97706' },
                   ].map(({ l, v, sub, bar, c }) => (
-                    <div key={l} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-                      <p className="text-[11px] text-gray-400 mb-1">{l}</p>
-                      <p className="text-xl font-black text-gray-900">{v}</p>
+                    <div key={l} className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-gray-100 dark:border-gray-700 shadow-sm">
+                      <p className="text-[11px] text-gray-400 dark:text-gray-500 mb-1">{l}</p>
+                      <p className="text-xl font-black text-gray-900 dark:text-white">{v}</p>
                       <div className="mt-2 h-1 bg-gray-100 rounded-full overflow-hidden">
                         <div className="h-full rounded-full" style={{ width: `${bar}%`, background: c }} />
                       </div>
-                      <p className="text-[10px] text-gray-400 mt-1">{sub}</p>
+                      <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">{sub}</p>
                     </div>
                   ))}
                 </div>
@@ -174,9 +174,9 @@ export default function HeroSection() {
                 {/* Alt iki panel */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {/* Grafik */}
-                  <div className="sm:col-span-2 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                  <div className="sm:col-span-2 bg-white dark:bg-gray-800 rounded-2xl p-4 border border-gray-100 dark:border-gray-700 shadow-sm">
                     <div className="flex items-center justify-between mb-3">
-                      <p className="text-xs font-bold text-gray-700">Aylık Sefer Geliri</p>
+                      <p className="text-xs font-bold text-gray-700 dark:text-gray-200">Aylık Sefer Geliri</p>
                       <span className="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">▲ %18 artış</span>
                     </div>
                     <div className="flex items-end gap-1.5 h-20">
@@ -203,11 +203,11 @@ export default function HeroSection() {
                       { l: 'Filo Takibi', c: '#7c3aed', icon: '📍' },
                       { l: 'Optimizasyon', c: '#2563eb', icon: '📦' },
                     ].map(({ l, c, icon }) => (
-                      <div key={l} className="bg-white rounded-xl px-3 py-2.5 border border-gray-100 shadow-sm flex items-center gap-2.5 flex-1">
-                        <div className="w-7 h-7 rounded-lg flex items-center justify-center text-sm" style={{ background: c + '15' }}>
+                      <div key={l} className="bg-white dark:bg-gray-800 rounded-xl px-3 py-2.5 border border-gray-100 dark:border-gray-700 shadow-sm flex items-center gap-2.5 flex-1">
+                        <div className="w-7 h-7 rounded-lg flex items-center justify-center text-sm" style={{ background: c + '20' }}>
                           {icon}
                         </div>
-                        <span className="text-xs font-semibold text-gray-700">{l}</span>
+                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-200">{l}</span>
                         <svg className="w-3 h-3 text-gray-300 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
@@ -236,11 +236,11 @@ export default function HeroSection() {
       </section>
 
       {/* ══════════════════ ÖZELLİKLER — yatay kartlar ══════════════════ */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-24 md:py-32 bg-white dark:bg-gray-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">Ne sunuyoruz?</p>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 mb-3">Ne sunuyoruz?</p>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight">
               Tek platform,<br className="sm:hidden" /> sonsuz imkân
             </h2>
           </div>
@@ -248,7 +248,7 @@ export default function HeroSection() {
           <div className="space-y-5">
             {OZELLIKLER.map((o, i) => (
               <Link key={o.href} href={o.href}
-                className="group flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 p-7 md:p-9 rounded-3xl border border-gray-100 hover:border-gray-200 hover:shadow-xl hover:shadow-gray-100/80 bg-white hover:bg-gray-50/50 transition-all duration-300">
+                className="group flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 p-7 md:p-9 rounded-3xl border border-gray-100 dark:border-gray-800 hover:border-gray-200 dark:hover:border-gray-700 hover:shadow-xl hover:shadow-gray-100/80 dark:hover:shadow-black/30 bg-white dark:bg-gray-900 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-all duration-300">
                 {/* Numara */}
                 <div className="shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl text-white"
                   style={{ background: `linear-gradient(135deg, ${o.accent}, ${o.accent}bb)`, boxShadow: `0 8px 24px ${o.accent}33` }}>
@@ -257,14 +257,14 @@ export default function HeroSection() {
                 {/* İçerik */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-xl font-black text-gray-900">{o.baslik}</h3>
+                    <h3 className="text-xl font-black text-gray-900 dark:text-white">{o.baslik}</h3>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
                       style={{ background: o.accent }}>{o.tag}</span>
                   </div>
-                  <p className="text-gray-500 leading-relaxed mb-4 max-w-xl">{o.aciklama}</p>
+                  <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-4 max-w-xl">{o.aciklama}</p>
                   <div className="flex flex-wrap gap-2">
                     {o.liste.map((m) => (
-                      <span key={m} className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-gray-100 text-gray-600">
+                      <span key={m} className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
                         <span style={{ color: o.accent }}><Check /></span>
                         {m}
                       </span>
@@ -272,7 +272,7 @@ export default function HeroSection() {
                   </div>
                 </div>
                 {/* Ok */}
-                <div className="shrink-0 w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400 group-hover:border-gray-400 group-hover:text-gray-700 group-hover:translate-x-1 transition-all duration-200">
+                <div className="shrink-0 w-10 h-10 rounded-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500 group-hover:border-gray-400 dark:group-hover:border-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300 group-hover:translate-x-1 transition-all duration-200">
                   <ArrowRight />
                 </div>
               </Link>
@@ -282,24 +282,24 @@ export default function HeroSection() {
       </section>
 
       {/* ══════════════════ NASIL ÇALIŞIR ══════════════════ */}
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 bg-gray-50 dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">Başlamak kolay</p>
-            <h2 className="text-4xl font-black text-gray-900">3 adımda hazır</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 mb-3">Başlamak kolay</p>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white">3 adımda hazır</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {NASIL_CALISIR.map((a, i) => (
-              <div key={a.adim} className="relative bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div key={a.adim} className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
                 {i < 2 && (
-                  <div className="hidden md:block absolute top-12 -right-2.5 z-10 text-gray-300">
+                  <div className="hidden md:block absolute top-12 -right-2.5 z-10 text-gray-300 dark:text-gray-600">
                     <ArrowRight />
                   </div>
                 )}
                 <div className="text-4xl mb-5">{a.ikon}</div>
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Adım {a.adim}</div>
-                <h3 className="text-lg font-black text-gray-900 mb-2">{a.baslik}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{a.aciklama}</p>
+                <div className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-2">Adım {a.adim}</div>
+                <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2">{a.baslik}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{a.aciklama}</p>
               </div>
             ))}
           </div>
@@ -307,7 +307,7 @@ export default function HeroSection() {
       </section>
 
       {/* ══════════════════ CTA ══════════════════ */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-24 md:py-32 bg-white dark:bg-gray-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="relative rounded-[2.5rem] overflow-hidden p-12 md:p-20"
             style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #4338ca 50%, #7c3aed 100%)' }}>

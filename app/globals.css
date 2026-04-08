@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* ─── Dark mode — class tabanlı (next-themes ile) ─────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ─── Design Tokens ──────────────────────────────────────────────
    Tailwind v4 @theme: tüm token'lar CSS custom property olarak
    tanımlanır ve utility class'larıyla (text-brand, bg-surface vb.)

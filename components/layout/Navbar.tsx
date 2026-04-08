@@ -7,6 +7,7 @@ import { NAV_ITEMS } from '@/lib/constants';
 import { logout } from '@/lib/auth';
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import GlobalSearch from '@/components/ui/GlobalSearch';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import {
   Calculator, Navigation, Truck, Building2,
   BarChart3, Package, ChevronDown, LayoutDashboard,
@@ -105,8 +106,8 @@ export default function Navbar() {
       ref={navRef}
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)] border-b border-gray-100/80'
-          : 'bg-white border-b border-gray-100'
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)] dark:shadow-[0_1px_0_0_rgba(255,255,255,0.04)] border-b border-gray-100/80 dark:border-gray-800/80'
+          : 'bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,7 +118,7 @@ export default function Navbar() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center shadow-sm">
               <span className="text-white font-black text-xs tracking-tight">LF</span>
             </div>
-            <span className="text-xl font-bold text-gray-900 tracking-tight">
+            <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
               Logi<span className="text-blue-600">Flow</span>
             </span>
           </Link>
@@ -127,7 +128,7 @@ export default function Navbar() {
             {authed ? (
               <>
                 <Link href="/dashboard"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
                   <LayoutDashboard className="w-4 h-4" aria-hidden="true" />
                   Dashboard
                 </Link>
@@ -140,8 +141,8 @@ export default function Navbar() {
                     aria-haspopup="true"
                     className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                       modullerOpen
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                        : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30'
                     }`}
                   >
                     Modüller
@@ -152,10 +153,10 @@ export default function Navbar() {
                   {modullerOpen && (
                     <div
                       role="menu"
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2.5 w-[500px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-gray-200/70 border border-gray-100 p-2 grid grid-cols-2 gap-1 z-50"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2.5 w-[500px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-gray-200/70 dark:shadow-black/40 border border-gray-100 dark:border-gray-800 p-2 grid grid-cols-2 gap-1 z-50"
                     >
                       <div className="col-span-2 px-3 py-2 mb-1">
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Uygulama Modülleri</p>
+                        <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Uygulama Modülleri</p>
                       </div>
                       {MODULLER.map((m) => {
                         const Icon = m.icon;
@@ -165,14 +166,14 @@ export default function Navbar() {
                             href={m.href}
                             role="menuitem"
                             onClick={() => setModullerOpen(false)}
-                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50/80 transition-all duration-150 group"
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50/80 dark:hover:bg-gray-800/80 transition-all duration-150 group"
                           >
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${m.color} ring-1 ring-black/5`}>
                               <Icon className="w-4 h-4" aria-hidden="true" />
                             </div>
                             <div>
-                              <p className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight">{m.label}</p>
-                              <p className="text-xs text-gray-400 leading-tight mt-0.5">{m.desc}</p>
+                              <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">{m.label}</p>
+                              <p className="text-xs text-gray-400 dark:text-gray-500 leading-tight mt-0.5">{m.desc}</p>
                             </div>
                             <ChevronRight className="w-3.5 h-3.5 text-gray-300 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                           </Link>
@@ -183,7 +184,7 @@ export default function Navbar() {
                 </div>
 
                 <Link href="/opt-gecmisi"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
                   <History className="w-4 h-4" aria-hidden="true" />
                   Geçmiş
                 </Link>
@@ -202,10 +203,12 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             {authed && <GlobalSearch />}
 
+            <ThemeToggle />
+
             {/* Language toggle */}
             <button
               onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
-              className="hidden sm:flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 border border-gray-200 rounded-lg text-gray-500 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="hidden sm:flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               aria-label="Dil değiştir"
             >
               {lang === 'tr' ? '🇬🇧 EN' : '🇹🇷 TR'}
@@ -221,15 +224,15 @@ export default function Navbar() {
                   Fatura
                 </Link>
                 <Link href="/profil"
-                  className="hidden sm:flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-1.5 hover:border-blue-200 transition-colors">
+                  className="hidden sm:flex items-center gap-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-1.5 hover:border-blue-200 dark:hover:border-blue-700 transition-colors">
                   <div className="w-6 h-6 bg-blue-600 rounded-lg flex items-center justify-center">
                     <User className="w-3.5 h-3.5 text-white" aria-hidden="true" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700">{t('nav_account')}</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{t('nav_account')}</span>
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 border border-gray-200 hover:border-red-200 px-3 py-2 rounded-xl transition-colors"
+                  className="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 border border-gray-200 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-800 px-3 py-2 rounded-xl transition-colors"
                   aria-label="Çıkış yap"
                 >
                   <LogOut className="w-4 h-4" aria-hidden="true" />
@@ -252,7 +255,7 @@ export default function Navbar() {
 
             {/* Hamburger — mobile */}
             <button
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-gray-500 hover:text-blue-600 hover:bg-gray-100 transition-colors"
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               aria-label={menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((p) => !p)}
@@ -273,7 +276,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden border-t border-gray-100 bg-white shadow-lg overflow-hidden transition-all duration-200 ease-in-out ${
+        className={`md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg overflow-hidden transition-all duration-200 ease-in-out ${
           menuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
@@ -281,34 +284,34 @@ export default function Navbar() {
           {authed ? (
             <>
               <Link href="/dashboard" onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
+                className="flex items-center gap-2.5 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
                 <LayoutDashboard className="w-4 h-4" aria-hidden="true" /> Dashboard
               </Link>
 
               {/* Modüller grup başlığı */}
-              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest px-3 pt-3 pb-1">Modüller</p>
+              <p className="text-[10px] font-bold text-gray-500 dark:text-gray-500 uppercase tracking-widest px-3 pt-3 pb-1">Modüller</p>
               {MODULLER.map((m) => {
                 const Icon = m.icon;
                 return (
                   <Link key={m.href} href={m.href} onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2.5 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
+                    className="flex items-center gap-2.5 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
                     <Icon className="w-4 h-4 text-gray-400" aria-hidden="true" />
                     {m.label}
                   </Link>
                 );
               })}
 
-              <div className="border-t border-gray-100 mt-2 pt-2 flex flex-col gap-0.5">
+              <div className="border-t border-gray-100 dark:border-gray-800 mt-2 pt-2 flex flex-col gap-0.5">
                 <Link href="/opt-gecmisi" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2.5 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
+                  className="flex items-center gap-2.5 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
                   <History className="w-4 h-4" aria-hidden="true" /> Geçmiş
                 </Link>
                 <Link href="/fatura" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2.5 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
+                  className="flex items-center gap-2.5 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
                   <CreditCard className="w-4 h-4" aria-hidden="true" /> Fatura
                 </Link>
                 <Link href="/profil" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2.5 text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
+                  className="flex items-center gap-2.5 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
                   <User className="w-4 h-4" aria-hidden="true" /> Hesabım
                 </Link>
                 <button onClick={() => { handleLogout(); setMenuOpen(false); }}
@@ -321,13 +324,13 @@ export default function Navbar() {
             <>
               {NAV_ITEMS.map((item) => (
                 <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)}
-                  className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
+                  className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium px-3 py-2.5 rounded-xl transition-colors">
                   {item.label}
                 </Link>
               ))}
-              <div className="border-t border-gray-100 mt-2 pt-2 flex flex-col gap-1">
+              <div className="border-t border-gray-100 dark:border-gray-800 mt-2 pt-2 flex flex-col gap-1">
                 <Link href="/login" onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium text-gray-600 hover:text-blue-600 px-3 py-2.5 rounded-xl transition-colors">
+                  className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2.5 rounded-xl transition-colors">
                   Giriş Yap
                 </Link>
                 <Link href="/register" onClick={() => setMenuOpen(false)}

@@ -141,7 +141,7 @@ function DepoVisual({ from, to }: { from: string; to: string }) {
             </div>
           </div>
         ))}
-        <div className="flex items-center gap-1.5 mt-1 text-[10px] text-gray-500 bg-white border border-gray-100 rounded-lg px-2 py-1.5">
+        <div className="flex items-center gap-1.5 mt-1 text-[10px] text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg px-2 py-1.5">
           <UploadCloud className="w-3 h-3" style={{ color: from }} />
           Excel içe aktarıldı
         </div>
@@ -154,10 +154,10 @@ function PaylasimVisual({ from, to }: { from: string; to: string }) {
   return (
     <div className="relative w-full h-full flex items-center justify-center p-6">
       <div className="w-full max-w-[200px] space-y-3">
-        <div className="bg-white border border-gray-100 rounded-xl p-3 shadow-sm">
+        <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-3 shadow-sm">
           <div className="flex items-center gap-2 mb-2">
             <Globe className="w-4 h-4" style={{ color: from }} />
-            <span className="text-[11px] font-semibold text-gray-700 truncate">logiflow.io/plan/abc123</span>
+            <span className="text-[11px] font-semibold text-gray-700 dark:text-gray-200 truncate">logiflow.io/plan/abc123</span>
           </div>
           <div className="grid grid-cols-4 gap-0.5">
             {['#ef4444','#3b82f6','#10b981','#f59e0b','#8b5cf6','#06b6d4','#f97316','#ec4899'].map((c, i) => (
@@ -165,9 +165,9 @@ function PaylasimVisual({ from, to }: { from: string; to: string }) {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-2 bg-white border border-gray-100 rounded-xl px-3 py-2 shadow-sm">
+        <div className="flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl px-3 py-2 shadow-sm">
           <Box className="w-4 h-4" style={{ color: to }} />
-          <span className="text-[11px] text-gray-600">3D görünüm aktif</span>
+          <span className="text-[11px] text-gray-600 dark:text-gray-300">3D görünüm aktif</span>
           <div className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400" />
         </div>
       </div>
@@ -184,7 +184,7 @@ const VISUALS: Record<string, React.ComponentType<{ from: string; to: string }>>
 
 export default function FeaturesContainer() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
@@ -193,10 +193,10 @@ export default function FeaturesContainer() {
             <Zap className="w-3.5 h-3.5" />
             Özellikler
           </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-gray-900 leading-[1.1] tracking-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight mb-4">
             Lojistiği <span style={{ WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundImage:'linear-gradient(135deg,#2563eb,#7c3aed)', display:'inline' }}>yeniden</span> tanımlayın
           </h2>
-          <p className="text-lg text-gray-500 max-w-xl mx-auto">
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
             Kargo optimizasyonundan muhasebe takibine kadar tüm operasyonlarınız tek platformda.
           </p>
         </div>
@@ -211,7 +211,7 @@ export default function FeaturesContainer() {
             return (
               <div
                 key={f.id}
-                className={`group relative bg-white border border-gray-100 rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-gray-200/60 hover:-translate-y-0.5 transition-all duration-300 flex flex-col ${isWide ? 'md:col-span-2 md:flex-row' : ''}`}
+                className={`group relative bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-gray-200/60 dark:hover:shadow-black/40 hover:-translate-y-0.5 transition-all duration-300 flex flex-col ${isWide ? 'md:col-span-2 md:flex-row' : ''}`}
               >
                 {/* Top gradient accent line */}
                 <div className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -236,14 +236,14 @@ export default function FeaturesContainer() {
                 {/* Content side */}
                 <div className={`flex flex-col justify-between p-7 ${isWide ? 'md:w-1/2' : ''}`}>
                   <div>
-                    <h3 className="text-xl font-black text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {f.title}
                     </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed mb-5">{f.description}</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-5">{f.description}</p>
 
                     <ul className="space-y-2">
                       {f.bullets.map((b) => (
-                        <li key={b} className="flex items-center gap-2 text-sm text-gray-700">
+                        <li key={b} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                           <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
                             style={{ background: `${f.accentFrom}18` }}>
                             <Check className="w-2.5 h-2.5" style={{ color: f.accentFrom }} />
