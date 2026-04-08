@@ -103,9 +103,9 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`sticky top-0 z-50 transition-all duration-200 ${
+      className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
+          ? 'bg-white/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)] border-b border-gray-100/80'
           : 'bg-white border-b border-gray-100'
       }`}
     >
@@ -152,8 +152,11 @@ export default function Navbar() {
                   {modullerOpen && (
                     <div
                       role="menu"
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[480px] bg-white rounded-2xl shadow-xl border border-gray-100 p-3 grid grid-cols-2 gap-1.5 z-50"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2.5 w-[500px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-gray-200/70 border border-gray-100 p-2 grid grid-cols-2 gap-1 z-50"
                     >
+                      <div className="col-span-2 px-3 py-2 mb-1">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Uygulama Modülleri</p>
+                      </div>
                       {MODULLER.map((m) => {
                         const Icon = m.icon;
                         return (
@@ -162,15 +165,16 @@ export default function Navbar() {
                             href={m.href}
                             role="menuitem"
                             onClick={() => setModullerOpen(false)}
-                            className="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group"
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50/80 transition-all duration-150 group"
                           >
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${m.color}`}>
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${m.color} ring-1 ring-black/5`}>
                               <Icon className="w-4 h-4" aria-hidden="true" />
                             </div>
                             <div>
                               <p className="text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight">{m.label}</p>
-                              <p className="text-xs text-gray-500 leading-tight mt-0.5">{m.desc}</p>
+                              <p className="text-xs text-gray-400 leading-tight mt-0.5">{m.desc}</p>
                             </div>
+                            <ChevronRight className="w-3.5 h-3.5 text-gray-300 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                           </Link>
                         );
                       })}
