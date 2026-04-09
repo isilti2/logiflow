@@ -8,6 +8,7 @@ import { logout } from '@/lib/auth';
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import GlobalSearch from '@/components/ui/GlobalSearch';
 import ThemeToggle from '@/components/ui/ThemeToggle';
+import { locales, localeNames, localeFlags, type Locale } from '@/i18n/routing';
 import {
   Calculator, Navigation, Truck, Building2,
   BarChart3, Package, ChevronDown, LayoutDashboard,
@@ -62,6 +63,7 @@ const MODULLER = [
 export default function Navbar() {
   const [menuOpen,     setMenuOpen]     = useState(false);
   const [modullerOpen, setModullerOpen] = useState(false);
+  const [langOpen,     setLangOpen]     = useState(false);
   const [scrolled,     setScrolled]     = useState(false);
   const [authed,       setAuthed]       = useState<boolean | null>(null);
   const navRef      = useRef<HTMLDivElement>(null);
@@ -81,6 +83,7 @@ export default function Navbar() {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setMenuOpen(false);
         setModullerOpen(false);
+        setLangOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClick);
@@ -90,7 +93,7 @@ export default function Navbar() {
   /* Escape ile kapat */
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') { setModullerOpen(false); setMenuOpen(false); }
+      if (e.key === 'Escape') { setModullerOpen(false); setMenuOpen(false); setLangOpen(false); }
     }
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
@@ -205,14 +208,45 @@ export default function Navbar() {
 
             <ThemeToggle />
 
-            {/* Language toggle */}
-            <button
-              onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
-              className="hidden sm:flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              aria-label="Dil değiştir"
-            >
-              {lang === 'tr' ? '🇬🇧 EN' : '🇹🇷 TR'}
-            </button>
+            {/* Language dropdown */}
+            <div className="relative hidden sm:block">
+              <button
+                onClick={() => setLangOpen((p) => !p)}
+                aria-expanded={langOpen}
+                aria-haspopup="listbox"
+                aria-label="Change language"
+                className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-500 dark:text-gray-400 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                <span>{localeFlags[lang as Locale] ?? '🌐'}</span>
+                <span>{lang.toUpperCase()}</span>
+                <ChevronDown className={`w-3 h-3 transition-transform duration-150 ${langOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+              </button>
+              {langOpen && (
+                <div
+                  role="listbox"
+                  aria-label="Select language"
+                  className="absolute right-0 top-full mt-2 w-36 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl shadow-xl shadow-gray-200/60 dark:shadow-black/40 py-1 z-50"
+                >
+                  {locales.map((l) => (
+                    <button
+                      key={l}
+                      role="option"
+                      aria-selected={lang === l}
+                      onClick={() => { setLang(l); setLangOpen(false); }}
+                      className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm transition-colors ${
+                        lang === l
+                          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold'
+                          : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      }`}
+                    >
+                      <span>{localeFlags[l]}</span>
+                      <span>{localeNames[l]}</span>
+                      {lang === l && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {authed === null ? (
               <div className="w-20 h-8 bg-gray-100 rounded-xl animate-pulse hidden sm:block" />

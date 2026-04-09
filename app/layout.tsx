@@ -6,29 +6,36 @@ import Footer from '@/components/layout/Footer';
 import ToastContainer from '@/components/ui/Toast';
 import { LanguageProvider } from '@/components/ui/LanguageProvider';
 import ThemeProvider from '@/components/ui/ThemeProvider';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'LogiFlow — Lojistik Optimizasyon Platformu',
-  description: '3D kargo optimizasyonu, depo yönetimi ve yük planı paylaşımını tek platformda yönetin.',
+  title: 'LogiFlow — Logistics Optimization Platform',
+  description: 'Manage 3D cargo optimization, warehouse management and load plan sharing on one platform.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${inter.className} antialiased bg-white dark:bg-gray-950 transition-colors duration-300`}>
-        <ThemeProvider>
-          <LanguageProvider>
-            {children}
-            <Footer />
-            <ToastContainer />
-          </LanguageProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider>
+            <LanguageProvider>
+              {children}
+              <Footer />
+              <ToastContainer />
+            </LanguageProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

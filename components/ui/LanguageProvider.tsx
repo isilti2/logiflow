@@ -2,34 +2,41 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { translations, type Lang, type TranslationKey } from '@/lib/i18n';
+import { locales, type Locale } from '@/i18n/routing';
 
 interface LangContextValue {
-  lang: Lang;
-  setLang: (l: Lang) => void;
+  lang: Locale;
+  setLang: (l: Locale) => void;
   t: (key: TranslationKey) => string;
 }
 
 const LangContext = createContext<LangContextValue>({
-  lang: 'tr',
+  lang: 'en',
   setLang: () => {},
   t: (key) => key as string,
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('tr');
+  const [lang, setLangState] = useState<Locale>('en');
 
   useEffect(() => {
-    const saved = localStorage.getItem('lf_lang') as Lang | null;
-    if (saved === 'tr' || saved === 'en') setLangState(saved);
+    const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]+)/);
+    const saved = match?.[1] as Locale | undefined;
+    if (saved && (locales as readonly string[]).includes(saved)) {
+      setLangState(saved);
+    }
   }, []);
 
-  function setLang(l: Lang) {
+  function setLang(l: Locale) {
+    document.cookie = `NEXT_LOCALE=${l}; path=/; max-age=${60 * 60 * 24 * 365}`;
     setLangState(l);
-    localStorage.setItem('lf_lang', l);
+    window.location.reload();
   }
 
   function t(key: TranslationKey): string {
-    return translations[lang][key] as string;
+    // Fall back to 'en' or 'tr' for legacy translations if 'de' isn't available
+    const legacyLang: Lang = lang === 'de' ? 'en' : (lang as Lang);
+    return (translations[legacyLang]?.[key] ?? key) as string;
   }
 
   return (

@@ -28,7 +28,12 @@
       "Bash(sed -i 's/<p className=\"text-xs text-gray-400\">Devam Eden Sefer<\\\\/p>/<p className=\"text-xs text-gray-500\">Devam Eden Sefer<\\\\/p>/g' app/konum/page.tsx)",
       "Bash(sed -i 's/<p className=\"text-xs text-gray-400\">Ort. Hız \\(km\\\\/s\\)<\\\\/p>/<p className=\"text-xs text-gray-500\">Ort. Hız \\(km\\\\/s\\)<\\\\/p>/g' app/konum/page.tsx)",
       "Bash(node_modules/.bin/tsc --noEmit)",
-      "Bash(node_modules/.bin/tsc --noEmit --pretty false)"
+      "Bash(node_modules/.bin/tsc --noEmit --pretty false)",
+      "Bash(ls c:/Users/Okan/Contacts/yuks/*.config.*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in d.get\\('dependencies',{}\\).items\\(\\)]\")",
+      "Bash(git -C \"c:/Users/Okan/Contacts/yuks\" worktree list)",
+      "Bash(git -C \"c:/Users/Okan/Contacts/yuks/.claude/worktrees/agent-a9ea114f\" status --short)",
+      "Bash(kill %1)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Okan\\Contacts\\yuks\\app",
