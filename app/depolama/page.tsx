@@ -46,7 +46,7 @@ const EXCEL_MOCK: Omit<CargoItem, 'id' | 'areaId'>[] = [
 const STATUS_STYLE: Record<StatusKey, string> = {
   depolarda: 'bg-blue-50 text-blue-800 border border-blue-100',
   çıkışta: 'bg-orange-50 text-orange-700 border border-orange-100',
-  beklemede: 'bg-gray-100 text-gray-600 border border-gray-200',
+  beklemede: 'bg-gray-100 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700',
 };
 
 const CARGO_TYPES = ['Elektronik', 'Mobilya', 'Tekstil', 'Sanayi', 'Kimyasal', 'Gıda', 'Diğer'];
@@ -54,14 +54,14 @@ const CARGO_TYPES = ['Elektronik', 'Mobilya', 'Tekstil', 'Sanayi', 'Kimyasal', '
 /* ─── Sub-components ─────────────────────────────────────── */
 function StatCard({ icon, label, value, sub }: { icon: React.ReactNode; label: string; value: string | number; sub?: string }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 flex items-start gap-4 shadow-sm">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 flex items-start gap-4 shadow-sm">
       <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0 text-blue-600">
         {icon}
       </div>
       <div>
-        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">{label}</p>
-        <p className="text-2xl font-black text-gray-900 leading-tight">{value}</p>
-        {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
+        <p className="text-xs text-gray-400 dark:text-gray-500 font-medium uppercase tracking-wider">{label}</p>
+        <p className="text-2xl font-black text-gray-900 dark:text-white leading-tight">{value}</p>
+        {sub && <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{sub}</p>}
       </div>
     </div>
   );
@@ -74,8 +74,8 @@ function Modal({ title, onClose, children }: ModalProps) {
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose} />
       <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-bold text-gray-900">{title}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:text-gray-300 transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -335,7 +335,7 @@ export default function DepolamaPage() {
   if (loading) {
     return (
       <AuthGuard>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
           <Navbar />
           <div className="flex items-center justify-center py-32">
             <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
@@ -346,16 +346,16 @@ export default function DepolamaPage() {
   }
 
   return (
-    <AuthGuard><div className="min-h-screen bg-gray-50">
+    <AuthGuard><div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
 
       {/* Page header */}
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-2xl font-black text-gray-900">
+          <h1 className="text-2xl font-black text-gray-900 dark:text-white">
             Yönetme &amp; <span className="text-blue-600">Depolama</span>
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
             Alanlarınızı ve kargo stoğunuzu merkezi olarak yönetin.
           </p>
         </div>
@@ -377,11 +377,11 @@ export default function DepolamaPage() {
 
         {/* Type distribution */}
         {typeStats.length > 0 && selectedArea && (
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
             <div className="flex items-center gap-2 mb-4">
               <BarChart2 className="w-4 h-4 text-blue-600" />
-              <h2 className="text-sm font-bold text-gray-900">Kargo Tipi Dağılımı</h2>
-              <span className="text-xs text-gray-400 ml-1">— {selectedArea.name}</span>
+              <h2 className="text-sm font-bold text-gray-900 dark:text-white">Kargo Tipi Dağılımı</h2>
+              <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">— {selectedArea.name}</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
               {typeStats.map(({ type, count, weight, pct }, i) => {
@@ -390,18 +390,18 @@ export default function DepolamaPage() {
                 return (
                   <div key={type}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-medium text-gray-700">{type}</span>
-                      <div className="flex items-center gap-2 text-xs text-gray-400">
+                      <span className="text-xs font-medium text-gray-700 dark:text-gray-200">{type}</span>
+                      <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
                         <span className="flex items-center gap-0.5">
                           <Package className="w-3 h-3" />{count}
                         </span>
                         <span className="flex items-center gap-0.5">
                           <Weight className="w-3 h-3" />{weight.toFixed(0)} kg
                         </span>
-                        <span className="font-semibold text-gray-600 w-8 text-right">%{pct}</span>
+                        <span className="font-semibold text-gray-600 dark:text-gray-300 w-8 text-right">%{pct}</span>
                       </div>
                     </div>
-                    <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div className={`h-full rounded-full ${bar}`} style={{ width: `${pct}%` }} />
                     </div>
                   </div>
@@ -421,7 +421,7 @@ export default function DepolamaPage() {
 
         {/* Empty state */}
         {areas.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+          <div className="flex flex-col items-center justify-center py-20 text-gray-400 dark:text-gray-500">
             <Building2 className="w-10 h-10 mb-3 opacity-30" />
             <p className="text-sm font-medium">Henüz depo alanı yok.</p>
             <button
@@ -437,12 +437,12 @@ export default function DepolamaPage() {
           <div className="flex gap-6 items-start">
 
             {/* Sidebar — areas */}
-            <aside className="w-64 flex-shrink-0 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Alanlar</span>
+            <aside className="w-64 flex-shrink-0 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+                <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">Alanlar</span>
                 <button
                   onClick={() => setShowAddArea(true)}
-                  className="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-blue-50 text-gray-400 hover:text-blue-600 transition-colors"
+                  className="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 text-gray-400 dark:text-gray-500 hover:text-blue-600 transition-colors"
                   title="Yeni alan ekle"
                 >
                   <Plus className="w-4 h-4" />
@@ -459,7 +459,7 @@ export default function DepolamaPage() {
                       <button
                         onClick={() => setSelectedAreaId(area.id)}
                         className={`w-full flex flex-col gap-2 px-4 py-3 text-left transition-colors ${
-                          active ? 'bg-blue-50 text-blue-800' : 'text-gray-700 hover:bg-gray-50'
+                          active ? 'bg-blue-50 text-blue-800' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
                         }`}
                       >
                         <div className="flex items-center gap-3">
@@ -468,15 +468,15 @@ export default function DepolamaPage() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold truncate">{area.name}</p>
-                            <p className="text-xs text-gray-400 flex items-center gap-1">
+                            <p className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1">
                               <MapPin className="w-3 h-3" />{area.location}
                             </p>
                           </div>
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${active ? 'bg-blue-200 text-blue-800' : 'bg-gray-100 text-gray-500'}`}>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${active ? 'bg-blue-200 text-blue-800' : 'bg-gray-100 text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                             {count}/{area.capacity}
                           </span>
                         </div>
-                        <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                           <div className={`h-full rounded-full transition-all duration-500 ${capColor}`} style={{ width: `${capPct}%` }} />
                         </div>
                       </button>
@@ -493,12 +493,12 @@ export default function DepolamaPage() {
               <div className="flex flex-wrap items-center gap-3">
                 {/* Search */}
                 <div className="relative flex-1 min-w-48">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                   <input
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Kargo ara…"
-                    className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                    className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
                   />
                 </div>
 
@@ -506,7 +506,7 @@ export default function DepolamaPage() {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value as StatusKey | 'tümü')}
-                  className="px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white text-gray-700"
+                  className="px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white text-gray-700 dark:text-gray-200"
                 >
                   <option value="tümü">Tüm Durumlar</option>
                   <option value="depolarda">Depolarda</option>
@@ -524,7 +524,7 @@ export default function DepolamaPage() {
                 />
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-gray-200 rounded-xl bg-white text-gray-700 hover:border-blue-300 hover:text-blue-700 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-xl bg-white text-gray-700 dark:text-gray-200 hover:border-blue-300 hover:text-blue-700 transition-colors"
                 >
                   <FileSpreadsheet className="w-4 h-4" />
                   Excel İçe Aktar
@@ -533,7 +533,7 @@ export default function DepolamaPage() {
                 {/* CSV Export */}
                 <button
                   onClick={handleCSVExport}
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-gray-200 rounded-xl bg-white text-gray-700 hover:border-emerald-300 hover:text-emerald-700 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-xl bg-white text-gray-700 dark:text-gray-200 hover:border-emerald-300 hover:text-emerald-700 transition-colors"
                   title="Kargo listesini CSV olarak indir"
                 >
                   <Download className="w-4 h-4" />
@@ -546,7 +546,7 @@ export default function DepolamaPage() {
                   className={`flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-colors border ${
                     show3D
                       ? 'bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700'
-                      : 'bg-white text-gray-700 border-gray-200 hover:border-indigo-300 hover:text-indigo-700'
+                      : 'bg-white text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:border-indigo-300 hover:text-indigo-700'
                   }`}
                 >
                   <Boxes className="w-4 h-4" />
@@ -580,7 +580,7 @@ export default function DepolamaPage() {
                   <select
                     defaultValue=""
                     onChange={(e) => { if (e.target.value) handleBulkStatus(e.target.value as StatusKey); e.target.value = ''; }}
-                    className="text-xs font-semibold text-gray-600 bg-white border border-gray-200 hover:border-blue-300 px-3 py-1.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="text-xs font-semibold text-gray-600 dark:text-gray-300 bg-white border border-gray-200 dark:border-gray-700 hover:border-blue-300 px-3 py-1.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
                   >
                     <option value="" disabled>Durum Değiştir</option>
                     <option value="depolarda">Depolarda</option>
@@ -589,7 +589,7 @@ export default function DepolamaPage() {
                   </select>
                   <button
                     onClick={() => setSelectedIds(new Set())}
-                    className="ml-auto text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                    className="ml-auto text-xs text-gray-400 hover:text-gray-600 dark:text-gray-300 transition-colors"
                   >
                     Seçimi Temizle
                   </button>
@@ -598,12 +598,12 @@ export default function DepolamaPage() {
 
               {/* 3D Depot View */}
               {show3D && selectedArea && (
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                  <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-100">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+                  <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-100 dark:border-gray-800">
                     <Boxes className="w-4 h-4 text-indigo-600" />
-                    <h2 className="text-sm font-bold text-gray-900">3D Depo Doluluk Görünümü</h2>
-                    <span className="text-xs text-gray-400 ml-1">— {selectedArea.name}</span>
-                    <span className="ml-auto text-xs text-gray-400">
+                    <h2 className="text-sm font-bold text-gray-900 dark:text-white">3D Depo Doluluk Görünümü</h2>
+                    <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">— {selectedArea.name}</span>
+                    <span className="ml-auto text-xs text-gray-400 dark:text-gray-500">
                       {areaCargo.length}/{selectedArea.capacity} slot dolu · fareyle döndür, kaydır
                     </span>
                   </div>
@@ -623,9 +623,9 @@ export default function DepolamaPage() {
               )}
 
               {/* Table */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 {filteredCargo.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-16 text-gray-400">
+                  <div className="flex flex-col items-center justify-center py-16 text-gray-400 dark:text-gray-500">
                     <AlertCircle className="w-8 h-8 mb-3" />
                     <p className="text-sm font-medium">Bu alanda kargo bulunamadı.</p>
                     <p className="text-xs mt-1">Yeni kargo eklemek için &quot;Kargo Ekle&quot; butonunu kullanın.</p>
@@ -634,7 +634,7 @@ export default function DepolamaPage() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm min-w-[640px]">
                       <thead>
-                        <tr className="border-b border-gray-100 bg-gray-50">
+                        <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50">
                           <th className="pl-5 py-3 w-8">
                             <input
                               type="checkbox"
@@ -645,17 +645,17 @@ export default function DepolamaPage() {
                             />
                           </th>
                           {['Kargo Adı', 'Tip', 'Ağırlık (kg)', 'Boyutlar (cm)', 'Konum', 'Tarih', 'Durum', ''].map((h) => (
-                            <th key={h} className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            <th key={h} className="text-left px-5 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">
                               {h}
                             </th>
                           ))}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-50">
+                      <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                         {filteredCargo.map((item) => {
                           const isEditing = editId === item.id && editDraft;
                           return (
-                            <tr key={item.id} className={`hover:bg-gray-50 transition-colors group ${selectedIds.has(item.id) ? 'bg-blue-50/50' : ''} ${isEditing ? 'bg-blue-50/30' : ''}`}>
+                            <tr key={item.id} className={`hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group ${selectedIds.has(item.id) ? 'bg-blue-50/50' : ''} ${isEditing ? 'bg-blue-50/30' : ''}`}>
                               <td className="pl-5 py-3.5 w-8">
                                 <input
                                   type="checkbox"
@@ -667,7 +667,7 @@ export default function DepolamaPage() {
                               </td>
 
                               {/* Name */}
-                              <td className="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
+                              <td className="px-5 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 {isEditing ? (
                                   <input
                                     value={editDraft.name}
@@ -683,7 +683,7 @@ export default function DepolamaPage() {
                               </td>
 
                               {/* Type */}
-                              <td className="px-5 py-3 text-gray-600">
+                              <td className="px-5 py-3 text-gray-600 dark:text-gray-300">
                                 {isEditing ? (
                                   <select
                                     value={editDraft.type}
@@ -696,7 +696,7 @@ export default function DepolamaPage() {
                               </td>
 
                               {/* Weight */}
-                              <td className="px-5 py-3 text-gray-600">
+                              <td className="px-5 py-3 text-gray-600 dark:text-gray-300">
                                 {isEditing ? (
                                   <input
                                     type="number"
@@ -710,7 +710,7 @@ export default function DepolamaPage() {
                               </td>
 
                               {/* Dimensions */}
-                              <td className="px-5 py-3 text-gray-500 font-mono text-xs">{item.dimensions}</td>
+                              <td className="px-5 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 font-mono text-xs">{item.dimensions}</td>
 
                               {/* Location */}
                               <td className="px-5 py-3">
@@ -741,7 +741,7 @@ export default function DepolamaPage() {
                                     />
                                   </div>
                                 ) : item.shelf ? (
-                                  <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 font-mono">
+                                  <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 dark:text-gray-300 font-mono">
                                     <MapPin className="w-3 h-3 text-blue-400" />
                                     {item.shelf}{item.row ? `-${item.row}` : ''}{item.col ? `-${item.col}` : ''}
                                   </span>
@@ -751,7 +751,7 @@ export default function DepolamaPage() {
                               </td>
 
                               {/* Date */}
-                              <td className="px-5 py-3 text-gray-500 whitespace-nowrap">{item.date}</td>
+                              <td className="px-5 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{item.date}</td>
 
                               {/* Status */}
                               <td className="px-5 py-3">
@@ -785,7 +785,7 @@ export default function DepolamaPage() {
                                     </button>
                                     <button
                                       onClick={cancelEdit}
-                                      className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+                                      className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-200 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                                     >
                                       İptal
                                     </button>
@@ -798,7 +798,7 @@ export default function DepolamaPage() {
                                     >Sil</button>
                                     <button
                                       onClick={() => setConfirmDeleteId(null)}
-                                      className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+                                      className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-200 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                                     >İptal</button>
                                   </div>
                                 ) : transferId === item.id ? (
@@ -806,7 +806,7 @@ export default function DepolamaPage() {
                                     <select
                                       value={transferTarget}
                                       onChange={(e) => setTransferTarget(e.target.value)}
-                                      className="text-xs border border-blue-300 rounded-lg px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                      className="text-xs border border-blue-300 rounded-lg px-2 py-1 bg-white dark:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     >
                                       {areas.filter((a) => a.id !== item.areaId).map((a) => (
                                         <option key={a.id} value={a.id}>{a.name}</option>
@@ -822,7 +822,7 @@ export default function DepolamaPage() {
                                     </button>
                                     <button
                                       onClick={() => setTransferId(null)}
-                                      className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+                                      className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-200 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                                     >İptal</button>
                                   </div>
                                 ) : (
@@ -863,7 +863,7 @@ export default function DepolamaPage() {
               </div>
 
               {/* Footer info */}
-              <p className="text-xs text-gray-400 px-1">
+              <p className="text-xs text-gray-400 dark:text-gray-500 px-1">
                 {filteredCargo.length} kargo gösteriliyor
                 {statusFilter !== 'tümü' && ` · Filtre: ${statusFilter}`}
                 {search && ` · Arama: "${search}"`}
@@ -878,29 +878,29 @@ export default function DepolamaPage() {
         <Modal title={`Kargo Ekle — ${selectedArea.name}`} onClose={() => setShowAddCargo(false)}>
           <form onSubmit={handleAddCargo} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Kargo Adı *</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Kargo Adı *</label>
               <input
                 name="name"
                 required
                 placeholder="örn. Elektronik Paket A"
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Tip *</label>
+                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Tip *</label>
                 <select
                   name="type"
                   required
                   defaultValue=""
-                  className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                  className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
                 >
                   <option value="" disabled>Seçin</option>
                   {CARGO_TYPES.map((t) => <option key={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Ağırlık (kg) *</label>
+                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Ağırlık (kg) *</label>
                 <input
                   name="weight"
                   type="number"
@@ -908,12 +908,12 @@ export default function DepolamaPage() {
                   min="0"
                   required
                   placeholder="0.0"
-                  className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Boyutlar (cm) — G × Y × D</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Boyutlar (cm) — G × Y × D</label>
               <div className="grid grid-cols-3 gap-2">
                 {(['w', 'h', 'd'] as const).map((k, i) => (
                   <input
@@ -922,28 +922,28 @@ export default function DepolamaPage() {
                     type="number"
                     min="0"
                     placeholder={['Genişlik', 'Yükseklik', 'Derinlik'][i]}
-                    className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 ))}
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Tarih</label>
+                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Tarih</label>
                 <input
                   name="date"
                   type="date"
                   defaultValue={new Date().toISOString().slice(0, 10)}
-                  className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Durum *</label>
+                <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Durum *</label>
                 <select
                   name="status"
                   required
                   defaultValue="depolarda"
-                  className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                  className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
                 >
                   <option value="depolarda">Depolarda</option>
                   <option value="beklemede">Beklemede</option>
@@ -953,48 +953,48 @@ export default function DepolamaPage() {
             </div>
             {/* Location */}
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Depo Konumu (isteğe bağlı)</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Depo Konumu (isteğe bağlı)</label>
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="block text-[10px] text-gray-400 mb-1">Raf</label>
+                  <label className="block text-[10px] text-gray-400 dark:text-gray-500 mb-1">Raf</label>
                   <input
                     name="shelf"
                     maxLength={3}
                     placeholder="A"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 uppercase"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 uppercase"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-gray-400 mb-1">Sıra</label>
+                  <label className="block text-[10px] text-gray-400 dark:text-gray-500 mb-1">Sıra</label>
                   <input
                     name="row"
                     type="number"
                     min="1"
                     max="99"
                     placeholder="1"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-gray-400 mb-1">Sütun</label>
+                  <label className="block text-[10px] text-gray-400 dark:text-gray-500 mb-1">Sütun</label>
                   <input
                     name="col"
                     type="number"
                     min="1"
                     max="99"
                     placeholder="1"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
               </div>
-              <p className="text-[10px] text-gray-400 mt-1">Örn: Raf B, Sıra 3, Sütun 2 → B-3-2</p>
+              <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">Örn: Raf B, Sıra 3, Sütun 2 → B-3-2</p>
             </div>
 
             <div className="flex gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => setShowAddCargo(false)}
-                className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                className="flex-1 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 İptal
               </button>
@@ -1014,37 +1014,37 @@ export default function DepolamaPage() {
         <Modal title="Yeni Alan Tanımla" onClose={() => setShowAddArea(false)}>
           <form onSubmit={handleAddArea} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Alan Adı *</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Alan Adı *</label>
               <input
                 name="name"
                 required
                 placeholder="örn. Bursa Depo"
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Konum</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Konum</label>
               <input
                 name="location"
                 placeholder="örn. Osmangazi, Bursa"
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Kapasite (adet)</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">Kapasite (adet)</label>
               <input
                 name="capacity"
                 type="number"
                 min="1"
                 defaultValue={50}
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
             <div className="flex gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => setShowAddArea(false)}
-                className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                className="flex-1 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 İptal
               </button>

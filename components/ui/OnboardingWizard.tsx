@@ -140,7 +140,7 @@ export default function OnboardingWizard() {
         {/* Close */}
         <button
           onClick={finish}
-          className="absolute top-4 right-4 text-gray-300 hover:text-gray-500 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-lg"
+          className="absolute top-4 right-4 text-gray-300 hover:text-gray-500 dark:text-gray-400 dark:text-gray-500 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-lg"
           aria-label="Turu kapat"
         >
           <X className="w-5 h-5" aria-hidden="true" />
@@ -165,8 +165,8 @@ export default function OnboardingWizard() {
           </div>
 
           {/* Content */}
-          <h2 id="onboarding-title" className="text-xl font-black text-gray-900 mb-2">{current.title}</h2>
-          <p className="text-sm text-gray-500 leading-relaxed mb-4">{current.desc}</p>
+          <h2 id="onboarding-title" className="text-xl font-black text-gray-900 dark:text-white mb-2">{current.title}</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed mb-4">{current.desc}</p>
 
           {current.tip && (
             <div className={`flex items-start gap-2 ${c.bg} rounded-xl px-3 py-2.5 mb-4`}>
@@ -180,7 +180,7 @@ export default function OnboardingWizard() {
             {step > 0 && (
               <button
                 onClick={() => setStep((s) => s - 1)}
-                className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200"
+                className="flex-1 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200"
               >
                 Geri
               </button>
@@ -201,7 +201,7 @@ export default function OnboardingWizard() {
           {!isLast && (
             <button
               onClick={finish}
-              className="w-full text-center text-xs text-gray-500 hover:text-gray-700 mt-3 transition-colors focus:outline-none focus:underline"
+              className="w-full text-center text-xs text-gray-500 hover:text-gray-700 dark:text-gray-200 mt-3 transition-colors focus:outline-none focus:underline"
             >
               Turu atla
             </button>

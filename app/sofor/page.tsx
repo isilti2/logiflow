@@ -183,7 +183,7 @@ export default function SoforPage() {
           </div>
           <div>
             <p className="text-sm font-bold text-white leading-none">LogiFlow</p>
-            <p className="text-xs text-gray-500 leading-none mt-0.5">Şoför Paneli</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-none mt-0.5">Şoför Paneli</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -193,9 +193,9 @@ export default function SoforPage() {
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" /> CANLI
             </span>
           ) : durum === 'durduruldu' ? (
-            <span className="text-xs font-semibold text-gray-500">DURDURULDU</span>
+            <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">DURDURULDU</span>
           ) : (
-            <span className="text-xs text-gray-600">{user?.name ?? user?.email ?? '—'}</span>
+            <span className="text-xs text-gray-600 dark:text-gray-300">{user?.name ?? user?.email ?? '—'}</span>
           )}
         </div>
       </header>
@@ -223,7 +223,7 @@ export default function SoforPage() {
         {/* Sefer seçimi */}
         {durum !== 'aktif' && (
           <div className="bg-gray-900 rounded-2xl p-4 border border-gray-800">
-            <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
               <Truck className="w-3.5 h-3.5 inline mr-1.5" /> Aktif Sefer
             </label>
             <select
@@ -287,28 +287,28 @@ export default function SoforPage() {
             <div className="bg-gray-900 rounded-2xl p-4 border border-gray-800">
               <Clock className="w-5 h-5 text-blue-400 mb-2" />
               <p className="text-2xl font-black text-white font-mono">{sureFmt}</p>
-              <p className="text-xs text-gray-500 mt-1">Yolda geçen süre</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">Yolda geçen süre</p>
             </div>
             <div className="bg-gray-900 rounded-2xl p-4 border border-gray-800">
               <Gauge className="w-5 h-5 text-green-400 mb-2" />
               <p className="text-2xl font-black text-white">
                 {sonKonum ? Math.round(sonKonum.hiz) : '—'}
-                <span className="text-sm font-normal text-gray-400 ml-1">km/s</span>
+                <span className="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">km/s</span>
               </p>
-              <p className="text-xs text-gray-500 mt-1">Anlık hız</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">Anlık hız</p>
             </div>
             <div className="bg-gray-900 rounded-2xl p-4 border border-gray-800">
               <MapPin className="w-5 h-5 text-purple-400 mb-2" />
               <p className="text-2xl font-black text-white">{gonderilen}</p>
-              <p className="text-xs text-gray-500 mt-1">Konum gönderildi</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">Konum gönderildi</p>
             </div>
             <div className="bg-gray-900 rounded-2xl p-4 border border-gray-800">
               <Crosshair className="w-5 h-5 text-amber-400 mb-2" />
               <p className="text-2xl font-black text-white">
                 {sonKonum ? `±${Math.round(sonKonum.accuracy)}` : '—'}
-                <span className="text-sm font-normal text-gray-400 ml-1">m</span>
+                <span className="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">m</span>
               </p>
-              <p className="text-xs text-gray-500 mt-1">GPS doğruluğu</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">GPS doğruluğu</p>
             </div>
           </div>
         )}
@@ -318,7 +318,7 @@ export default function SoforPage() {
           <div className="bg-gray-900 rounded-2xl p-4 border border-gray-800">
             <div className="flex items-center gap-2 mb-2">
               <Navigation className="w-4 h-4 text-green-400" />
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Son Alınan Konum</span>
+              <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Son Alınan Konum</span>
               <span className="ml-auto flex items-center gap-1.5 text-xs text-green-400 font-semibold">
                 <Wifi className="w-3.5 h-3.5" /> Aktif
               </span>
@@ -334,25 +334,25 @@ export default function SoforPage() {
           <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800 text-center">
             <CheckCircle2 className="w-10 h-10 text-green-500 mx-auto mb-3" />
             <p className="font-bold text-white text-lg">Yolculuk Tamamlandı</p>
-            <p className="text-sm text-gray-400 mt-1">{gonderilen} konum noktası kaydedildi</p>
-            <p className="text-sm text-gray-400">Süre: {sureFmt}</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">{gonderilen} konum noktası kaydedildi</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500">Süre: {sureFmt}</p>
           </div>
         )}
 
         {/* Bilgi notu */}
         {durum === 'bekliyor' && (
           <div className="bg-gray-900/50 rounded-2xl p-4 border border-gray-800/50 space-y-2">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Nasıl Çalışır?</p>
-            <div className="flex items-start gap-2 text-xs text-gray-500">
-              <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 shrink-0 font-bold">1</span>
-              <span>Sefer seçin ve <strong className="text-gray-400">Yolculuğu Başlat</strong>&apos;a basın</span>
+            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">Nasıl Çalışır?</p>
+            <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 dark:text-gray-500 shrink-0 font-bold">1</span>
+              <span>Sefer seçin ve <strong className="text-gray-400 dark:text-gray-500">Yolculuğu Başlat</strong>&apos;a basın</span>
             </div>
-            <div className="flex items-start gap-2 text-xs text-gray-500">
-              <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 shrink-0 font-bold">2</span>
+            <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 dark:text-gray-500 shrink-0 font-bold">2</span>
               <span>Bu sekmeyi açık bırakın — başka uygulamaya geçebilirsiniz</span>
             </div>
-            <div className="flex items-start gap-2 text-xs text-gray-500">
-              <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 shrink-0 font-bold">3</span>
+            <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
+              <span className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 dark:text-gray-500 shrink-0 font-bold">3</span>
               <span>Konum her 15 saniyede veya 30 m hareket edildiğinde otomatik gönderilir</span>
             </div>
           </div>
@@ -362,7 +362,7 @@ export default function SoforPage() {
 
       {/* Footer */}
       <div className="px-4 pb-safe pb-4 border-t border-gray-800 pt-3 flex items-center justify-between">
-        <Link href="/dashboard" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">← Dashboard</Link>
+        <Link href="/dashboard" className="text-xs text-gray-600 dark:text-gray-300 hover:text-gray-400 dark:text-gray-500 transition-colors">← Dashboard</Link>
         {durum === 'aktif' && (
           <span className="flex items-center gap-1.5 text-xs text-green-500 font-semibold">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -370,7 +370,7 @@ export default function SoforPage() {
           </span>
         )}
         {durum !== 'aktif' && (
-          <span className="text-xs text-gray-700">{user?.email ?? ''}</span>
+          <span className="text-xs text-gray-700 dark:text-gray-200">{user?.email ?? ''}</span>
         )}
       </div>
 

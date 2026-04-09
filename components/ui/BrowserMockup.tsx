@@ -47,15 +47,15 @@ export default function BrowserMockup({
   const colors = colorSchemes[colorScheme];
 
   return (
-    <div className={`rounded-2xl overflow-hidden shadow-2xl border border-gray-200 ${className}`}>
+    <div className={`rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 ${className}`}>
       {/* Browser Chrome */}
-      <div className="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200">
+      <div className="bg-gray-100 px-4 py-2.5 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-400" />
           <div className="w-3 h-3 rounded-full bg-yellow-400" />
           <div className="w-3 h-3 rounded-full bg-green-400" />
         </div>
-        <div className="flex-1 bg-white rounded-md text-xs text-gray-400 px-3 py-1 mx-2 text-center">
+        <div className="flex-1 bg-white rounded-md text-xs text-gray-400 dark:text-gray-500 px-3 py-1 mx-2 text-center">
           app.logiflow.io
         </div>
         <div className="flex gap-1">
@@ -67,7 +67,7 @@ export default function BrowserMockup({
       {/* App Content Placeholder */}
       <div className={`bg-gradient-to-br ${colors.bg} aspect-video relative overflow-hidden`}>
         {/* Sidebar */}
-        <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-white/60 border-r border-gray-200/50 p-2">
+        <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-white/60 border-r border-gray-200 dark:border-gray-700/50 p-2">
           <div className="space-y-1.5">
             {[...Array(6)].map((_, i) => (
               <div key={i} className={`h-3 rounded ${i === 0 ? colors.accent : 'bg-gray-200'} ${i === 0 ? 'w-full' : i % 2 === 0 ? 'w-3/4' : 'w-5/6'}`} />
@@ -115,7 +115,7 @@ export default function BrowserMockup({
 
         {/* Label overlay */}
         <div className="absolute bottom-2 right-2 bg-white/80 backdrop-blur-sm rounded px-2 py-1">
-          <span className="text-xs text-gray-500 font-medium">{label}</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">{label}</span>
         </div>
       </div>
     </div>

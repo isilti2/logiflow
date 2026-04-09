@@ -46,7 +46,7 @@ const TIMELINE = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Navbar />
 
       {/* ── Hero ── */}
@@ -71,19 +71,22 @@ export default function AboutPage() {
 
         <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, transparent, #ffffff)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none dark:hidden" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none hidden dark:block"
+          style={{ background: 'linear-gradient(to bottom, transparent, #030712)' }} />
       </section>
 
       {/* ── İstatistikler ── */}
-      <section className="py-16 bg-white border-b border-gray-100">
+      <section className="py-16 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {STATS.map(({ icon: Icon, value, label }) => (
               <div key={label} className="text-center">
-                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mx-auto mb-3">
                   <Icon className="w-5 h-5 text-blue-600" aria-hidden="true" />
                 </div>
-                <p className="text-3xl font-black text-gray-900 mb-1">{value}</p>
-                <p className="text-sm text-gray-500">{label}</p>
+                <p className="text-3xl font-black text-gray-900 dark:text-white mb-1">{value}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
               </div>
             ))}
           </div>
@@ -91,23 +94,23 @@ export default function AboutPage() {
       </section>
 
       {/* ── Misyon / Vizyon / Değerler ── */}
-      <section className="py-24 bg-gray-50/60">
+      <section className="py-24 bg-gray-50/60 dark:bg-gray-800/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">
-              <span className="w-4 h-px bg-gray-300" />Kim Olduğumuz<span className="w-4 h-px bg-gray-300" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-4">
+              <span className="w-4 h-px bg-gray-300 dark:bg-gray-600" />Kim Olduğumuz<span className="w-4 h-px bg-gray-300 dark:bg-gray-600" />
             </span>
-            <h2 className="text-4xl font-black text-gray-900">Bizi harekete geçiren değerler</h2>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white">Bizi harekete geçiren değerler</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {CARDS.map((card) => (
               <div key={card.title}
-                className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-3xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                 <div className={`w-12 h-12 border rounded-2xl flex items-center justify-center mb-6 ${card.color}`}>
                   <card.Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-black text-gray-900 mb-3">{card.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{card.description}</p>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-3">{card.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{card.description}</p>
               </div>
             ))}
           </div>
@@ -115,31 +118,31 @@ export default function AboutPage() {
       </section>
 
       {/* ── Zaman Çizelgesi ── */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">
-              <span className="w-4 h-px bg-gray-300" />Yolculuğumuz<span className="w-4 h-px bg-gray-300" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-4">
+              <span className="w-4 h-px bg-gray-300 dark:bg-gray-600" />Yolculuğumuz<span className="w-4 h-px bg-gray-300 dark:bg-gray-600" />
             </span>
-            <h2 className="text-4xl font-black text-gray-900">Büyüme hikayemiz</h2>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white">Büyüme hikayemiz</h2>
           </div>
           <div className="relative">
             {/* Dikey çizgi */}
-            <div className="absolute left-[3.25rem] top-4 bottom-4 w-px bg-gray-100" />
+            <div className="absolute left-[3.25rem] top-4 bottom-4 w-px bg-gray-100 dark:bg-gray-800" />
             <div className="space-y-8">
               {TIMELINE.map((item, i) => (
                 <div key={item.yil} className="flex gap-6">
                   <div className="flex flex-col items-center shrink-0">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black z-10 ${i === TIMELINE.length - 1 ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-white border-2 border-gray-200 text-gray-500'}`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black z-10 ${i === TIMELINE.length - 1 ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400'}`}>
                       {item.yil.slice(2)}
                     </div>
                   </div>
                   <div className="pb-8 flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold text-gray-400">{item.yil}</span>
+                      <span className="text-xs font-bold text-gray-400 dark:text-gray-500">{item.yil}</span>
                     </div>
-                    <h4 className="text-lg font-black text-gray-900 mb-1">{item.baslik}</h4>
-                    <p className="text-sm text-gray-500 leading-relaxed">{item.aciklama}</p>
+                    <h4 className="text-lg font-black text-gray-900 dark:text-white mb-1">{item.baslik}</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{item.aciklama}</p>
                   </div>
                 </div>
               ))}
@@ -149,25 +152,25 @@ export default function AboutPage() {
       </section>
 
       {/* ── Takım ── */}
-      <section className="py-24 bg-gray-50/60">
+      <section className="py-24 bg-gray-50/60 dark:bg-gray-800/40">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">
-              <span className="w-4 h-px bg-gray-300" />Ekibimiz<span className="w-4 h-px bg-gray-300" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-4">
+              <span className="w-4 h-px bg-gray-300 dark:bg-gray-600" />Ekibimiz<span className="w-4 h-px bg-gray-300 dark:bg-gray-600" />
             </span>
-            <h2 className="text-4xl font-black text-gray-900 mb-3">Arkasındaki insanlar</h2>
-            <p className="text-gray-500 max-w-md mx-auto">
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-3">Arkasındaki insanlar</h2>
+            <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
               LogiFlow&apos;u hayata geçiren, lojistik ve yazılım alanında uzman tutkulu bir ekip.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {TEAM.map((member) => (
               <div key={member.name}
-                className="bg-white rounded-3xl p-7 text-center shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                className="bg-white dark:bg-gray-800 rounded-3xl p-7 text-center shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                 <div className={`w-16 h-16 bg-gradient-to-br ${member.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
                   <span className="text-white font-black text-lg">{member.initials}</span>
                 </div>
-                <h3 className="text-gray-900 font-bold text-base mb-0.5">{member.name}</h3>
+                <h3 className="text-gray-900 dark:text-white font-bold text-base mb-0.5">{member.name}</h3>
                 <p className="text-blue-600 text-xs font-semibold">{member.role}</p>
               </div>
             ))}
@@ -176,17 +179,17 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl font-black text-gray-900 mb-4">Bize katılın</h2>
-          <p className="text-gray-500 mb-8">Türkiye&apos;nin lojistik geleceğini birlikte şekillendirelim.</p>
+          <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4">Bize katılın</h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">Türkiye&apos;nin lojistik geleceğini birlikte şekillendirelim.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="/register"
               className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-bold px-7 py-3.5 rounded-2xl transition-all text-sm shadow-lg shadow-blue-500/25">
               Ücretsiz Başla
             </a>
             <a href="/contact"
-              className="inline-flex items-center justify-center gap-2 border border-gray-200 hover:border-gray-300 text-gray-700 font-semibold px-7 py-3.5 rounded-2xl transition-all text-sm hover:bg-gray-50">
+              className="inline-flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-700 dark:text-gray-200 font-semibold px-7 py-3.5 rounded-2xl transition-all text-sm hover:bg-gray-50 dark:hover:bg-gray-800">
               Bize Ulaşın
             </a>
           </div>

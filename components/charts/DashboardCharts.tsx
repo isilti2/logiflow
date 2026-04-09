@@ -25,15 +25,15 @@ const TL = (n: number) =>
 function CustomTooltipGelirGider({ active, payload, label }: { active?: boolean; payload?: { value: number; name: string; color: string }[]; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-white border border-gray-100 shadow-lg rounded-xl px-4 py-3 text-xs">
-      <p className="font-bold text-gray-700 mb-2">{label}</p>
+    <div className="bg-white border border-gray-100 dark:border-gray-800 shadow-lg rounded-xl px-4 py-3 text-xs">
+      <p className="font-bold text-gray-700 dark:text-gray-200 mb-2">{label}</p>
       {payload.map((p) => (
         <p key={p.name} style={{ color: p.color }} className="font-semibold">
           {p.name === 'gelir' ? 'Gelir' : 'Gider'}: {TL(p.value)}
         </p>
       ))}
       {payload.length === 2 && (
-        <p className={`font-black mt-1 pt-1 border-t border-gray-100 ${payload[0].value - payload[1].value >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+        <p className={`font-black mt-1 pt-1 border-t border-gray-100 dark:border-gray-800 ${payload[0].value - payload[1].value >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
           Net: {TL(payload[0].value - payload[1].value)}
         </p>
       )}
@@ -45,11 +45,11 @@ function CustomTooltipArac({ active, payload }: { active?: boolean; payload?: { 
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
   return (
-    <div className="bg-white border border-gray-100 shadow-lg rounded-xl px-4 py-3 text-xs">
-      <p className="font-bold text-gray-700 mb-2">{d.plaka}</p>
+    <div className="bg-white border border-gray-100 dark:border-gray-800 shadow-lg rounded-xl px-4 py-3 text-xs">
+      <p className="font-bold text-gray-700 dark:text-gray-200 mb-2">{d.plaka}</p>
       <p className="text-emerald-600 font-semibold">Gelir: {TL(d.gelir)}</p>
       <p className="text-red-500 font-semibold">Gider: {TL(d.gider)}</p>
-      <p className={`font-black mt-1 pt-1 border-t border-gray-100 ${d.net >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+      <p className={`font-black mt-1 pt-1 border-t border-gray-100 dark:border-gray-800 ${d.net >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
         Net: {TL(d.net)}
       </p>
     </div>
@@ -71,7 +71,7 @@ export default function DashboardCharts() {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {[0, 1].map((i) => (
-          <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center justify-center" style={{ minHeight: 260 }}>
+          <div key={i} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 flex items-center justify-center" style={{ minHeight: 260 }}>
             <Spinner size="md" />
           </div>
         ))}
@@ -92,7 +92,7 @@ export default function DashboardCharts() {
     <div className="space-y-4">
       {/* Section header + özet rakamlar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h2 className="text-base font-bold text-gray-900">Mali Analitik <span className="text-xs font-normal text-gray-500 ml-1">Son 6 ay</span></h2>
+        <h2 className="text-base font-bold text-gray-900 dark:text-white">Mali Analitik <span className="text-xs font-normal text-gray-500 dark:text-gray-400 dark:text-gray-500 ml-1">Son 6 ay</span></h2>
         {hasFinancial && (
           <div className="flex items-center gap-4 text-sm">
             <span className="flex items-center gap-1.5 text-emerald-600 font-semibold">
@@ -111,10 +111,10 @@ export default function DashboardCharts() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
         {/* Chart 1: Aylık Gelir / Gider */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
           <div className="flex items-center gap-2 mb-4">
             <BarChart3 className="w-4 h-4 text-blue-600" />
-            <h3 className="text-sm font-bold text-gray-900">Aylık Gelir & Gider</h3>
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white">Aylık Gelir & Gider</h3>
           </div>
           {hasFinancial ? (
             <>
@@ -145,7 +145,7 @@ export default function DashboardCharts() {
                   );
                 })}
               </div>
-              <p className="text-[10px] text-gray-500 mt-1">Net kâr/zarar (çubuk)</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">Net kâr/zarar (çubuk)</p>
             </>
           ) : (
             <EmptyState
@@ -158,10 +158,10 @@ export default function DashboardCharts() {
         </div>
 
         {/* Chart 2: Araç Net Kâr */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
           <div className="flex items-center gap-2 mb-4">
             <Truck className="w-4 h-4 text-indigo-600" />
-            <h3 className="text-sm font-bold text-gray-900">Araç Bazlı Performans</h3>
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white">Araç Bazlı Performans</h3>
           </div>
           {hasArac ? (
             <ResponsiveContainer width="100%" height={224}>
@@ -199,7 +199,7 @@ export default function DashboardCharts() {
                 {seferDurum.devam} Devam Ediyor
               </span>
               {seferDurum.iptal > 0 && (
-                <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-full">
+                <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 px-2.5 py-1 rounded-full">
                   {seferDurum.iptal} İptal
                 </span>
               )}

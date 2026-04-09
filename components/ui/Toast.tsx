@@ -76,7 +76,7 @@ export default function ToastContainer() {
             <button
               onClick={() => setToasts((prev) => prev.filter((x) => x.id !== t.id))}
               aria-label="Bildirimi kapat"
-              className="text-gray-500 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-white/30 rounded"
+              className="text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-white/30 rounded"
             >
               <X className="w-3.5 h-3.5" aria-hidden="true" />
             </button>

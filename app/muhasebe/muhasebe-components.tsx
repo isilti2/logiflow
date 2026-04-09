@@ -18,7 +18,7 @@ export function ExpiryPill({ label, date }: { label: string; date: string | null
     expired: { cls: 'bg-red-50 text-red-700 border border-red-100',      icon: <AlertTriangle className="w-3 h-3" /> },
     warn:    { cls: 'bg-amber-50 text-amber-700 border border-amber-100', icon: <Clock className="w-3 h-3" /> },
     ok:      { cls: 'bg-green-50 text-green-700 border border-green-100', icon: <ShieldCheck className="w-3 h-3" /> },
-    none:    { cls: 'bg-gray-50 text-gray-500 border border-gray-100',    icon: null },
+    none:    { cls: 'bg-gray-50 text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-100 dark:border-gray-800',    icon: null },
   }[s];
   return (
     <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.cls}`}>
@@ -29,14 +29,14 @@ export function ExpiryPill({ label, date }: { label: string; date: string | null
 
 export function DurumBadge({ durum }: { durum: string }) {
   const map: Record<string, { label: string; cls: string }> = {
-    planlandi:  { label: 'Planlandı',    cls: 'bg-blue-50 text-blue-700' },
+    planlandi:  { label: 'Planlandı',    cls: 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' },
     devam:      { label: 'Devam Ediyor', cls: 'bg-amber-50 text-amber-700' },
     tamamlandi: { label: 'Tamamlandı',  cls: 'bg-green-50 text-green-700' },
     iptal:      { label: 'İptal',        cls: 'bg-red-50 text-red-600' },
     beklemede:  { label: 'Beklemede',   cls: 'bg-yellow-50 text-yellow-700' },
     odendi:     { label: 'Ödendi',       cls: 'bg-green-50 text-green-700' },
   };
-  const d = map[durum] ?? { label: durum, cls: 'bg-gray-100 text-gray-600' };
+  const d = map[durum] ?? { label: durum, cls: 'bg-gray-100 text-gray-600 dark:text-gray-300' };
   return <span className={`inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full ${d.cls}`}>{d.label}</span>;
 }
 
@@ -44,7 +44,7 @@ export function IzinBadge({ izin }: { izin: string | null }) {
   if (!izin) return <span className="text-xs text-green-700 font-semibold">Çalışıldı</span>;
   const map: Record<string, string>    = { yillik: 'Yıllık İzin', hastalik: 'Hastalık', ucretsiz: 'Ücretsiz', resmi: 'Resmi Tatil' };
   const colors: Record<string, string> = { yillik: 'text-blue-700', hastalik: 'text-red-600', ucretsiz: 'text-orange-600', resmi: 'text-purple-700' };
-  return <span className={`text-xs font-semibold ${colors[izin] ?? 'text-gray-500'}`}>{map[izin] ?? izin}</span>;
+  return <span className={`text-xs font-semibold ${colors[izin] ?? 'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>{map[izin] ?? izin}</span>;
 }
 
 export function StatCard({ label, value, sub, color, icon: Icon }: {
@@ -54,21 +54,21 @@ export function StatCard({ label, value, sub, color, icon: Icon }: {
   const colors: Record<string, string> = {
     green:  'bg-green-50 text-green-600',
     red:    'bg-red-50 text-red-600',
-    blue:   'bg-blue-50 text-blue-600',
+    blue:   'bg-blue-50 dark:bg-blue-900/30 text-blue-600',
     purple: 'bg-purple-50 text-purple-600',
     amber:  'bg-amber-50 text-amber-600',
     indigo: 'bg-indigo-50 text-indigo-600',
   };
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{label}</span>
+        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">{label}</span>
         <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${colors[color] ?? colors.blue}`}>
           <Icon className="w-4 h-4" />
         </div>
       </div>
-      <p className="text-2xl font-black text-gray-900">{value}</p>
-      {sub && <p className="text-xs text-gray-500 mt-1">{sub}</p>}
+      <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
+      {sub && <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{sub}</p>}
     </div>
   );
 }

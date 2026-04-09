@@ -172,7 +172,7 @@ function BarChart({ labels, values }: { labels: string[]; values: number[] }) {
               className={`w-full rounded-t-lg transition-all duration-500 ease-out ${isHigh ? 'bg-gradient-to-t from-blue-700 to-blue-500' : 'bg-gradient-to-t from-blue-400 to-blue-300'}`}
               style={{ height: heightPct > 0 ? `${heightPct}%` : '4px', opacity: heightPct > 0 ? 1 : 0.3 }}
             />
-            <span className="text-[9px] text-gray-400 font-medium leading-none truncate w-full text-center">{label}</span>
+            <span className="text-[9px] text-gray-400 dark:text-gray-500 font-medium leading-none truncate w-full text-center">{label}</span>
           </div>
         );
       })}
@@ -184,10 +184,10 @@ function BarChart({ labels, values }: { labels: string[]; values: number[] }) {
 
 function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="flex flex-col gap-3 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+    <div className="flex flex-col gap-3 bg-white border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
       <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">{icon}</div>
-      <p className="text-sm text-gray-400 font-medium">{label}</p>
-      <p className="text-2xl font-black text-gray-900">{value}</p>
+      <p className="text-sm text-gray-400 dark:text-gray-500 font-medium">{label}</p>
+      <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
     </div>
   );
 }
@@ -227,9 +227,9 @@ export default function DetayliRaporlamaPage() {
   }, [history, hasData]);
 
   const STATUS_STYLES = {
-    'Tamamlandı': 'bg-blue-50 text-blue-700',
+    'Tamamlandı': 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
     'İşleniyor':  'bg-amber-50 text-amber-600',
-    'Bekliyor':   'bg-gray-100 text-gray-500',
+    'Bekliyor':   'bg-gray-100 text-gray-500 dark:text-gray-400 dark:text-gray-500',
   };
 
   function handleDownload() {
@@ -255,7 +255,7 @@ export default function DetayliRaporlamaPage() {
   }
 
   return (
-    <AuthGuard><div className="min-h-screen bg-white">
+    <AuthGuard><div className="min-h-screen bg-white dark:bg-gray-950">
       <Navbar />
 
       {/* Hero */}
@@ -264,10 +264,10 @@ export default function DetayliRaporlamaPage() {
           <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
             <BarChart3 size={15} /> Özellik
           </span>
-          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 mb-5 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-5 leading-tight">
             Detaylı <span className="text-blue-600">Raporlama</span>
           </h1>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 max-w-2xl mx-auto leading-relaxed">
             Kargo operasyonlarınızı gerçek zamanlı verilerle takip edin.
             {hasData ? ` ${history.length} adet optimizasyon kaydınız analiz ediliyor.` : ' Veriler optimizasyon geçmişinizden otomatik alınır.'}
           </p>
@@ -290,19 +290,19 @@ export default function DetayliRaporlamaPage() {
 
           {/* Period selector */}
           <div className="flex items-center gap-3 mb-8 flex-wrap">
-            <div className="flex items-center gap-1.5 text-sm text-gray-400 font-medium">
+            <div className="flex items-center gap-1.5 text-sm text-gray-400 dark:text-gray-500 font-medium">
               <Calendar size={15} /> Dönem:
             </div>
-            <div className="flex bg-gray-100 rounded-xl p-1 gap-1">
+            <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 gap-1">
               {periods.map((p) => (
                 <button key={p} onClick={() => setPeriod(p)}
-                  className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${period === p ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-500 hover:text-gray-800'}`}>
+                  className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${period === p ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-500 hover:text-gray-800 dark:hover:text-white dark:text-gray-100'}`}>
                   {p}
                 </button>
               ))}
             </div>
             {hasData && (
-              <span className="text-xs text-gray-400 bg-gray-50 border border-gray-100 px-3 py-1 rounded-full">
+              <span className="text-xs text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-800 px-3 py-1 rounded-full">
                 {history.length} optimizasyon · gerçek veri
               </span>
             )}
@@ -318,12 +318,12 @@ export default function DetayliRaporlamaPage() {
           </div>
 
           {/* Bar chart */}
-          <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-8">
+          <div className="bg-white border border-gray-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-bold text-gray-900">
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">
                 {hasData ? 'Doluluk Oranı Trendi' : 'Verimlilik Grafiği'}
               </h2>
-              <span className="text-xs text-gray-400 font-medium bg-gray-50 px-3 py-1 rounded-full">{period}</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 font-medium bg-gray-50 px-3 py-1 rounded-full">{period}</span>
             </div>
             <div className="flex gap-3">
               <div className="flex flex-col justify-between text-[10px] text-gray-300 font-medium pb-6 pt-2 select-none">
@@ -368,15 +368,15 @@ export default function DetayliRaporlamaPage() {
           )}
 
           {/* Reports table */}
-          <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden mb-8">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h2 className="text-base font-bold text-gray-900">
+          <div className="bg-white border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden mb-8">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">
                 {hasData ? 'Optimizasyon Geçmişi' : 'Son Raporlar'}
               </h2>
               <button onClick={handleDownload} disabled={downloading}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  downloaded ? 'bg-blue-50 text-blue-700'
-                  : downloading ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  downloaded ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
+                  : downloading ? 'bg-gray-100 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                   : 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm'}`}>
                 <Download size={15} />
                 {downloaded ? 'İndirildi ✓' : downloading ? 'Hazırlanıyor...' : hasData ? 'CSV İndir' : 'PDF İndir'}
@@ -387,16 +387,16 @@ export default function DetayliRaporlamaPage() {
                 <thead>
                   <tr className="bg-gray-50 text-left">
                     {['Rapor / Optimizasyon','Tarih','Verimlilik','Durum'].map((h) => (
-                      <th key={h} className="px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">{h}</th>
+                      <th key={h} className="px-6 py-3 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {reportRows.map((row, i) => (
-                    <tr key={i} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 font-medium text-gray-800">{row.name}</td>
-                      <td className="px-6 py-4 text-gray-400 text-xs font-mono">{row.date}</td>
-                      <td className="px-6 py-4 font-semibold text-gray-700">
+                    <tr key={i} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="px-6 py-4 font-medium text-gray-800 dark:text-gray-100">{row.name}</td>
+                      <td className="px-6 py-4 text-gray-400 dark:text-gray-500 text-xs font-mono">{row.date}</td>
+                      <td className="px-6 py-4 font-semibold text-gray-700 dark:text-gray-200">
                         {row.efficiency !== '—' ? (
                           <span className={`${parseInt(row.efficiency) >= 80 ? 'text-green-600' : parseInt(row.efficiency) >= 60 ? 'text-blue-600' : 'text-orange-500'}`}>
                             {row.efficiency}
@@ -424,8 +424,8 @@ export default function DetayliRaporlamaPage() {
               <div key={item.label} className="flex items-start gap-3 bg-blue-50 rounded-2xl px-5 py-4 flex-1">
                 <CheckCircle2 size={20} className="text-blue-600 mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-bold text-gray-900">{item.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+                  <p className="text-sm font-bold text-gray-900 dark:text-white">{item.label}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">{item.desc}</p>
                 </div>
               </div>
             ))}

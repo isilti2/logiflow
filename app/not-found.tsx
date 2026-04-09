@@ -20,7 +20,7 @@ export default function NotFound() {
 
         <h1 className="text-7xl font-black text-white mb-2">404</h1>
         <h2 className="text-xl font-bold text-gray-300 mb-3">Sayfa Bulunamadı</h2>
-        <p className="text-gray-500 text-sm leading-relaxed mb-8">
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed mb-8">
           Aradığınız sayfa taşınmış, silinmiş veya hiç var olmamış olabilir.
         </p>
 
@@ -33,7 +33,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 border border-gray-700 hover:border-gray-500 text-gray-400 hover:text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
+            className="inline-flex items-center justify-center gap-2 border border-gray-700 hover:border-gray-500 text-gray-400 dark:text-gray-500 hover:text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
           >
             Destek Al
           </Link>

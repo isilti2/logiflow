@@ -633,7 +633,7 @@ export default function KargoOptimizasyonPage() {
   }, [result]);
 
   return (
-    <AuthGuard><main className="min-h-screen bg-white">
+    <AuthGuard><main className="min-h-screen bg-white dark:bg-gray-950">
 
       {/* ── Fullscreen 3D overlay ── */}
       {fullscreen3D && result && (() => {
@@ -643,7 +643,7 @@ export default function KargoOptimizasyonPage() {
             {/* Header */}
             <div className="flex items-center gap-3 px-5 py-3 bg-gray-900/80 border-b border-white/10 backdrop-blur-sm flex-wrap">
               <span className="text-white font-bold text-sm">3D Konteyner Görünümü</span>
-              <span className="text-gray-500 text-xs">— {PRESETS.find((p) => p.width === container.width && p.depth === container.depth)?.label ?? 'Özel'}</span>
+              <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">— {PRESETS.find((p) => p.width === container.width && p.depth === container.depth)?.label ?? 'Özel'}</span>
               <div className="flex flex-wrap gap-3 ml-2">
                 {placedSummary.map((s) => {
                   const c = COLORS[s.colorIdx % COLORS.length];
@@ -662,10 +662,10 @@ export default function KargoOptimizasyonPage() {
                 )}
               </div>
               <div className="ml-auto flex items-center gap-3">
-                <span className="hidden sm:block text-xs text-gray-500">Sol tık: döndür · Scroll: zoom · Sağ tık: taşı</span>
+                <span className="hidden sm:block text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">Sol tık: döndür · Scroll: zoom · Sağ tık: taşı</span>
                 <button
                   onClick={() => setFullscreen3D(false)}
-                  className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg transition-all"
+                  className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg transition-all"
                 >
                   <Minimize2 className="w-3.5 h-3.5" /> Küçült
                 </button>
@@ -682,7 +682,7 @@ export default function KargoOptimizasyonPage() {
               </ErrorBoundary>
             </div>
             {/* Stats footer */}
-            <div className="flex items-center justify-center gap-8 px-5 py-2.5 bg-gray-900/60 border-t border-white/10 text-xs text-gray-400">
+            <div className="flex items-center justify-center gap-8 px-5 py-2.5 bg-gray-900/60 border-t border-white/10 text-xs text-gray-400 dark:text-gray-500">
               <span>Doluluk: <strong className="text-white">{fillPct}%</strong></span>
               <span>Ağırlık: <strong className="text-white">{result.totalWeight.toFixed(1)} kg</strong> / {container.maxWeight} kg</span>
               <span>Paketlenen: <strong className="text-white">{fsPlaced.length}</strong> kutu</span>
@@ -697,21 +697,21 @@ export default function KargoOptimizasyonPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-8">
+          <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 mb-8">
             <Link href="/" className="hover:text-blue-600 transition-colors">Anasayfa</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-gray-600 font-medium">Kargo Optimizasyon</span>
+            <span className="text-gray-600 dark:text-gray-300 font-medium">Kargo Optimizasyon</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-6">
               <div className="w-8 h-1 bg-blue-600 rounded" />
-              <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight">
                 Kargo <span className="text-blue-600">Optimizasyon</span>
               </h1>
-              <p className="text-gray-500 text-lg leading-relaxed">
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-lg leading-relaxed">
                 Konteyner ve kamyon yüklemelerini saniyeler içinde hesaplayın. Gerçek 3D
                 bin-packing algoritması ile her kutu için optimal (x, y, z) pozisyonu bulunur,
                 doluluk maksimuma taşınır.
@@ -720,7 +720,7 @@ export default function KargoOptimizasyonPage() {
                 {['Süper Hızlı Sonuçlar', 'Gerçek 3D Bin-Packing', 'LIFO/FIFO Yükleme Sırası', 'Kırılgan & İstifleme Kuralları'].map((t) => (
                   <div key={t} className="flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0" />
-                    <span className="text-gray-700 font-medium">{t}</span>
+                    <span className="text-gray-700 dark:text-gray-200 font-medium">{t}</span>
                   </div>
                 ))}
               </div>
@@ -736,14 +736,14 @@ export default function KargoOptimizasyonPage() {
                 { icon: BarChart3, label: 'Ort. Doluluk Oranı',  value: '%91',   sub: 'konteyner verimliliği' },
                 { icon: Zap,      label: 'Hesaplama Süresi',    value: '<1s',   sub: 'gerçek zamanlı sonuç' },
               ].map(({ icon: Icon, label, value, sub }) => (
-                <div key={label} className="flex items-center gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div key={label} className="flex items-center gap-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                   <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400 font-medium">{label}</p>
-                    <p className="text-2xl font-black text-gray-900">{value}</p>
-                    <p className="text-xs text-gray-400">{sub}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 font-medium">{label}</p>
+                    <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">{sub}</p>
                   </div>
                 </div>
               ))}
@@ -753,20 +753,20 @@ export default function KargoOptimizasyonPage() {
       </section>
 
       {/* Optimizer */}
-      <section id="optimizer" className="py-16 bg-gray-50 border-t border-gray-100">
+      <section id="optimizer" className="py-16 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-black text-gray-900">
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white">
                 Kargo <span className="text-blue-600">Optimizörü</span>
               </h2>
-              <p className="text-gray-500 mt-1 text-sm">
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1 text-sm">
                 Konteyner seçin, kargo ekleyin, optimize edin.
               </p>
             </div>
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-700 border border-gray-200 rounded-xl px-3 py-2 bg-white transition-colors"
+              className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-700 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 bg-white dark:bg-gray-950 transition-colors"
             >
               <RotateCcw className="w-4 h-4" /> Sıfırla
             </button>
@@ -778,13 +778,13 @@ export default function KargoOptimizasyonPage() {
             <div className="flex flex-col gap-5">
 
               {/* Preset selector */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2 text-sm">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
+                <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-3 flex items-center gap-2 text-sm">
                   <Box className="w-4 h-4 text-blue-600" /> Konteyner Önayarı
                 </h3>
                 <select
                   onChange={applyPreset}
-                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+                  className="w-full border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
                 >
                   {PRESETS.map((p, i) => <option key={p.label} value={i}>{p.label}</option>)}
                 </select>
@@ -796,12 +796,12 @@ export default function KargoOptimizasyonPage() {
                     { field: 'maxWeight', label: 'Maks. Ağırlık (kg)' },
                   ] as { field: keyof ContainerDims; label: string }[]).map(({ field, label }) => (
                     <div key={field}>
-                      <label className="block text-xs font-semibold text-gray-400 mb-1">{label}</label>
+                      <label className="block text-xs font-semibold text-gray-400 dark:text-gray-500 mb-1">{label}</label>
                       <input
                         type="number" min={1}
                         value={container[field]}
                         onChange={(e) => handleContainerChange(field, e.target.value)}
-                        className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   ))}
@@ -809,9 +809,9 @@ export default function KargoOptimizasyonPage() {
               </div>
 
               {/* Cargo list */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bold text-gray-800 flex items-center gap-2 text-sm">
+                  <h3 className="font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2 text-sm">
                     <Package className="w-4 h-4 text-blue-600" /> Kargo Kalemleri
                   </h3>
                   <div className="flex items-center gap-2">
@@ -863,12 +863,12 @@ export default function KargoOptimizasyonPage() {
                         {templates.map((t) => (
                           <div key={t.id} className="flex items-center gap-2 bg-white border border-amber-100 rounded-lg px-3 py-2">
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs font-semibold text-gray-800 truncate">{t.name}</p>
-                              <p className="text-[10px] text-gray-400">{t.items.length} kalem · {t.savedAt}</p>
+                              <p className="text-xs font-semibold text-gray-800 dark:text-gray-100 truncate">{t.name}</p>
+                              <p className="text-[10px] text-gray-400 dark:text-gray-500">{t.items.length} kalem · {t.savedAt}</p>
                             </div>
                             <button
                               onClick={() => handleLoadTemplate(t)}
-                              className="text-xs font-semibold text-blue-600 hover:text-blue-700 px-2 py-1 rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap"
+                              className="text-xs font-semibold text-blue-600 hover:text-blue-700 px-2 py-1 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors whitespace-nowrap"
                             >
                               Yükle
                             </button>
@@ -888,7 +888,7 @@ export default function KargoOptimizasyonPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs">
                     <thead>
-                      <tr className="border-b border-gray-100 text-gray-400">
+                      <tr className="border-b border-gray-100 dark:border-gray-800 text-gray-400 dark:text-gray-500">
                         <th className="text-left pb-2 pr-2 font-semibold">Ad</th>
                         <th className="text-left pb-2 pr-2 font-semibold">U×G×Y (cm)</th>
                         <th className="text-center pb-2 pr-2 font-semibold">Adet</th>
@@ -906,7 +906,7 @@ export default function KargoOptimizasyonPage() {
                         const isEditing = editId === item.id;
                         const d = isEditing ? editDraft! : item;
                         return (
-                          <tr key={item.id} className={`border-b border-gray-50 transition-colors ${isEditing ? 'bg-blue-50/40' : 'hover:bg-gray-50'}`}>
+                          <tr key={item.id} className={`border-b border-gray-50 transition-colors ${isEditing ? 'bg-blue-50/40' : 'hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
                             <td className="py-1.5 pr-2">
                               {isEditing ? (
                                 <input value={d.name} onChange={(e) => setEditDraft((p) => p ? { ...p, name: e.target.value } : p)}
@@ -914,7 +914,7 @@ export default function KargoOptimizasyonPage() {
                               ) : (
                                 <span className="flex items-center gap-1.5">
                                   <span className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: c.bg }} />
-                                  <span className="font-medium text-gray-800">{item.name}</span>
+                                  <span className="font-medium text-gray-800 dark:text-gray-100">{item.name}</span>
                                 </span>
                               )}
                             </td>
@@ -928,7 +928,7 @@ export default function KargoOptimizasyonPage() {
                                   ))}
                                 </div>
                               ) : (
-                                <span className="text-gray-500 font-mono">{item.depth}×{item.width}×{item.height}</span>
+                                <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-mono">{item.depth}×{item.width}×{item.height}</span>
                               )}
                             </td>
                             <td className="py-1.5 pr-2 text-center">
@@ -946,7 +946,7 @@ export default function KargoOptimizasyonPage() {
                                   onChange={(e) => setEditDraft((p) => p ? { ...p, weight: parseFloat(e.target.value) || 0 } : p)}
                                   className="w-14 border border-blue-300 rounded-lg px-1.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500" />
                               ) : (
-                                <span className="text-gray-600">{item.weight}</span>
+                                <span className="text-gray-600 dark:text-gray-300">{item.weight}</span>
                               )}
                             </td>
                             <td className="py-1.5 pr-2 text-center">
@@ -957,7 +957,7 @@ export default function KargoOptimizasyonPage() {
                                     className="accent-blue-600 w-3 h-3" />
                                 </label>
                               ) : (
-                                <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${item.canRotate ? 'bg-blue-50 text-blue-700' : 'bg-gray-100 text-gray-400'}`}>
+                                <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${item.canRotate ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : 'bg-gray-100 text-gray-400 dark:text-gray-500'}`}>
                                   {item.canRotate ? 'Var' : 'Yok'}
                                 </span>
                               )}
@@ -1002,9 +1002,9 @@ export default function KargoOptimizasyonPage() {
                                 </select>
                               ) : (
                                 <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
-                                  item.priority === 'first-out' ? 'bg-blue-50 text-blue-700' :
+                                  item.priority === 'first-out' ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
                                   item.priority === 'last-out'  ? 'bg-purple-50 text-purple-600' :
-                                  'bg-gray-50 text-gray-400'
+                                  'bg-gray-50 text-gray-400 dark:text-gray-500'
                                 }`}>
                                   {item.priority === 'first-out' ? 'Önce' : item.priority === 'last-out' ? 'Sonra' : '—'}
                                 </span>
@@ -1016,7 +1016,7 @@ export default function KargoOptimizasyonPage() {
                                   <button onClick={handleEditSave} className="text-green-500 hover:text-green-600 transition-colors" title="Kaydet">
                                     <Plus className="w-3.5 h-3.5 rotate-45" />
                                   </button>
-                                  <button onClick={handleEditCancel} className="text-gray-300 hover:text-gray-500 transition-colors" title="İptal">
+                                  <button onClick={handleEditCancel} className="text-gray-300 hover:text-gray-500 dark:text-gray-400 dark:text-gray-500 transition-colors" title="İptal">
                                     <RotateCcw className="w-3 h-3" />
                                   </button>
                                 </div>
@@ -1039,26 +1039,26 @@ export default function KargoOptimizasyonPage() {
                 </div>
 
                 {/* Add item */}
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Yeni Kalem Ekle</p>
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+                  <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">Yeni Kalem Ekle</p>
 
                   {/* Row 1: Ad + Boyutlar */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                     {/* Ad */}
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Ürün Adı</label>
+                      <label className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Ürün Adı</label>
                       <input
                         type="text"
                         placeholder="ör. Koli A, Palet B…"
                         value={newItem.name}
                         onChange={(e) => setNewItem((p) => ({ ...p, name: e.target.value }))}
-                        className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
 
                     {/* Boyutlar: Uzunluk × Genişlik × Yükseklik */}
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">
+                      <label className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">
                         Boyutlar <span className="font-normal normal-case text-gray-300">(Uzunluk × Genişlik × Yükseklik — cm)</span>
                       </label>
                       <div className="flex items-center gap-1.5">
@@ -1069,12 +1069,12 @@ export default function KargoOptimizasyonPage() {
                         ] as { field: 'width' | 'height' | 'depth'; ph: string }[]).map(({ field, ph }, i) => (
                           <>
                             <div key={field} className="flex flex-col gap-0.5 flex-1">
-                              <span className="text-[10px] text-gray-400 text-center">{ph}</span>
+                              <span className="text-[10px] text-gray-400 dark:text-gray-500 text-center">{ph}</span>
                               <input
                                 type="number" min={1}
                                 value={newItem[field]}
                                 onChange={(e) => setNewItem((p) => ({ ...p, [field]: parseInt(e.target.value) || 1 }))}
-                                className="w-full border border-gray-200 rounded-lg px-2 py-2 text-xs text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-2 text-xs text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
                               />
                             </div>
                             {i < 2 && <span key={`sep-${i}`} className="text-gray-300 text-sm font-bold mt-4">×</span>}
@@ -1087,57 +1087,57 @@ export default function KargoOptimizasyonPage() {
                   {/* Row 2: Adet + Ağırlık */}
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Adet</label>
+                      <label className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Adet</label>
                       <input
                         type="number" min={1}
                         value={newItem.qty}
                         onChange={(e) => setNewItem((p) => ({ ...p, qty: parseInt(e.target.value) || 1 }))}
-                        className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Ağırlık <span className="font-normal">(kg / adet)</span></label>
+                      <label className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Ağırlık <span className="font-normal">(kg / adet)</span></label>
                       <input
                         type="number" min={0} step="0.1"
                         value={newItem.weight}
                         onChange={(e) => setNewItem((p) => ({ ...p, weight: parseFloat(e.target.value) || 0 }))}
-                        className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
 
                   {/* Row 3: Özellikler */}
                   <div className="flex flex-col gap-1 mb-3">
-                    <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Özellikler</label>
-                    <div className="flex flex-wrap gap-3 bg-gray-50 border border-gray-100 rounded-lg px-3 py-2.5">
-                      <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer" title="Kutu farklı yönlerde yerleştirilebilir">
+                    <label className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Özellikler</label>
+                    <div className="flex flex-wrap gap-3 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-800 rounded-lg px-3 py-2.5">
+                      <label className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 cursor-pointer" title="Kutu farklı yönlerde yerleştirilebilir">
                         <input type="checkbox" checked={newItem.canRotate}
                           onChange={(e) => setNewItem((p) => ({ ...p, canRotate: e.target.checked }))}
                           className="accent-blue-600 w-3.5 h-3.5" />
-                        <span>Rotasyon <span className="text-gray-400">(yön değiştirilebilir)</span></span>
+                        <span>Rotasyon <span className="text-gray-400 dark:text-gray-500">(yön değiştirilebilir)</span></span>
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer" title="Bu kutunun üstüne başka kutu konulabilir">
+                      <label className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 cursor-pointer" title="Bu kutunun üstüne başka kutu konulabilir">
                         <input type="checkbox" checked={newItem.stackable}
                           onChange={(e) => setNewItem((p) => ({ ...p, stackable: e.target.checked }))}
                           className="accent-green-600 w-3.5 h-3.5" />
-                        <span>İstifleme <span className="text-gray-400">(üste kutu konabilir)</span></span>
+                        <span>İstifleme <span className="text-gray-400 dark:text-gray-500">(üste kutu konabilir)</span></span>
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer" title="Kırılgan — en üste yerleştirilir">
+                      <label className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 cursor-pointer" title="Kırılgan — en üste yerleştirilir">
                         <input type="checkbox" checked={newItem.fragile}
                           onChange={(e) => setNewItem((p) => ({ ...p, fragile: e.target.checked }))}
                           className="accent-amber-500 w-3.5 h-3.5" />
-                        <span>Kırılgan <span className="text-gray-400">(en üste yerleştirilir)</span></span>
+                        <span>Kırılgan <span className="text-gray-400 dark:text-gray-500">(en üste yerleştirilir)</span></span>
                       </label>
                     </div>
                   </div>
 
                   {/* Row 4: Çıkış sırası */}
                   <div className="flex flex-col gap-1 mb-4">
-                    <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Çıkış Sırası</label>
+                    <label className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">Çıkış Sırası</label>
                     <select
                       value={newItem.priority}
                       onChange={(e) => setNewItem((p) => ({ ...p, priority: e.target.value as LoadPriority }))}
-                      className="border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700"
+                      className="border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 dark:text-gray-200"
                     >
                       <option value="first-out">Önce Çıkar — LIFO (kapı tarafına yakın yerleşir)</option>
                       <option value="any">Herhangi — hacim bazlı optimal yerleşim</option>
@@ -1154,7 +1154,7 @@ export default function KargoOptimizasyonPage() {
                     >
                       <Plus className="w-4 h-4" /> Kalem Ekle
                     </button>
-                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-500 border border-gray-200 hover:border-blue-400 hover:text-blue-600 px-4 py-2.5 rounded-xl transition-colors cursor-pointer">
+                    <label className="flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 hover:border-blue-400 hover:text-blue-600 px-4 py-2.5 rounded-xl transition-colors cursor-pointer">
                       <input type="file" accept=".csv" className="hidden" onChange={handleImportCSV} />
                       CSV İçe Aktar
                     </label>
@@ -1169,16 +1169,16 @@ export default function KargoOptimizasyonPage() {
                 const wPct       = Math.min(110, Math.round((totalW / container.maxWeight) * 100));
                 const over       = totalW > container.maxWeight;
                 return (
-                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
+                  <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm px-5 py-4">
                     <div className="flex items-center justify-between text-xs mb-2">
-                      <span className="font-semibold text-gray-500">
-                        {cargoItems.length} tip · <span className="text-gray-700 font-bold">{totalUnits} adet</span>
+                      <span className="font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">
+                        {cargoItems.length} tip · <span className="text-gray-700 dark:text-gray-200 font-bold">{totalUnits} adet</span>
                       </span>
-                      <span className={`font-semibold ${over ? 'text-red-500' : 'text-gray-600'}`}>
+                      <span className={`font-semibold ${over ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'}`}>
                         {totalW.toFixed(1)} / {container.maxWeight} kg
                       </span>
                     </div>
-                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${over ? 'bg-red-400' : wPct > 80 ? 'bg-amber-400' : 'bg-blue-500'}`}
                         style={{ width: `${Math.min(100, wPct)}%` }}
@@ -1226,38 +1226,38 @@ export default function KargoOptimizasyonPage() {
                       { label: 'Sığmayan Tip',     value: result.unplacedItems.length, color: result.unplacedItems.length > 0 ? 'orange' : 'teal', sub: result.unplacedItems.length > 0 ? 'uyarı: alan dolu' : 'tüm tipler yerleşti' },
                     ].map(({ label, value, color, sub }) => (
                       <div key={label} className={`rounded-2xl p-4 border bg-${color}-50 border-${color}-100`}>
-                        <p className="text-xs text-gray-500 font-semibold">{label}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-semibold">{label}</p>
                         <p className={`text-2xl font-black text-${color}-600`}>{value}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{sub}</p>
                       </div>
                     ))}
                   </div>
 
                   {/* Fill bar */}
-                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+                  <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-gray-500">Hacim Doluluk</span>
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Hacim Doluluk</span>
                       <span className="text-xs font-bold text-blue-700">{fillPct}%</span>
                     </div>
-                    <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-blue-500 to-blue-700 rounded-full transition-all duration-700"
                         style={{ width: `${fillPct}%` }}
                       />
                     </div>
                     <div className="flex items-center justify-between mb-2 mt-3">
-                      <span className="text-xs font-semibold text-gray-500">Ağırlık Yükü</span>
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Ağırlık Yükü</span>
                       <span className={`text-xs font-bold ${weightPct > 90 ? 'text-red-500' : 'text-blue-600'}`}>{weightPct}%</span>
                     </div>
-                    <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-700 ${weightPct > 90 ? 'bg-gradient-to-r from-orange-400 to-red-500' : 'bg-gradient-to-r from-blue-400 to-blue-600'}`}
                         style={{ width: `${weightPct}%` }}
                       />
                     </div>
                     {cog && activeContainer === 1 && (
-                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-                        <span className="text-xs font-semibold text-gray-500">Ağırlık Merkezi (CoG)</span>
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100 dark:border-gray-800">
+                        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Ağırlık Merkezi (CoG)</span>
                         <span className="text-xs font-mono font-bold text-amber-600">
                           x:{cog.x.toFixed(0)} y:{cog.y.toFixed(0)} z:{cog.z.toFixed(0)} cm
                         </span>
@@ -1290,16 +1290,16 @@ export default function KargoOptimizasyonPage() {
                     const EU_KINGPIN_MAX = 12000;  // beşinci teker kg
 
                     return (
-                      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-4">
+                      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 space-y-4">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-sm font-bold text-gray-900">Ağırlık Dağılımı</h3>
-                          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">AB Direktifi 96/53/EC</span>
+                          <h3 className="text-sm font-bold text-gray-900 dark:text-white">Ağırlık Dağılımı</h3>
+                          <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">AB Direktifi 96/53/EC</span>
                         </div>
 
                         {/* Ön / Arka */}
                         <div>
                           <div className="flex items-center justify-between text-xs mb-1.5">
-                            <span className="font-semibold text-gray-500">Ön – Arka Dağılımı</span>
+                            <span className="font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Ön – Arka Dağılımı</span>
                             <span className={`font-bold ${frontRearOk ? 'text-emerald-600' : 'text-amber-500'}`}>
                               {frontRearOk ? '✓ Dengeli' : frontPct > 60 ? '⚠ Öne ağırlıklı' : '⚠ Arkaya ağırlıklı'}
                             </span>
@@ -1312,7 +1312,7 @@ export default function KargoOptimizasyonPage() {
                               {rearPct >= 15 && `Arka %${rearPct}`}
                             </div>
                           </div>
-                          <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                          <div className="flex justify-between text-[10px] text-gray-400 dark:text-gray-500 mt-1">
                             <span>{fw.toFixed(0)} kg</span>
                             <span className="text-gray-300">|  İdeal: %40-60  |</span>
                             <span>{rw.toFixed(0)} kg</span>
@@ -1322,7 +1322,7 @@ export default function KargoOptimizasyonPage() {
                         {/* Sol / Sağ */}
                         <div>
                           <div className="flex items-center justify-between text-xs mb-1.5">
-                            <span className="font-semibold text-gray-500">Sol – Sağ Dengesi</span>
+                            <span className="font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Sol – Sağ Dengesi</span>
                             <span className={`font-bold ${lateralOk ? 'text-emerald-600' : 'text-amber-500'}`}>
                               {lateralOk ? '✓ Dengeli' : leftPct > 60 ? '⚠ Sola yatık' : '⚠ Sağa yatık'}
                             </span>
@@ -1339,21 +1339,21 @@ export default function KargoOptimizasyonPage() {
 
                         {/* Aks yükleri */}
                         {kingpinLoad !== null && trailerAxleLoad !== null && (
-                          <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100">
+                          <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100 dark:border-gray-800">
                             <div className={`rounded-xl p-3 ${kingpinLoad > EU_KINGPIN_MAX ? 'bg-red-50 border border-red-100' : 'bg-gray-50'}`}>
-                              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-0.5">Beşinci Teker Yükü</p>
-                              <p className={`text-lg font-black ${kingpinLoad > EU_KINGPIN_MAX ? 'text-red-600' : 'text-gray-800'}`}>
+                              <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-0.5">Beşinci Teker Yükü</p>
+                              <p className={`text-lg font-black ${kingpinLoad > EU_KINGPIN_MAX ? 'text-red-600' : 'text-gray-800 dark:text-gray-100'}`}>
                                 {(kingpinLoad / 1000).toFixed(1)} t
                               </p>
-                              <p className="text-[10px] text-gray-400">limit: {EU_KINGPIN_MAX / 1000} t</p>
+                              <p className="text-[10px] text-gray-400 dark:text-gray-500">limit: {EU_KINGPIN_MAX / 1000} t</p>
                               {kingpinLoad > EU_KINGPIN_MAX && <p className="text-[10px] text-red-500 font-semibold mt-0.5">⚠ Limit aşıldı</p>}
                             </div>
                             <div className={`rounded-xl p-3 ${trailerAxleLoad > EU_TRAILER_AXL ? 'bg-red-50 border border-red-100' : 'bg-gray-50'}`}>
-                              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-0.5">Dorse Aks Yükü</p>
-                              <p className={`text-lg font-black ${trailerAxleLoad > EU_TRAILER_AXL ? 'text-red-600' : 'text-gray-800'}`}>
+                              <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-0.5">Dorse Aks Yükü</p>
+                              <p className={`text-lg font-black ${trailerAxleLoad > EU_TRAILER_AXL ? 'text-red-600' : 'text-gray-800 dark:text-gray-100'}`}>
                                 {(trailerAxleLoad / 1000).toFixed(1)} t
                               </p>
-                              <p className="text-[10px] text-gray-400">limit: {EU_TRAILER_AXL / 1000} t (tandem)</p>
+                              <p className="text-[10px] text-gray-400 dark:text-gray-500">limit: {EU_TRAILER_AXL / 1000} t (tandem)</p>
                               {trailerAxleLoad > EU_TRAILER_AXL && <p className="text-[10px] text-red-500 font-semibold mt-0.5">⚠ Limit aşıldı</p>}
                             </div>
                           </div>
@@ -1361,8 +1361,8 @@ export default function KargoOptimizasyonPage() {
 
                         {/* CoG konumu */}
                         {cogZPct !== null && (
-                          <div className="flex items-center justify-between text-xs pt-1 border-t border-gray-100">
-                            <span className="font-semibold text-gray-500">Ağırlık Merkezi (Z ekseni)</span>
+                          <div className="flex items-center justify-between text-xs pt-1 border-t border-gray-100 dark:border-gray-800">
+                            <span className="font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Ağırlık Merkezi (Z ekseni)</span>
                             <span className={`font-bold ${cogOk ? 'text-emerald-600' : 'text-amber-500'}`}>
                               %{cogZPct} — {cogOk ? '✓ İdeal aralıkta' : '⚠ Aralık dışı'}
                             </span>
@@ -1494,11 +1494,11 @@ export default function KargoOptimizasyonPage() {
                     };
 
                     return (
-                      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
+                      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 space-y-3">
                         <div className="flex items-center gap-2">
                           <Lightbulb className="w-4 h-4 text-amber-500" />
-                          <h3 className="text-sm font-bold text-gray-900">Akıllı Öneriler</h3>
-                          <span className="ml-auto text-[10px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                          <h3 className="text-sm font-bold text-gray-900 dark:text-white">Akıllı Öneriler</h3>
+                          <span className="ml-auto text-[10px] font-semibold text-gray-400 dark:text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
                             {oneriler.length} öneri
                           </span>
                         </div>
@@ -1512,9 +1512,9 @@ export default function KargoOptimizasyonPage() {
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 flex-wrap mb-1">
                                       <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${r.badge}`}>{r.label}</span>
-                                      <p className="text-xs font-bold text-gray-900">{o.baslik}</p>
+                                      <p className="text-xs font-bold text-gray-900 dark:text-white">{o.baslik}</p>
                                     </div>
-                                    <p className="text-xs text-gray-600 leading-relaxed">{o.aciklama}</p>
+                                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{o.aciklama}</p>
                                   </div>
                                 </div>
                               </div>
@@ -1557,13 +1557,13 @@ export default function KargoOptimizasyonPage() {
                   )}
 
                   {/* Tab: 3D / Table */}
-                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                    <div className="flex border-b border-gray-100">
+                  <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+                    <div className="flex border-b border-gray-100 dark:border-gray-800">
                       {(['3d', 'table'] as const).map((tab) => (
                         <button
                           key={tab}
                           onClick={() => setActiveTab(tab)}
-                          className={`flex-1 py-3 text-sm font-semibold transition-colors ${activeTab === tab ? 'bg-blue-50 text-blue-800 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                          className={`flex-1 py-3 text-sm font-semibold transition-colors ${activeTab === tab ? 'bg-blue-50 text-blue-800 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700 dark:text-gray-200'}`}
                         >
                           {tab === '3d' ? '3D Görünüm' : 'Yerleşim Tablosu'}
                         </button>
@@ -1592,7 +1592,7 @@ export default function KargoOptimizasyonPage() {
                           </div>
 
                           {/* Controls hint */}
-                          <p className="text-center text-xs text-gray-400 mt-2">
+                          <p className="text-center text-xs text-gray-400 dark:text-gray-500 mt-2">
                             Sol tık: döndür · Kaydır: zoom · Sağ tık: taşı
                           </p>
 
@@ -1601,7 +1601,7 @@ export default function KargoOptimizasyonPage() {
                             {placedSummary.map((s) => {
                               const c = COLORS[s.colorIdx % COLORS.length];
                               return (
-                                <span key={s.name} className="flex items-center gap-1.5 text-xs text-gray-600 font-medium">
+                                <span key={s.name} className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 font-medium">
                                   <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: c.bg }} />
                                   {s.name} ×{s.count}
                                 </span>
@@ -1628,7 +1628,7 @@ export default function KargoOptimizasyonPage() {
                         <div className="overflow-x-auto">
                           <table className="w-full text-xs">
                             <thead>
-                              <tr className="border-b border-gray-100 text-gray-400 text-left">
+                              <tr className="border-b border-gray-100 dark:border-gray-800 text-gray-400 dark:text-gray-500 text-left">
                                 <th className="pb-2 pr-3 font-semibold">#</th>
                                 <th className="pb-2 pr-3 font-semibold">Ürün</th>
                                 <th className="pb-2 pr-3 font-semibold">X (cm)</th>
@@ -1641,18 +1641,18 @@ export default function KargoOptimizasyonPage() {
                               {result.placed.map((p, i) => {
                                 const c = COLORS[p.colorIdx % COLORS.length];
                                 return (
-                                  <tr key={p.uid} className="border-b border-gray-50 hover:bg-gray-50">
-                                    <td className="py-1.5 pr-3 text-gray-400">{i + 1}</td>
+                                  <tr key={p.uid} className="border-b border-gray-50 hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <td className="py-1.5 pr-3 text-gray-400 dark:text-gray-500">{i + 1}</td>
                                     <td className="py-1.5 pr-3">
                                       <span className="flex items-center gap-1.5">
                                         <span className="w-2 h-2 rounded-sm shrink-0" style={{ backgroundColor: c.bg }} />
-                                        <span className="font-medium text-gray-700">{p.name}</span>
+                                        <span className="font-medium text-gray-700 dark:text-gray-200">{p.name}</span>
                                       </span>
                                     </td>
-                                    <td className="py-1.5 pr-3 font-mono text-gray-600">{p.x}</td>
-                                    <td className="py-1.5 pr-3 font-mono text-gray-600">{p.y}</td>
-                                    <td className="py-1.5 pr-3 font-mono text-gray-600">{p.z}</td>
-                                    <td className="py-1.5 font-mono text-gray-500">{p.w}×{p.h}×{p.d}</td>
+                                    <td className="py-1.5 pr-3 font-mono text-gray-600 dark:text-gray-300">{p.x}</td>
+                                    <td className="py-1.5 pr-3 font-mono text-gray-600 dark:text-gray-300">{p.y}</td>
+                                    <td className="py-1.5 pr-3 font-mono text-gray-600 dark:text-gray-300">{p.z}</td>
+                                    <td className="py-1.5 font-mono text-gray-500 dark:text-gray-400 dark:text-gray-500">{p.w}×{p.h}×{p.d}</td>
                                   </tr>
                                 );
                               })}
@@ -1676,7 +1676,7 @@ export default function KargoOptimizasyonPage() {
                     </div>
                     <button
                       onClick={() => window.print()}
-                      className="flex flex-col items-center justify-center gap-2 bg-white border border-gray-200 rounded-2xl px-5 py-4 text-gray-500 hover:text-blue-700 hover:border-blue-200 transition-colors text-xs font-semibold"
+                      className="flex flex-col items-center justify-center gap-2 bg-white border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-4 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-700 hover:border-blue-200 transition-colors text-xs font-semibold"
                     >
                       <Printer className="w-5 h-5" />
                       Planı Yazdır
@@ -1684,12 +1684,12 @@ export default function KargoOptimizasyonPage() {
                   </div>
                 </>
               ) : (
-                <div className="flex-1 flex flex-col items-center justify-center bg-white rounded-2xl border border-dashed border-gray-200 p-16 text-center min-h-96">
+                <div className="flex-1 flex flex-col items-center justify-center bg-white rounded-2xl border border-dashed border-gray-200 dark:border-gray-700 p-16 text-center min-h-96">
                   <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-4">
                     <Box className="w-8 h-8 text-blue-300" />
                   </div>
-                  <p className="text-gray-500 font-medium">Konteyner ve kargo bilgilerini doldurun,</p>
-                  <p className="text-gray-400 text-sm mt-1">ardından <span className="font-bold text-blue-600">"Optimize Et"</span> butonuna tıklayın.</p>
+                  <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">Konteyner ve kargo bilgilerini doldurun,</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">ardından <span className="font-bold text-blue-600">"Optimize Et"</span> butonuna tıklayın.</p>
                 </div>
               )}
             </div>
@@ -1699,19 +1699,19 @@ export default function KargoOptimizasyonPage() {
 
       {/* Optimization History */}
       {optHistory.length > 0 && (
-        <section className="py-12 bg-white border-t border-gray-100">
+        <section className="py-12 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-black text-gray-900">
+              <h2 className="text-xl font-black text-gray-900 dark:text-white">
                 Optimizasyon <span className="text-blue-600">Geçmişi</span>
               </h2>
-              <span className="text-xs font-semibold text-gray-400 bg-gray-100 px-3 py-1 rounded-full">Son {Math.min(optHistory.length, 10)} çalışma</span>
+              <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Son {Math.min(optHistory.length, 10)} çalışma</span>
             </div>
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm min-w-[560px]">
                   <thead>
-                    <tr className="border-b border-gray-100 bg-gray-50 text-gray-400 text-xs uppercase tracking-wider">
+                    <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50 text-gray-400 dark:text-gray-500 text-xs uppercase tracking-wider">
                       <th className="text-left px-5 py-3 font-semibold">Tarih</th>
                       <th className="text-left px-5 py-3 font-semibold">Konteyner</th>
                       <th className="text-center px-5 py-3 font-semibold">Doluluk</th>
@@ -1720,20 +1720,20 @@ export default function KargoOptimizasyonPage() {
                       <th className="w-24 px-5 py-3" />
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                     {optHistory.slice(0, 10).map((rec, i) => (
-                      <tr key={i} className="hover:bg-blue-50/30 transition-colors group">
-                        <td className="px-5 py-3 text-gray-400 text-xs font-mono">{rec.date}</td>
-                        <td className="px-5 py-3 font-medium text-gray-700">{rec.containerLabel}</td>
+                      <tr key={i} className="hover:bg-blue-50 dark:hover:bg-blue-900/30/30 transition-colors group">
+                        <td className="px-5 py-3 text-gray-400 dark:text-gray-500 text-xs font-mono">{rec.date}</td>
+                        <td className="px-5 py-3 font-medium text-gray-700 dark:text-gray-200">{rec.containerLabel}</td>
                         <td className="px-5 py-3 text-center">
                           <div className="flex items-center justify-center gap-2">
-                            <div className="w-20 h-2 bg-gray-100 rounded-full overflow-hidden">
+                            <div className="w-20 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                               <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full" style={{ width: `${rec.fillPct}%` }} />
                             </div>
                             <span className="text-xs font-bold text-blue-700">{rec.fillPct}%</span>
                           </div>
                         </td>
-                        <td className="px-5 py-3 text-center text-gray-600 font-medium">{rec.itemCount}</td>
+                        <td className="px-5 py-3 text-center text-gray-600 dark:text-gray-300 font-medium">{rec.itemCount}</td>
                         <td className="px-5 py-3 text-center">
                           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${rec.placedCount === rec.itemCount ? 'bg-green-50 text-green-700' : 'bg-orange-50 text-orange-700'}`}>
                             {rec.placedCount} / {rec.itemCount}
@@ -1760,13 +1760,13 @@ export default function KargoOptimizasyonPage() {
       )}
 
       {/* How it works */}
-      <section className="py-16 bg-white border-t border-gray-100">
+      <section className="py-16 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mb-3">
               Nasıl <span className="text-blue-600">Çalışır?</span>
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm">3 adımda optimal kargo planına ulaşın.</p>
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 max-w-xl mx-auto text-sm">3 adımda optimal kargo planına ulaşın.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -1774,15 +1774,15 @@ export default function KargoOptimizasyonPage() {
               { step: '02', icon: Package,  title: 'Kargoyu Listele',  desc: 'Her ürün tipini boyut, adet, ağırlık ve rotasyon izniyle ekleyin.' },
               { step: '03', icon: BarChart3, title: 'Planı İncele',     desc: '3D görünüm, yerleşim tablosu ve doluluk istatistiklerini alın.' },
             ].map(({ step, icon: Icon, title, desc }) => (
-              <div key={step} className="flex flex-col gap-4 bg-gray-50 rounded-2xl border border-gray-100 p-6">
+              <div key={step} className="flex flex-col gap-4 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3">
                   <span className="text-4xl font-black text-blue-100">{step}</span>
                   <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
                     <Icon className="w-5 h-5 text-white" />
                   </div>
                 </div>
-                <h3 className="font-bold text-gray-900">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white">{title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -1790,13 +1790,13 @@ export default function KargoOptimizasyonPage() {
       </section>
 
       {/* Feature highlights */}
-      <section className="py-16 bg-gray-50 border-t border-gray-100">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mb-3">
               Neden <span className="text-blue-600">LogiFlow?</span>
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm">
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 max-w-xl mx-auto text-sm">
               Sadece bir optimizasyon aracından fazlası — uçtan uca yük planlama platformu.
             </p>
           </div>
@@ -1845,11 +1845,11 @@ export default function KargoOptimizasyonPage() {
             ].map(({ icon, title, desc }) => (
               <div
                 key={title}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:border-blue-200 hover:shadow-md transition-all duration-200"
+                className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 hover:border-blue-200 hover:shadow-md transition-all duration-200"
               >
                 <div className="text-2xl mb-3">{icon}</div>
-                <h3 className="font-bold text-gray-900 text-sm mb-2">{title}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm mb-2">{title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -1863,7 +1863,7 @@ export default function KargoOptimizasyonPage() {
           <p className="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
             Optimizasyonu depo yönetimiyle birleştirerek uçtan uca lojistik verimliliği elde edin.
           </p>
-          <Link href="/depolama" className="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 font-bold px-8 py-4 rounded-2xl transition-colors shadow-sm">
+          <Link href="/depolama" className="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 font-bold px-8 py-4 rounded-2xl transition-colors shadow-sm">
             Uygulamaya Git <ChevronRight className="w-5 h-5" />
           </Link>
         </div>

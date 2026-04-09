@@ -97,29 +97,29 @@ export default function YukPlaniPaylasimi() {
   }
 
   return (
-    <AuthGuard><main className="min-h-screen bg-white">
+    <AuthGuard><main className="min-h-screen bg-white dark:bg-gray-950">
       <Navbar />
 
       {/* Hero */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-950 dark:bg-gray-950 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-10">
+          <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 mb-10">
             <Link href="/" className="hover:text-blue-600 transition-colors">
               Anasayfa
             </Link>
             <span>/</span>
-            <span className="text-gray-600 font-medium">Yük Planı Paylaşımı</span>
+            <span className="text-gray-600 dark:text-gray-300 font-medium">Yük Planı Paylaşımı</span>
           </div>
 
           {/* Hero Content */}
           <div className="max-w-2xl">
             <div className="inline-block w-8 h-1 bg-blue-600 rounded mb-6" />
-            <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight mb-6">
               Yük Planı{' '}
               <span className="text-blue-600">Paylaşımı</span>
             </h1>
-            <p className="text-gray-500 text-lg leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-lg leading-relaxed">
               Optimize edilmiş konteyner düzenlemelerinizi tek tıkla ekip arkadaşlarınız,
               müşterileriniz veya lojistik ortaklarınızla paylaşın. Hesap açmadan anında
               erişim, tam 3D görünüm desteğiyle.
@@ -137,28 +137,28 @@ export default function YukPlaniPaylasimi() {
             <div className="flex flex-col gap-6">
 
               {/* Load Plan Card */}
-              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6">
+              <div className="bg-white border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
                       <Package className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 text-base">
+                      <h3 className="font-bold text-gray-900 dark:text-white text-base">
                         {hasRealData ? 'Son Optimizasyon' : 'İstanbul → Ankara #2847'}
                       </h3>
-                      <p className="text-xs text-gray-400">{containerLabel}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500">{containerLabel}</p>
                     </div>
                   </div>
-                  <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded-lg">
+                  <span className="text-xs text-gray-400 dark:text-gray-500 bg-gray-50 px-2 py-1 rounded-lg">
                     {lastDate || '27 Mart 2026'}
                   </span>
                 </div>
 
                 {/* Meta row */}
-                <div className="flex items-center gap-6 mb-5 text-sm text-gray-600">
+                <div className="flex items-center gap-6 mb-5 text-sm text-gray-600 dark:text-gray-300">
                   <span>
-                    <span className="font-semibold text-gray-900">{totalItems}</span> kalem kargo
+                    <span className="font-semibold text-gray-900 dark:text-white">{totalItems}</span> kalem kargo
                   </span>
                   <span className="flex items-center gap-1">
                     Doluluk:{' '}
@@ -168,11 +168,11 @@ export default function YukPlaniPaylasimi() {
 
                 {/* Mini bar visualization */}
                 <div className="mb-5">
-                  <div className="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                  <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500 mb-1.5">
                     <span>Konteyner Kullanımı</span>
                     <span>84 / 100 m³</span>
                   </div>
-                  <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-700"
                       style={{ width: `${fillPct}%` }}
@@ -202,9 +202,9 @@ export default function YukPlaniPaylasimi() {
                 ) : (
                   <div className="flex flex-col gap-3">
                     {/* Link input + Copy */}
-                    <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2">
-                      <LinkIcon className="w-4 h-4 text-gray-400 shrink-0" />
-                      <span className="flex-1 text-sm text-gray-600 truncate font-mono">
+                    <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2">
+                      <LinkIcon className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0" />
+                      <span className="flex-1 text-sm text-gray-600 dark:text-gray-300 truncate font-mono">
                         {shareUrl}
                       </span>
                       <button
@@ -212,7 +212,7 @@ export default function YukPlaniPaylasimi() {
                         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all shrink-0 ${
                           copied
                             ? 'bg-blue-600 text-white'
-                            : 'bg-white border border-gray-200 text-gray-700 hover:border-blue-500 hover:text-blue-700'
+                            : 'bg-white border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-blue-500 hover:text-blue-700'
                         }`}
                       >
                         {copied ? (
@@ -251,7 +251,7 @@ export default function YukPlaniPaylasimi() {
                     <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center shrink-0">
                       <Icon className="w-3.5 h-3.5 text-blue-600" />
                     </div>
-                    <span className="text-gray-700 font-medium text-sm">{text}</span>
+                    <span className="text-gray-700 dark:text-gray-200 font-medium text-sm">{text}</span>
                   </div>
                 ))}
               </div>
@@ -260,35 +260,35 @@ export default function YukPlaniPaylasimi() {
             {/* Right: Shared View Preview */}
             <div>
               {linkGenerated ? (
-                <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+                <div className="bg-white border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden">
                   {/* Preview header */}
-                  <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-100 bg-gray-50">
+                  <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50">
                     <Eye className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm font-semibold text-gray-700">
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                       Paylaşılan Görünüm
                     </span>
-                    <span className="ml-auto text-xs text-gray-400 bg-white border border-gray-200 px-2 py-0.5 rounded-full">
+                    <span className="ml-auto text-xs text-gray-400 dark:text-gray-500 bg-white border border-gray-200 dark:border-gray-700 px-2 py-0.5 rounded-full">
                       Salt Okunur
                     </span>
                   </div>
 
                   {/* Plan summary in preview */}
-                  <div className="px-5 py-4 border-b border-gray-100">
-                    <p className="text-xs text-gray-400 mb-1">Yük Planı</p>
-                    <p className="font-bold text-gray-900">LogiFlow Yük Planı</p>
-                    <p className="text-xs text-gray-500 mt-0.5">
+                  <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800">
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Yük Planı</p>
+                    <p className="font-bold text-gray-900 dark:text-white">LogiFlow Yük Planı</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">
                       {containerLabel} · {new Date().toLocaleDateString('tr-TR')}
                     </p>
                   </div>
 
                   {/* Cargo table */}
                   <div className="px-5 py-4">
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">
                       Kargo Listesi
                     </p>
                     <div className="flex flex-col gap-0">
                       {/* Table header */}
-                      <div className="grid grid-cols-4 text-xs font-semibold text-gray-400 pb-2 border-b border-gray-100">
+                      <div className="grid grid-cols-4 text-xs font-semibold text-gray-400 dark:text-gray-500 pb-2 border-b border-gray-100 dark:border-gray-800">
                         <span>İsim</span>
                         <span>Boyutlar</span>
                         <span className="text-center">Adet</span>
@@ -300,14 +300,14 @@ export default function YukPlaniPaylasimi() {
                           key={i}
                           className="grid grid-cols-4 text-sm py-2.5 border-b border-gray-50 last:border-0"
                         >
-                          <span className="font-medium text-gray-900">{item.name}</span>
-                          <span className="text-gray-500 text-xs self-center">
+                          <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
+                          <span className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs self-center">
                             {item.dims}
                           </span>
-                          <span className="text-center text-gray-700 font-semibold">
+                          <span className="text-center text-gray-700 dark:text-gray-200 font-semibold">
                             x{item.qty}
                           </span>
-                          <span className="text-right text-gray-500 text-xs self-center">
+                          <span className="text-right text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs self-center">
                             {item.weight}
                           </span>
                         </div>
@@ -316,8 +316,8 @@ export default function YukPlaniPaylasimi() {
                   </div>
 
                   {/* Preview footer */}
-                  <div className="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-                    <span className="text-xs text-gray-400">
+                  <div className="px-5 py-3 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">
                       LogiFlow tarafından paylaşıldı
                     </span>
                     <a
@@ -332,13 +332,13 @@ export default function YukPlaniPaylasimi() {
                 </div>
               ) : (
                 /* Placeholder before link is generated */
-                <div className="bg-gray-50 border border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center py-20 px-8 text-center gap-4">
-                  <div className="w-14 h-14 bg-white border border-gray-200 rounded-2xl flex items-center justify-center shadow-sm">
+                <div className="bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-200 dark:border-gray-700 rounded-2xl flex flex-col items-center justify-center py-20 px-8 text-center gap-4">
+                  <div className="w-14 h-14 bg-white border border-gray-200 dark:border-gray-700 rounded-2xl flex items-center justify-center shadow-sm">
                     <Share2 className="w-6 h-6 text-gray-300" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-400 text-sm">Önizleme</p>
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="font-semibold text-gray-400 dark:text-gray-500 text-sm">Önizleme</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                       Link oluşturduktan sonra alıcı görünümü burada görünecek
                     </p>
                   </div>
@@ -350,16 +350,16 @@ export default function YukPlaniPaylasimi() {
       </section>
 
       {/* Stats Row */}
-      <section className="py-12 bg-gray-50 border-t border-gray-100">
+      <section className="py-12 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {STATS.map(({ label, value }) => (
               <div
                 key={label}
-                className="flex flex-col items-center text-center gap-2 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-8"
+                className="flex flex-col items-center text-center gap-2 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm px-6 py-8"
               >
                 <span className="text-3xl font-black text-blue-600">{value}</span>
-                <span className="text-sm font-medium text-gray-600">{label}</span>
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{label}</span>
               </div>
             ))}
           </div>
@@ -367,13 +367,13 @@ export default function YukPlaniPaylasimi() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-950 dark:bg-gray-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
             Planlarınızı Anında{' '}
             <span className="text-blue-600">Paylaşmaya</span> Başlayın
           </h2>
-          <p className="text-gray-500 text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-lg mb-8 max-w-xl mx-auto">
             Hesap açmaya gerek yok. Tek link, tam erişim.
           </p>
           <Link

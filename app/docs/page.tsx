@@ -54,7 +54,7 @@ function CodeBlock({ children }: { children: string }) {
           <span className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
         </div>
-        <span className="text-[10px] text-gray-500 font-mono">terminal</span>
+        <span className="text-[10px] text-gray-500 dark:text-gray-400 dark:text-gray-500 font-mono">terminal</span>
       </div>
       <pre className="bg-gray-900 rounded-b-xl p-5 text-sm font-mono text-emerald-400 overflow-x-auto leading-relaxed">
         <code>{children}</code>
@@ -80,8 +80,8 @@ const CONTENT: Record<string, React.ReactNode> = {
   baslangic: (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-black text-gray-900 mb-2">Başlangıç</h2>
-        <p className="text-gray-500 leading-relaxed">
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2">Başlangıç</h2>
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">
           LogiFlow platformuna hoş geldiniz. Bu rehber, hesap oluşturmaktan ilk kargo optimizasyonunuzu çalıştırmaya kadar tüm adımları kapsamaktadır.
         </p>
       </div>
@@ -91,7 +91,7 @@ const CONTENT: Record<string, React.ReactNode> = {
           num: '1',
           title: 'Hesap Oluşturma',
           body: (
-            <p className="text-gray-500 text-sm leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">
               <Link href="/register" className="text-blue-600 hover:underline font-semibold">Kayıt sayfasına</Link> gidin. E-posta adresinizi, adınızı ve şifrenizi girerek 30 saniyede ücretsiz hesap oluşturun. Kredi kartı gerekmez.
             </p>
           ),
@@ -99,23 +99,23 @@ const CONTENT: Record<string, React.ReactNode> = {
         {
           num: '2',
           title: 'İlk Projenizi Oluşturun',
-          body: <p className="text-gray-500 text-sm leading-relaxed">Dashboard&apos;dan &ldquo;Yeni Proje&rdquo; butonuna tıklayın. Konteyner boyutlarını ve kargo kalemlerini girerek optimizasyon işlemini başlatabilirsiniz.</p>,
+          body: <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">Dashboard&apos;dan &ldquo;Yeni Proje&rdquo; butonuna tıklayın. Konteyner boyutlarını ve kargo kalemlerini girerek optimizasyon işlemini başlatabilirsiniz.</p>,
         },
         {
           num: '3',
           title: 'Kargo Kalemlerini Ekleyin',
-          body: <p className="text-gray-500 text-sm leading-relaxed">Kargo kalemlerini manuel olarak girebilir veya Microsoft Excel şablonumuzu kullanarak toplu içe aktarabilirsiniz. Her kalem için boyut (G × D × Y) ve ağırlık bilgisi zorunludur.</p>,
+          body: <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">Kargo kalemlerini manuel olarak girebilir veya Microsoft Excel şablonumuzu kullanarak toplu içe aktarabilirsiniz. Her kalem için boyut (G × D × Y) ve ağırlık bilgisi zorunludur.</p>,
         },
         {
           num: '4',
           title: 'Optimizasyonu Çalıştırın',
-          body: <p className="text-gray-500 text-sm leading-relaxed">&ldquo;Optimize Et&rdquo; butonuna tıklayın. Yapay zeka motorumuz saniyeler içinde en iyi yerleştirme planını hesaplayacak ve 3D görselleştirme ile sonuçları gösterecektir.</p>,
+          body: <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">&ldquo;Optimize Et&rdquo; butonuna tıklayın. Yapay zeka motorumuz saniyeler içinde en iyi yerleştirme planını hesaplayacak ve 3D görselleştirme ile sonuçları gösterecektir.</p>,
         },
       ].map(({ num, title, body }) => (
         <div key={num} className="flex gap-5">
           <div className="w-8 h-8 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black text-sm shrink-0">{num}</div>
           <div className="flex-1 pt-0.5">
-            <h3 className="text-base font-black text-gray-900 mb-2">{title}</h3>
+            <h3 className="text-base font-black text-gray-900 dark:text-white mb-2">{title}</h3>
             {body}
           </div>
         </div>
@@ -130,14 +130,14 @@ const CONTENT: Record<string, React.ReactNode> = {
   api: (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-black text-gray-900 mb-2">API Referansı</h2>
-        <p className="text-gray-500 leading-relaxed">
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2">API Referansı</h2>
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">
           LogiFlow REST API&apos;sini kullanarak kargo optimizasyonunu kendi sisteminize entegre edin.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-base font-black text-gray-900">Kimlik Doğrulama</h3>
+        <h3 className="text-base font-black text-gray-900 dark:text-white">Kimlik Doğrulama</h3>
         <CodeBlock>{`POST /api/auth/login
 Content-Type: application/json
 
@@ -148,7 +148,7 @@ Content-Type: application/json
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-base font-black text-gray-900">Optimizasyon İsteği</h3>
+        <h3 className="text-base font-black text-gray-900 dark:text-white">Optimizasyon İsteği</h3>
         <CodeBlock>{`POST /api/v1/optimize
 Authorization: Bearer <token>
 Content-Type: application/json
@@ -170,27 +170,27 @@ Content-Type: application/json
   ozellikler: (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-black text-gray-900 mb-2">Özellikler</h2>
-        <p className="text-gray-500 leading-relaxed">LogiFlow&apos;un sunduğu tüm özellikler ve kapasiteler.</p>
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2">Özellikler</h2>
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">LogiFlow&apos;un sunduğu tüm özellikler ve kapasiteler.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {[
-          { title: '3D Görselleştirme', desc: 'Gerçek zamanlı Three.js tabanlı 3D kargo önizlemesi.', color: 'bg-blue-50 text-blue-600' },
+          { title: '3D Görselleştirme', desc: 'Gerçek zamanlı Three.js tabanlı 3D kargo önizlemesi.', color: 'bg-blue-50 dark:bg-blue-900/30 text-blue-600' },
           { title: 'Excel İçe Aktarma', desc: 'Kargo kalemlerinizi .xlsx formatında toplu yükleyin.', color: 'bg-emerald-50 text-emerald-600' },
           { title: 'PDF Raporu', desc: 'Yükleme planını tek tıkla PDF olarak dışa aktarın.', color: 'bg-violet-50 text-violet-600' },
           { title: 'Paylaşım Linki', desc: 'Hesapsız erişim için özel paylaşım bağlantısı oluşturun.', color: 'bg-orange-50 text-orange-600' },
           { title: 'Canlı Filo Takibi', desc: 'Tüm araçlarınızı gerçek zamanlı harita üzerinde izleyin.', color: 'bg-teal-50 text-teal-600' },
           { title: 'Lojistik Muhasebe', desc: 'Sefer, gelir, gider, bordro ve cari hesap yönetimi.', color: 'bg-indigo-50 text-indigo-600' },
           { title: 'AES-256 Şifreleme', desc: 'Tüm hassas veriler uçtan uca şifrelenerek saklanır.', color: 'bg-red-50 text-red-600' },
-          { title: 'Bulut Tabanlı', desc: 'Tüm projeleriniz güvenli bulut altyapısında saklanır.', color: 'bg-gray-100 text-gray-600' },
+          { title: 'Bulut Tabanlı', desc: 'Tüm projeleriniz güvenli bulut altyapısında saklanır.', color: 'bg-gray-100 text-gray-600 dark:text-gray-300' },
         ].map((f) => (
-          <div key={f.title} className="flex gap-3 p-4 bg-gray-50 border border-gray-100 rounded-2xl hover:border-gray-200 hover:bg-white transition-all">
+          <div key={f.title} className="flex gap-3 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-800 rounded-2xl hover:border-gray-200 dark:hover:border-gray-700 dark:border-gray-700 hover:bg-white transition-all">
             <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-black ${f.color}`}>
               {f.title[0]}
             </div>
             <div>
-              <p className="font-bold text-gray-900 text-sm">{f.title}</p>
-              <p className="text-gray-500 text-xs mt-0.5 leading-relaxed">{f.desc}</p>
+              <p className="font-bold text-gray-900 dark:text-white text-sm">{f.title}</p>
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs mt-0.5 leading-relaxed">{f.desc}</p>
             </div>
           </div>
         ))}
@@ -201,8 +201,8 @@ Content-Type: application/json
   sss: (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-black text-gray-900 mb-2">Sık Sorulan Sorular</h2>
-        <p className="text-gray-500 leading-relaxed">En çok merak edilen konular hakkında hızlı yanıtlar.</p>
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2">Sık Sorulan Sorular</h2>
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed">En çok merak edilen konular hakkında hızlı yanıtlar.</p>
       </div>
       <div className="space-y-3">
         {[
@@ -213,15 +213,15 @@ Content-Type: application/json
           { q: 'Mobil cihazlarda kullanılabiliyor mu?', a: 'Evet. Şoför paneli özellikle mobil tarayıcılar için optimize edilmiştir. Canlı GPS paylaşımı için uygulama indirmenize gerek yoktur.' },
           { q: 'Takım üyeleri ekleyebilir miyim?', a: 'Pro ve Kurumsal planlarda takım üyesi desteği mevcuttur. Her kullanıcı için ayrı rol tanımlaması yapılabilir.' },
         ].map((item, i) => (
-          <details key={i} className="group border border-gray-100 rounded-2xl overflow-hidden">
-            <summary className="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors list-none">
-              <span className="font-bold text-gray-900 text-sm pr-4">{item.q}</span>
-              <svg className="w-4 h-4 text-gray-400 shrink-0 group-open:rotate-180 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <details key={i} className="group border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden">
+            <summary className="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors list-none">
+              <span className="font-bold text-gray-900 dark:text-white text-sm pr-4">{item.q}</span>
+              <svg className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0 group-open:rotate-180 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
             <div className="px-5 pb-5 pt-1 border-t border-gray-50">
-              <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">{item.a}</p>
             </div>
           </details>
         ))}
@@ -234,7 +234,7 @@ export default function DocsPage() {
   const [active, setActive] = useState('baslangic');
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
       <Navbar />
 
       {/* ── Hero ── */}
@@ -248,7 +248,7 @@ export default function DocsPage() {
           <h1 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4">
             Her şey burada
           </h1>
-          <p className="text-gray-400 max-w-md mx-auto">
+          <p className="text-gray-400 dark:text-gray-500 max-w-md mx-auto">
             LogiFlow&apos;u kullanmaya başlamak ve entegre etmek için ihtiyacınız olan tüm rehberler.
           </p>
         </div>
@@ -262,30 +262,30 @@ export default function DocsPage() {
           {/* ── Sidebar ── */}
           <aside className="md:w-56 shrink-0">
             <nav className="sticky top-20 space-y-1">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 pb-2">Bölümler</p>
+              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest px-3 pb-2">Bölümler</p>
               {SIDEBAR.map((item) => (
                 <button key={item.id} onClick={() => setActive(item.id)}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 text-left ${
                     active === item.id
                       ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      : 'text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white dark:text-white'
                   }`}>
-                  <span className={active === item.id ? 'text-white' : 'text-gray-400'}>{item.icon}</span>
+                  <span className={active === item.id ? 'text-white' : 'text-gray-400 dark:text-gray-500'}>{item.icon}</span>
                   {item.label}
                 </button>
               ))}
 
-              <div className="pt-4 mt-2 border-t border-gray-100">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 pb-2">Hızlı Erişim</p>
+              <div className="pt-4 mt-2 border-t border-gray-100 dark:border-gray-800">
+                <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest px-3 pb-2">Hızlı Erişim</p>
                 <Link href="/register"
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-xl transition-colors">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                   Hemen Başla
                 </Link>
                 <Link href="/contact"
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl transition-colors">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
                   </svg>
@@ -297,7 +297,7 @@ export default function DocsPage() {
 
           {/* ── İçerik ── */}
           <main className="flex-1 min-w-0">
-            <div className="bg-white border border-gray-100 rounded-3xl p-8 sm:p-10 shadow-sm">
+            <div className="bg-white border border-gray-100 dark:border-gray-800 rounded-3xl p-8 sm:p-10 shadow-sm">
               {CONTENT[active]}
             </div>
           </main>

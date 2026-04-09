@@ -263,11 +263,11 @@ const posts = [
 ];
 
 const categoryColors: Record<string, string> = {
-  Teknoloji: 'bg-blue-50 text-blue-600',
+  Teknoloji: 'bg-blue-50 dark:bg-blue-900/30 text-blue-600',
   Lojistik: 'bg-orange-50 text-orange-600',
   Geliştirici: 'bg-purple-50 text-purple-600',
   Sürdürülebilirlik: 'bg-green-50 text-green-600',
-  Ürün: 'bg-blue-50 text-blue-700',
+  Ürün: 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
   'Başarı Hikayeleri': 'bg-yellow-50 text-yellow-600',
 };
 
@@ -283,36 +283,36 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   const others = posts.filter((p) => p.id !== post.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
       <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-blue-50 to-white py-16 px-4 border-b border-gray-100">
+        <section className="bg-gradient-to-br from-blue-50 to-white py-16 px-4 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-2 mb-4 flex-wrap">
-              <Link href="/blog" className="text-xs text-gray-400 hover:text-blue-600 transition-colors">Blog</Link>
+              <Link href="/blog" className="text-xs text-gray-400 dark:text-gray-500 hover:text-blue-600 transition-colors">Blog</Link>
               <span className="text-gray-300 text-xs">›</span>
-              <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[post.category] ?? 'bg-gray-100 text-gray-600'}`}>
+              <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[post.category] ?? 'bg-gray-100 text-gray-600 dark:text-gray-300'}`}>
                 {post.category}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight mb-4">{post.title}</h1>
-            <p className="text-gray-500 leading-relaxed mb-6">{post.summary}</p>
+            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white leading-tight mb-4">{post.title}</h1>
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed mb-6">{post.summary}</p>
             <div className="flex items-center gap-4 flex-wrap">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs font-bold">{post.author.initials}</span>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">{post.author.name}</p>
-                  <p className="text-xs text-gray-400">{post.author.role}</p>
+                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">{post.author.name}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">{post.author.role}</p>
                 </div>
               </div>
               <span className="text-gray-300">·</span>
-              <span className="text-sm text-gray-400">{post.date}</span>
+              <span className="text-sm text-gray-400 dark:text-gray-500">{post.date}</span>
               <span className="text-gray-300">·</span>
-              <span className="text-sm text-gray-400">{post.readTime} okuma</span>
+              <span className="text-sm text-gray-400 dark:text-gray-500">{post.readTime} okuma</span>
             </div>
           </div>
         </section>
@@ -323,7 +323,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             <div className="space-y-6">
               {post.content.map((block, i) => {
                 if (block.type === 'heading') {
-                  return <h2 key={i} className="text-xl font-black text-gray-900 mt-8 mb-2">{block.text}</h2>;
+                  return <h2 key={i} className="text-xl font-black text-gray-900 dark:text-white mt-8 mb-2">{block.text}</h2>;
                 }
                 if (block.type === 'callout') {
                   return (
@@ -332,32 +332,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                     </div>
                   );
                 }
-                return <p key={i} className="text-gray-600 leading-relaxed">{block.text}</p>;
+                return <p key={i} className="text-gray-600 dark:text-gray-300 leading-relaxed">{block.text}</p>;
               })}
             </div>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-gray-100">
+            <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-gray-100 dark:border-gray-800">
               {post.tags.map((tag) => (
-                <span key={tag} className="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full">{tag}</span>
+                <span key={tag} className="text-xs font-medium bg-gray-100 text-gray-600 dark:text-gray-300 px-3 py-1.5 rounded-full">{tag}</span>
               ))}
             </div>
           </div>
         </section>
 
         {/* Other posts */}
-        <section className="bg-gray-50 py-12 px-4 border-t border-gray-100">
+        <section className="bg-gray-50 py-12 px-4 border-t border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-base font-black text-gray-900 mb-5">Diğer Yazılar</h3>
+            <h3 className="text-base font-black text-gray-900 dark:text-white mb-5">Diğer Yazılar</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {others.map((p) => (
                 <Link key={p.id} href={`/blog/${p.id}`}
-                  className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 hover:shadow-md transition-shadow">
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${categoryColors[p.category] ?? 'bg-gray-100 text-gray-600'}`}>
+                  className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 hover:shadow-md transition-shadow">
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${categoryColors[p.category] ?? 'bg-gray-100 text-gray-600 dark:text-gray-300'}`}>
                     {p.category}
                   </span>
-                  <h4 className="text-sm font-bold text-gray-900 mt-2 leading-snug line-clamp-2">{p.title}</h4>
-                  <p className="text-xs text-gray-400 mt-1">{p.date}</p>
+                  <h4 className="text-sm font-bold text-gray-900 dark:text-white mt-2 leading-snug line-clamp-2">{p.title}</h4>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{p.date}</p>
                 </Link>
               ))}
             </div>

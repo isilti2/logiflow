@@ -466,24 +466,24 @@ export default function MuhasebePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">
 
       {/* Topbar */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-40">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/dashboard" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
                 <span className="text-white font-black text-xs">LF</span>
               </div>
-              <span className="text-lg font-bold text-gray-900 tracking-tight hidden sm:block">Logi<span className="text-blue-600">Flow</span></span>
+              <span className="text-lg font-bold text-gray-900 dark:text-white tracking-tight hidden sm:block">Logi<span className="text-blue-600">Flow</span></span>
             </Link>
             <ChevronRight className="w-4 h-4 text-gray-300 hidden sm:block" />
-            <span className="text-sm font-bold text-gray-700 hidden sm:block">Muhasebe</span>
+            <span className="text-sm font-bold text-gray-700 dark:text-gray-200 hidden sm:block">Muhasebe</span>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/dashboard" className="text-sm text-gray-500 hover:text-blue-600 px-3 py-1.5 rounded-lg transition-colors hidden sm:block">← Dashboard</Link>
-            <button onClick={async () => { await logout(); window.location.href = '/'; }} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 border border-gray-200 px-3 py-2 rounded-xl transition-colors">
+            <Link href="/dashboard" className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 px-3 py-1.5 rounded-lg transition-colors hidden sm:block">← Dashboard</Link>
+            <button onClick={async () => { await logout(); window.location.href = '/'; }} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-red-500 border border-gray-200 dark:border-gray-700 px-3 py-2 rounded-xl transition-colors">
               <LogOut className="w-4 h-4" />
             </button>
           </div>
@@ -499,12 +499,12 @@ export default function MuhasebePage() {
       </div>
 
       {/* Tab nav */}
-      <div className="bg-white border-b border-gray-100 sticky top-16 z-30">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 sticky top-16 z-30">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="flex gap-1 overflow-x-auto py-1" style={{ scrollbarWidth: 'none' }}>
             {NAV.map(({ tab: t, label, icon: Icon }) => (
               <button key={t} onClick={() => { setTab(t); setShowForm(false); setSearch(''); }}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${tab === t ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-500 hover:bg-gray-100'}`}>
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${tab === t ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700'}`}>
                 <Icon className="w-4 h-4" /> {label}
               </button>
             ))}
@@ -562,21 +562,21 @@ export default function MuhasebePage() {
             })()}
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-                  <h3 className="font-bold text-gray-900 text-sm">Son Seferler</h3>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+                <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                  <h3 className="font-bold text-gray-900 dark:text-white text-sm">Son Seferler</h3>
                   <button onClick={() => setTab('seferler')} className="text-xs text-blue-600 hover:underline font-semibold">Tümü →</button>
                 </div>
-                <div className="divide-y divide-gray-50">
+                <div className="divide-y divide-gray-50 dark:divide-gray-800">
                   {seferler.slice(0, 5).map(s => (
                     <div key={s.id} className="px-5 py-3 flex items-center gap-3">
                       <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0"><Truck className="w-4 h-4 text-blue-600" /></div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 truncate">{s.rotaDan} → {s.rotaAya}</p>
-                        <p className="text-xs text-gray-500">{s.aracPlaka} · {fmtDate(s.tarih)}</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{s.rotaDan} → {s.rotaAya}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{s.aracPlaka} · {fmtDate(s.tarih)}</p>
                       </div>
                       <div className="text-right shrink-0">
-                        <p className="text-sm font-bold text-gray-900">{TL(s.seferUcreti)}</p>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white">{TL(s.seferUcreti)}</p>
                         <DurumBadge durum={s.durum} />
                       </div>
                     </div>
@@ -591,21 +591,21 @@ export default function MuhasebePage() {
                   )}
                 </div>
               </div>
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-                  <h3 className="font-bold text-gray-900 text-sm">Son Faturalar</h3>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+                <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                  <h3 className="font-bold text-gray-900 dark:text-white text-sm">Son Faturalar</h3>
                   <button onClick={() => setTab('faturalar')} className="text-xs text-blue-600 hover:underline font-semibold">Tümü →</button>
                 </div>
-                <div className="divide-y divide-gray-50">
+                <div className="divide-y divide-gray-50 dark:divide-gray-800">
                   {faturalar.slice(0, 5).map(f => (
                     <div key={f.id} className="px-5 py-3 flex items-center gap-3">
                       <div className="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center shrink-0"><FileText className="w-4 h-4 text-purple-600" /></div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900">{f.faturaNo}</p>
-                        <p className="text-xs text-gray-500">{f.musteri?.ad ?? '—'} · {fmtDate(f.tarih)}</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white">{f.faturaNo}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{f.musteri?.ad ?? '—'} · {fmtDate(f.tarih)}</p>
                       </div>
                       <div className="text-right shrink-0">
-                        <p className="text-sm font-bold text-gray-900">{TL(f.genelToplam)}</p>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white">{TL(f.genelToplam)}</p>
                         <DurumBadge durum={f.durum} />
                       </div>
                     </div>
@@ -626,8 +626,8 @@ export default function MuhasebePage() {
           <>
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Plaka veya rota ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Plaka veya rota ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <button onClick={() => setShowForm(p => !p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
                 <Plus className="w-4 h-4" /> Yeni Sefer
@@ -635,14 +635,14 @@ export default function MuhasebePage() {
             </div>
 
             {showForm && (
-              <form onSubmit={submitSefer} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <h3 className="col-span-full font-bold text-gray-900">Yeni Sefer Kaydı</h3>
+              <form onSubmit={submitSefer} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className="col-span-full font-bold text-gray-900 dark:text-white">Yeni Sefer Kaydı</h3>
                 {[
                   { label: 'Müşteri (opsiyonel)', type: 'select', key: 'musteriId', options: musteriler.map(m => ({ v: m.id, l: m.ad })) },
                 ].map(f => (
                   <div key={f.key}>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">{f.label}</label>
-                    <select value={seferForm[f.key as keyof typeof seferForm]} onChange={e => setSeferForm(p => ({ ...p, [f.key]: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">{f.label}</label>
+                    <select value={seferForm[f.key as keyof typeof seferForm]} onChange={e => setSeferForm(p => ({ ...p, [f.key]: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                       <option value="">— Seç —</option>
                       {f.options?.map(o => <option key={o.v} value={o.v}>{o.l}</option>)}
                     </select>
@@ -650,16 +650,16 @@ export default function MuhasebePage() {
                 ))}
                 {/* Araç Plakası — kayıtlı araçlardan seç ya da el ile gir */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Araç Plakası *</label>
+                  <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Araç Plakası *</label>
                   {!plakaManuel && araclar.length > 0 ? (
                     <div className="flex gap-2">
                       <select required value={seferForm.aracPlaka} onChange={e => setSeferForm(p => ({ ...p, aracPlaka: e.target.value }))}
-                        className="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">— Kayıtlı araç seç —</option>
                         {araclar.filter(a => a.aktif).map(a => <option key={a.id} value={a.plaka}>{a.plaka}{a.marka ? ` · ${a.marka} ${a.model ?? ''}`.trim() : ''}</option>)}
                       </select>
                       <button type="button" onClick={() => { setPlakaManuel(true); setSeferForm(p => ({ ...p, aracPlaka: '' })); }}
-                        className="px-3 py-2 text-xs text-gray-500 hover:text-blue-600 border border-gray-200 rounded-xl whitespace-nowrap">El ile gir</button>
+                        className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 border border-gray-200 dark:border-gray-700 rounded-xl whitespace-nowrap">El ile gir</button>
                     </div>
                   ) : (
                     <div className="flex gap-2">
@@ -667,56 +667,56 @@ export default function MuhasebePage() {
                         placeholder="34 ABC 123" className="flex-1 px-3 py-2 border border-blue-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono" />
                       {araclar.length > 0 && (
                         <button type="button" onClick={() => { setPlakaManuel(false); setSeferForm(p => ({ ...p, aracPlaka: '' })); }}
-                          className="px-3 py-2 text-xs text-gray-500 hover:text-blue-600 border border-gray-200 rounded-xl whitespace-nowrap">← Listeden seç</button>
+                          className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 border border-gray-200 dark:border-gray-700 rounded-xl whitespace-nowrap">← Listeden seç</button>
                       )}
                     </div>
                   )}
                 </div>
                 {([['Çıkış Noktası *', 'rotaDan', 'text', 'İstanbul'], ['Varış Noktası *', 'rotaAya', 'text', 'Ankara'], ['Tarih *', 'tarih', 'date', ''], ['Mesafe (km)', 'mesafeKm', 'number', '0'], ['Yük Ağırlığı (kg)', 'yukAgirligi', 'number', '0'], ['Sefer Ücreti (₺)', 'seferUcreti', 'number', '0'], ['Yakıt Maliyeti (₺)', 'yakitMaliyeti', 'number', '0']] as [string, keyof typeof seferForm, string, string][]).map(([lbl, key, type, ph]) => (
                   <div key={key}>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">{lbl}</label>
-                    <input required={lbl.endsWith('*')} type={type} min={type==='number'?0:undefined} value={seferForm[key]} onChange={e => setSeferForm(p => ({ ...p, [key]: e.target.value }))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">{lbl}</label>
+                    <input required={lbl.endsWith('*')} type={type} min={type==='number'?0:undefined} value={seferForm[key]} onChange={e => setSeferForm(p => ({ ...p, [key]: e.target.value }))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
                 ))}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Durum</label>
-                  <select value={seferForm.durum} onChange={e => setSeferForm(p => ({ ...p, durum: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Durum</label>
+                  <select value={seferForm.durum} onChange={e => setSeferForm(p => ({ ...p, durum: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="planlandi">Planlandı</option><option value="devam">Devam Ediyor</option><option value="tamamlandi">Tamamlandı</option><option value="iptal">İptal</option>
                   </select>
                 </div>
                 <div className="sm:col-span-2 lg:col-span-3">
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Notlar</label>
-                  <input value={seferForm.notlar} onChange={e => setSeferForm(p => ({ ...p, notlar: e.target.value }))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Notlar</label>
+                  <input value={seferForm.notlar} onChange={e => setSeferForm(p => ({ ...p, notlar: e.target.value }))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
                 <div className="col-span-full flex gap-2 justify-end">
-                  <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 rounded-xl">İptal</button>
+                  <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-xl">İptal</button>
                   <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4" /> Kaydet</button>
                 </div>
               </form>
             )}
 
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota', 'Plaka', 'Tarih', 'Müşteri', 'Ücret', 'Yakıt', 'Net', 'Durum', ''].map(h => <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Rota', 'Plaka', 'Tarih', 'Müşteri', 'Ücret', 'Yakıt', 'Net', 'Durum', ''].map(h => <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {seferler.filter(s => !search || s.aracPlaka.toLowerCase().includes(search.toLowerCase()) || s.rotaDan.toLowerCase().includes(search.toLowerCase()) || s.rotaAya.toLowerCase().includes(search.toLowerCase())).map(s => (
-                    <tr key={s.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap">{s.rotaDan} → {s.rotaAya}</td>
-                      <td className="px-4 py-3 font-mono text-gray-700">{s.aracPlaka}</td>
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(s.tarih)}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{s.musteri?.ad ?? '—'}</td>
+                    <tr key={s.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white whitespace-nowrap">{s.rotaDan} → {s.rotaAya}</td>
+                      <td className="px-4 py-3 font-mono text-gray-700 dark:text-gray-200">{s.aracPlaka}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(s.tarih)}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{s.musteri?.ad ?? '—'}</td>
                       <td className="px-4 py-3 font-semibold text-green-700 whitespace-nowrap">{TL(s.seferUcreti)}</td>
                       <td className="px-4 py-3 text-red-500 whitespace-nowrap">{TL(s.yakitMaliyeti)}</td>
                       <td className={`px-4 py-3 font-bold whitespace-nowrap ${(s.seferUcreti - s.yakitMaliyeti) >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>{TL(s.seferUcreti - s.yakitMaliyeti)}</td>
                       <td className="px-4 py-3">
-                        <select value={s.durum} onChange={e => updateSeferDurum(s.id, e.target.value)} className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select value={s.durum} onChange={e => updateSeferDurum(s.id, e.target.value)} className="text-xs border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                           <option value="planlandi">Planlandı</option><option value="devam">Devam</option><option value="tamamlandi">Tamamlandı</option><option value="iptal">İptal</option>
                         </select>
                       </td>
                       <td className="px-4 py-3"><button onClick={() => deleteSefer(s.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4" /></button></td>
                     </tr>
                   ))}
-                  {!seferler.length && <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-500">Henüz sefer kaydı yok.</td></tr>}
+                  {!seferler.length && <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Henüz sefer kaydı yok.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -735,56 +735,56 @@ export default function MuhasebePage() {
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Kategori veya açıklama ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Kategori veya açıklama ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <button onClick={() => setShowForm(p => !p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4" /> Yeni İşlem</button>
             </div>
             {showForm && (
-              <form onSubmit={submitIslem} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <h3 className="col-span-full font-bold text-gray-900">Yeni Mali İşlem</h3>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tür *</label>
-                  <select value={islemForm.tur} onChange={e => { const tur = e.target.value; setIslemForm(p => ({ ...p, tur, kategori: tur==='gelir'?'Sefer Ücreti':'Yakıt' })); }} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <form onSubmit={submitIslem} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className="col-span-full font-bold text-gray-900 dark:text-white">Yeni Mali İşlem</h3>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tür *</label>
+                  <select value={islemForm.tur} onChange={e => { const tur = e.target.value; setIslemForm(p => ({ ...p, tur, kategori: tur==='gelir'?'Sefer Ücreti':'Yakıt' })); }} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="gider">Gider</option><option value="gelir">Gelir</option>
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Kategori *</label>
-                  <select value={islemForm.kategori} onChange={e => setIslemForm(p => ({ ...p, kategori: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Kategori *</label>
+                  <select value={islemForm.kategori} onChange={e => setIslemForm(p => ({ ...p, kategori: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     {(islemForm.tur==='gelir'?GELIR_KATEGORILER:GIDER_KATEGORILER).map(k => <option key={k}>{k}</option>)}
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tutar (₺) *</label><input required type="number" min="0" step="0.01" value={islemForm.tutar} onChange={e => setIslemForm(p => ({ ...p, tutar: e.target.value }))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">KDV Oranı (%)</label>
-                  <select value={islemForm.kdvOrani} onChange={e => setIslemForm(p => ({ ...p, kdvOrani: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tutar (₺) *</label><input required type="number" min="0" step="0.01" value={islemForm.tutar} onChange={e => setIslemForm(p => ({ ...p, tutar: e.target.value }))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">KDV Oranı (%)</label>
+                  <select value={islemForm.kdvOrani} onChange={e => setIslemForm(p => ({ ...p, kdvOrani: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     {KDV_ORANLARI.map(k => <option key={k} value={k}>%{k}</option>)}
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label><input required type="date" value={islemForm.tarih} onChange={e => setIslemForm(p => ({ ...p, tarih: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">İlgili Sefer</label>
-                  <select value={islemForm.seferId} onChange={e => setIslemForm(p => ({ ...p, seferId: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tarih *</label><input required type="date" value={islemForm.tarih} onChange={e => setIslemForm(p => ({ ...p, tarih: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">İlgili Sefer</label>
+                  <select value={islemForm.seferId} onChange={e => setIslemForm(p => ({ ...p, seferId: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">— Seç —</option>{seferler.map(s => <option key={s.id} value={s.id}>{s.rotaDan}→{s.rotaAya} ({s.aracPlaka})</option>)}
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri</label>
-                  <select value={islemForm.musteriId} onChange={e => setIslemForm(p => ({ ...p, musteriId: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Müşteri</label>
+                  <select value={islemForm.musteriId} onChange={e => setIslemForm(p => ({ ...p, musteriId: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">— Seç —</option>{musteriler.map(m => <option key={m.id} value={m.id}>{m.ad}</option>)}
                   </select></div>
-                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 mb-1">Açıklama</label><input value={islemForm.aciklama} onChange={e => setIslemForm(p => ({ ...p, aciklama: e.target.value }))} placeholder="Opsiyonel açıklama…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
+                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Açıklama</label><input value={islemForm.aciklama} onChange={e => setIslemForm(p => ({ ...p, aciklama: e.target.value }))} placeholder="Opsiyonel açıklama…" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
                 <div className="col-span-full flex gap-2 justify-end">
-                  <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 rounded-xl">İptal</button>
+                  <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-xl">İptal</button>
                   <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4" /> Kaydet</button>
                 </div>
               </form>
             )}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Tür','Kategori','Açıklama','Sefer','Müşteri','KDV','Tutar',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Tarih','Tür','Kategori','Açıklama','Sefer','Müşteri','KDV','Tutar',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {islemler.filter(i => !search || i.kategori.toLowerCase().includes(search.toLowerCase()) || i.aciklama.toLowerCase().includes(search.toLowerCase())).map(i => (
-                    <tr key={i.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(i.tarih)}</td>
+                    <tr key={i.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(i.tarih)}</td>
                       <td className="px-4 py-3"><span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${i.tur==='gelir'?'bg-green-50 text-green-700':'bg-red-50 text-red-600'}`}>{i.tur}</span></td>
-                      <td className="px-4 py-3 font-semibold text-gray-800">{i.kategori}</td>
-                      <td className="px-4 py-3 text-gray-500 max-w-[140px] truncate">{i.aciklama||'—'}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{i.sefer?`${i.sefer.rotaDan}→${i.sefer.rotaAya}`:'—'}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{i.musteri?.ad??'—'}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">%{i.kdvOrani}</td>
+                      <td className="px-4 py-3 font-semibold text-gray-800 dark:text-gray-100">{i.kategori}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 max-w-[140px] truncate">{i.aciklama||'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{i.sefer?`${i.sefer.rotaDan}→${i.sefer.rotaAya}`:'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{i.musteri?.ad??'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">%{i.kdvOrani}</td>
                       <td className={`px-4 py-3 font-bold whitespace-nowrap ${i.tur==='gelir'?'text-green-600':'text-red-500'}`}>{i.tur==='gelir'?'+':'-'}{TL(i.tutar)}</td>
                       <td className="px-4 py-3"><button onClick={()=>deleteIslem(i.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
@@ -807,20 +807,20 @@ export default function MuhasebePage() {
           <>
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
+                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
               </div>
               <button onClick={()=>setShowForm(p=>!p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4"/> Yeni Müşteri</button>
             </div>
             {showForm && (
-              <form onSubmit={submitMusteri} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <h3 className="col-span-full font-bold text-gray-900">Yeni Müşteri / Cari</h3>
+              <form onSubmit={submitMusteri} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className="col-span-full font-bold text-gray-900 dark:text-white">Yeni Müşteri / Cari</h3>
                 {([['Ad / Firma *','ad','text','ABC Lojistik A.Ş.'],['Vergi No','vergiNo','text','1234567890'],['Telefon','telefon','text','+90 212 000 00 00'],['E-posta','email','email','info@firma.com']] as [string,keyof typeof musteriForm,string,string][]).map(([lbl,key,type,ph])=>(
-                  <div key={key}><label className="block text-xs font-semibold text-gray-600 mb-1">{lbl}</label><input required={lbl.endsWith('*')} type={type} value={musteriForm[key]} onChange={e=>setMusteriForm(p=>({...p,[key]:e.target.value}))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                  <div key={key}><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">{lbl}</label><input required={lbl.endsWith('*')} type={type} value={musteriForm[key]} onChange={e=>setMusteriForm(p=>({...p,[key]:e.target.value}))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
                 ))}
-                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 mb-1">Adres</label><input value={musteriForm.adres} onChange={e=>setMusteriForm(p=>({...p,adres:e.target.value}))} placeholder="İl, ilçe, sokak…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Adres</label><input value={musteriForm.adres} onChange={e=>setMusteriForm(p=>({...p,adres:e.target.value}))} placeholder="İl, ilçe, sokak…" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
                 <div className="col-span-full flex gap-2 justify-end">
-                  <button type="button" onClick={()=>setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 rounded-xl">İptal</button>
+                  <button type="button" onClick={()=>setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-xl">İptal</button>
                   <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4"/> Kaydet</button>
                 </div>
               </form>
@@ -833,31 +833,31 @@ export default function MuhasebePage() {
                 const borclu = m.bakiye > 0;
                 const alacakli = m.bakiye < 0;
                 return (
-                  <div key={m.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${borclu?'border-amber-200':alacakli?'border-green-200':'border-gray-100'}`}>
+                  <div key={m.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${borclu?'border-amber-200':alacakli?'border-green-200':'border-gray-100 dark:border-gray-800'}`}>
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${borclu?'bg-amber-50':'bg-blue-50'}`}><Building2 className={`w-5 h-5 ${borclu?'text-amber-600':'text-blue-600'}`}/></div>
-                        <div><p className="font-bold text-gray-900">{m.ad}</p>{m.vergiNo&&<p className="text-xs text-gray-500">VN: {m.vergiNo}</p>}</div>
+                        <div><p className="font-bold text-gray-900 dark:text-white">{m.ad}</p>{m.vergiNo&&<p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">VN: {m.vergiNo}</p>}</div>
                       </div>
                       <button onClick={()=>deleteMusteri(m.id)} className="text-gray-200 hover:text-red-500 transition-colors shrink-0"><Trash2 className="w-4 h-4"/></button>
                     </div>
                     <div className="space-y-1 mb-3">
-                      {m.telefon&&<p className="flex items-center gap-2 text-xs text-gray-500"><Phone className="w-3.5 h-3.5"/>{m.telefon}</p>}
-                      {m.email&&<p className="flex items-center gap-2 text-xs text-gray-500"><Mail className="w-3.5 h-3.5"/>{m.email}</p>}
-                      {m.adres&&<p className="flex items-center gap-2 text-xs text-gray-500"><MapPin className="w-3.5 h-3.5"/>{m.adres}</p>}
+                      {m.telefon&&<p className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500"><Phone className="w-3.5 h-3.5"/>{m.telefon}</p>}
+                      {m.email&&<p className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500"><Mail className="w-3.5 h-3.5"/>{m.email}</p>}
+                      {m.adres&&<p className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500"><MapPin className="w-3.5 h-3.5"/>{m.adres}</p>}
                     </div>
                     {/* Bakiye gösterimi */}
                     <div className={`rounded-xl px-3 py-2 mb-3 flex items-center justify-between ${borclu?'bg-amber-50':alacakli?'bg-green-50':'bg-gray-50'}`}>
-                      <span className="text-xs font-semibold text-gray-500">Cari Bakiye</span>
-                      <span className={`font-black text-base ${borclu?'text-amber-700':alacakli?'text-green-700':'text-gray-500'}`}>
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500">Cari Bakiye</span>
+                      <span className={`font-black text-base ${borclu?'text-amber-700':alacakli?'text-green-700':'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                         {m.bakiye > 0 ? '+' : ''}{TL(m.bakiye)}
                         <span className="text-xs font-normal ml-1">{borclu?'borçlu':alacakli?'alacaklı':'sıfır'}</span>
                       </span>
                     </div>
                     <div className="flex items-center justify-between pt-3 border-t border-gray-50">
                       <div className="flex gap-4">
-                        {bekleyen>0&&<div><p className="text-sm font-bold text-amber-600">{TL(bekleyen)}</p><p className="text-xs text-gray-500">Bekleyen fatura</p></div>}
-                        <div><p className="text-sm font-bold text-gray-900">{mSefer}</p><p className="text-xs text-gray-500">Sefer</p></div>
+                        {bekleyen>0&&<div><p className="text-sm font-bold text-amber-600">{TL(bekleyen)}</p><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">Bekleyen fatura</p></div>}
+                        <div><p className="text-sm font-bold text-gray-900 dark:text-white">{mSefer}</p><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">Sefer</p></div>
                       </div>
                       <button onClick={()=>{setTahsilatForm(f=>({...f,musteriId:m.id,tarih:new Date().toISOString().slice(0,10)}));setSelMusteri(m.id);setShowForm(true);setEditId('tahsilat');}}
                         className="flex items-center gap-1.5 text-xs text-green-700 hover:text-green-900 font-semibold border border-green-200 bg-green-50 px-3 py-1.5 rounded-lg transition-colors">
@@ -883,24 +883,24 @@ export default function MuhasebePage() {
             {showForm && editId==='tahsilat' && (
               <form onSubmit={submitTahsilat} className="bg-white rounded-2xl border border-green-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="col-span-full flex items-center justify-between">
-                  <h3 className="font-bold text-gray-900">Tahsilat Kaydı — {musteriler.find(m=>m.id===tahsilatForm.musteriId)?.ad}</h3>
-                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Tahsilat Kaydı — {musteriler.find(m=>m.id===tahsilatForm.musteriId)?.ad}</h3>
+                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600 dark:text-gray-300"><X className="w-5 h-5"/></button>
                 </div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri *</label>
-                  <select required value={tahsilatForm.musteriId} onChange={e=>setTahsilatForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Müşteri *</label>
+                  <select required value={tahsilatForm.musteriId} onChange={e=>setTahsilatForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="">— Seç —</option>{musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">İlgili Fatura (opsiyonel)</label>
-                  <select value={tahsilatForm.faturaId} onChange={e=>setTahsilatForm(p=>({...p,faturaId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">İlgili Fatura (opsiyonel)</label>
+                  <select value={tahsilatForm.faturaId} onChange={e=>setTahsilatForm(p=>({...p,faturaId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="">— Seç —</option>
                     {faturalar.filter(f=>f.musteri?.id===tahsilatForm.musteriId&&f.durum!=='odendi').map(f=><option key={f.id} value={f.id}>{f.faturaNo} — {TL(f.genelToplam)}</option>)}
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tutar (₺) *</label>
-                  <input required type="number" min="0" step="0.01" value={tahsilatForm.tutar} onChange={e=>setTahsilatForm(p=>({...p,tutar:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label>
-                  <input required type="date" value={tahsilatForm.tarih} onChange={e=>setTahsilatForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
-                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 mb-1">Notlar</label>
-                  <input value={tahsilatForm.notlar} onChange={e=>setTahsilatForm(p=>({...p,notlar:e.target.value}))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tutar (₺) *</label>
+                  <input required type="number" min="0" step="0.01" value={tahsilatForm.tutar} onChange={e=>setTahsilatForm(p=>({...p,tutar:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tarih *</label>
+                  <input required type="date" value={tahsilatForm.tarih} onChange={e=>setTahsilatForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
+                <div className="sm:col-span-2"><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Notlar</label>
+                  <input value={tahsilatForm.notlar} onChange={e=>setTahsilatForm(p=>({...p,notlar:e.target.value}))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"/></div>
                 <div className="col-span-full flex gap-2 justify-end">
                   <button type="submit" className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4"/> Kaydet</button>
                 </div>
@@ -908,28 +908,28 @@ export default function MuhasebePage() {
             )}
 
             {/* Tahsilat tablosu */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <Wallet className="w-4 h-4 text-gray-500"/>
-                <h3 className="font-bold text-gray-900 text-sm">Tahsilat Geçmişi</h3>
-                <select value={selMusteri} onChange={e=>setSelMusteri(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none ml-auto">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center gap-3 flex-wrap">
+                <Wallet className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500"/>
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm">Tahsilat Geçmişi</h3>
+                <select value={selMusteri} onChange={e=>setSelMusteri(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 focus:outline-none ml-auto">
                   <option value="">Tüm Müşteriler</option>{musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
                 </select>
               </div>
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Müşteri','Fatura','Tutar','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>)}</tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Tarih','Müşteri','Fatura','Tutar','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider">{h}</th>)}</tr></thead>
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {tahsilatlar.filter(t=>!selMusteri||t.musteriId===selMusteri).map(t=>(
-                    <tr key={t.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(t.tarih)}</td>
-                      <td className="px-4 py-3 font-semibold text-gray-800">{t.musteri?.ad??'—'}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{t.fatura?.faturaNo??'—'}</td>
+                    <tr key={t.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(t.tarih)}</td>
+                      <td className="px-4 py-3 font-semibold text-gray-800 dark:text-gray-100">{t.musteri?.ad??'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{t.fatura?.faturaNo??'—'}</td>
                       <td className="px-4 py-3 font-bold text-green-600 whitespace-nowrap">{TL(t.tutar)}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{t.notlar||'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{t.notlar||'—'}</td>
                       <td className="px-4 py-3"><button onClick={()=>deleteTahsilat(t.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!tahsilatlar.length&&<tr><td colSpan={6} className="px-4 py-12 text-center text-gray-500">Henüz tahsilat kaydı yok.</td></tr>}
+                  {!tahsilatlar.length&&<tr><td colSpan={6} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Henüz tahsilat kaydı yok.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -942,21 +942,21 @@ export default function MuhasebePage() {
         {tab === 'araclar' && (
           <>
             <div className="flex items-center gap-3 flex-wrap">
-              <h2 className="font-bold text-gray-900 flex-1">Araç Filosu</h2>
+              <h2 className="font-bold text-gray-900 dark:text-white flex-1">Araç Filosu</h2>
               <button onClick={()=>{setShowForm(p=>!p);setEditId('arac');}} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4"/> Araç Ekle</button>
             </div>
 
             {showForm && editId==='arac' && (
-              <form onSubmit={submitArac} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <h3 className="col-span-full font-bold text-gray-900">Yeni Araç</h3>
+              <form onSubmit={submitArac} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className="col-span-full font-bold text-gray-900 dark:text-white">Yeni Araç</h3>
                 {([['Plaka *','plaka','text','34 ABC 123'],['Marka','marka','text','Mercedes'],['Model','model','text','Actros'],['Yıl','yil','number','2020']] as [string,keyof typeof aracForm,string,string][]).map(([lbl,key,type,ph])=>(
-                  <div key={key}><label className="block text-xs font-semibold text-gray-600 mb-1">{lbl}</label><input required={lbl.endsWith('*')} type={type} value={aracForm[key]} onChange={e=>setAracForm(p=>({...p,[key]:e.target.value}))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                  <div key={key}><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">{lbl}</label><input required={lbl.endsWith('*')} type={type} value={aracForm[key]} onChange={e=>setAracForm(p=>({...p,[key]:e.target.value}))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
                 ))}
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Ruhsat Bitiş</label><input type="date" value={aracForm.ruhsatSon} onChange={e=>setAracForm(p=>({...p,ruhsatSon:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Sigorta Bitiş</label><input type="date" value={aracForm.sigortaSon} onChange={e=>setAracForm(p=>({...p,sigortaSon:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Muayene Bitiş</label><input type="date" value={aracForm.muayeneSon} onChange={e=>setAracForm(p=>({...p,muayeneSon:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Ruhsat Bitiş</label><input type="date" value={aracForm.ruhsatSon} onChange={e=>setAracForm(p=>({...p,ruhsatSon:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Sigorta Bitiş</label><input type="date" value={aracForm.sigortaSon} onChange={e=>setAracForm(p=>({...p,sigortaSon:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Muayene Bitiş</label><input type="date" value={aracForm.muayeneSon} onChange={e=>setAracForm(p=>({...p,muayeneSon:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
                 <div className="col-span-full flex gap-2 justify-end">
-                  <button type="button" onClick={()=>setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 rounded-xl">İptal</button>
+                  <button type="button" onClick={()=>setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-xl">İptal</button>
                   <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4"/> Kaydet</button>
                 </div>
               </form>
@@ -968,15 +968,15 @@ export default function MuhasebePage() {
                 const toplamYakit = aYakit.reduce((s,y)=>s+y.toplamTutar,0);
                 const hasExpiry = expiryStatus(a.ruhsatSon)==='expired'||expiryStatus(a.sigortaSon)==='expired'||expiryStatus(a.muayeneSon)==='expired';
                 return (
-                  <div key={a.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${hasExpiry?'border-red-200':'border-gray-100'}`}>
+                  <div key={a.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${hasExpiry?'border-red-200':'border-gray-100 dark:border-gray-800'}`}>
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${hasExpiry?'bg-red-50':'bg-indigo-50'}`}>
                           <Car className={`w-5 h-5 ${hasExpiry?'text-red-500':'text-indigo-600'}`}/>
                         </div>
                         <div>
-                          <p className="font-black text-gray-900 text-lg">{a.plaka}</p>
-                          <p className="text-xs text-gray-500">{[a.marka,a.model,a.yil].filter(Boolean).join(' ')}</p>
+                          <p className="font-black text-gray-900 dark:text-white text-lg">{a.plaka}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{[a.marka,a.model,a.yil].filter(Boolean).join(' ')}</p>
                         </div>
                       </div>
                       <button onClick={()=>deleteArac(a.id)} className="text-gray-200 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button>
@@ -988,8 +988,8 @@ export default function MuhasebePage() {
                     </div>
                     <div className="flex items-center justify-between pt-3 border-t border-gray-50">
                       <div>
-                        <p className="text-sm font-bold text-gray-900">{TL(toplamYakit)}</p>
-                        <p className="text-xs text-gray-500">{a._count?.yakitKayitlari??0} yakıt kaydı</p>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white">{TL(toplamYakit)}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{a._count?.yakitKayitlari??0} yakıt kaydı</p>
                       </div>
                       <button onClick={()=>{setYakitForm(p=>({...p,aracId:a.id}));setShowForm(true);setEditId('yakit');setSelArac(a.id);}}
                         className="flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-800 font-semibold border border-indigo-100 bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors">
@@ -1015,18 +1015,18 @@ export default function MuhasebePage() {
             {showForm && editId==='yakit' && (
               <form onSubmit={submitYakit} className="bg-white rounded-2xl border border-indigo-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="col-span-full flex items-center justify-between">
-                  <h3 className="font-bold text-gray-900">Yakıt Kaydı — {araclar.find(a=>a.id===yakitForm.aracId)?.plaka}</h3>
-                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Yakıt Kaydı — {araclar.find(a=>a.id===yakitForm.aracId)?.plaka}</h3>
+                  <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600 dark:text-gray-300"><X className="w-5 h-5"/></button>
                 </div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Araç *</label>
-                  <select required value={yakitForm.aracId} onChange={e=>setYakitForm(p=>({...p,aracId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Araç *</label>
+                  <select required value={yakitForm.aracId} onChange={e=>setYakitForm(p=>({...p,aracId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option value="">— Seç —</option>{araclar.map(a=><option key={a.id} value={a.id}>{a.plaka}</option>)}
                   </select></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label><input required type="date" value={yakitForm.tarih} onChange={e=>setYakitForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Litre *</label><input required type="number" min="0" step="0.01" value={yakitForm.litre} onChange={e=>setYakitForm(p=>({...p,litre:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Birim Fiyat (₺/L) *</label><input required type="number" min="0" step="0.001" value={yakitForm.birimFiyat} onChange={e=>setYakitForm(p=>({...p,birimFiyat:e.target.value}))} placeholder="0.000" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">KM Sayacı</label><input type="number" min="0" value={yakitForm.kmSayaci} onChange={e=>setYakitForm(p=>({...p,kmSayaci:e.target.value}))} placeholder="0" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">İstasyon</label><input value={yakitForm.istasyon} onChange={e=>setYakitForm(p=>({...p,istasyon:e.target.value}))} placeholder="Shell, BP…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tarih *</label><input required type="date" value={yakitForm.tarih} onChange={e=>setYakitForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Litre *</label><input required type="number" min="0" step="0.01" value={yakitForm.litre} onChange={e=>setYakitForm(p=>({...p,litre:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Birim Fiyat (₺/L) *</label><input required type="number" min="0" step="0.001" value={yakitForm.birimFiyat} onChange={e=>setYakitForm(p=>({...p,birimFiyat:e.target.value}))} placeholder="0.000" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">KM Sayacı</label><input type="number" min="0" value={yakitForm.kmSayaci} onChange={e=>setYakitForm(p=>({...p,kmSayaci:e.target.value}))} placeholder="0" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">İstasyon</label><input value={yakitForm.istasyon} onChange={e=>setYakitForm(p=>({...p,istasyon:e.target.value}))} placeholder="Shell, BP…" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
                 {yakitForm.litre&&yakitForm.birimFiyat&&(
                   <div className="sm:col-span-2 flex items-center gap-2 bg-indigo-50 rounded-xl px-4 py-2 text-sm font-bold text-indigo-700">
                     <Fuel className="w-4 h-4"/> Toplam: {TL(Number(yakitForm.litre)*Number(yakitForm.birimFiyat))}
@@ -1039,11 +1039,11 @@ export default function MuhasebePage() {
             )}
 
             {/* Yakıt tablosu */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <Fuel className="w-4 h-4 text-gray-500"/>
-                <h3 className="font-bold text-gray-900 text-sm">Yakıt Kayıtları</h3>
-                <select value={selArac} onChange={e=>setSelArac(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 ml-auto">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center gap-3 flex-wrap">
+                <Fuel className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500"/>
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm">Yakıt Kayıtları</h3>
+                <select value={selArac} onChange={e=>setSelArac(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 ml-auto">
                   <option value="">Tüm Araçlar</option>{araclar.map(a=><option key={a.id} value={a.id}>{a.plaka}</option>)}
                 </select>
               </div>
@@ -1055,21 +1055,21 @@ export default function MuhasebePage() {
                 </div>
               )}
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Tarih','Araç','Litre','₺/L','Toplam','KM','İstasyon',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Tarih','Araç','Litre','₺/L','Toplam','KM','İstasyon',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {yakitlar.map(y=>(
-                    <tr key={y.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(y.tarih)}</td>
-                      <td className="px-4 py-3 font-mono font-semibold text-gray-800">{y.arac?.plaka??'—'}</td>
-                      <td className="px-4 py-3 text-gray-700">{y.litre.toFixed(1)} L</td>
-                      <td className="px-4 py-3 text-gray-500">{y.birimFiyat.toFixed(3)} ₺</td>
+                    <tr key={y.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(y.tarih)}</td>
+                      <td className="px-4 py-3 font-mono font-semibold text-gray-800 dark:text-gray-100">{y.arac?.plaka??'—'}</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-gray-200">{y.litre.toFixed(1)} L</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500">{y.birimFiyat.toFixed(3)} ₺</td>
                       <td className="px-4 py-3 font-semibold text-red-500 whitespace-nowrap">{TL(y.toplamTutar)}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{y.kmSayaci>0?`${y.kmSayaci.toLocaleString('tr-TR')} km`:'—'}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{y.istasyon||'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{y.kmSayaci>0?`${y.kmSayaci.toLocaleString('tr-TR')} km`:'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{y.istasyon||'—'}</td>
                       <td className="px-4 py-3"><button onClick={()=>deleteYakit(y.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!yakitlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Henüz yakıt kaydı yok.</td></tr>}
+                  {!yakitlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Henüz yakıt kaydı yok.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -1120,8 +1120,8 @@ export default function MuhasebePage() {
               {/* Arama + Ekle */}
               <div className="flex items-center gap-3 flex-wrap">
                 <div className="relative flex-1 min-w-[200px]">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"/>
-                  <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Fatura no veya müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500"/>
+                  <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Fatura no veya müşteri ara…" className="w-full pl-9 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                 </div>
                 <button onClick={()=>setShowForm(p=>!p)} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
                   <Plus className="w-4 h-4"/> Fatura Ekle
@@ -1130,41 +1130,41 @@ export default function MuhasebePage() {
 
               {/* Form: basit giriş */}
               {showForm && (
-                <form onSubmit={submitFatura} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+                <form onSubmit={submitFatura} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 space-y-5">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-gray-900">Fatura Bilgisi Gir</h3>
-                    <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                    <h3 className="font-bold text-gray-900 dark:text-white">Fatura Bilgisi Gir</h3>
+                    <button type="button" onClick={()=>setShowForm(false)} className="text-gray-500 hover:text-gray-600 dark:text-gray-300"><X className="w-5 h-5"/></button>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri / Tedarikçi</label>
-                      <select value={faturaForm.musteriId} onChange={e=>setFaturaForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Müşteri / Tedarikçi</label>
+                      <select value={faturaForm.musteriId} onChange={e=>setFaturaForm(p=>({...p,musteriId:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">— Seç (opsiyonel) —</option>
                         {musteriler.map(m=><option key={m.id} value={m.id}>{m.ad}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Fatura Tarihi *</label>
-                      <input required type="date" value={faturaForm.tarih} onChange={e=>setFaturaForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Fatura Tarihi *</label>
+                      <input required type="date" value={faturaForm.tarih} onChange={e=>setFaturaForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Vade Tarihi</label>
-                      <input type="date" value={faturaForm.vadeTarih} onChange={e=>setFaturaForm(p=>({...p,vadeTarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Vade Tarihi</label>
+                      <input type="date" value={faturaForm.vadeTarih} onChange={e=>setFaturaForm(p=>({...p,vadeTarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Tutar (KDV Dahil ₺) *</label>
-                      <input required type="number" min="0" step="0.01" value={faturaForm.tutar} onChange={e=>setFaturaForm(p=>({...p,tutar:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tutar (KDV Dahil ₺) *</label>
+                      <input required type="number" min="0" step="0.01" value={faturaForm.tutar} onChange={e=>setFaturaForm(p=>({...p,tutar:e.target.value}))} placeholder="0.00" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">KDV Oranı</label>
-                      <select value={faturaForm.kdvOrani} onChange={e=>setFaturaForm(p=>({...p,kdvOrani:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">KDV Oranı</label>
+                      <select value={faturaForm.kdvOrani} onChange={e=>setFaturaForm(p=>({...p,kdvOrani:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         {[0,1,8,10,18,20].map(k=><option key={k} value={k}>%{k}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Durum</label>
-                      <select value={faturaForm.durum} onChange={e=>setFaturaForm(p=>({...p,durum:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Durum</label>
+                      <select value={faturaForm.durum} onChange={e=>setFaturaForm(p=>({...p,durum:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="beklemede">Beklemede</option>
                         <option value="odendi">Ödendi</option>
                         <option value="iptal">İptal</option>
@@ -1174,21 +1174,21 @@ export default function MuhasebePage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Açıklama / Notlar</label>
-                      <input value={faturaForm.aciklama} onChange={e=>setFaturaForm(p=>({...p,aciklama:e.target.value}))} placeholder="Fatura konusu, referans no vb." className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Açıklama / Notlar</label>
+                      <input value={faturaForm.aciklama} onChange={e=>setFaturaForm(p=>({...p,aciklama:e.target.value}))} placeholder="Fatura konusu, referans no vb." className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-600 mb-1">Fatura Dosyası (PDF / Resim, maks. 5 MB)</label>
-                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={handleFaturaDosya} className="w-full text-sm text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                      <label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Fatura Dosyası (PDF / Resim, maks. 5 MB)</label>
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={handleFaturaDosya} className="w-full text-sm text-gray-600 dark:text-gray-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
                       {faturaForm.dosyaUrl && <p className="text-xs text-emerald-600 mt-1">✓ Dosya hazır</p>}
                     </div>
                   </div>
 
                   {faturaForm.tutar && Number(faturaForm.tutar) > 0 && (
-                    <div className="bg-gray-50 rounded-xl p-3 text-xs text-gray-600 flex gap-6">
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 text-xs text-gray-600 dark:text-gray-300 flex gap-6">
                       <span>Ara toplam: <strong>{TL(Number(faturaForm.tutar)/(1+Number(faturaForm.kdvOrani)/100))}</strong></span>
                       <span>KDV (%{faturaForm.kdvOrani}): <strong>{TL(Number(faturaForm.tutar)-Number(faturaForm.tutar)/(1+Number(faturaForm.kdvOrani)/100))}</strong></span>
-                      <span className="font-black text-gray-900">Genel Toplam: {TL(Number(faturaForm.tutar))}</span>
+                      <span className="font-black text-gray-900 dark:text-white">Genel Toplam: {TL(Number(faturaForm.tutar))}</span>
                     </div>
                   )}
 
@@ -1201,19 +1201,19 @@ export default function MuhasebePage() {
               )}
 
               {/* Fatura listesi */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-gray-50 border-b border-gray-100">
+                    <tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">
                       {['','Fatura No','Müşteri','Fatura Tar.','Vade / Kalan','Tutar','Durum',''].map(h=>(
-                        <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
+                        <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                     {filtreliF.map(f => {
                       const durum = vadeDurumu(f);
-                      const rowBg = durum==='gecikti' ? 'bg-red-50/60 hover:bg-red-50' : durum==='yaklasi' ? 'bg-amber-50/50 hover:bg-amber-50' : 'hover:bg-gray-50';
+                      const rowBg = durum==='gecikti' ? 'bg-red-50/60 hover:bg-red-50' : durum==='yaklasi' ? 'bg-amber-50/50 hover:bg-amber-50' : 'hover:bg-gray-50 dark:hover:bg-gray-800';
                       const fark  = f.vadeTarih ? vadeFark(f.vadeTarih) : null;
                       return (
                         <tr key={f.id} className={`transition-colors ${rowBg}`}>
@@ -1221,24 +1221,24 @@ export default function MuhasebePage() {
                           <td className="pl-4 py-3 w-2">
                             <span className={`block w-2 h-2 rounded-full ${durum==='gecikti'?'bg-red-500':durum==='yaklasi'?'bg-amber-400':durum==='odendi'?'bg-emerald-400':'bg-gray-300'}`}/>
                           </td>
-                          <td className="px-4 py-3 font-mono font-bold text-gray-900">{f.faturaNo}</td>
-                          <td className="px-4 py-3 font-semibold text-gray-700">{f.musteri?.ad??'—'}</td>
-                          <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(f.tarih)}</td>
+                          <td className="px-4 py-3 font-mono font-bold text-gray-900 dark:text-white">{f.faturaNo}</td>
+                          <td className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-200">{f.musteri?.ad??'—'}</td>
+                          <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(f.tarih)}</td>
                           <td className="px-4 py-3 whitespace-nowrap">
                             {f.vadeTarih ? (
                               <div>
-                                <p className="text-xs text-gray-500">{fmtDate(f.vadeTarih)}</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{fmtDate(f.vadeTarih)}</p>
                                 {durum!=='odendi' && fark!==null && (
-                                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${fark<0?'bg-red-100 text-red-700':fark<=7?'bg-amber-100 text-amber-700':'bg-gray-100 text-gray-500'}`}>
+                                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${fark<0?'bg-red-100 text-red-700':fark<=7?'bg-amber-100 text-amber-700':'bg-gray-100 text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                                     {fark<0?`${Math.abs(fark)} gün geçti`:fark===0?'Bugün vadeli':`${fark} gün kaldı`}
                                   </span>
                                 )}
                               </div>
-                            ) : <span className="text-gray-400 text-xs">—</span>}
+                            ) : <span className="text-gray-400 dark:text-gray-500 text-xs">—</span>}
                           </td>
-                          <td className="px-4 py-3 font-black text-gray-900 whitespace-nowrap">{TL(f.genelToplam)}</td>
+                          <td className="px-4 py-3 font-black text-gray-900 dark:text-white whitespace-nowrap">{TL(f.genelToplam)}</td>
                           <td className="px-4 py-3">
-                            <select value={f.durum} onChange={e=>updateFaturaDurum(f.id,e.target.value)} className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select value={f.durum} onChange={e=>updateFaturaDurum(f.id,e.target.value)} className="text-xs border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                               <option value="beklemede">Beklemede</option>
                               <option value="odendi">Ödendi</option>
                               <option value="iptal">İptal</option>
@@ -1247,7 +1247,7 @@ export default function MuhasebePage() {
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
                               {f.dosyaUrl && (
-                                <a href={f.dosyaUrl} target="_blank" rel="noopener noreferrer" title="Dosyayı Gör" className="text-gray-500 hover:text-blue-600 transition-colors">
+                                <a href={f.dosyaUrl} target="_blank" rel="noopener noreferrer" title="Dosyayı Gör" className="text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 transition-colors">
                                   <FileText className="w-4 h-4"/>
                                 </a>
                               )}
@@ -1276,18 +1276,18 @@ export default function MuhasebePage() {
           <>
             {/* Personel listesi */}
             <div className="flex items-center justify-between flex-wrap gap-3">
-              <h2 className="font-bold text-gray-900">Personel</h2>
+              <h2 className="font-bold text-gray-900 dark:text-white">Personel</h2>
               <button onClick={()=>{setShowForm(p=>!p);setEditId(null);}} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"><Plus className="w-4 h-4"/> Yeni Personel</button>
             </div>
 
             {showForm && editId===null && (
-              <form onSubmit={submitPersonel} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <h3 className="col-span-full font-bold text-gray-900">Yeni Personel</h3>
+              <form onSubmit={submitPersonel} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className="col-span-full font-bold text-gray-900 dark:text-white">Yeni Personel</h3>
                 {([['Ad Soyad *','ad','text','Ahmet Yılmaz'],['Unvan / Pozisyon','unvan','text','TIR Şoförü'],['Telefon','telefon','text','+90 5xx xxx xx xx'],['TC Kimlik No','tcNo','text','12345678901'],['Maaş (₺ / ay)','maas','number','0'],['İşe Başlangıç *','baslangicTarihi','date','']] as [string,keyof typeof personelForm,string,string][]).map(([lbl,key,type,ph])=>(
-                  <div key={key}><label className="block text-xs font-semibold text-gray-600 mb-1">{lbl}</label><input required={lbl.endsWith('*')} type={type} value={personelForm[key]} onChange={e=>setPersonelForm(p=>({...p,[key]:e.target.value}))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
+                  <div key={key}><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">{lbl}</label><input required={lbl.endsWith('*')} type={type} value={personelForm[key]} onChange={e=>setPersonelForm(p=>({...p,[key]:e.target.value}))} placeholder={ph} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/></div>
                 ))}
                 <div className="col-span-full flex gap-2 justify-end">
-                  <button type="button" onClick={()=>setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 rounded-xl">İptal</button>
+                  <button type="button" onClick={()=>setShowForm(false)} className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 rounded-xl">İptal</button>
                   <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4"/> Kaydet</button>
                 </div>
               </form>
@@ -1295,22 +1295,22 @@ export default function MuhasebePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {personeller.map(p => (
-                <div key={p.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${!p.aktif?'opacity-60':'border-gray-100'}`}>
+                <div key={p.id} className={`bg-white rounded-2xl border shadow-sm p-5 ${!p.aktif?'opacity-60':'border-gray-100 dark:border-gray-800'}`}>
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${p.aktif?'bg-indigo-50':'bg-gray-100'}`}>
-                        <Users className={`w-5 h-5 ${p.aktif?'text-indigo-600':'text-gray-500'}`}/>
+                        <Users className={`w-5 h-5 ${p.aktif?'text-indigo-600':'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}/>
                       </div>
-                      <div><p className="font-bold text-gray-900">{p.ad}</p><p className="text-xs text-gray-500">{p.unvan||'Pozisyon belirtilmemiş'}</p></div>
+                      <div><p className="font-bold text-gray-900 dark:text-white">{p.ad}</p><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{p.unvan||'Pozisyon belirtilmemiş'}</p></div>
                     </div>
                     <button onClick={()=>deletePersonel(p.id)} className="text-gray-200 hover:text-red-500 transition-colors shrink-0"><Trash2 className="w-4 h-4"/></button>
                   </div>
-                  <div className="space-y-1 mb-3 text-xs text-gray-500">
+                  <div className="space-y-1 mb-3 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
                     {p.telefon&&<p className="flex items-center gap-2"><Phone className="w-3.5 h-3.5"/>{p.telefon}</p>}
                     <p className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5"/>{fmtDate(p.baslangicTarihi)}&apos;dan beri</p>
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t border-gray-50 gap-2 flex-wrap">
-                    <div><p className="text-base font-black text-gray-900">{TL(p.maas)}</p><p className="text-xs text-gray-500">/ay brüt</p></div>
+                    <div><p className="text-base font-black text-gray-900 dark:text-white">{TL(p.maas)}</p><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">/ay brüt</p></div>
                     <div className="flex gap-2">
                       <button onClick={()=>{setSelPersonel(p.id);setEditId(p.id);setShowForm(true);setPuantajForm(prev=>({...prev,personelId:p.id}));}}
                         className="flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-800 font-semibold border border-indigo-100 bg-indigo-50 px-2.5 py-1.5 rounded-lg transition-colors">
@@ -1340,18 +1340,18 @@ export default function MuhasebePage() {
             {showForm && editId !== null && (
               <form onSubmit={submitPuantaj} className="bg-white rounded-2xl border border-indigo-100 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="col-span-full flex items-center justify-between">
-                  <h3 className="font-bold text-gray-900">Puantaj Girişi — {personeller.find(p=>p.id===editId)?.ad}</h3>
-                  <button type="button" onClick={()=>{setShowForm(false);setEditId(null);}} className="text-gray-500 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Puantaj Girişi — {personeller.find(p=>p.id===editId)?.ad}</h3>
+                  <button type="button" onClick={()=>{setShowForm(false);setEditId(null);}} className="text-gray-500 hover:text-gray-600 dark:text-gray-300"><X className="w-5 h-5"/></button>
                 </div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label><input required type="date" value={puantajForm.tarih} onChange={e=>setPuantajForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Giriş Saati</label><input type="time" value={puantajForm.girisSaati} onChange={e=>setPuantajForm(p=>({...p,girisSaati:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Çıkış Saati</label><input type="time" value={puantajForm.cikisSaati} onChange={e=>setPuantajForm(p=>({...p,cikisSaati:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">Fazla Mesai (saat)</label><input type="number" min="0" step="0.5" value={puantajForm.fazlaMesai} onChange={e=>setPuantajForm(p=>({...p,fazlaMesai:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
-                <div><label className="block text-xs font-semibold text-gray-600 mb-1">İzin Türü</label>
-                  <select value={puantajForm.izinTuru} onChange={e=>setPuantajForm(p=>({...p,izinTuru:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tarih *</label><input required type="date" value={puantajForm.tarih} onChange={e=>setPuantajForm(p=>({...p,tarih:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Giriş Saati</label><input type="time" value={puantajForm.girisSaati} onChange={e=>setPuantajForm(p=>({...p,girisSaati:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Çıkış Saati</label><input type="time" value={puantajForm.cikisSaati} onChange={e=>setPuantajForm(p=>({...p,cikisSaati:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Fazla Mesai (saat)</label><input type="number" min="0" step="0.5" value={puantajForm.fazlaMesai} onChange={e=>setPuantajForm(p=>({...p,fazlaMesai:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">İzin Türü</label>
+                  <select value={puantajForm.izinTuru} onChange={e=>setPuantajForm(p=>({...p,izinTuru:e.target.value}))} className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <option value="">Çalışıldı</option><option value="yillik">Yıllık İzin</option><option value="hastalik">Hastalık İzni</option><option value="ucretsiz">Ücretsiz İzin</option><option value="resmi">Resmi Tatil</option>
                   </select></div>
-                <div className="sm:col-span-2 lg:col-span-3"><label className="block text-xs font-semibold text-gray-600 mb-1">Not</label><input value={puantajForm.notlar} onChange={e=>setPuantajForm(p=>({...p,notlar:e.target.value}))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
+                <div className="sm:col-span-2 lg:col-span-3"><label className="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Not</label><input value={puantajForm.notlar} onChange={e=>setPuantajForm(p=>({...p,notlar:e.target.value}))} placeholder="Opsiyonel not…" className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/></div>
                 <div className="col-span-full flex gap-2 justify-end">
                   <button type="submit" className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"><Save className="w-4 h-4"/> Kaydet</button>
                 </div>
@@ -1363,60 +1363,60 @@ export default function MuhasebePage() {
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
                 <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                   <form onSubmit={submitTopluPuantaj}>
-                    <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+                    <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800">
                       <div>
-                        <h2 className="text-lg font-bold text-gray-900">Toplu Puantaj Girişi</h2>
-                        <p className="text-xs text-gray-500 mt-0.5">Birden fazla personel için aynı anda kayıt oluştur</p>
+                        <h2 className="text-lg font-bold text-gray-900 dark:text-white">Toplu Puantaj Girişi</h2>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">Birden fazla personel için aynı anda kayıt oluştur</p>
                       </div>
-                      <button type="button" onClick={()=>setShowToplu(false)} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5"/></button>
+                      <button type="button" onClick={()=>setShowToplu(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-300"><X className="w-5 h-5"/></button>
                     </div>
 
                     <div className="px-6 py-5 space-y-5">
                       {/* Personel Seçimi */}
                       <div>
                         <div className="flex items-center justify-between mb-2">
-                          <label className="text-xs font-semibold text-gray-700">Personel *</label>
+                          <label className="text-xs font-semibold text-gray-700 dark:text-gray-200">Personel *</label>
                           <button type="button"
                             onClick={()=>setTopluForm(p=>({...p, personelIds: p.personelIds.length===personeller.length ? [] : personeller.map(x=>x.id)}))}
                             className="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
                             {topluForm.personelIds.length===personeller.length ? 'Seçimi kaldır' : 'Tümünü seç'}
                           </button>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto border border-gray-100 rounded-xl p-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto border border-gray-100 dark:border-gray-800 rounded-xl p-3">
                           {personeller.filter(p=>p.aktif).map(p=>(
                             <label key={p.id} className="flex items-center gap-2 text-sm cursor-pointer select-none">
                               <input type="checkbox" checked={topluForm.personelIds.includes(p.id)}
                                 onChange={e=>setTopluForm(prev=>({...prev, personelIds: e.target.checked ? [...prev.personelIds, p.id] : prev.personelIds.filter(id=>id!==p.id)}))}
                                 className="rounded accent-indigo-600"/>
-                              <span className="text-gray-800 truncate">{p.ad}</span>
+                              <span className="text-gray-800 dark:text-gray-100 truncate">{p.ad}</span>
                             </label>
                           ))}
-                          {personeller.filter(p=>p.aktif).length===0 && <p className="text-xs text-gray-400 col-span-full">Aktif personel yok</p>}
+                          {personeller.filter(p=>p.aktif).length===0 && <p className="text-xs text-gray-400 dark:text-gray-500 col-span-full">Aktif personel yok</p>}
                         </div>
                       </div>
 
                       {/* Tarih Aralığı */}
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">Başlangıç Tarihi *</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Başlangıç Tarihi *</label>
                           <input required type="date" value={topluForm.baslangic} onChange={e=>setTopluForm(p=>({...p,baslangic:e.target.value}))}
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">Bitiş Tarihi *</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Bitiş Tarihi *</label>
                           <input required type="date" value={topluForm.bitis} min={topluForm.baslangic} onChange={e=>setTopluForm(p=>({...p,bitis:e.target.value}))}
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
                         </div>
                       </div>
 
                       {/* Hafta Günleri */}
                       <div>
-                        <label className="block text-xs font-semibold text-gray-700 mb-2">Günler</label>
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-2">Günler</label>
                         <div className="flex gap-2 flex-wrap">
                           {[['Paz',0],['Pts',1],['Sal',2],['Çar',3],['Per',4],['Cum',5],['Cmt',6]].map(([label, val])=>(
                             <button key={val} type="button"
                               onClick={()=>setTopluForm(p=>({...p, haftaGunleri: p.haftaGunleri.includes(val as number) ? p.haftaGunleri.filter(g=>g!==val) : [...p.haftaGunleri, val as number]}))}
-                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${topluForm.haftaGunleri.includes(val as number) ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-500 border-gray-200 hover:border-indigo-300'}`}>
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${topluForm.haftaGunleri.includes(val as number) ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-500 dark:text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-700 hover:border-indigo-300'}`}>
                               {label}
                             </button>
                           ))}
@@ -1426,30 +1426,30 @@ export default function MuhasebePage() {
                       {/* Çalışma Saatleri & Mesai */}
                       <div className="grid grid-cols-3 gap-4">
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">Giriş Saati</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Giriş Saati</label>
                           <input type="time" value={topluForm.girisSaati} onChange={e=>setTopluForm(p=>({...p,girisSaati:e.target.value}))}
                             disabled={!!topluForm.izinTuru}
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-40"/>
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-40"/>
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">Çıkış Saati</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Çıkış Saati</label>
                           <input type="time" value={topluForm.cikisSaati} onChange={e=>setTopluForm(p=>({...p,cikisSaati:e.target.value}))}
                             disabled={!!topluForm.izinTuru}
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-40"/>
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-40"/>
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">Fazla Mesai (s)</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Fazla Mesai (s)</label>
                           <input type="number" min="0" step="0.5" value={topluForm.fazlaMesai} onChange={e=>setTopluForm(p=>({...p,fazlaMesai:e.target.value}))}
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
                         </div>
                       </div>
 
                       {/* İzin Türü & Not */}
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">İzin Türü</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">İzin Türü</label>
                           <select value={topluForm.izinTuru} onChange={e=>setTopluForm(p=>({...p,izinTuru:e.target.value}))}
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <option value="">Çalışıldı</option>
                             <option value="yillik">Yıllık İzin</option>
                             <option value="hastalik">Hastalık İzni</option>
@@ -1458,16 +1458,16 @@ export default function MuhasebePage() {
                           </select>
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-gray-700 mb-1">Not</label>
+                          <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Not</label>
                           <input value={topluForm.notlar} onChange={e=>setTopluForm(p=>({...p,notlar:e.target.value}))}
                             placeholder="Opsiyonel…"
-                            className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
                         </div>
                       </div>
 
                       {/* Önizleme */}
                       {topluForm.baslangic && topluForm.bitis && (
-                        <div className={`rounded-xl px-4 py-3 text-sm flex items-center gap-2 ${topluTarihler().length>0 ? 'bg-indigo-50 text-indigo-800' : 'bg-gray-50 text-gray-500'}`}>
+                        <div className={`rounded-xl px-4 py-3 text-sm flex items-center gap-2 ${topluTarihler().length>0 ? 'bg-indigo-50 text-indigo-800' : 'bg-gray-50 text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                           <CalendarDays className="w-4 h-4 shrink-0"/>
                           {topluTarihler().length > 0
                             ? <span><b>{topluForm.personelIds.length}</b> personel × <b>{topluTarihler().length}</b> gün = <b>{topluForm.personelIds.length * topluTarihler().length}</b> kayıt oluşturulacak</span>
@@ -1476,8 +1476,8 @@ export default function MuhasebePage() {
                       )}
                     </div>
 
-                    <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3">
-                      <button type="button" onClick={()=>setShowToplu(false)} className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-800">İptal</button>
+                    <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-800 flex justify-end gap-3">
+                      <button type="button" onClick={()=>setShowToplu(false)} className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-800 dark:hover:text-white dark:text-gray-100">İptal</button>
                       <button type="submit" disabled={topluYukleniyor || topluForm.personelIds.length===0 || topluTarihler().length===0}
                         className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-semibold px-5 py-2 rounded-xl transition-colors active:scale-95">
                         {topluYukleniyor ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block"/>Kaydediliyor…</> : <><Save className="w-4 h-4"/>Toplu Kaydet</>}
@@ -1489,11 +1489,11 @@ export default function MuhasebePage() {
             )}
 
             {/* Puantaj tablosu */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <CalendarDays className="w-4 h-4 text-gray-500"/><h3 className="font-bold text-gray-900 text-sm">Puantaj Tablosu</h3>
-                <input type="month" value={puantajAy} onChange={e=>setPuantajAy(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-                <select value={selPersonel} onChange={e=>setSelPersonel(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center gap-3 flex-wrap">
+                <CalendarDays className="w-4 h-4 text-gray-500"/><h3 className="font-bold text-gray-900 dark:text-white text-sm">Puantaj Tablosu</h3>
+                <input type="month" value={puantajAy} onChange={e=>setPuantajAy(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+                <select value={selPersonel} onChange={e=>setSelPersonel(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                   <option value="">Tüm Personel</option>{personeller.map(p=><option key={p.id} value={p.id}>{p.ad}</option>)}
                 </select>
                 <div className="ml-auto flex items-center gap-2">
@@ -1508,25 +1508,25 @@ export default function MuhasebePage() {
                 </div>
               </div>
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">{['Personel','Tarih','Giriş','Çıkış','Fazla Mesai','Durum','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Personel','Tarih','Giriş','Çıkış','Fazla Mesai','Durum','Not',''].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {puantajlar.map(pt=>(
-                    <tr key={pt.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap">{pt.personel?.ad??'—'}{pt.personel?.unvan&&<span className="block text-xs text-gray-500 font-normal">{pt.personel.unvan}</span>}</td>
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(pt.tarih)}</td>
-                      <td className="px-4 py-3 text-gray-700 font-mono">{pt.girisSaati??'—'}</td>
-                      <td className="px-4 py-3 text-gray-700 font-mono">{pt.cikisSaati??'—'}</td>
+                    <tr key={pt.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white whitespace-nowrap">{pt.personel?.ad??'—'}{pt.personel?.unvan&&<span className="block text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-normal">{pt.personel.unvan}</span>}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(pt.tarih)}</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-gray-200 font-mono">{pt.girisSaati??'—'}</td>
+                      <td className="px-4 py-3 text-gray-700 dark:text-gray-200 font-mono">{pt.cikisSaati??'—'}</td>
                       <td className="px-4 py-3 text-center">{pt.fazlaMesai>0?<span className="text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">+{pt.fazlaMesai}s</span>:<span className="text-xs text-gray-300">—</span>}</td>
                       <td className="px-4 py-3"><IzinBadge izin={pt.izinTuru}/></td>
-                      <td className="px-4 py-3 text-gray-500 text-xs max-w-[120px] truncate">{pt.notlar||'—'}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs max-w-[120px] truncate">{pt.notlar||'—'}</td>
                       <td className="px-4 py-3"><button onClick={()=>deletePuantaj(pt.id)} className="text-gray-300 hover:text-red-500 transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                   ))}
-                  {!puantajlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Bu ay için puantaj kaydı yok.</td></tr>}
+                  {!puantajlar.length&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Bu ay için puantaj kaydı yok.</td></tr>}
                 </tbody>
               </table>
               {puantajlar.length>0&&(
-                <div className="px-5 py-3 border-t border-gray-50 flex gap-6 text-xs text-gray-500">
+                <div className="px-5 py-3 border-t border-gray-50 flex gap-6 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">
                   <span>{puantajlar.filter(p=>!p.izinTuru).length} çalışma günü</span>
                   <span className="text-amber-600">{puantajlar.filter(p=>p.izinTuru==='yillik').length} yıllık izin</span>
                   <span className="text-red-500">{puantajlar.filter(p=>p.izinTuru==='hastalik').length} hastalık</span>
@@ -1536,12 +1536,12 @@ export default function MuhasebePage() {
             </div>
 
             {/* ── Bordro ── */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-wrap">
-                <Calculator className="w-4 h-4 text-gray-500"/>
-                <h3 className="font-bold text-gray-900 text-sm">Bordro Hesaplama</h3>
-                <input type="month" value={bordroAy} onChange={e=>setBordroAy(e.target.value)} className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
-                <span className="text-xs text-gray-500">2025 Türkiye SGK oranları · tahmini hesap</span>
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+              <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center gap-3 flex-wrap">
+                <Calculator className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500"/>
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm">Bordro Hesaplama</h3>
+                <input type="month" value={bordroAy} onChange={e=>setBordroAy(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
+                <span className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">2025 Türkiye SGK oranları · tahmini hesap</span>
                 <button onClick={hesaplaHepsiBordro} disabled={bordroYukleniyor || personeller.filter(p=>p.aktif).length===0}
                   className="ml-auto flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95">
                   {bordroYukleniyor
@@ -1550,18 +1550,18 @@ export default function MuhasebePage() {
                 </button>
               </div>
               <table className="w-full text-sm">
-                <thead><tr className="bg-gray-50 border-b border-gray-100">
-                  {['Personel','Brüt','Fazla Mesai','SGK İşçi','İşsizlik','Gel. Vergisi','Damga','NET MAAŞ','İşveren Toplam',''].map(h=><th key={h} className="text-left px-3 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}
+                <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">
+                  {['Personel','Brüt','Fazla Mesai','SGK İşçi','İşsizlik','Gel. Vergisi','Damga','NET MAAŞ','İşveren Toplam',''].map(h=><th key={h} className="text-left px-3 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}
                 </tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {personeller.map(p => {
                     const b = bordrolar.find(b=>b.personelId===p.id&&b.ay===bordroAy);
                     return (
-                      <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-3 py-3 font-semibold text-gray-900 whitespace-nowrap">{p.ad}<span className="block text-xs text-gray-500 font-normal">{p.unvan}</span></td>
+                      <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <td className="px-3 py-3 font-semibold text-gray-900 dark:text-white whitespace-nowrap">{p.ad}<span className="block text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-normal">{p.unvan}</span></td>
                         {b ? (
                           <>
-                            <td className="px-3 py-3 text-gray-700 whitespace-nowrap">{TL(b.brutMaas)}</td>
+                            <td className="px-3 py-3 text-gray-700 dark:text-gray-200 whitespace-nowrap">{TL(b.brutMaas)}</td>
                             <td className="px-3 py-3 text-amber-600 whitespace-nowrap">{b.fazlaMesaiUcret>0?TL(b.fazlaMesaiUcret):'—'}</td>
                             <td className="px-3 py-3 text-red-500 whitespace-nowrap">-{TL(b.sgkIsci)}</td>
                             <td className="px-3 py-3 text-red-400 whitespace-nowrap">-{TL(b.issizlikIsci)}</td>
@@ -1592,7 +1592,7 @@ export default function MuhasebePage() {
               </table>
               {bordrolar.filter(b=>b.ay===bordroAy).length>0&&(
                 <div className="px-5 py-3 border-t border-gray-50 flex gap-6 text-xs font-semibold">
-                  <span className="text-gray-500">Toplam Brüt: <span className="text-gray-900">{TL(bordrolar.filter(b=>b.ay===bordroAy).reduce((s,b)=>s+b.brutMaas+b.fazlaMesaiUcret,0))}</span></span>
+                  <span className="text-gray-500">Toplam Brüt: <span className="text-gray-900 dark:text-white">{TL(bordrolar.filter(b=>b.ay===bordroAy).reduce((s,b)=>s+b.brutMaas+b.fazlaMesaiUcret,0))}</span></span>
                   <span className="text-emerald-600">Toplam Net: {TL(bordrolar.filter(b=>b.ay===bordroAy).reduce((s,b)=>s+b.netMaas,0))}</span>
                   <span className="text-purple-600">Toplam Maliyet: {TL(bordrolar.filter(b=>b.ay===bordroAy).reduce((s,b)=>s+b.toplamMaliyet,0))}</span>
                 </div>
@@ -1607,23 +1607,23 @@ export default function MuhasebePage() {
         {tab === 'raporlar' && (
           <>
             <div className="flex items-center gap-3 flex-wrap">
-              <h2 className="font-bold text-gray-900 flex-1">Raporlar</h2>
+              <h2 className="font-bold text-gray-900 dark:text-white flex-1">Raporlar</h2>
               <div className="flex gap-2">
                 {(['seferler','araclar','musteriler'] as const).map(t => (
                   <button key={t} onClick={()=>setRaporTip(t)}
-                    className={`text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors ${raporTip===t?'bg-blue-600 text-white':'bg-white border border-gray-200 text-gray-600 hover:border-blue-300'}`}>
+                    className={`text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors ${raporTip===t?'bg-blue-600 text-white':'bg-white border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:border-blue-300'}`}>
                     {t==='seferler'?'Sefer K/Z':t==='araclar'?'Araç K/Z':'Müşteri Ciro'}
                   </button>
                 ))}
               </div>
               <input type="month" value={raporDonem} onChange={e=>setRaporDonem(e.target.value)}
-                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {raporDonem && <button onClick={()=>setRaporDonem('')} className="text-xs text-gray-500 hover:text-gray-600"><X className="w-4 h-4"/></button>}
+                className="text-sm border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+              {raporDonem && <button onClick={()=>setRaporDonem('')} className="text-xs text-gray-500 hover:text-gray-600 dark:text-gray-300"><X className="w-4 h-4"/></button>}
             </div>
 
             {/* Sefer K/Z */}
             {raporTip === 'seferler' && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 {raporYuklendi && seferRapor.length > 0 && (
                   <div className="px-5 py-3 bg-blue-50 border-b border-blue-100 grid grid-cols-4 gap-4 text-xs font-semibold text-blue-800">
                     <span>Toplam Sefer: {seferRapor.length}</span>
@@ -1635,22 +1635,22 @@ export default function MuhasebePage() {
                   </div>
                 )}
                 <table className="w-full text-sm">
-                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Rota','Araç','Tarih','Müşteri','Ücret','Yakıt','Net K/Z','Durum'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Rota','Araç','Tarih','Müşteri','Ücret','Yakıt','Net K/Z','Durum'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                     {seferRapor.map(r=>(
-                      <tr key={r.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap">{r.rotaDan} → {r.rotaAya}</td>
-                        <td className="px-4 py-3 font-mono text-gray-600 text-xs">{r.aracPlaka}</td>
-                        <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{fmtDate(r.tarih)}</td>
-                        <td className="px-4 py-3 text-gray-500 text-xs">{r.musteriAd??'—'}</td>
+                      <tr key={r.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white whitespace-nowrap">{r.rotaDan} → {r.rotaAya}</td>
+                        <td className="px-4 py-3 font-mono text-gray-600 dark:text-gray-300 text-xs">{r.aracPlaka}</td>
+                        <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 whitespace-nowrap">{fmtDate(r.tarih)}</td>
+                        <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{r.musteriAd??'—'}</td>
                         <td className="px-4 py-3 text-green-600 font-semibold whitespace-nowrap">{TL(r.seferUcreti)}</td>
                         <td className="px-4 py-3 text-red-500 whitespace-nowrap">{TL(r.yakitMaliyeti)}</td>
                         <td className={`px-4 py-3 font-black whitespace-nowrap ${r.netKar>=0?'text-emerald-600':'text-red-600'}`}>{TL(r.netKar)}</td>
                         <td className="px-4 py-3"><DurumBadge durum={r.durum}/></td>
                       </tr>
                     ))}
-                    {!seferRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Bu dönemde sefer yok.</td></tr>}
-                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 text-xs">Yükleniyor…</td></tr>}
+                    {!seferRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Bu dönemde sefer yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">Yükleniyor…</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1658,24 +1658,24 @@ export default function MuhasebePage() {
 
             {/* Araç K/Z */}
             {raporTip === 'araclar' && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Plaka','Marka/Model','Sefer','KM','Sefer Geliri','Yakıt Gideri','Net K/Z','km Maliyeti'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Plaka','Marka/Model','Sefer','KM','Sefer Geliri','Yakıt Gideri','Net K/Z','km Maliyeti'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                     {aracRapor.map(r=>(
-                      <tr key={r.plaka} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 py-3 font-mono font-black text-gray-900">{r.plaka}</td>
-                        <td className="px-4 py-3 text-gray-500 text-xs">{[r.marka,r.model].filter(Boolean).join(' ')||'—'}</td>
-                        <td className="px-4 py-3 text-gray-700">{r.seferSayisi}</td>
-                        <td className="px-4 py-3 text-gray-500 text-xs">{r.kmTopla.toLocaleString('tr-TR')} km</td>
+                      <tr key={r.plaka} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <td className="px-4 py-3 font-mono font-black text-gray-900 dark:text-white">{r.plaka}</td>
+                        <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{[r.marka,r.model].filter(Boolean).join(' ')||'—'}</td>
+                        <td className="px-4 py-3 text-gray-700 dark:text-gray-200">{r.seferSayisi}</td>
+                        <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{r.kmTopla.toLocaleString('tr-TR')} km</td>
                         <td className="px-4 py-3 text-green-600 font-semibold whitespace-nowrap">{TL(r.seferGelir)}</td>
                         <td className="px-4 py-3 text-red-500 whitespace-nowrap">{TL(r.yakitTutar)}</td>
                         <td className={`px-4 py-3 font-black whitespace-nowrap ${r.netKar>=0?'text-emerald-600':'text-red-600'}`}>{TL(r.netKar)}</td>
-                        <td className="px-4 py-3 text-gray-500 text-xs">{r.kmBasiMaliyet>0?`${r.kmBasiMaliyet.toFixed(2)} ₺/km`:'—'}</td>
+                        <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">{r.kmBasiMaliyet>0?`${r.kmBasiMaliyet.toFixed(2)} ₺/km`:'—'}</td>
                       </tr>
                     ))}
-                    {!aracRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Bu dönemde araç verisi yok.</td></tr>}
-                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 text-xs">Yükleniyor…</td></tr>}
+                    {!aracRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Bu dönemde araç verisi yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">Yükleniyor…</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1683,31 +1683,31 @@ export default function MuhasebePage() {
 
             {/* Müşteri Ciro */}
             {raporTip === 'musteriler' && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead><tr className="bg-gray-50 border-b border-gray-100">{['Müşteri','Sefer','Fatura','Top. Fatura','Tahsilat','Tahsilat %','Bekleyen','Bakiye'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <thead><tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">{['Müşteri','Sefer','Fatura','Top. Fatura','Tahsilat','Tahsilat %','Bekleyen','Bakiye'].map(h=><th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>)}</tr></thead>
+                  <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                     {musteriRapor.map(r=>(
-                      <tr key={r.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-4 py-3 font-semibold text-gray-900">{r.ad}</td>
-                        <td className="px-4 py-3 text-gray-600">{r.seferSayisi}</td>
-                        <td className="px-4 py-3 text-gray-600">{r.faturaSayisi}</td>
-                        <td className="px-4 py-3 text-gray-900 font-semibold whitespace-nowrap">{TL(r.toplamFatura)}</td>
+                      <tr key={r.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">{r.ad}</td>
+                        <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{r.seferSayisi}</td>
+                        <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{r.faturaSayisi}</td>
+                        <td className="px-4 py-3 text-gray-900 dark:text-white font-semibold whitespace-nowrap">{TL(r.toplamFatura)}</td>
                         <td className="px-4 py-3 text-green-600 font-semibold whitespace-nowrap">{TL(r.toplamTahsilat)}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2">
-                            <div className="flex-1 bg-gray-100 rounded-full h-1.5 min-w-[40px]">
+                            <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-full h-1.5 min-w-[40px]">
                               <div className={`h-1.5 rounded-full ${r.tahsilatOrani>=100?'bg-green-500':r.tahsilatOrani>=50?'bg-amber-400':'bg-red-400'}`} style={{width:`${Math.min(100,r.tahsilatOrani).toFixed(0)}%`}}/>
                             </div>
-                            <span className="text-xs font-semibold text-gray-600">{r.tahsilatOrani.toFixed(0)}%</span>
+                            <span className="text-xs font-semibold text-gray-600 dark:text-gray-300">{r.tahsilatOrani.toFixed(0)}%</span>
                           </div>
                         </td>
-                        <td className={`px-4 py-3 font-semibold whitespace-nowrap ${r.bekleyenFatura>0?'text-amber-600':'text-gray-500'}`}>{r.bekleyenFatura>0?TL(r.bekleyenFatura):'—'}</td>
-                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.bakiye>0?'text-amber-600':r.bakiye<0?'text-green-600':'text-gray-500'}`}>{TL(r.bakiye)}</td>
+                        <td className={`px-4 py-3 font-semibold whitespace-nowrap ${r.bekleyenFatura>0?'text-amber-600':'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>{r.bekleyenFatura>0?TL(r.bekleyenFatura):'—'}</td>
+                        <td className={`px-4 py-3 font-black whitespace-nowrap ${r.bakiye>0?'text-amber-600':r.bakiye<0?'text-green-600':'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>{TL(r.bakiye)}</td>
                       </tr>
                     ))}
-                    {!musteriRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500">Müşteri verisi yok.</td></tr>}
-                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 text-xs">Yükleniyor…</td></tr>}
+                    {!musteriRapor.length&&raporYuklendi&&<tr><td colSpan={8} className="px-4 py-12 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">Müşteri verisi yok.</td></tr>}
+                    {!raporYuklendi&&<tr><td colSpan={8} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">Yükleniyor…</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1721,7 +1721,7 @@ export default function MuhasebePage() {
         {tab === 'donem' && (
           <>
             <div className="flex items-center gap-3 flex-wrap">
-              <h2 className="font-bold text-gray-900 flex-1">Dönem Yönetimi</h2>
+              <h2 className="font-bold text-gray-900 dark:text-white flex-1">Dönem Yönetimi</h2>
               <button onClick={()=>donemOlustur(thisMonth())}
                 className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors">
                 <Plus className="w-4 h-4"/> Bu Ayı Ekle
@@ -1754,11 +1754,11 @@ export default function MuhasebePage() {
                   const gider = ayIslemler.filter(i=>i.tur==='gider').reduce((s,i)=>s+i.tutar,0);
                   const kapali = donem?.durum === 'kapali';
                   return (
-                    <div key={ay} className={`bg-white rounded-2xl border shadow-sm p-5 ${kapali?'border-gray-300 opacity-80':'border-gray-100'}`}>
+                    <div key={ay} className={`bg-white rounded-2xl border shadow-sm p-5 ${kapali?'border-gray-300 opacity-80':'border-gray-100 dark:border-gray-800'}`}>
                       <div className="flex items-center justify-between mb-3">
                         <div>
-                          <p className="font-black text-gray-900 text-lg">{ay}</p>
-                          <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${kapali?'bg-gray-100 text-gray-500':'bg-green-50 text-green-700'}`}>
+                          <p className="font-black text-gray-900 dark:text-white text-lg">{ay}</p>
+                          <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${kapali?'bg-gray-100 text-gray-500 dark:text-gray-400 dark:text-gray-500':'bg-green-50 text-green-700'}`}>
                             {kapali?'🔒 Kapalı':'🟢 Açık'}
                           </span>
                         </div>
@@ -1766,7 +1766,7 @@ export default function MuhasebePage() {
                           <div className="flex gap-1">
                             {kapali
                               ? <button onClick={()=>donemAc(donem.id)} className="text-xs text-blue-600 hover:text-blue-800 border border-blue-200 px-2 py-1 rounded-lg">Aç</button>
-                              : <button onClick={()=>donemKapat(donem.id)} className="text-xs text-gray-500 hover:text-gray-800 border border-gray-200 px-2 py-1 rounded-lg">Kapat</button>
+                              : <button onClick={()=>donemKapat(donem.id)} className="text-xs text-gray-500 hover:text-gray-800 dark:hover:text-white dark:text-gray-100 border border-gray-200 dark:border-gray-700 px-2 py-1 rounded-lg">Kapat</button>
                             }
                             {!kapali && <button onClick={()=>donemSil(donem.id)} className="text-gray-200 hover:text-red-500 p-1"><Trash2 className="w-4 h-4"/></button>}
                           </div>
@@ -1777,9 +1777,9 @@ export default function MuhasebePage() {
                       </div>
                       {/* Dönem özeti — basitleştirilmiş çift taraflı */}
                       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-50">
-                        <div><p className="text-xs text-gray-500">Gelir</p><p className="text-sm font-bold text-green-600">{TL(gelir)}</p></div>
-                        <div><p className="text-xs text-gray-500">Gider</p><p className="text-sm font-bold text-red-500">{TL(gider)}</p></div>
-                        <div><p className="text-xs text-gray-500">Net</p><p className={`text-sm font-black ${gelir-gider>=0?'text-emerald-600':'text-red-600'}`}>{TL(gelir-gider)}</p></div>
+                        <div><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">Gelir</p><p className="text-sm font-bold text-green-600">{TL(gelir)}</p></div>
+                        <div><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">Gider</p><p className="text-sm font-bold text-red-500">{TL(gider)}</p></div>
+                        <div><p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">Net</p><p className={`text-sm font-black ${gelir-gider>=0?'text-emerald-600':'text-red-600'}`}>{TL(gelir-gider)}</p></div>
                       </div>
                     </div>
                   );
@@ -1788,12 +1788,12 @@ export default function MuhasebePage() {
             </div>
 
             {/* Bilanço özeti (çift taraflı muhasebe basit formu) */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2"><Calculator className="w-4 h-4 text-blue-600"/> Basitleştirilmiş Bilanço</h3>
+            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2"><Calculator className="w-4 h-4 text-blue-600"/> Basitleştirilmiş Bilanço</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* AKTİF */}
                 <div>
-                  <p className="text-xs font-black text-gray-500 uppercase tracking-wider mb-3">AKTİFLER (Ne var?)</p>
+                  <p className="text-xs font-black text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">AKTİFLER (Ne var?)</p>
                   <div className="space-y-2">
                     {[
                       { ad: 'Nakit / Tahsilatlar', tutar: tahsilatlar.reduce((s,t)=>s+t.tutar,0), renk: 'text-green-700' },
@@ -1801,7 +1801,7 @@ export default function MuhasebePage() {
                       { ad: 'Toplam Gelirler', tutar: islemler.filter(i=>i.tur==='gelir').reduce((s,i)=>s+i.tutar,0), renk: 'text-blue-700' },
                     ].map(r=>(
                       <div key={r.ad} className="flex items-center justify-between py-1.5 border-b border-gray-50">
-                        <span className="text-sm text-gray-600">{r.ad}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-300">{r.ad}</span>
                         <span className={`text-sm font-bold ${r.renk}`}>{TL(r.tutar)}</span>
                       </div>
                     ))}
@@ -1809,7 +1809,7 @@ export default function MuhasebePage() {
                 </div>
                 {/* PASİF */}
                 <div>
-                  <p className="text-xs font-black text-gray-500 uppercase tracking-wider mb-3">PASİFLER + ÖZKAYNAKLAR (Ne gitti?)</p>
+                  <p className="text-xs font-black text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">PASİFLER + ÖZKAYNAKLAR (Ne gitti?)</p>
                   <div className="space-y-2">
                     {[
                       { ad: 'Toplam Giderler', tutar: islemler.filter(i=>i.tur==='gider').reduce((s,i)=>s+i.tutar,0), renk: 'text-red-600' },
@@ -1817,7 +1817,7 @@ export default function MuhasebePage() {
                       { ad: 'Net Kar / Zarar', tutar: islemler.filter(i=>i.tur==='gelir').reduce((s,i)=>s+i.tutar,0) - islemler.filter(i=>i.tur==='gider').reduce((s,i)=>s+i.tutar,0), renk: 'text-emerald-700 font-black' },
                     ].map(r=>(
                       <div key={r.ad} className="flex items-center justify-between py-1.5 border-b border-gray-50">
-                        <span className="text-sm text-gray-600">{r.ad}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-300">{r.ad}</span>
                         <span className={`text-sm font-bold ${r.renk}`}>{TL(r.tutar)}</span>
                       </div>
                     ))}

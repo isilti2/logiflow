@@ -98,7 +98,7 @@ function RegisterForm() {
                 başlayın.
               </span>
             </h2>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed max-w-sm">
               Kredi kartı gerekmez. 30 saniyede kayıt, anında kullanıma hazır.
             </p>
           </div>
@@ -115,7 +115,7 @@ function RegisterForm() {
                 <div className={`w-6 h-6 rounded-lg border flex items-center justify-center shrink-0 ${color}`}>
                   <Check className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-sm text-gray-400">{text}</span>
+                <span className="text-sm text-gray-400 dark:text-gray-500">{text}</span>
               </div>
             ))}
           </div>
@@ -130,7 +130,7 @@ function RegisterForm() {
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-gray-400">+200 şirket bu ay katıldı</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500">+200 şirket bu ay katıldı</p>
             </div>
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map(i => (
@@ -138,18 +138,18 @@ function RegisterForm() {
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               ))}
-              <span className="text-xs text-gray-600 ml-1.5">4.9/5 puan</span>
+              <span className="text-xs text-gray-600 dark:text-gray-300 ml-1.5">4.9/5 puan</span>
             </div>
           </div>
         </div>
 
-        <p className="relative text-xs text-gray-700">
+        <p className="relative text-xs text-gray-700 dark:text-gray-200">
           © {new Date().getFullYear()} LogiFlow. Tüm hakları saklıdır.
         </p>
       </div>
 
       {/* ── Sağ panel — form ── */}
-      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white overflow-y-auto">
+      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white dark:bg-gray-950 overflow-y-auto">
         <div className="w-full max-w-[380px]">
 
           {/* Mobil logo */}
@@ -157,47 +157,47 @@ function RegisterForm() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
               <span className="text-white font-black text-xs">LF</span>
             </div>
-            <span className="text-xl font-bold text-gray-900 tracking-tight">
+            <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
               Logi<span className="text-blue-600">Flow</span>
             </span>
           </Link>
 
           <div className="mb-7">
-            <h1 className="text-3xl font-black text-gray-900 tracking-tight">Hesap Oluştur</h1>
-            <p className="text-gray-500 text-sm mt-2">Ücretsiz hesabınızla hemen başlayın.</p>
+            <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Hesap Oluştur</h1>
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm mt-2">Ücretsiz hesabınızla hemen başlayın.</p>
           </div>
 
           <form className="space-y-4" onSubmit={handleSubmit} noValidate>
 
             {/* Ad Soyad */}
             <div className="space-y-1.5">
-              <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Ad Soyad</label>
+              <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">Ad Soyad</label>
               <input
                 id="name" type="text" autoComplete="name"
                 placeholder="Adınız Soyadınız"
                 value={form.name}
                 onChange={(e) => handleChange('name', e.target.value)}
-                className={`w-full px-4 py-3 border rounded-xl text-sm text-gray-900 placeholder-gray-300 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.name ? 'border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-red-500/20' : 'border-gray-200'}`}
+                className={`w-full px-4 py-3 border rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 bg-gray-50/50 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.name ? 'border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-red-500/20' : 'border-gray-200 dark:border-gray-700'}`}
               />
               {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
             </div>
 
             {/* E-posta */}
             <div className="space-y-1.5">
-              <label htmlFor="reg-email" className="block text-sm font-semibold text-gray-700">E-posta</label>
+              <label htmlFor="reg-email" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">E-posta</label>
               <input
                 id="reg-email" type="email" autoComplete="email"
                 placeholder="ornek@logiflow.io"
                 value={form.email}
                 onChange={(e) => handleChange('email', e.target.value)}
-                className={`w-full px-4 py-3 border rounded-xl text-sm text-gray-900 placeholder-gray-300 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.email ? 'border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-red-500/20' : 'border-gray-200'}`}
+                className={`w-full px-4 py-3 border rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 bg-gray-50/50 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.email ? 'border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-red-500/20' : 'border-gray-200 dark:border-gray-700'}`}
               />
               {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
             </div>
 
             {/* Şifre */}
             <div className="space-y-1.5">
-              <label htmlFor="reg-password" className="block text-sm font-semibold text-gray-700">Şifre</label>
+              <label htmlFor="reg-password" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">Şifre</label>
               <div className="relative">
                 <input
                   id="reg-password"
@@ -206,11 +206,11 @@ function RegisterForm() {
                   placeholder="••••••••"
                   value={form.password}
                   onChange={(e) => handleChange('password', e.target.value)}
-                  className={`w-full px-4 py-3 pr-11 border rounded-xl text-sm text-gray-900 placeholder-gray-300 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.password ? 'border-red-300 bg-red-50/50' : 'border-gray-200'}`}
+                  className={`w-full px-4 py-3 pr-11 border rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 bg-gray-50/50 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.password ? 'border-red-300 bg-red-50/50' : 'border-gray-200 dark:border-gray-700'}`}
                 />
                 <button type="button" onClick={() => setShowPw((p) => !p)}
                   aria-label={showPw ? 'Şifreyi gizle' : 'Şifreyi göster'}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-300 transition-colors">
                   {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
@@ -230,7 +230,7 @@ function RegisterForm() {
 
             {/* Şifre tekrar */}
             <div className="space-y-1.5">
-              <label htmlFor="reg-confirm" className="block text-sm font-semibold text-gray-700">Şifre Tekrar</label>
+              <label htmlFor="reg-confirm" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">Şifre Tekrar</label>
               <div className="relative">
                 <input
                   id="reg-confirm"
@@ -239,11 +239,11 @@ function RegisterForm() {
                   placeholder="••••••••"
                   value={form.confirm}
                   onChange={(e) => handleChange('confirm', e.target.value)}
-                  className={`w-full px-4 py-3 pr-11 border rounded-xl text-sm text-gray-900 placeholder-gray-300 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.confirm ? 'border-red-300 bg-red-50/50' : 'border-gray-200'}`}
+                  className={`w-full px-4 py-3 pr-11 border rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 bg-gray-50/50 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${errors.confirm ? 'border-red-300 bg-red-50/50' : 'border-gray-200 dark:border-gray-700'}`}
                 />
                 <button type="button" onClick={() => setShowConfirm((p) => !p)}
                   aria-label={showConfirm ? 'Şifreyi gizle' : 'Şifreyi göster'}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-300 transition-colors">
                   {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
@@ -265,18 +265,18 @@ function RegisterForm() {
 
           <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-gray-100" />
-            <span className="text-xs text-gray-400">veya</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">veya</span>
             <div className="flex-1 h-px bg-gray-100" />
           </div>
 
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500">
             Zaten hesabınız var mı?{' '}
             <Link href="/login" className="text-blue-600 hover:text-blue-700 font-semibold transition-colors">
               Giriş Yap
             </Link>
           </p>
 
-          <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-center gap-1.5 text-xs text-gray-400">
+          <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>

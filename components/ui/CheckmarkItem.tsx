@@ -11,7 +11,7 @@ export default function CheckmarkItem({ text, className = '' }: CheckmarkItemPro
       <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center">
         <Check className="w-3 h-3 text-blue-600 stroke-[3]" />
       </div>
-      <span className="text-gray-700 text-sm md:text-base">{text}</span>
+      <span className="text-gray-700 dark:text-gray-200 text-sm md:text-base">{text}</span>
     </div>
   );
 }

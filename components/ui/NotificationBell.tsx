@@ -94,7 +94,7 @@ export default function NotificationBell() {
     <div ref={panelRef} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="relative flex items-center justify-center w-9 h-9 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-500 hover:text-blue-600 transition-colors"
+        className="relative flex items-center justify-center w-9 h-9 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 transition-colors"
         aria-label="Bildirimler"
       >
         <Bell className="w-4 h-4" />
@@ -106,10 +106,10 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-12 w-80 bg-white rounded-2xl border border-gray-100 shadow-xl z-50 overflow-hidden">
+        <div className="absolute right-0 top-12 w-80 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-xl z-50 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-            <span className="text-sm font-bold text-gray-900">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+            <span className="text-sm font-bold text-gray-900 dark:text-white">
               Bildirimler
               {unread > 0 && (
                 <span className="ml-2 text-xs font-semibold bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">
@@ -121,7 +121,7 @@ export default function NotificationBell() {
               {unread > 0 && (
                 <button
                   onClick={handleMarkAll}
-                  className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-blue-50 transition-colors"
+                  className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
                   title="Tümünü okundu işaretle"
                 >
                   <CheckCheck className="w-3.5 h-3.5" />
@@ -130,22 +130,22 @@ export default function NotificationBell() {
               {notifs.length > 0 && (
                 <button
                   onClick={handleClear}
-                  className="text-xs text-gray-400 hover:text-red-500 flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-red-50 transition-colors"
+                  className="text-xs text-gray-400 dark:text-gray-500 hover:text-red-500 flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-red-50 transition-colors"
                   title="Tümünü temizle"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
               )}
-              <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600 p-1 rounded-lg transition-colors">
+              <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-300 p-1 rounded-lg transition-colors">
                 <X className="w-4 h-4" />
               </button>
             </div>
           </div>
 
           {/* List */}
-          <div className="max-h-80 overflow-y-auto divide-y divide-gray-50">
+          <div className="max-h-80 overflow-y-auto divide-y divide-gray-50 dark:divide-gray-800">
             {notifs.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-10 text-gray-400">
+              <div className="flex flex-col items-center justify-center py-10 text-gray-400 dark:text-gray-500">
                 <Bell className="w-8 h-8 mb-2 opacity-30" />
                 <p className="text-xs font-medium">Henüz bildirim yok</p>
               </div>
@@ -156,20 +156,20 @@ export default function NotificationBell() {
                   <button
                     key={n.id}
                     onClick={() => handleRead(n.id)}
-                    className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors ${!n.read ? 'bg-blue-50/30' : ''}`}
+                    className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${!n.read ? 'bg-blue-50/30' : ''}`}
                   >
                     <div className={`w-7 h-7 rounded-lg border flex items-center justify-center flex-shrink-0 mt-0.5 ${style.ring}`}>
                       {style.icon}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
-                        <p className={`text-xs font-semibold ${!n.read ? 'text-gray-900' : 'text-gray-600'} leading-snug`}>
+                        <p className={`text-xs font-semibold ${!n.read ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300'} leading-snug`}>
                           {n.title}
                         </p>
                         {!n.read && <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0 mt-1" />}
                       </div>
-                      <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{n.message}</p>
-                      <p className="text-[10px] text-gray-400 mt-1">{timeAgo(n.time)}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5 leading-relaxed">{n.message}</p>
+                      <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">{timeAgo(n.time)}</p>
                     </div>
                   </button>
                 );

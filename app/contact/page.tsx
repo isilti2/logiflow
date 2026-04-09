@@ -44,12 +44,12 @@ export default function ContactPage() {
   }
 
   const inputCls = (field: keyof typeof form) =>
-    `w-full px-4 py-3 border rounded-xl text-sm text-gray-900 placeholder-gray-300 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${
-      errors[field] ? 'border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-red-400/20' : 'border-gray-200'
+    `w-full px-4 py-3 border rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 bg-gray-50/50 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all ${
+      errors[field] ? 'border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-red-400/20' : 'border-gray-200 dark:border-gray-700'
     }`;
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
       <Navbar />
 
       {/* ── Hero ── */}
@@ -65,7 +65,7 @@ export default function ContactPage() {
           <h1 className="text-5xl sm:text-6xl font-black text-white leading-[1.08] tracking-tight mb-6">
             Bize <span className="text-blue-400">Ulaşın</span>
           </h1>
-          <p className="text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-400 dark:text-gray-500 max-w-xl mx-auto leading-relaxed">
             Sorularınız, önerileriniz veya iş birliği teklifleriniz için buradayız. Ortalama yanıt süremiz 30 dakika.
           </p>
         </div>
@@ -80,20 +80,20 @@ export default function ContactPage() {
             {/* ── Sol panel ── */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <h2 className="text-2xl font-black text-gray-900 mb-2">İletişim Bilgileri</h2>
-                <p className="text-gray-500 text-sm">Aşağıdaki kanallardan bize doğrudan ulaşabilirsiniz.</p>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2">İletişim Bilgileri</h2>
+                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">Aşağıdaki kanallardan bize doğrudan ulaşabilirsiniz.</p>
               </div>
 
               <div className="space-y-3">
                 {CONTACT_ITEMS.map(({ icon: Icon, label, value, href }) => {
                   const inner = (
-                    <div className="flex items-center gap-4 p-4 bg-gray-50 border border-gray-100 rounded-2xl hover:border-gray-200 hover:bg-white hover:shadow-sm transition-all duration-200">
+                    <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-800 rounded-2xl hover:border-gray-200 dark:hover:border-gray-700 dark:border-gray-700 hover:bg-white hover:shadow-sm transition-all duration-200">
                       <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
                         <Icon className="w-5 h-5 text-blue-600" aria-hidden="true" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{label}</p>
-                        <p className="text-sm font-semibold text-gray-800 mt-0.5">{value}</p>
+                        <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{label}</p>
+                        <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 mt-0.5">{value}</p>
                       </div>
                     </div>
                   );
@@ -128,32 +128,32 @@ export default function ContactPage() {
               </div>
 
               {/* Canlı sohbet */}
-              <div className="flex items-center gap-4 p-4 border border-dashed border-gray-200 rounded-2xl">
+              <div className="flex items-center gap-4 p-4 border border-dashed border-gray-200 dark:border-gray-700 rounded-2xl">
                 <div className="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center shrink-0">
                   <MessageSquare className="w-5 h-5 text-violet-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-900">Canlı Sohbet</p>
-                  <p className="text-xs text-gray-500 mt-0.5">Sağ alttaki simgeden bize yazın.</p>
+                  <p className="text-sm font-bold text-gray-900 dark:text-white">Canlı Sohbet</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">Sağ alttaki simgeden bize yazın.</p>
                 </div>
               </div>
             </div>
 
             {/* ── Form paneli ── */}
             <div className="lg:col-span-3">
-              <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-8 sm:p-10">
+              <div className="bg-white border border-gray-100 dark:border-gray-800 rounded-3xl shadow-sm p-8 sm:p-10">
                 {sent ? (
                   <div className="flex flex-col items-center justify-center py-16 text-center">
                     <div className="w-16 h-16 bg-emerald-50 border border-emerald-100 rounded-3xl flex items-center justify-center mb-5">
                       <CheckCircle2 className="w-8 h-8 text-emerald-500" />
                     </div>
-                    <h3 className="text-2xl font-black text-gray-900 mb-2">Mesajınız İletildi!</h3>
-                    <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
-                      En kısa sürede <strong className="text-gray-700">{form.email}</strong> adresine dönüş yapacağız.
+                    <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">Mesajınız İletildi!</h3>
+                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm max-w-xs leading-relaxed">
+                      En kısa sürede <strong className="text-gray-700 dark:text-gray-200">{form.email}</strong> adresine dönüş yapacağız.
                     </p>
                     <button
                       onClick={() => { setSent(false); setForm({ name: '', email: '', subject: '', message: '' }); }}
-                      className="mt-8 text-sm font-semibold text-blue-600 hover:text-blue-700 border border-blue-100 hover:border-blue-200 px-5 py-2.5 rounded-xl transition-all hover:bg-blue-50"
+                      className="mt-8 text-sm font-semibold text-blue-600 hover:text-blue-700 border border-blue-100 hover:border-blue-200 px-5 py-2.5 rounded-xl transition-all hover:bg-blue-50 dark:hover:bg-blue-900/30"
                     >
                       ← Yeni mesaj gönder
                     </button>
@@ -161,14 +161,14 @@ export default function ContactPage() {
                 ) : (
                   <>
                     <div className="mb-8">
-                      <h2 className="text-2xl font-black text-gray-900">Mesaj Gönderin</h2>
-                      <p className="text-gray-500 text-sm mt-1.5">Tüm alanları doldurun, en kısa sürede yanıt vereceğiz.</p>
+                      <h2 className="text-2xl font-black text-gray-900 dark:text-white">Mesaj Gönderin</h2>
+                      <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm mt-1.5">Tüm alanları doldurun, en kısa sürede yanıt vereceğiz.</p>
                     </div>
 
                     <form className="space-y-5" onSubmit={handleSubmit} noValidate>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label htmlFor="ct-name" className="block text-sm font-semibold text-gray-700">
+                          <label htmlFor="ct-name" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">
                             Ad Soyad <span className="text-red-400">*</span>
                           </label>
                           <input id="ct-name" type="text" placeholder="Adınız Soyadınız"
@@ -177,7 +177,7 @@ export default function ContactPage() {
                           {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                         </div>
                         <div className="space-y-1.5">
-                          <label htmlFor="ct-email" className="block text-sm font-semibold text-gray-700">
+                          <label htmlFor="ct-email" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">
                             E-posta <span className="text-red-400">*</span>
                           </label>
                           <input id="ct-email" type="email" placeholder="ornek@email.com"
@@ -188,16 +188,16 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-1.5">
-                        <label htmlFor="ct-subject" className="block text-sm font-semibold text-gray-700">Konu</label>
+                        <label htmlFor="ct-subject" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">Konu</label>
                         <select id="ct-subject" value={form.subject} onChange={(e) => handleChange('subject', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm text-gray-900 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all appearance-none">
+                          className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl text-sm text-gray-900 dark:text-white bg-gray-50/50 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all appearance-none">
                           <option value="">Konu seçin (isteğe bağlı)</option>
                           {KONULAR.map(k => <option key={k}>{k}</option>)}
                         </select>
                       </div>
 
                       <div className="space-y-1.5">
-                        <label htmlFor="ct-message" className="block text-sm font-semibold text-gray-700">
+                        <label htmlFor="ct-message" className="block text-sm font-semibold text-gray-700 dark:text-gray-200">
                           Mesaj <span className="text-red-400">*</span>
                         </label>
                         <textarea id="ct-message" rows={5} placeholder="Mesajınızı buraya yazın…"

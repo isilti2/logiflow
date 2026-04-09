@@ -23,7 +23,7 @@ interface ApiKey {
 /* ─── Constants ──────────────────────────────────────────── */
 const SCOPE_META: Record<ApiKeyScope, { label: string; desc: string; color: string }> = {
   read:  { label: 'Okuma',   desc: 'GET endpoint\'leri, rapor ve listeleme',       color: 'bg-green-50 text-green-700 border-green-100' },
-  write: { label: 'Yazma',   desc: 'Optimizasyon çalıştırma, kargo ekleme',        color: 'bg-blue-50 text-blue-700 border-blue-100' },
+  write: { label: 'Yazma',   desc: 'Optimizasyon çalıştırma, kargo ekleme',        color: 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-100' },
   admin: { label: 'Admin',   desc: 'Tüm erişim + takım ve ayar yönetimi',          color: 'bg-purple-50 text-purple-700 border-purple-100' },
 };
 
@@ -94,16 +94,16 @@ export default function ApiKeysPage() {
 
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
         <Navbar />
 
         {/* Header */}
-        <div className="bg-white border-b border-gray-100">
+        <div className="bg-white border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-            <h1 className="text-2xl font-black text-gray-900">
+            <h1 className="text-2xl font-black text-gray-900 dark:text-white">
               API <span className="text-blue-600">Anahtarları</span>
             </h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
               LogiFlow API'sine erişim için anahtarlar oluşturun ve yönetin.
             </p>
           </div>
@@ -118,13 +118,13 @@ export default function ApiKeysPage() {
               { label: 'Aktif',          value: activeCount,   icon: Zap,    color: 'text-green-600 bg-green-50' },
               { label: 'API Durumu',     value: 'Q2\'26',      icon: Clock,  color: 'text-amber-600 bg-amber-50' },
             ].map(({ label, value, icon: Icon, color }) => (
-              <div key={label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+              <div key={label} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 flex items-center gap-4">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-medium">{label}</p>
-                  <p className="text-2xl font-black text-gray-900">{value}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 font-medium">{label}</p>
+                  <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
                 </div>
               </div>
             ))}
@@ -158,7 +158,7 @@ export default function ApiKeysPage() {
                 </button>
               </div>
               <div className="flex items-center gap-2 bg-white border border-green-200 rounded-xl px-4 py-2.5">
-                <code className="text-xs font-mono text-gray-800 flex-1 break-all">{justCreated.secret}</code>
+                <code className="text-xs font-mono text-gray-800 dark:text-gray-100 flex-1 break-all">{justCreated.secret}</code>
                 <button
                   onClick={() => handleCopy(justCreated.secret)}
                   className={`shrink-0 flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
@@ -172,9 +172,9 @@ export default function ApiKeysPage() {
           )}
 
           {/* Keys list */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h2 className="text-sm font-bold text-gray-900">API Anahtarları</h2>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-white">API Anahtarları</h2>
               <button
                 onClick={() => setShowCreate(true)}
                 className="flex items-center gap-1.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors"
@@ -184,32 +184,32 @@ export default function ApiKeysPage() {
             </div>
 
             {keys.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-16 text-gray-400">
+              <div className="flex flex-col items-center justify-center py-16 text-gray-400 dark:text-gray-500">
                 <Key className="w-8 h-8 mb-3 opacity-30" />
                 <p className="text-sm font-medium">Henüz API anahtarı yok.</p>
                 <p className="text-xs mt-1">Yeni anahtar oluşturmak için butona tıklayın.</p>
               </div>
             ) : (
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-gray-50 dark:divide-gray-800">
                 {keys.map((k) => (
                   <div key={k.id} className={`px-6 py-4 flex items-center gap-4 ${!k.active ? 'opacity-50' : ''}`}>
                     {/* Icon */}
                     <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${k.active ? 'bg-blue-50' : 'bg-gray-100'}`}>
-                      <Key className={`w-4 h-4 ${k.active ? 'text-blue-600' : 'text-gray-400'}`} />
+                      <Key className={`w-4 h-4 ${k.active ? 'text-blue-600' : 'text-gray-400 dark:text-gray-500'}`} />
                     </div>
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <p className="text-sm font-semibold text-gray-800">{k.name}</p>
+                        <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">{k.name}</p>
                         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${SCOPE_META[k.scope].color}`}>
                           {SCOPE_META[k.scope].label}
                         </span>
                         {!k.active && (
-                          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">Pasif</span>
+                          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 dark:text-gray-400 dark:text-gray-500">Pasif</span>
                         )}
                       </div>
-                      <div className="flex items-center gap-3 text-xs text-gray-400">
+                      <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
                         <code className="font-mono">{k.prefix}</code>
                         <span>·</span>
                         <span>Oluşturuldu: {k.createdAt}</span>
@@ -223,7 +223,7 @@ export default function ApiKeysPage() {
                       {k.secret && (
                         <button
                           onClick={() => setRevealed((r) => ({ ...r, [k.id]: !r[k.id] }))}
-                          className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                          className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 dark:text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
                           title="Anahtarı göster/gizle"
                         >
                           {revealed[k.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -233,7 +233,7 @@ export default function ApiKeysPage() {
                       {k.secret && (
                         <button
                           onClick={() => handleCopy(k.secret)}
-                          className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                          className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 dark:text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
                           title="Kopyala"
                         >
                           <Copy className="w-4 h-4" />
@@ -243,7 +243,7 @@ export default function ApiKeysPage() {
                       <button
                         onClick={() => handleToggle(k.id)}
                         className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
-                          k.active ? 'text-green-500 hover:text-red-400 hover:bg-red-50' : 'text-gray-400 hover:text-green-500 hover:bg-green-50'
+                          k.active ? 'text-green-500 hover:text-red-400 hover:bg-red-50' : 'text-gray-400 dark:text-gray-500 hover:text-green-500 hover:bg-green-50'
                         }`}
                         title={k.active ? 'Devre Dışı Bırak' : 'Etkinleştir'}
                       >
@@ -257,7 +257,7 @@ export default function ApiKeysPage() {
                             Sil
                           </button>
                           <button onClick={() => setDeleteId(null)}
-                            className="text-xs text-gray-500 px-2 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
+                            className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 px-2 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                             İptal
                           </button>
                         </div>
@@ -278,8 +278,8 @@ export default function ApiKeysPage() {
           </div>
 
           {/* Scope descriptions */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <Shield className="w-4 h-4 text-blue-600" /> Kapsam Açıklamaları
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -293,11 +293,11 @@ export default function ApiKeysPage() {
           </div>
 
           {/* Security note */}
-          <div className="flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4 text-sm text-gray-600">
+          <div className="flex items-start gap-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-4 text-sm text-gray-600 dark:text-gray-300">
             <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold text-gray-700">Güvenlik Önerileri</p>
-              <ul className="text-xs text-gray-500 mt-1 space-y-0.5 list-disc list-inside">
+              <p className="font-semibold text-gray-700 dark:text-gray-200">Güvenlik Önerileri</p>
+              <ul className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1 space-y-0.5 list-disc list-inside">
                 <li>API anahtarlarını kaynak koduna veya public repo'ya eklemeyin.</li>
                 <li>Her servis için ayrı, minimum kapsamlı anahtar kullanın.</li>
                 <li>Kullanılmayan anahtarları devre dışı bırakın veya silin.</li>
@@ -313,31 +313,31 @@ export default function ApiKeysPage() {
             <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setShowCreate(false)} />
             <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
               <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-gray-900">Yeni API Anahtarı</h2>
-                <button onClick={() => setShowCreate(false)} className="text-gray-400 hover:text-gray-600">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Yeni API Anahtarı</h2>
+                <button onClick={() => setShowCreate(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-300">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Anahtar Adı</label>
+                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1.5">Anahtar Adı</label>
                   <input
                     type="text"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                     placeholder="örn. Üretim Servisi, CI/CD"
-                    className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Kapsam</label>
+                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1.5">Kapsam</label>
                   <div className="flex flex-col gap-2">
                     {(Object.entries(SCOPE_META) as [ApiKeyScope, typeof SCOPE_META[ApiKeyScope]][]).map(([scope, meta]) => (
                       <label key={scope} className={`flex items-start gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
-                        newScope === scope ? 'border-blue-500 bg-blue-50' : 'border-gray-100 hover:border-gray-200'
+                        newScope === scope ? 'border-blue-500 bg-blue-50' : 'border-gray-100 dark:border-gray-800 hover:border-gray-200 dark:hover:border-gray-700 dark:border-gray-700'
                       }`}>
                         <input
                           type="radio"
@@ -348,8 +348,8 @@ export default function ApiKeysPage() {
                           className="mt-0.5 accent-blue-600"
                         />
                         <div>
-                          <p className={`text-sm font-semibold ${newScope === scope ? 'text-blue-700' : 'text-gray-700'}`}>{meta.label}</p>
-                          <p className="text-xs text-gray-400 mt-0.5">{meta.desc}</p>
+                          <p className={`text-sm font-semibold ${newScope === scope ? 'text-blue-700' : 'text-gray-700 dark:text-gray-200'}`}>{meta.label}</p>
+                          <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{meta.desc}</p>
                         </div>
                       </label>
                     ))}

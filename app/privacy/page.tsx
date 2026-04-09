@@ -35,17 +35,17 @@ const sections = [
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
       <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-blue-50 to-white py-16 px-4 border-b border-gray-100">
+        <section className="bg-gradient-to-br from-blue-50 to-white py-16 px-4 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto">
             <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">Hukuki</span>
-            <h1 className="text-4xl font-black text-gray-900 mb-3">Gizlilik Politikası</h1>
-            <p className="text-gray-500 text-sm">Son güncelleme: 29 Mart 2026 · Sürüm 2.1</p>
-            <p className="text-gray-600 mt-4 leading-relaxed">
+            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3">Gizlilik Politikası</h1>
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">Son güncelleme: 29 Mart 2026 · Sürüm 2.1</p>
+            <p className="text-gray-600 dark:text-gray-300 mt-4 leading-relaxed">
               LogiFlow olarak kişisel verilerinizin gizliliğine büyük önem veriyoruz. Bu politika, hangi verileri topladığımızı, nasıl kullandığımızı ve haklarınızın neler olduğunu açıklamaktadır.
             </p>
           </div>
@@ -60,15 +60,15 @@ export default function PrivacyPage() {
                   {i + 1}
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-gray-900 mb-2">{s.title}</h2>
-                  <p className="text-gray-500 text-sm leading-relaxed">{s.content}</p>
+                  <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{s.title}</h2>
+                  <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">{s.content}</p>
                 </div>
               </div>
             ))}
 
             <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 mt-8">
-              <h3 className="font-bold text-gray-900 mb-2">İletişim</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">İletişim</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
                 Gizlilik ile ilgili sorularınız için{' '}
                 <a href="mailto:privacy@logiflow.io" className="text-blue-600 hover:underline font-medium">privacy@logiflow.io</a>{' '}
                 adresine ulaşabilir ya da{' '}

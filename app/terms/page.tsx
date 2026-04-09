@@ -39,17 +39,17 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
       <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-gray-50 to-white py-16 px-4 border-b border-gray-100">
+        <section className="bg-gradient-to-br from-gray-50 to-white py-16 px-4 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-3xl mx-auto">
-            <span className="inline-block bg-gray-100 text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">Hukuki</span>
-            <h1 className="text-4xl font-black text-gray-900 mb-3">Kullanım Koşulları</h1>
-            <p className="text-gray-500 text-sm">Son güncelleme: 29 Mart 2026 · Sürüm 2.1</p>
-            <p className="text-gray-600 mt-4 leading-relaxed">
+            <span className="inline-block bg-gray-100 text-gray-600 dark:text-gray-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">Hukuki</span>
+            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3">Kullanım Koşulları</h1>
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">Son güncelleme: 29 Mart 2026 · Sürüm 2.1</p>
+            <p className="text-gray-600 dark:text-gray-300 mt-4 leading-relaxed">
               LogiFlow platformunu kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız. Lütfen bu belgeyi dikkatlice okuyunuz.
             </p>
           </div>
@@ -60,19 +60,19 @@ export default function TermsPage() {
           <div className="max-w-3xl mx-auto space-y-8">
             {sections.map((s, i) => (
               <div key={s.title} className="flex gap-5">
-                <div className="shrink-0 w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-xs font-bold text-gray-600 mt-0.5">
+                <div className="shrink-0 w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300 mt-0.5">
                   {i + 1}
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-gray-900 mb-2">{s.title}</h2>
-                  <p className="text-gray-500 text-sm leading-relaxed">{s.content}</p>
+                  <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{s.title}</h2>
+                  <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm leading-relaxed">{s.content}</p>
                 </div>
               </div>
             ))}
 
-            <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 mt-8">
-              <h3 className="font-bold text-gray-900 mb-2">Sorularınız mı var?</h3>
-              <p className="text-sm text-gray-600">
+            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 mt-8">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Sorularınız mı var?</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
                 Kullanım koşullarına ilişkin sorularınız için{' '}
                 <a href="mailto:legal@logiflow.io" className="text-blue-600 hover:underline font-medium">legal@logiflow.io</a>{' '}
                 adresine ulaşabilir ya da{' '}

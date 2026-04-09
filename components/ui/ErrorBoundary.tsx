@@ -29,7 +29,7 @@ export default class ErrorBoundary extends Component<Props, State> {
           <div className="flex flex-col items-center gap-3 text-center px-6">
             <span className="text-2xl">⚠️</span>
             <p className="text-gray-300 text-sm font-semibold">3D görünüm yüklenemedi</p>
-            <p className="text-gray-500 text-xs max-w-xs">
+            <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs max-w-xs">
               WebGL desteği gereklidir. Tarayıcınızın grafik hızlandırmasını etkinleştirin veya farklı bir tarayıcı deneyin.
             </p>
             <button

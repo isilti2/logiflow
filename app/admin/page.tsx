@@ -55,7 +55,7 @@ function RoleBadge({ role }: { role: string }) {
   const map: Record<string, string> = {
     admin:  'bg-red-50 text-red-700 border border-red-100',
     editor: 'bg-purple-50 text-purple-700 border border-purple-100',
-    user:   'bg-gray-100 text-gray-600',
+    user:   'bg-gray-100 text-gray-600 dark:text-gray-300',
   };
   return <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${map[role] ?? map.user}`}>{role}</span>;
 }
@@ -66,7 +66,7 @@ function StatusBadge({ status }: { status: string }) {
       <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> aktif
     </span>
   ) : (
-    <span className="flex items-center gap-1 text-xs font-semibold text-gray-400">
+    <span className="flex items-center gap-1 text-xs font-semibold text-gray-400 dark:text-gray-500">
       <span className="w-1.5 h-1.5 rounded-full bg-gray-300" /> pasif
     </span>
   );
@@ -83,10 +83,10 @@ function HealthBar({ label, pct, warn }: { label: string; pct: number; warn: boo
   return (
     <div>
       <div className="flex justify-between text-xs mb-1.5">
-        <span className="font-medium text-gray-600">{label}</span>
-        <span className={`font-bold ${warn ? 'text-amber-600' : 'text-gray-700'}`}>{pct}%</span>
+        <span className="font-medium text-gray-600 dark:text-gray-300">{label}</span>
+        <span className={`font-bold ${warn ? 'text-amber-600' : 'text-gray-700 dark:text-gray-200'}`}>{pct}%</span>
       </div>
-      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+      <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
         <div className={`h-full rounded-full transition-all duration-700 ${warn ? 'bg-amber-400' : 'bg-blue-600'}`} style={{ width: `${pct}%` }} />
       </div>
     </div>
@@ -95,10 +95,10 @@ function HealthBar({ label, pct, warn }: { label: string; pct: number; warn: boo
 
 function SettingToggle({ label, desc, value, onChange }: { label: string; desc: string; value: boolean; onChange: () => void }) {
   return (
-    <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-0">
+    <div className="flex items-center justify-between py-4 border-b border-gray-100 dark:border-gray-800 last:border-0">
       <div>
-        <p className="text-sm font-semibold text-gray-800">{label}</p>
-        <p className="text-xs text-gray-400 mt-0.5">{desc}</p>
+        <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">{label}</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{desc}</p>
       </div>
       <button onClick={onChange} className="shrink-0 ml-4">
         {value ? <ToggleRight className="w-8 h-8 text-blue-600" /> : <ToggleLeft className="w-8 h-8 text-gray-300" />}
@@ -236,7 +236,7 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col">
 
       {/* Top bar */}
       <header className="bg-gray-950 border-b border-gray-800 sticky top-0 z-40">
@@ -248,22 +248,22 @@ export default function AdminPage() {
               </div>
               <span className="text-sm font-bold text-white tracking-tight">Logi<span className="text-blue-400">Flow</span></span>
             </Link>
-            <span className="text-gray-700 text-xs">·</span>
+            <span className="text-gray-700 dark:text-gray-200 text-xs">·</span>
             <div className="flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold px-2.5 py-1 rounded-full">
               <Shield className="w-3 h-3" /> Admin Panel
             </div>
           </div>
           <div className="flex items-center gap-3">
             {unreadCount > 0 && (
-              <button onClick={() => setActiveTab('notifications')} className="relative text-gray-400 hover:text-white transition-colors">
+              <button onClick={() => setActiveTab('notifications')} className="relative text-gray-400 dark:text-gray-500 hover:text-white transition-colors">
                 <Bell className="w-5 h-5" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center">
                   {unreadCount}
                 </span>
               </button>
             )}
-            <Link href="/dashboard" className="text-xs text-gray-400 hover:text-white transition-colors">← Uygulamaya Dön</Link>
-            <button onClick={handleLogout} className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-red-400 border border-gray-700 hover:border-red-800 px-3 py-1.5 rounded-lg transition-colors">
+            <Link href="/dashboard" className="text-xs text-gray-400 dark:text-gray-500 hover:text-white transition-colors">← Uygulamaya Dön</Link>
+            <button onClick={handleLogout} className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 hover:text-red-400 border border-gray-700 hover:border-red-800 px-3 py-1.5 rounded-lg transition-colors">
               <LogOut className="w-3.5 h-3.5" /> Çıkış
             </button>
           </div>
@@ -274,11 +274,11 @@ export default function AdminPage() {
 
         {/* Sidebar */}
         <aside className="w-56 shrink-0 hidden md:block">
-          <nav className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <nav className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
             {NAV.map(({ tab, label, icon: Icon, badge }) => (
               <button key={tab} onClick={() => setActiveTab(tab)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors text-left border-b border-gray-50 last:border-0 ${
-                  activeTab === tab ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  activeTab === tab ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white dark:text-white'
                 }`}
               >
                 <span className="flex items-center gap-3"><Icon className="w-4 h-4 shrink-0" />{label}</span>
@@ -291,21 +291,21 @@ export default function AdminPage() {
             ))}
           </nav>
 
-          <div className="mt-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Sistem Sağlığı</p>
+          <div className="mt-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 space-y-3">
+            <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Sistem Sağlığı</p>
             <HealthBar label="CPU" pct={34} warn={false} />
             <HealthBar label="RAM" pct={61} warn={false} />
             <HealthBar label="Disk" pct={80} warn={true} />
           </div>
 
-          <div className="mt-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-2">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Hızlı Bağlantılar</p>
+          <div className="mt-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 space-y-2">
+            <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Hızlı Bağlantılar</p>
             {[
               { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
               { label: 'Optimizasyon', href: '/features/kargo-optimizasyon', icon: Truck },
               { label: 'Depolama', href: '/depolama', icon: Building2 },
             ].map(({ label, href, icon: Icon }) => (
-              <Link key={href} href={href} className="flex items-center gap-2 text-xs text-gray-500 hover:text-blue-600 hover:bg-blue-50 px-2 py-1.5 rounded-lg transition-colors">
+              <Link key={href} href={href} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 px-2 py-1.5 rounded-lg transition-colors">
                 <Icon className="w-3.5 h-3.5" />{label}
               </Link>
             ))}
@@ -314,10 +314,10 @@ export default function AdminPage() {
 
         {/* Mobile tab bar */}
         <div className="md:hidden w-full">
-          <div className="flex gap-1 bg-white rounded-xl border border-gray-100 p-1 mb-4 overflow-x-auto">
+          <div className="flex gap-1 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 p-1 mb-4 overflow-x-auto">
             {NAV.map(({ tab, icon: Icon, badge }) => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`relative flex-shrink-0 flex items-center justify-center px-3 py-2 rounded-lg transition-colors ${activeTab === tab ? 'bg-blue-600 text-white' : 'text-gray-400'}`}
+                className={`relative flex-shrink-0 flex items-center justify-center px-3 py-2 rounded-lg transition-colors ${activeTab === tab ? 'bg-blue-600 text-white' : 'text-gray-400 dark:text-gray-500'}`}
               >
                 <Icon className="w-4 h-4" />
                 {badge ? <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 rounded-full text-white text-[9px] font-bold flex items-center justify-center">{badge}</span> : null}
@@ -333,10 +333,10 @@ export default function AdminPage() {
           {activeTab === 'overview' && (
             <>
               <div className="flex items-center justify-between">
-                <h1 className="text-xl font-black text-gray-900">Genel Bakış</h1>
+                <h1 className="text-xl font-black text-gray-900 dark:text-white">Genel Bakış</h1>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-400 hidden sm:block">Son güncelleme: {lastRefresh}</span>
-                  <button onClick={handleRefresh} className="flex items-center gap-1.5 text-xs text-gray-500 border border-gray-200 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 transition-colors bg-white">
+                  <span className="text-xs text-gray-400 dark:text-gray-500 hidden sm:block">Son güncelleme: {lastRefresh}</span>
+                  <button onClick={handleRefresh} className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 transition-colors bg-white">
                     <RefreshCw className="w-3.5 h-3.5" /> Yenile
                   </button>
                 </div>
@@ -349,15 +349,15 @@ export default function AdminPage() {
                   { label: 'Kargo Kalemi',      value: dbStats?.totalCargo ?? '—', delta: 'depoda',         icon: Package,    color: 'purple' },
                   { label: 'Depo Alanı',        value: dbStats?.totalAreas ?? '—', delta: 'tanımlı',        icon: Activity,   color: 'indigo' },
                 ].map(({ label, value, delta, icon: Icon, color }) => (
-                  <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <div key={label} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 shadow-sm">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs text-gray-400 font-medium">{label}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">{label}</span>
                       <div className={`w-8 h-8 bg-${color}-50 rounded-lg flex items-center justify-center`}>
                         <Icon className={`w-4 h-4 text-${color}-600`} />
                       </div>
                     </div>
-                    <p className="text-2xl font-black text-gray-900">{value}</p>
-                    <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                    <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 flex items-center gap-1">
                       <ArrowUpRight className="w-3 h-3 text-green-500" />{delta}
                     </p>
                   </div>
@@ -365,9 +365,9 @@ export default function AdminPage() {
               </div>
 
               {/* Mini bar chart — optimizations this week */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-sm font-bold text-gray-900">Bu Hafta — Günlük Optimizasyonlar</h2>
+                  <h2 className="text-sm font-bold text-gray-900 dark:text-white">Bu Hafta — Günlük Optimizasyonlar</h2>
                   <button onClick={() => setActiveTab('reports')} className="text-xs text-blue-600 hover:underline flex items-center gap-1">
                     Tüm rapor <ChevronRight className="w-3.5 h-3.5" />
                   </button>
@@ -379,51 +379,51 @@ export default function AdminPage() {
                         style={{ height: `${(v / 15) * 100}%` }}>
                         <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] font-bold text-blue-700 opacity-0 group-hover:opacity-100">{v}</span>
                       </div>
-                      <span className="text-[10px] text-gray-400">{['Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct', 'Pz'][i]}</span>
+                      <span className="text-[10px] text-gray-400 dark:text-gray-500">{['Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct', 'Pz'][i]}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Recent logs */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-                  <h2 className="text-sm font-bold text-gray-900">Son Aktiviteler</h2>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800">
+                  <h2 className="text-sm font-bold text-gray-900 dark:text-white">Son Aktiviteler</h2>
                   <button onClick={() => setActiveTab('logs')} className="text-xs text-blue-600 hover:underline flex items-center gap-1">
                     Tümünü gör <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
-                <div className="divide-y divide-gray-50">
+                <div className="divide-y divide-gray-50 dark:divide-gray-800">
                   {auditLogs.slice(0, 5).map((log) => (
                     <div key={log.id} className="flex items-center gap-3 px-5 py-3">
                       <LogIcon type={log.type} />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-gray-800 font-medium truncate">{log.action}</p>
-                        <p className="text-xs text-gray-400">{log.userEmail ?? '—'} · {log.module}</p>
+                        <p className="text-sm text-gray-800 dark:text-gray-100 font-medium truncate">{log.action}</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500">{log.userEmail ?? '—'} · {log.module}</p>
                       </div>
-                      <span className="text-xs text-gray-400 shrink-0">{new Date(log.createdAt).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">{new Date(log.createdAt).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* User summary */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-                  <h2 className="text-sm font-bold text-gray-900">Kullanıcı Özeti</h2>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800">
+                  <h2 className="text-sm font-bold text-gray-900 dark:text-white">Kullanıcı Özeti</h2>
                   <button onClick={() => setActiveTab('users')} className="text-xs text-blue-600 hover:underline flex items-center gap-1">
                     Yönet <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
                 <div className="px-5 py-4 flex flex-wrap gap-8">
                   {[
-                    { label: 'Toplam',  value: users.length,                              color: 'text-gray-900' },
+                    { label: 'Toplam',  value: users.length,                              color: 'text-gray-900 dark:text-white' },
                     { label: 'Admin',   value: users.filter(u => u.role === 'admin').length, color: 'text-red-600' },
                     { label: 'Üye',     value: users.filter(u => u.role === 'user').length,  color: 'text-blue-600' },
                   ].map(({ label, value, color }) => (
                     <div key={label} className="text-center">
                       <p className={`text-2xl font-black ${color}`}>{value}</p>
-                      <p className="text-xs text-gray-400 mt-1">{label}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{label}</p>
                     </div>
                   ))}
                 </div>
@@ -435,7 +435,7 @@ export default function AdminPage() {
           {activeTab === 'users' && (
             <>
               <div className="flex items-center justify-between">
-                <h1 className="text-xl font-black text-gray-900">Kullanıcılar</h1>
+                <h1 className="text-xl font-black text-gray-900 dark:text-white">Kullanıcılar</h1>
                 <button onClick={() => setShowAddUser(true)}
                   className="flex items-center gap-1.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors">
                   <Plus className="w-4 h-4" /> Kullanıcı Ekle
@@ -443,46 +443,46 @@ export default function AdminPage() {
               </div>
 
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                 <input value={userSearch} onChange={(e) => setUserSearch(e.target.value)}
                   placeholder="Ad veya e-posta ara…"
-                  className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white" />
+                  className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white" />
               </div>
 
               {showAddUser && (
                 <div className="bg-white rounded-2xl border border-blue-100 shadow-sm p-5">
-                  <h3 className="font-bold text-gray-900 mb-4 text-sm">Yeni Kullanıcı</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-sm">Yeni Kullanıcı</h3>
                   <form onSubmit={handleAddUser} className="grid grid-cols-2 gap-3">
                     <input value={newUser.name} onChange={(e) => setNewUser(p => ({ ...p, name: e.target.value }))}
-                      placeholder="Ad Soyad" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                      placeholder="Ad Soyad" className="border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
                     <input required type="email" value={newUser.email} onChange={(e) => setNewUser(p => ({ ...p, email: e.target.value }))}
-                      placeholder="E-posta" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                      placeholder="E-posta" className="border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
                     <input required type="password" value={newUser.password} onChange={(e) => setNewUser(p => ({ ...p, password: e.target.value }))}
-                      placeholder="Şifre" className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                      placeholder="Şifre" className="border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
                     <select value={newUser.role} onChange={(e) => setNewUser(p => ({ ...p, role: e.target.value }))}
-                      className="border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white">
+                      className="border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white">
                       <option value="user">user</option>
                       <option value="admin">admin</option>
                     </select>
                     <div className="col-span-2 flex gap-2 justify-end">
-                      <button type="button" onClick={() => setShowAddUser(false)} className="px-4 py-2 text-sm border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50">İptal</button>
+                      <button type="button" onClick={() => setShowAddUser(false)} className="px-4 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">İptal</button>
                       <button type="submit" className="px-4 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl hover:bg-blue-700">Ekle</button>
                     </div>
                   </form>
                 </div>
               )}
 
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm min-w-[820px]">
                     <thead>
-                      <tr className="border-b border-gray-100 bg-gray-50">
+                      <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50">
                         {['Kullanıcı', 'Durum', 'Son İşlem', 'Opt.', 'Kargo', 'Rol', 'Rol Değiştir', ''].map((h) => (
-                          <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
+                          <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-50">
+                    <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                       {filteredUsers.map((user) => {
                         // Aktivite durumu
                         const lastSeenMs = user.lastLog ? Date.now() - new Date(user.lastLog.createdAt).getTime() : null;
@@ -500,7 +500,7 @@ export default function AdminPage() {
                           : null;
 
                         return (
-                          <tr key={user.id} className="hover:bg-gray-50 transition-colors group">
+                          <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
                             {/* Kullanıcı */}
                             <td className="px-4 py-3.5">
                               <div className="flex items-center gap-3">
@@ -508,8 +508,8 @@ export default function AdminPage() {
                                   <span className="text-white text-xs font-bold">{(user.name ?? user.email).charAt(0).toUpperCase()}</span>
                                 </div>
                                 <div>
-                                  <p className="font-semibold text-gray-900 leading-tight">{user.name || '—'}</p>
-                                  <p className="text-xs text-gray-400">{user.email}</p>
+                                  <p className="font-semibold text-gray-900 dark:text-white leading-tight">{user.name || '—'}</p>
+                                  <p className="text-xs text-gray-400 dark:text-gray-500">{user.email}</p>
                                 </div>
                               </div>
                             </td>
@@ -525,7 +525,7 @@ export default function AdminPage() {
                                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Yakında
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 bg-gray-50 border border-gray-100 px-2 py-1 rounded-full">
+                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-800 px-2 py-1 rounded-full">
                                   <span className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Pasif
                                 </span>
                               )}
@@ -535,8 +535,8 @@ export default function AdminPage() {
                             <td className="px-4 py-3.5 max-w-[200px]">
                               {lastAction ? (
                                 <div>
-                                  <p className="text-xs font-medium text-gray-700 truncate">{lastAction}</p>
-                                  <p className="text-[10px] text-gray-400 mt-0.5">{lastWhen}</p>
+                                  <p className="text-xs font-medium text-gray-700 dark:text-gray-200 truncate">{lastAction}</p>
+                                  <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">{lastWhen}</p>
                                 </div>
                               ) : (
                                 <span className="text-xs text-gray-300">—</span>
@@ -545,14 +545,14 @@ export default function AdminPage() {
 
                             {/* Opt sayısı */}
                             <td className="px-4 py-3.5 text-center">
-                              <span className="inline-flex items-center justify-center w-8 h-6 bg-blue-50 text-blue-700 text-xs font-bold rounded-md">
+                              <span className="inline-flex items-center justify-center w-8 h-6 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-md">
                                 {user.optCount ?? 0}
                               </span>
                             </td>
 
                             {/* Kargo sayısı */}
                             <td className="px-4 py-3.5 text-center">
-                              <span className="inline-flex items-center justify-center w-8 h-6 bg-gray-50 text-gray-600 text-xs font-bold rounded-md">
+                              <span className="inline-flex items-center justify-center w-8 h-6 bg-gray-50 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-md">
                                 {user.cargoCount ?? 0}
                               </span>
                             </td>
@@ -563,7 +563,7 @@ export default function AdminPage() {
                             {/* Rol değiştir */}
                             <td className="px-4 py-3.5">
                               <select value={user.role} onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                                className="text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                className="text-xs border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 bg-white dark:bg-gray-950 focus:outline-none focus:ring-1 focus:ring-blue-600">
                                 <option value="user">user</option>
                                 <option value="admin">admin</option>
                               </select>
@@ -577,11 +577,11 @@ export default function AdminPage() {
                                     <button onClick={() => handleDeleteUser(user.id)}
                                       className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-lg transition-colors">Sil</button>
                                     <button onClick={() => setConfirmDeleteUserId(null)}
-                                      className="text-xs text-gray-500 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors">İptal</button>
+                                      className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">İptal</button>
                                   </div>
                                 ) : (
                                   <button onClick={() => setConfirmDeleteUserId(user.id)}
-                                    className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
+                                    className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 dark:text-gray-500 hover:text-red-500 transition-colors">
                                     <Trash2 className="w-4 h-4" />
                                   </button>
                                 )}
@@ -593,7 +593,7 @@ export default function AdminPage() {
                     </tbody>
                   </table>
                 </div>
-                <div className="px-5 py-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+                <div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
                   <span>{filteredUsers.length} kullanıcı</span>
                   <span className="flex items-center gap-3">
                     <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Aktif: son 30 dk</span>
@@ -608,11 +608,11 @@ export default function AdminPage() {
           {activeTab === 'reports' && (
             <>
               <div className="flex items-center justify-between flex-wrap gap-3">
-                <h1 className="text-xl font-black text-gray-900">Raporlar</h1>
-                <div className="flex gap-1 bg-white border border-gray-200 rounded-xl p-1">
+                <h1 className="text-xl font-black text-gray-900 dark:text-white">Raporlar</h1>
+                <div className="flex gap-1 bg-white border border-gray-200 dark:border-gray-700 rounded-xl p-1">
                   {(['1m', '3m', '6m'] as const).map((p) => (
                     <button key={p} onClick={() => setReportPeriod(p)}
-                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${reportPeriod === p ? 'bg-blue-600 text-white' : 'text-gray-500 hover:text-gray-900'}`}>
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${reportPeriod === p ? 'bg-blue-600 text-white' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-white'}`}>
                       {p === '1m' ? 'Bu Ay' : p === '3m' ? '3 Ay' : '6 Ay'}
                     </button>
                   ))}
@@ -627,23 +627,23 @@ export default function AdminPage() {
                   { label: 'Ortalama Aylık', value: Math.round(reportData.reduce((s, r) => s + r.optCount, 0) / reportData.length), icon: BarChart3, color: 'indigo' },
                   { label: 'Aktif Kullanıcı', value: reportData[reportData.length - 1].activeUsers, icon: Users, color: 'green' },
                 ].map(({ label, value, icon: Icon, color }) => (
-                  <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <div key={label} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 shadow-sm">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs text-gray-400 font-medium">{label}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">{label}</span>
                       <div className={`w-8 h-8 bg-${color}-50 rounded-lg flex items-center justify-center`}>
                         <Icon className={`w-4 h-4 text-${color}-600`} />
                       </div>
                     </div>
-                    <p className="text-2xl font-black text-gray-900">{value}</p>
+                    <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
                   </div>
                 ))}
               </div>
 
               {/* Optimization bar chart */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                 <div className="flex items-center justify-between mb-5">
-                  <h2 className="text-sm font-bold text-gray-900">Aylık Optimizasyon Sayısı</h2>
-                  <button className="flex items-center gap-1.5 text-xs text-gray-500 border border-gray-200 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 bg-white transition-colors">
+                  <h2 className="text-sm font-bold text-gray-900 dark:text-white">Aylık Optimizasyon Sayısı</h2>
+                  <button className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 bg-white transition-colors">
                     <Download className="w-3.5 h-3.5" /> CSV
                   </button>
                 </div>
@@ -653,15 +653,15 @@ export default function AdminPage() {
                       <span className="text-xs font-bold text-blue-700">{r.optCount}</span>
                       <div className="w-full rounded-t-lg bg-blue-600 hover:bg-blue-700 transition-colors cursor-default"
                         style={{ height: `${(r.optCount / maxOpt) * 100}%` }} />
-                      <span className="text-xs text-gray-400 font-medium">{r.month}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">{r.month}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Depot capacity */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                <h2 className="text-sm font-bold text-gray-900 mb-5">Depo Doluluk Oranları</h2>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
+                <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-5">Depo Doluluk Oranları</h2>
                 <div className="space-y-4">
                   {DEPOT_STATS.map((d) => {
                     const pct = Math.round((d.used / d.capacity) * 100);
@@ -669,12 +669,12 @@ export default function AdminPage() {
                     return (
                       <div key={d.name}>
                         <div className="flex justify-between text-sm mb-2">
-                          <span className="font-medium text-gray-700">{d.name}</span>
-                          <span className={`font-bold text-xs ${warn ? 'text-amber-600' : 'text-gray-600'}`}>
+                          <span className="font-medium text-gray-700 dark:text-gray-200">{d.name}</span>
+                          <span className={`font-bold text-xs ${warn ? 'text-amber-600' : 'text-gray-600 dark:text-gray-300'}`}>
                             {d.used.toLocaleString()} / {d.capacity.toLocaleString()} {d.unit} ({pct}%)
                           </span>
                         </div>
-                        <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                           <div className={`h-full rounded-full transition-all duration-700 ${warn ? 'bg-amber-400' : 'bg-blue-600'}`} style={{ width: `${pct}%` }} />
                         </div>
                       </div>
@@ -684,8 +684,8 @@ export default function AdminPage() {
               </div>
 
               {/* Saved volume trend */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                <h2 className="text-sm font-bold text-gray-900 mb-5">Tasarruf Edilen Hacim (m³)</h2>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
+                <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-5">Tasarruf Edilen Hacim (m³)</h2>
                 <div className="flex items-end gap-3 h-28">
                   {reportData.map((r) => {
                     const maxV = Math.max(...reportData.map((x) => x.savedM3));
@@ -694,7 +694,7 @@ export default function AdminPage() {
                         <span className="text-xs font-bold text-purple-700">{r.savedM3}</span>
                         <div className="w-full rounded-t-lg bg-purple-400 hover:bg-purple-600 transition-colors cursor-default"
                           style={{ height: `${(r.savedM3 / maxV) * 100}%` }} />
-                        <span className="text-xs text-gray-400 font-medium">{r.month}</span>
+                        <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">{r.month}</span>
                       </div>
                     );
                   })}
@@ -707,21 +707,21 @@ export default function AdminPage() {
           {activeTab === 'logs' && (
             <>
               <div className="flex items-center justify-between">
-                <h1 className="text-xl font-black text-gray-900">Aktivite Günlüğü</h1>
-                <button onClick={handleDownloadCSV} className="flex items-center gap-1.5 text-xs text-gray-500 border border-gray-200 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 transition-colors bg-white">
+                <h1 className="text-xl font-black text-gray-900 dark:text-white">Aktivite Günlüğü</h1>
+                <button onClick={handleDownloadCSV} className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 transition-colors bg-white">
                   <Download className="w-3.5 h-3.5" /> CSV İndir
                 </button>
               </div>
 
               <div className="flex gap-3">
                 <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                   <input value={logSearch} onChange={(e) => setLogSearch(e.target.value)}
                     placeholder="Kullanıcı veya işlem ara…"
-                    className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white" />
+                    className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white" />
                 </div>
                 <select value={logFilter} onChange={(e) => setLogFilter(e.target.value)}
-                  className="px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white text-gray-700">
+                  className="px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white text-gray-700 dark:text-gray-200">
                   <option value="tümü">Tüm Türler</option>
                   <option value="success">Başarılı</option>
                   <option value="error">Hata</option>
@@ -730,33 +730,33 @@ export default function AdminPage() {
                 </select>
               </div>
 
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-gray-100 bg-gray-50">
+                      <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50">
                         {['', 'İşlem', 'Kullanıcı', 'Modül', 'IP', 'Zaman'].map((h) => (
-                          <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
+                          <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wider whitespace-nowrap">{h}</th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-50">
+                    <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                       {filteredLogs.map((log) => (
-                        <tr key={log.id} className="hover:bg-gray-50 transition-colors">
+                        <tr key={log.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                           <td className="px-4 py-3"><LogIcon type={log.type} /></td>
-                          <td className="px-4 py-3 font-medium text-gray-800 max-w-xs">{log.action}</td>
-                          <td className="px-4 py-3 text-gray-600 whitespace-nowrap">{log.userEmail ?? '—'}</td>
+                          <td className="px-4 py-3 font-medium text-gray-800 dark:text-gray-100 max-w-xs">{log.action}</td>
+                          <td className="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{log.userEmail ?? '—'}</td>
                           <td className="px-4 py-3">
-                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">{log.module}</span>
+                            <span className="text-xs bg-gray-100 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full font-medium">{log.module}</span>
                           </td>
-                          <td className="px-4 py-3 text-gray-400 text-xs font-mono">{log.ip ?? '—'}</td>
-                          <td className="px-4 py-3 text-gray-400 text-xs whitespace-nowrap">{new Date(log.createdAt).toLocaleString('tr-TR')}</td>
+                          <td className="px-4 py-3 text-gray-400 dark:text-gray-500 text-xs font-mono">{log.ip ?? '—'}</td>
+                          <td className="px-4 py-3 text-gray-400 dark:text-gray-500 text-xs whitespace-nowrap">{new Date(log.createdAt).toLocaleString('tr-TR')}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                <div className="px-5 py-3 border-t border-gray-100 text-xs text-gray-400">{filteredLogs.length} kayıt gösteriliyor</div>
+                <div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-400 dark:text-gray-500">{filteredLogs.length} kayıt gösteriliyor</div>
               </div>
             </>
           )}
@@ -766,32 +766,32 @@ export default function AdminPage() {
             <>
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-black text-gray-900">Bildirimler</h1>
-                  {unreadCount > 0 && <p className="text-xs text-gray-400 mt-0.5">{unreadCount} okunmamış bildirim</p>}
+                  <h1 className="text-xl font-black text-gray-900 dark:text-white">Bildirimler</h1>
+                  {unreadCount > 0 && <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{unreadCount} okunmamış bildirim</p>}
                 </div>
                 <div className="flex gap-2">
                   {unreadCount > 0 && (
                     <button onClick={markAllRead}
-                      className="flex items-center gap-1.5 text-xs text-gray-500 border border-gray-200 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 bg-white transition-colors">
+                      className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 bg-white transition-colors">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Tümünü Okundu İşaretle
                     </button>
                   )}
-                  <button className="flex items-center gap-1.5 text-xs text-gray-500 border border-gray-200 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 bg-white transition-colors">
+                  <button className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-xl hover:text-blue-600 hover:border-blue-200 bg-white transition-colors">
                     <Filter className="w-3.5 h-3.5" /> Filtrele
                   </button>
                 </div>
               </div>
 
               {notifications.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-12 text-center">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-12 text-center">
                   <Inbox className="w-10 h-10 text-gray-200 mx-auto mb-3" />
-                  <p className="text-sm font-semibold text-gray-400">Bildirim yok</p>
+                  <p className="text-sm font-semibold text-gray-400 dark:text-gray-500">Bildirim yok</p>
                   <p className="text-xs text-gray-300 mt-1">Yeni bildirimler burada görünecek.</p>
                 </div>
               ) : (
                 <div className="space-y-2">
                   {notifications.map((n) => (
-                    <div key={n.id} className={`bg-white rounded-2xl border shadow-sm p-4 flex gap-4 transition-all ${n.read ? 'border-gray-100 opacity-70' : 'border-blue-100'}`}>
+                    <div key={n.id} className={`bg-white rounded-2xl border shadow-sm p-4 flex gap-4 transition-all ${n.read ? 'border-gray-100 dark:border-gray-800 opacity-70' : 'border-blue-100'}`}>
                       <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
                         n.type === 'success' ? 'bg-green-50' : n.type === 'error' ? 'bg-red-50' : n.type === 'warning' ? 'bg-amber-50' : 'bg-blue-50'
                       }`}>
@@ -799,7 +799,7 @@ export default function AdminPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
-                          <p className={`text-sm font-semibold ${n.read ? 'text-gray-500' : 'text-gray-900'}`}>{n.title}</p>
+                          <p className={`text-sm font-semibold ${n.read ? 'text-gray-500' : 'text-gray-900 dark:text-white'}`}>{n.title}</p>
                           <div className="flex items-center gap-2 shrink-0">
                             {!n.read && <span className="w-2 h-2 bg-blue-600 rounded-full" />}
                             <button onClick={() => deleteNotif(n.id)} aria-label="Bildirimi sil" className="text-gray-300 hover:text-red-400 transition-colors">
@@ -807,7 +807,7 @@ export default function AdminPage() {
                             </button>
                           </div>
                         </div>
-                        <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{n.message}</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 leading-relaxed">{n.message}</p>
                         <p className="text-xs text-gray-300 mt-1.5">{n.time}</p>
                       </div>
                     </div>
@@ -820,31 +820,31 @@ export default function AdminPage() {
           {/* ── Settings ── */}
           {activeTab === 'settings' && (
             <>
-              <h1 className="text-xl font-black text-gray-900">Sistem Ayarları</h1>
+              <h1 className="text-xl font-black text-gray-900 dark:text-white">Sistem Ayarları</h1>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Bell className="w-4 h-4 text-blue-600" />
-                    <h2 className="font-bold text-gray-900 text-sm">Bildirimler</h2>
+                    <h2 className="font-bold text-gray-900 dark:text-white text-sm">Bildirimler</h2>
                   </div>
                   <SettingToggle label="E-posta Bildirimleri" desc="Önemli olaylar için e-posta gönder" value={settings.emailNotif} onChange={() => toggleSetting('emailNotif')} />
                   <SettingToggle label="Aktivite Günlüğü" desc="Tüm kullanıcı işlemlerini kaydet" value={settings.activityLog} onChange={() => toggleSetting('activityLog')} />
                 </div>
 
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Shield className="w-4 h-4 text-blue-600" />
-                    <h2 className="font-bold text-gray-900 text-sm">Güvenlik</h2>
+                    <h2 className="font-bold text-gray-900 dark:text-white text-sm">Güvenlik</h2>
                   </div>
                   <SettingToggle label="İki Faktörlü Doğrulama" desc="Tüm kullanıcılar için zorunlu yap" value={settings.twoFactor} onChange={() => toggleSetting('twoFactor')} />
                   <SettingToggle label="Paylaşım Linkleri" desc="Anonim yük planı paylaşımına izin ver" value={settings.shareLinks} onChange={() => toggleSetting('shareLinks')} />
                 </div>
 
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Server className="w-4 h-4 text-blue-600" />
-                    <h2 className="font-bold text-gray-900 text-sm">Sistem</h2>
+                    <h2 className="font-bold text-gray-900 dark:text-white text-sm">Sistem</h2>
                   </div>
                   <SettingToggle label="Otomatik Yedekleme" desc="Her gün 03:00'te yedek al" value={settings.autoBackup} onChange={() => toggleSetting('autoBackup')} />
                   <SettingToggle label="Bakım Modu" desc="Aktif edilirse kullanıcılar giriş yapamaz" value={settings.maintenanceMode} onChange={() => toggleSetting('maintenanceMode')} />
@@ -855,17 +855,17 @@ export default function AdminPage() {
                   )}
                 </div>
 
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <Key className="w-4 h-4 text-blue-600" />
-                    <h2 className="font-bold text-gray-900 text-sm">API Anahtarı</h2>
+                    <h2 className="font-bold text-gray-900 dark:text-white text-sm">API Anahtarı</h2>
                   </div>
-                  <p className="text-xs text-gray-500 mb-3">Harici sistemlerle entegrasyon için kullanın (Excel, SAP vb.)</p>
-                  <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
-                    <code className="text-xs text-gray-700 font-mono flex-1 truncate">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-3">Harici sistemlerle entegrasyon için kullanın (Excel, SAP vb.)</p>
+                  <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2.5">
+                    <code className="text-xs text-gray-700 dark:text-gray-200 font-mono flex-1 truncate">
                       {showApiKey ? apiKey : '••••••••••••••••••••••••••••'}
                     </code>
-                    <button onClick={() => setShowApiKey((p) => !p)} aria-label={showApiKey ? 'API anahtarını gizle' : 'API anahtarını göster'} className="text-gray-400 hover:text-blue-600 transition-colors shrink-0">
+                    <button onClick={() => setShowApiKey((p) => !p)} aria-label={showApiKey ? 'API anahtarını gizle' : 'API anahtarını göster'} className="text-gray-400 dark:text-gray-500 hover:text-blue-600 transition-colors shrink-0">
                       {showApiKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
@@ -875,10 +875,10 @@ export default function AdminPage() {
                 </div>
 
                 {/* Storage info */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 lg:col-span-2">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 lg:col-span-2">
                   <div className="flex items-center gap-2 mb-4">
                     <HardDrive className="w-4 h-4 text-blue-600" />
-                    <h2 className="font-bold text-gray-900 text-sm">Depolama & Altyapı</h2>
+                    <h2 className="font-bold text-gray-900 dark:text-white text-sm">Depolama & Altyapı</h2>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <HealthBar label="CPU Kullanımı" pct={34} warn={false} />
@@ -892,10 +892,10 @@ export default function AdminPage() {
                       { label: 'Uptime', value: '99.9%', sub: 'son 30 gün' },
                       { label: 'Son Yedek', value: '26 Mar', sub: '03:00' },
                     ].map(({ label, value, sub }) => (
-                      <div key={label} className="bg-gray-50 rounded-xl p-3 border border-gray-100">
-                        <p className="text-xs text-gray-400 mb-1">{label}</p>
-                        <p className="text-sm font-bold text-gray-800">{value}</p>
-                        <p className="text-xs text-gray-400">{sub}</p>
+                      <div key={label} className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 border border-gray-100 dark:border-gray-800">
+                        <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">{label}</p>
+                        <p className="text-sm font-bold text-gray-800 dark:text-gray-100">{value}</p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500">{sub}</p>
                       </div>
                     ))}
                   </div>

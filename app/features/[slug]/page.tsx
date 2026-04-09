@@ -36,15 +36,15 @@ export default async function FeaturePage({
       <Navbar />
 
       {/* Hero */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-950 dark:bg-gray-950 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-10">
+          <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 mb-10">
             <Link href="/" className="hover:text-blue-600 transition-colors">
               Anasayfa
             </Link>
             <span>/</span>
-            <span className="text-gray-600 font-medium">
+            <span className="text-gray-600 dark:text-gray-300 font-medium">
               {feature.title}
               {feature.titleHighlight}
             </span>
@@ -56,14 +56,14 @@ export default async function FeaturePage({
             <div className="flex flex-col gap-6">
               <div className="inline-block w-8 h-1 bg-blue-600 rounded" />
 
-              <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight">
                 {feature.title}
                 {feature.titleHighlight && (
                   <span className="text-blue-600">{feature.titleHighlight}</span>
                 )}
               </h1>
 
-              <p className="text-gray-500 text-lg leading-relaxed">
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-lg leading-relaxed">
                 {feature.description}
               </p>
 
@@ -99,9 +99,9 @@ export default async function FeaturePage({
       </section>
 
       {/* Other Features */}
-      <section className="py-14 bg-gray-50 border-t border-gray-100">
+      <section className="py-14 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-8">Diğer Özellikler</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-8">Diğer Özellikler</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {FEATURES.filter((f) => f.id !== slug).map((f, i) => {
               const originalIndex = FEATURES.findIndex((x) => x.id === f.id);
@@ -118,13 +118,13 @@ export default async function FeaturePage({
                   href={`/features/${f.id}`}
                   className={`flex flex-col gap-2 p-5 bg-white rounded-2xl border ${accentMap[scheme]} hover:shadow-md transition-all duration-200`}
                 >
-                  <h3 className="font-bold text-gray-900 text-base">
+                  <h3 className="font-bold text-gray-900 dark:text-white text-base">
                     {f.title}
                     {f.titleHighlight && (
                       <span className="text-blue-600">{f.titleHighlight}</span>
                     )}
                   </h3>
-                  <p className="text-gray-500 text-sm line-clamp-2">{f.description}</p>
+                  <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm line-clamp-2">{f.description}</p>
                 </Link>
               );
             })}

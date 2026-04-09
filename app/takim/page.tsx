@@ -26,7 +26,7 @@ interface TeamMember {
 const ROLE_META: Record<Role, { label: string; desc: string; icon: LucideIcon; color: string }> = {
   admin:  { label: 'Admin',   desc: 'Tüm ayarlar ve üye yönetimi',   icon: Crown,  color: 'text-amber-600 bg-amber-50 border-amber-100' },
   editor: { label: 'Editör',  desc: 'Optimizasyon ve depo düzenleme', icon: Edit3,  color: 'text-blue-600 bg-blue-50 border-blue-100' },
-  viewer: { label: 'Görüntüleyici', desc: 'Yalnızca okuma erişimi',  icon: Eye,    color: 'text-gray-600 bg-gray-100 border-gray-200' },
+  viewer: { label: 'Görüntüleyici', desc: 'Yalnızca okuma erişimi',  icon: Eye,    color: 'text-gray-600 dark:text-gray-300 bg-gray-100 border-gray-200 dark:border-gray-700' },
 };
 
 function makeInviteToken(email: string, role: Role): string {
@@ -125,16 +125,16 @@ export default function TakimPage() {
 
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
         <Navbar />
 
         {/* Header */}
-        <div className="bg-white border-b border-gray-100">
+        <div className="bg-white border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-            <h1 className="text-2xl font-black text-gray-900">
+            <h1 className="text-2xl font-black text-gray-900 dark:text-white">
               Takım <span className="text-blue-600">Yönetimi</span>
             </h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">
               Ekibinizi davet edin, rol ve erişim yetkilerini yönetin.
             </p>
           </div>
@@ -149,22 +149,22 @@ export default function TakimPage() {
               { label: 'Aktif',         value: activeCount,     icon: Check,    color: 'text-green-600 bg-green-50' },
               { label: 'Davet Bekliyor', value: invitedCount,   icon: Mail,     color: 'text-amber-600 bg-amber-50' },
             ].map(({ label, value, icon: Icon, color }) => (
-              <div key={label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+              <div key={label} className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 flex items-center gap-4">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-medium">{label}</p>
-                  <p className="text-2xl font-black text-gray-900">{value}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 font-medium">{label}</p>
+                  <p className="text-2xl font-black text-gray-900 dark:text-white">{value}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Members table */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-              <h2 className="text-sm font-bold text-gray-900">Üyeler</h2>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-white">Üyeler</h2>
               <button
                 onClick={() => { setShowInvite(true); setGeneratedLink(null); setInviteEmail(''); }}
                 className="flex items-center gap-1.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors"
@@ -177,13 +177,13 @@ export default function TakimPage() {
               <thead>
                 <tr className="bg-gray-50 text-left">
                   {['Üye', 'Rol', 'Katılım', 'Durum', ''].map((h) => (
-                    <th key={h} className="px-5 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">{h}</th>
+                    <th key={h} className="px-5 py-3 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                 {members.map((m) => (
-                  <tr key={m.id} className="hover:bg-gray-50 transition-colors group">
+                  <tr key={m.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
                     {/* Member info */}
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
@@ -193,8 +193,8 @@ export default function TakimPage() {
                           </span>
                         </div>
                         <div>
-                          <p className="font-semibold text-gray-800">{m.name}</p>
-                          <p className="text-xs text-gray-400">{m.email}</p>
+                          <p className="font-semibold text-gray-800 dark:text-gray-100">{m.name}</p>
+                          <p className="text-xs text-gray-400 dark:text-gray-500">{m.email}</p>
                         </div>
                       </div>
                     </td>
@@ -206,7 +206,7 @@ export default function TakimPage() {
                           <select
                             value={editRole}
                             onChange={(e) => setEditRole(e.target.value as Role)}
-                            className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                            className="text-xs border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                           >
                             {(Object.keys(ROLE_META) as Role[]).map((r) => (
                               <option key={r} value={r}>{ROLE_META[r].label}</option>
@@ -217,7 +217,7 @@ export default function TakimPage() {
                             <Check className="w-4 h-4" />
                           </button>
                           <button onClick={() => setEditId(null)}
-                            className="text-gray-300 hover:text-gray-500 transition-colors">
+                            className="text-gray-300 hover:text-gray-500 dark:text-gray-400 dark:text-gray-500 transition-colors">
                             <X className="w-4 h-4" />
                           </button>
                         </div>
@@ -228,13 +228,13 @@ export default function TakimPage() {
                           title="Rolü değiştir"
                         >
                           <RoleBadge role={m.role} />
-                          <ChevronDown className="w-3 h-3 text-gray-300 group-hover/role:text-gray-500 transition-colors" />
+                          <ChevronDown className="w-3 h-3 text-gray-300 group-hover/role:text-gray-500 dark:text-gray-400 dark:text-gray-500 transition-colors" />
                         </button>
                       )}
                     </td>
 
                     {/* Joined */}
-                    <td className="px-5 py-4 text-xs text-gray-400 font-mono">{m.joinedAt}</td>
+                    <td className="px-5 py-4 text-xs text-gray-400 dark:text-gray-500 font-mono">{m.joinedAt}</td>
 
                     {/* Status */}
                     <td className="px-5 py-4">
@@ -257,7 +257,7 @@ export default function TakimPage() {
                             Sil
                           </button>
                           <button onClick={() => setDeleteId(null)}
-                            className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors">
+                            className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-200 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                             İptal
                           </button>
                         </div>
@@ -278,8 +278,8 @@ export default function TakimPage() {
           </div>
 
           {/* Role descriptions */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-            <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-6">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <Shield className="w-4 h-4 text-blue-600" /> Rol Açıklamaları
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -305,26 +305,26 @@ export default function TakimPage() {
             <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setShowInvite(false)} />
             <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
               <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-gray-900">Üye Davet Et</h2>
-                <button onClick={() => setShowInvite(false)} className="text-gray-400 hover:text-gray-600">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Üye Davet Et</h2>
+                <button onClick={() => setShowInvite(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-300">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">E-posta Adresi</label>
+                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1.5">E-posta Adresi</label>
                   <input
                     type="email"
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
                     placeholder="ornek@sirket.com"
-                    className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Rol</label>
+                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1.5">Rol</label>
                   <div className="grid grid-cols-3 gap-2">
                     {(Object.entries(ROLE_META) as [Role, typeof ROLE_META[Role]][]).map(([role, meta]) => {
                       const Icon = meta.icon;
@@ -333,11 +333,11 @@ export default function TakimPage() {
                           key={role}
                           onClick={() => setInviteRole(role)}
                           className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all text-center ${
-                            inviteRole === role ? 'border-blue-500 bg-blue-50' : 'border-gray-100 hover:border-gray-200'
+                            inviteRole === role ? 'border-blue-500 bg-blue-50' : 'border-gray-100 dark:border-gray-800 hover:border-gray-200 dark:hover:border-gray-700 dark:border-gray-700'
                           }`}
                         >
-                          <Icon className={`w-4 h-4 ${inviteRole === role ? 'text-blue-600' : 'text-gray-400'}`} />
-                          <span className={`text-xs font-semibold ${inviteRole === role ? 'text-blue-700' : 'text-gray-500'}`}>
+                          <Icon className={`w-4 h-4 ${inviteRole === role ? 'text-blue-600' : 'text-gray-400 dark:text-gray-500'}`} />
+                          <span className={`text-xs font-semibold ${inviteRole === role ? 'text-blue-700' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                             {meta.label}
                           </span>
                         </button>
@@ -354,10 +354,10 @@ export default function TakimPage() {
                 </button>
 
                 {generatedLink && (
-                  <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 space-y-2">
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Davet Linki (7 gün geçerli)</p>
+                  <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-3 space-y-2">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-500 uppercase tracking-wide">Davet Linki (7 gün geçerli)</p>
                     <div className="flex items-center gap-2">
-                      <p className="text-xs text-gray-600 font-mono truncate flex-1">{generatedLink}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 font-mono truncate flex-1">{generatedLink}</p>
                       <button
                         onClick={handleCopyLink}
                         className={`shrink-0 flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
@@ -367,7 +367,7 @@ export default function TakimPage() {
                         {copied ? <><Check className="w-3 h-3" /> Kopyalandı</> : <><Copy className="w-3 h-3" /> Kopyala</>}
                       </button>
                     </div>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-gray-400 dark:text-gray-500">
                       Bu linki davet ettiğiniz kişiyle paylaşın. Link 7 gün sonra geçersiz olur.
                     </p>
                   </div>

@@ -150,7 +150,7 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <Navbar />
 
       {/* Hero */}
@@ -159,11 +159,11 @@ export default function PricingPage() {
           <Zap className="w-3.5 h-3.5" />
           Şeffaf Fiyatlandırma
         </div>
-        <h1 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+        <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
           İhtiyacınıza Uygun<br />
           <span className="text-blue-600">Plan Seçin</span>
         </h1>
-        <p className="text-lg text-gray-500 max-w-xl mx-auto mb-8">
+        <p className="text-lg text-gray-500 dark:text-gray-400 dark:text-gray-500 max-w-xl mx-auto mb-8">
           Bireysel kullanıcıdan kurumsal operasyonlara kadar her ölçek için esnek planlar. Gizli ücret yok.
         </p>
 
@@ -172,7 +172,7 @@ export default function PricingPage() {
           <button
             onClick={() => setAnnual(false)}
             className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-              !annual ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500'
+              !annual ? 'bg-white text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500'
             }`}
           >
             Aylık
@@ -180,7 +180,7 @@ export default function PricingPage() {
           <button
             onClick={() => setAnnual(true)}
             className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-              annual ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500'
+              annual ? 'bg-white text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500'
             }`}
           >
             Yıllık
@@ -200,7 +200,7 @@ export default function PricingPage() {
               className={`relative rounded-2xl border p-7 flex flex-col gap-6 ${
                 plan.highlight
                   ? 'border-blue-500 bg-gradient-to-b from-blue-600 to-blue-800 text-white shadow-2xl shadow-blue-200 scale-[1.02]'
-                  : 'border-gray-200 bg-white'
+                  : 'border-gray-200 dark:border-gray-700 bg-white'
               }`}
             >
               {plan.badge && (
@@ -214,35 +214,35 @@ export default function PricingPage() {
               {/* Plan header */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  {plan.id === 'free' && <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center"><Zap className="w-4 h-4 text-gray-500" /></div>}
+                  {plan.id === 'free' && <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center"><Zap className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" /></div>}
                   {plan.id === 'pro' && <div className="w-8 h-8 rounded-lg bg-blue-400/30 flex items-center justify-center"><Zap className="w-4 h-4 text-blue-100" /></div>}
-                  {plan.id === 'enterprise' && <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center"><Building2 className="w-4 h-4 text-gray-500" /></div>}
-                  <span className={`text-base font-bold ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>
+                  {plan.id === 'enterprise' && <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center"><Building2 className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" /></div>}
+                  <span className={`text-base font-bold ${plan.highlight ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
                     {plan.name}
                   </span>
                 </div>
 
                 <div className="flex items-end gap-1.5 mb-2">
-                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>
+                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
                     {displayPrice(plan)}
                   </span>
                   {plan.monthlyPrice !== null && plan.monthlyPrice > 0 && (
-                    <span className={`text-sm mb-1.5 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                    <span className={`text-sm mb-1.5 ${plan.highlight ? 'text-blue-200' : 'text-gray-400 dark:text-gray-500'}`}>
                       / ay
                     </span>
                   )}
                   {plan.monthlyPrice === null && (
-                    <span className={`text-sm mb-1.5 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                    <span className={`text-sm mb-1.5 ${plan.highlight ? 'text-blue-200' : 'text-gray-400 dark:text-gray-500'}`}>
                       fiyatlandırma
                     </span>
                   )}
                 </div>
                 {annual && plan.monthlyPrice !== null && plan.monthlyPrice > 0 && (
-                  <p className={`text-xs mb-2 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                  <p className={`text-xs mb-2 ${plan.highlight ? 'text-blue-200' : 'text-gray-400 dark:text-gray-500'}`}>
                     Yıllık ₺{Math.round(plan.monthlyPrice * (1 - ANNUAL_DISCOUNT) * 12)} faturalandırılır
                   </p>
                 )}
-                <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-blue-100' : 'text-gray-500'}`}>
+                <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400 dark:text-gray-500'}`}>
                   {plan.description}
                 </p>
               </div>
@@ -252,7 +252,7 @@ export default function PricingPage() {
                 href={ctaHref(plan)}
                 className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
                   plan.highlight
-                    ? 'bg-white text-blue-700 hover:bg-blue-50'
+                    ? 'bg-white text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30'
                     : plan.id === 'enterprise'
                     ? 'bg-gray-900 text-white hover:bg-gray-800'
                     : 'bg-blue-600 text-white hover:bg-blue-700'
@@ -273,8 +273,8 @@ export default function PricingPage() {
                     )}
                     <span className={`text-sm leading-tight ${
                       f.included
-                        ? plan.highlight ? 'text-white' : 'text-gray-700'
-                        : plan.highlight ? 'text-blue-300/60' : 'text-gray-400'
+                        ? plan.highlight ? 'text-white' : 'text-gray-700 dark:text-gray-200'
+                        : plan.highlight ? 'text-blue-300/60' : 'text-gray-400 dark:text-gray-500'
                     }`}>
                       {f.text}
                       {f.note && (
@@ -295,20 +295,20 @@ export default function PricingPage() {
 
       {/* Feature comparison table */}
       <section className="max-w-4xl mx-auto px-4 pb-20">
-        <h2 className="text-2xl font-black text-gray-900 text-center mb-10">
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white text-center mb-10">
           Plan Karşılaştırması
         </h2>
-        <div className="rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-5 py-4 font-semibold text-gray-700 w-1/2">Özellik</th>
-                <th className="text-center px-4 py-4 font-semibold text-gray-700">Ücretsiz</th>
+              <tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <th className="text-left px-5 py-4 font-semibold text-gray-700 dark:text-gray-200 w-1/2">Özellik</th>
+                <th className="text-center px-4 py-4 font-semibold text-gray-700 dark:text-gray-200">Ücretsiz</th>
                 <th className="text-center px-4 py-4 font-bold text-blue-700 bg-blue-50">Pro</th>
-                <th className="text-center px-4 py-4 font-semibold text-gray-700">Kurumsal</th>
+                <th className="text-center px-4 py-4 font-semibold text-gray-700 dark:text-gray-200">Kurumsal</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {[
                 ['Aylık optimizasyon', '10', 'Sınırsız', 'Sınırsız'],
                 ['Depolama alanı', '3 alan', 'Sınırsız', 'Sınırsız'],
@@ -323,11 +323,11 @@ export default function PricingPage() {
                 ['API erişimi', '—', 'Yakında', 'Tam Erişim'],
                 ['Destek', 'Topluluk', 'E-posta', 'Telefon + SLA'],
               ].map(([feature, free, pro, ent], i) => (
-                <tr key={i} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-3.5 text-gray-700 font-medium">{feature}</td>
-                  <td className="px-4 py-3.5 text-center text-gray-500">{free}</td>
+                <tr key={i} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <td className="px-5 py-3.5 text-gray-700 dark:text-gray-200 font-medium">{feature}</td>
+                  <td className="px-4 py-3.5 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">{free}</td>
                   <td className="px-4 py-3.5 text-center font-semibold text-blue-700 bg-blue-50/40">{pro}</td>
-                  <td className="px-4 py-3.5 text-center text-gray-500">{ent}</td>
+                  <td className="px-4 py-3.5 text-center text-gray-500 dark:text-gray-400 dark:text-gray-500">{ent}</td>
                 </tr>
               ))}
             </tbody>
@@ -336,9 +336,9 @@ export default function PricingPage() {
       </section>
 
       {/* Social proof */}
-      <section className="bg-gray-50 border-y border-gray-100 py-14 px-4 mb-16">
+      <section className="bg-gray-50 dark:bg-gray-800 border-y border-gray-100 dark:border-gray-800 py-14 px-4 mb-16">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
+          <p className="text-sm font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-8">
             Güvenilen Rakamlar
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
@@ -349,8 +349,8 @@ export default function PricingPage() {
               { value: '₺0', label: 'Gizli Ücret' },
             ].map(({ value, label }) => (
               <div key={label}>
-                <p className="text-3xl font-black text-gray-900">{value}</p>
-                <p className="text-sm text-gray-500 mt-1">{label}</p>
+                <p className="text-3xl font-black text-gray-900 dark:text-white">{value}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1">{label}</p>
               </div>
             ))}
           </div>
@@ -365,13 +365,13 @@ export default function PricingPage() {
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-black text-white mb-1">Kurumsal Çözüm mü Arıyorsunuz?</h3>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 dark:text-gray-500 text-sm">
               Özel entegrasyon, yönetilen altyapı ve adanmış destek ekibiyle kurumsal operasyonlarınız için özel teklif alın.
             </p>
           </div>
           <Link
             href="/contact"
-            className="shrink-0 inline-flex items-center gap-2 bg-white text-gray-900 hover:bg-gray-100 font-semibold text-sm px-5 py-3 rounded-xl transition-colors"
+            className="shrink-0 inline-flex items-center gap-2 bg-white text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-semibold text-sm px-5 py-3 rounded-xl transition-colors"
           >
             <Users className="w-4 h-4" />
             Teklif Al
@@ -381,21 +381,21 @@ export default function PricingPage() {
 
       {/* FAQ */}
       <section className="max-w-2xl mx-auto px-4 pb-24">
-        <h2 className="text-2xl font-black text-gray-900 text-center mb-8">
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white text-center mb-8">
           Sıkça Sorulan Sorular
         </h2>
         <div className="flex flex-col gap-2">
           {FAQ.map((item, i) => (
-            <div key={i} className="border border-gray-200 rounded-xl overflow-hidden">
+            <div key={i} className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
-                <span className="font-semibold text-gray-800 text-sm pr-4">{item.q}</span>
-                <HelpCircle className={`w-4 h-4 shrink-0 transition-colors ${openFaq === i ? 'text-blue-600' : 'text-gray-400'}`} />
+                <span className="font-semibold text-gray-800 dark:text-gray-100 text-sm pr-4">{item.q}</span>
+                <HelpCircle className={`w-4 h-4 shrink-0 transition-colors ${openFaq === i ? 'text-blue-600' : 'text-gray-400 dark:text-gray-500'}`} />
               </button>
               {openFaq === i && (
-                <div className="px-5 pb-4 text-sm text-gray-500 leading-relaxed border-t border-gray-100 pt-3">
+                <div className="px-5 pb-4 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-3">
                   {item.a}
                 </div>
               )}

@@ -55,21 +55,21 @@ export default function JoinPage() {
   }
 
   if (state === 'loading') return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center">
       <div className="w-10 h-10 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
   if (state === 'invalid' || state === 'expired') return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 max-w-md text-center space-y-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center px-4">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-10 max-w-md text-center space-y-4">
         <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mx-auto">
           {state === 'expired' ? <Clock className="w-7 h-7 text-orange-500" /> : <AlertTriangle className="w-7 h-7 text-orange-500" />}
         </div>
-        <h1 className="text-xl font-black text-gray-900">
+        <h1 className="text-xl font-black text-gray-900 dark:text-white">
           {state === 'expired' ? 'Davet Süresi Doldu' : 'Geçersiz Davet Linki'}
         </h1>
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">
           {state === 'expired'
             ? 'Bu davet linki 7 gün geçerliydi ve süresi doldu. Yeni bir davet linki isteyin.'
             : 'Bu davet linki geçersiz veya bozuk. Lütfen gönderilen linki doğrudan yapıştırın.'}
@@ -82,14 +82,14 @@ export default function JoinPage() {
   );
 
   if (state === 'accepted') return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 max-w-md text-center space-y-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center px-4">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-10 max-w-md text-center space-y-4">
         <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-7 h-7 text-green-500" />
         </div>
-        <h1 className="text-xl font-black text-gray-900">Takıma Katıldınız!</h1>
-        <p className="text-gray-500 text-sm">
-          <span className="font-semibold text-gray-700">{payload?.email}</span> adresiyle{' '}
+        <h1 className="text-xl font-black text-gray-900 dark:text-white">Takıma Katıldınız!</h1>
+        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">
+          <span className="font-semibold text-gray-700 dark:text-gray-200">{payload?.email}</span> adresiyle{' '}
           <span className="font-semibold text-blue-600">{ROLE_LABEL[payload?.role ?? 'viewer']}</span> rolüyle
           LogiFlow takımına eklendiniz.
         </p>
@@ -102,14 +102,14 @@ export default function JoinPage() {
 
   // valid
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 max-w-md text-center space-y-5">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center px-4">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-10 max-w-md text-center space-y-5">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-2">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
             <span className="text-white font-black text-xs">LF</span>
           </div>
-          <span className="text-xl font-bold text-gray-900">
+          <span className="text-xl font-bold text-gray-900 dark:text-white">
             Logi<span className="text-blue-600">Flow</span>
           </span>
         </div>
@@ -119,27 +119,27 @@ export default function JoinPage() {
         </div>
 
         <div>
-          <h1 className="text-xl font-black text-gray-900 mb-1">Takım Daveti</h1>
-          <p className="text-gray-500 text-sm">
+          <h1 className="text-xl font-black text-gray-900 dark:text-white mb-1">Takım Daveti</h1>
+          <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 text-sm">
             LogiFlow takımına katılmaya davet edildiniz.
           </p>
         </div>
 
         {/* Details */}
-        <div className="bg-gray-50 rounded-xl p-4 text-left space-y-2 text-sm">
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-left space-y-2 text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-gray-400">E-posta</span>
-            <span className="font-semibold text-gray-700">{payload?.email}</span>
+            <span className="text-gray-400 dark:text-gray-500">E-posta</span>
+            <span className="font-semibold text-gray-700 dark:text-gray-200">{payload?.email}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-gray-400">Rol</span>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded-full">
+            <span className="text-gray-400 dark:text-gray-500">Rol</span>
+            <span className="inline-flex items-center gap-1 text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-100 px-2 py-0.5 rounded-full">
               {ROLE_LABEL[payload?.role ?? 'viewer']}
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-gray-400">Geçerlilik</span>
-            <span className="text-gray-600 text-xs">
+            <span className="text-gray-400 dark:text-gray-500">Geçerlilik</span>
+            <span className="text-gray-600 dark:text-gray-300 text-xs">
               {new Date(payload?.exp ?? 0).toLocaleDateString('tr-TR')} tarihine kadar
             </span>
           </div>
@@ -152,7 +152,7 @@ export default function JoinPage() {
           >
             <CheckCircle2 className="w-4 h-4" /> Daveti Kabul Et
           </button>
-          <Link href="/" className="text-xs text-center text-gray-400 hover:text-gray-600 transition-colors">
+          <Link href="/" className="text-xs text-center text-gray-400 hover:text-gray-600 dark:text-gray-300 transition-colors">
             Reddet
           </Link>
         </div>
